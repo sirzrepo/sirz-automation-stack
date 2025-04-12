@@ -24,6 +24,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# UX Design files
-/public/ux
