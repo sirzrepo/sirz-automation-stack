@@ -342,7 +342,11 @@ export default function OnboardingPage() {
                         whileHover={{ scale: 1.02 }}
                         transition={{ duration: 0.3 }}
                     >
-                        <img src={VidDemonstration} alt="" className='rounded-tr-2xl rounded-tl-2xl w-full' />
+                        {/* <img src={VidDemonstration} alt="" className='rounded-tr-2xl rounded-tl-2xl w-full' /> */}
+                        <video controls autoPlay loop className='rounded-br-2xl rounded-bl-2xl w-full'>
+                            <source src={VidDemonstration} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
                     </motion.div>
 
                     <div className='flex justify-center'>

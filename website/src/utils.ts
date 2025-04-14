@@ -21,4 +21,4 @@ export const socialLinks = {
     Linkedin: "https://www.linkedin.com/company/sanz-innovation-retro/"
 };
 
-export const calendyLink = `https://calendly.com/sirz-support/1-hour-business-solutions-consult?month=2025-03`
+export const calendyLink = `https://calendly.com/sirz-support/15-minutes-business-solutions-consult`

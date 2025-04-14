@@ -173,7 +173,7 @@ import purviaAchievedImgThree from './imgs/Screenshot 2025-02-28 at 03.29.57 1 (
 import purviaAchievedImgFour from './imgs/image 51.png';
 import purviaAchievedImgFive from './imgs/image 65 (1).png';
 import purviaAchievedImgSix from './imgs/image 3 (1).png';
-import vidDemonstration from './imgs/Frame 6.svg'
+import vidDemonstration from './videos/VID-20250414-WA0006.mp4'
 
 
 // case studies
