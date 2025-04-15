@@ -70,7 +70,7 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
   const formik = useFormik({
     initialValues: {
       title: "",
-      summary: "",
+      // summary: "",
       content: "",
       coverImage: "",
       slug: "",
@@ -82,9 +82,9 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
         errors.title = "Title is required";
       }
       
-      if (!values.summary) {
-        errors.summary = "Summary is required";
-      }
+      // if (!values.summary) {
+      //   errors.summary = "Summary is required";
+      // }
       
       if (!values.content) {
         errors.content = "Content is required";
@@ -210,7 +210,7 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
       </div>
 
       {/* Summary Input */}
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label className="flex justify-between items-center mb-1">
           <h2 className="font-bold">Summary</h2>
           <p className="text-sm">Required</p>
@@ -230,7 +230,7 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
         {formik.touched.summary && formik.errors.summary && (
           <p className="text-red-500 text-sm mt-1">{formik.errors.summary}</p>
         )}
-      </div>
+      </div> */}
 
       {/* Content Editor */}
       <div className="mb-4">

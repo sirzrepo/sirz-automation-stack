@@ -16,7 +16,7 @@ const projectIdeaSchema = new mongoose.Schema({
   },
   userId: { 
     type: mongoose.Schema.Types.ObjectId, 
-    ref: "User", 
+    ref: "users", 
   },
   service: {
     type: String,

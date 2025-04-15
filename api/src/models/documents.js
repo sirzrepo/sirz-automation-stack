@@ -7,7 +7,7 @@ const DocumentSchema = new mongoose.Schema(
     projectId: { type: mongoose.Schema.Types.ObjectId, ref: "MyProject", required: true },
     userId: { 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: "User", 
+        ref: "users", 
     },
   },
   { timestamps: true }
