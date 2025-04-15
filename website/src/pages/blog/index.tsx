@@ -7,6 +7,17 @@ import { BlogPost, fetchAllBlogs } from "../../features/blogApi";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../utils";
 
+// Helper function to get author name
+const getAuthorName = (author: any) => {
+    if (typeof author === 'object' && author !== null) {
+        if (author.first_name || author.last_name) {
+            return `${author.first_name || ''} ${author.last_name || ''}`.trim();
+        }
+        return author.email ? author.email.split('@')[0] : 'Unknown';
+    }
+    return author || 'Unknown';
+};
+
 export default function OurBlogPage() {
     const [blogs, setBlogs] = useState<BlogPost[]>([]);
     const [loading, setLoading] = useState(true);
@@ -58,7 +69,7 @@ export default function OurBlogPage() {
                                 {featuredBlog.title}
                             </h4>
                             <p className="flex items-center gap-3 text-sm">
-                                By {featuredBlog.author} 
+                                By {getAuthorName(featuredBlog.author)} 
                                 <div className="h-2 w-2 rounded-full bg-colorGreen"></div> 
                                 {featuredBlog.readTime} read
                             </p>

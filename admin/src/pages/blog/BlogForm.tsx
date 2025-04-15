@@ -70,7 +70,6 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
   const formik = useFormik({
     initialValues: {
       title: "",
-      // summary: "",
       content: "",
       coverImage: "",
       slug: "",
@@ -81,10 +80,6 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
       if (!values.title) {
         errors.title = "Title is required";
       }
-      
-      // if (!values.summary) {
-      //   errors.summary = "Summary is required";
-      // }
       
       if (!values.content) {
         errors.content = "Content is required";
@@ -109,6 +104,8 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
           tags,
           status,
         };
+
+        console.log("Payload:", payload);
         
         const response = await axios.post(`${BASE_URL}/api/blogs`, payload);
         setIsLoading(false);
@@ -208,29 +205,6 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
           This will be used for the URL: /blog/your-slug
         </p>
       </div>
-
-      {/* Summary Input */}
-      {/* <div className="mb-4">
-        <label className="flex justify-between items-center mb-1">
-          <h2 className="font-bold">Summary</h2>
-          <p className="text-sm">Required</p>
-        </label>
-        <textarea
-          name="summary"
-          value={formik.values.summary}
-          placeholder="Enter a brief summary of the blog post..."
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          rows={3}
-          className={`w-full border-[1.5px] px-3 py-2 outline-none ${
-            formik.touched.summary && formik.errors.summary ? "border-red-500" : ""
-          }`}
-          required
-        />
-        {formik.touched.summary && formik.errors.summary && (
-          <p className="text-red-500 text-sm mt-1">{formik.errors.summary}</p>
-        )}
-      </div> */}
 
       {/* Content Editor */}
       <div className="mb-4">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { BlogPost, fetchBlogById, fetchRelatedBlogs } from "../../features/blogApi";
+import { fetchBlogById, fetchRelatedBlogs } from "../../features/blogApi";
 import { formatDate } from "../../utils";
 import { IoIosArrowBack } from "react-icons/io";
 import { ROUTES } from "../../constants/routes/desc";
@@ -9,14 +9,48 @@ import { motion } from "framer-motion";
 import MainCard from "../../components/layout/cards/mainCard";
 import HeaderFormat from "../../components/header";
 
+// Define a type that extends the imported BlogPost
+type ExtendedBlogPost = {
+  _id: string;
+  title: string;
+  content: string;
+  summary?: string;
+  author: string | {
+    _id: string;
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+  };
+  coverImage?: string;
+  tags?: string[];
+  status?: string;
+  slug?: string;
+  createdAt: string;
+  updatedAt?: string;
+  readTime?: string;
+};
+
+// Helper function to get author name
+const getAuthorName = (author: any) => {
+    if (typeof author === 'object' && author !== null) {
+        if (author.first_name || author.last_name) {
+            return `${author.first_name || ''} ${author.last_name || ''}`.trim();
+        }
+        return author.email ? author.email.split('@')[0] : 'Unknown';
+    }
+    return author || 'Unknown';
+};
+
 export default function BlogDetailPage() {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const [blog, setBlog] = useState<BlogPost | null>(null);
-    const [relatedBlogs, setRelatedBlogs] = useState<BlogPost[]>([]);
+    const [blog, setBlog] = useState<ExtendedBlogPost | null>(null);
+    const [relatedBlogs, setRelatedBlogs] = useState<ExtendedBlogPost[]>([]);
     const [loading, setLoading] = useState(true);
     const [relatedLoading, setRelatedLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    console.log("blog", blog);
 
     useEffect(() => {
         const loadBlog = async () => {
@@ -112,7 +146,7 @@ export default function BlogDetailPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            <div className="relative">
+            <div className="relative ">
                 <img 
                     src={blog.coverImage || MainCardBg} 
                     alt={blog.title} 
@@ -127,7 +161,7 @@ export default function BlogDetailPage() {
                     >
                         <h1 className="text-4xl font-bold mb-4">{blog.title}</h1>
                         <div className="flex flex-wrap justify-center items-center gap-3 text-sm">
-                            <span>By {blog.author}</span>
+                            <span className=" capitalize ">By {getAuthorName(blog.author)}</span>
                             <div className="h-2 w-2 rounded-full bg-colorGreen"></div>
                             <span>{formatDate(blog.createdAt)}</span>
                             <div className="h-2 w-2 rounded-full bg-colorGreen"></div>
@@ -146,92 +180,134 @@ export default function BlogDetailPage() {
                 <IoIosArrowBack /> Back to Blogs
             </motion.button>
 
-            <article className="max-w-3xl mx-auto my-12 px-6">
-                {blog.summary && (
-                    <motion.div 
-                        className="mb-8 text-lg font-medium italic bg-gray-100 dark:bg-gray-800 p-6 rounded-lg border-l-4 border-colorGreen"
-                        initial={{ x: -20, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 0.5 }}
-                    >
-                        {blog.summary}
-                    </motion.div>
-                )}
-                
-                <motion.div 
-                    className="prose prose-lg dark:prose-invert max-w-none"
-                    dangerouslySetInnerHTML={{ __html: blog.content }}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.6, duration: 0.7 }}
-                />
+            {/* Three-column layout */}
+            <div className="max-w-[80%] mx-auto my-12 px-6">
+                <div className="flex flex-col md:flex-row gap-8">
+                    {/* Left column - Additional content */}
+                    <aside className="md:w-1/4">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3, duration: 0.5 }}
+                            className="sticky top-6"
+                        >
+                            <HeaderFormat title="Contents" classNames="text-black dark:text-white" />
+                            
+                            <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+                                <ul className="space-y-2">
+                                    <li className="text-colorGreen font-medium">Introduction</li>
+                                    <li className="text-gray-600 dark:text-gray-300 hover:text-colorGreen cursor-pointer">Key Points</li>
+                                    <li className="text-gray-600 dark:text-gray-300 hover:text-colorGreen cursor-pointer">Analysis</li>
+                                    <li className="text-gray-600 dark:text-gray-300 hover:text-colorGreen cursor-pointer">Conclusion</li>
+                                </ul>
+                                
+                                <div className="mt-6">
+                                    <h3 className="font-bold mb-2">Share this article</h3>
+                                    <div className="flex space-x-3">
+                                        <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white cursor-pointer">f</div>
+                                        <div className="w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center text-white cursor-pointer">t</div>
+                                        <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white cursor-pointer">in</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </aside>
 
-                {blog.tags && blog.tags.length > 0 && (
-                    <motion.div 
-                        className="mt-12"
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.8, duration: 0.5 }}
-                    >
-                        <h3 className="text-lg font-semibold mb-3">Tags</h3>
-                        <div className="flex flex-wrap gap-2">
-                            {blog.tags.map((tag, index) => (
-                                <motion.span 
-                                    key={index} 
-                                    className="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full text-sm"
-                                    whileHover={{ scale: 1.05, backgroundColor: "#4CAF50", color: "white" }}
-                                    transition={{ duration: 0.2 }}
-                                >
-                                    {tag}
-                                </motion.span>
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
-            </article>
-
-            {/* Related Blogs Section */}
-            <section className="max-w-6xl mx-auto mt-16 mb-20 px-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1, duration: 0.5 }}
-                >
-                    <HeaderFormat title="Related Posts" classNames="text-black dark:text-white" />
-                </motion.div>
-
-                {relatedLoading ? (
-                    <div className="flex justify-center py-20">
-                        <motion.div 
-                            className="rounded-full h-12 w-12 border-t-2 border-b-2 border-colorGreen"
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        ></motion.div>
-                    </div>
-                ) : relatedBlogs.length > 0 ? (
-                    <motion.div 
-                        className="grid md:grid-cols-3 sm:grid-cols-2 gap-6 mt-8"
-                        variants={container}
-                        initial="hidden"
-                        animate="show"
-                    >
-                        {relatedBlogs.map((relatedBlog) => (
-                            <motion.div key={relatedBlog._id} variants={item}>
-                                <MainCard blog={relatedBlog} />
+                    {/* Center column - Main content */}
+                    <article className="md:w-1/2">
+                        {blog.summary && (
+                            <motion.div 
+                                className="mb-8 text-lg font-medium italic bg-gray-100 dark:bg-gray-800 p-6 rounded-lg border-l-4 border-colorGreen"
+                                initial={{ x: -20, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ delay: 0.4, duration: 0.5 }}
+                            >
+                                {blog.summary}
                             </motion.div>
-                        ))}
-                    </motion.div>
-                ) : (
-                    <motion.p 
-                        className="text-center py-10 text-gray-500"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.2 }}
-                    >
-                        No related posts found.
-                    </motion.p>
-                )}
-            </section>
+                        )}
+                        
+                        <motion.div 
+                            className="prose prose-lg dark:prose-invert max-w-none"
+                            dangerouslySetInnerHTML={{ __html: blog.content }}
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.6, duration: 0.7 }}
+                        />
+
+                        {blog.tags && blog.tags.length > 0 && (
+                            <motion.div 
+                                className="mt-12"
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.8, duration: 0.5 }}
+                            >
+                                <h3 className="text-lg font-semibold mb-3">Tags</h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {blog.tags.map((tag, index) => (
+                                        <motion.span 
+                                            key={index} 
+                                            className="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full text-sm"
+                                            whileHover={{ scale: 1.05, backgroundColor: "#4CAF50", color: "white" }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            {tag}
+                                        </motion.span>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        )}
+                    </article>
+
+                    {/* Right column - Related blogs */}
+                    <aside className="md:w-1/4">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1, duration: 0.5 }}
+                            className="sticky top-6"
+                        >
+                            <HeaderFormat title="Related Posts" classNames="text-black dark:text-white" />
+                            
+                            {relatedLoading ? (
+                                <div className="flex justify-center py-10">
+                                    <motion.div 
+                                        className="rounded-full h-12 w-12 border-t-2 border-b-2 border-colorGreen"
+                                        animate={{ rotate: 360 }}
+                                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                    ></motion.div>
+                                </div>
+                            ) : relatedBlogs.length > 0 ? (
+                                <motion.div 
+                                    className="flex flex-col gap-6 mt-6"
+                                    variants={container}
+                                    initial="hidden"
+                                    animate="show"
+                                >
+                                    {relatedBlogs.map((relatedBlog) => (
+                                        <motion.div 
+                                            key={relatedBlog._id} 
+                                            variants={item}
+                                            onClick={() => navigate(`${ROUTES.BLOG.PATH}/${relatedBlog._id}`)}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            <MainCard blog={relatedBlog} />
+                                        </motion.div>
+                                    ))}
+                                </motion.div>
+                            ) : (
+                                <motion.p 
+                                    className="text-center py-10 text-gray-500"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 1.2 }}
+                                >
+                                    No related posts found.
+                                </motion.p>
+                            )}
+                        </motion.div>
+                    </aside>
+                </div>
+            </div>
         </motion.div>
     );
 } 

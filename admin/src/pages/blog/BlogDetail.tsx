@@ -8,7 +8,6 @@ import { ArrowLeft, Calendar, Tag, User } from "lucide-react";
 interface BlogPost {
   _id: string;
   title: string;
-  summary: string;
   content: string;
   author: {
     _id: string;
@@ -140,13 +139,6 @@ export default function BlogDetail() {
               {getAuthorName(blog.author)}
             </div>
           )}
-        </div>
-      </div>
-
-      {/* Summary */}
-      <div className="mb-8">
-        <div className="text-xl font-medium text-gray-700 italic border-l-4 border-blue-500 pl-4 py-2">
-          {blog.summary}
         </div>
       </div>
 

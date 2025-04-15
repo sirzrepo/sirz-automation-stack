@@ -20,7 +20,6 @@ import Image from '@tiptap/extension-image';
 interface BlogType {
   _id?: string;
   title: string;
-  summary: string;
   content: string;
   author: string;
   coverImage?: string;
@@ -60,7 +59,6 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
   const formik = useFormik({
     initialValues: {
       title: blog?.title || "",
-      summary: blog?.summary || "",
       content: blog?.content || "",
       coverImage: blog?.coverImage || "",
       slug: blog?.slug || "",
@@ -70,10 +68,6 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
       
       if (!values.title) {
         errors.title = "Title is required";
-      }
-      
-      if (!values.summary) {
-        errors.summary = "Summary is required";
       }
       
       if (!values.content) {
@@ -133,7 +127,6 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
     if (blog) {
       formik.setValues({
         title: blog.title || "",
-        summary: blog.summary || "",
         content: blog.content || "",
         coverImage: blog.coverImage || "",
         slug: blog.slug || "",
@@ -225,29 +218,6 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
         required
         error={formik.touched.title && formik.errors.title}
       />
-
-      {/* Summary Input */}
-      <div className="mb-4">
-        <label className="flex justify-between items-center mb-1">
-          <h2 className="font-bold">Summary</h2>
-          <p className="text-sm">Required</p>
-        </label>
-        <textarea
-          name="summary"
-          value={formik.values.summary}
-          placeholder="Enter a brief summary of the blog post..."
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          rows={3}
-          className={`w-full border-[1.5px] px-3 py-2 outline-none ${
-            formik.touched.summary && formik.errors.summary ? "border-red-500" : ""
-          }`}
-          required
-        />
-        {formik.touched.summary && formik.errors.summary && (
-          <p className="text-red-500 text-sm mt-1">{formik.errors.summary}</p>
-        )}
-      </div>
 
       {/* Slug Input */}
       <div className="mb-4">

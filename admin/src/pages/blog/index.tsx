@@ -15,7 +15,6 @@ import UpdateBlogForm from "./UpdateBlogForm";
 interface BlogType {
   _id?: string;
   title: string;
-  summary: string;
   content: string;
   author: string;
   coverImage?: string;
@@ -121,14 +120,22 @@ export default function Blogs() {
   const handleDeleteBlog = async (blogId: string | undefined) => {
     if (!blogId) return;
     
-    if (window.confirm('Are you sure you want to delete this blog post?')) {
-      try {
-        await axios.delete(`${BASE_URL}/api/blogs/${blogId}`);
-        refreshBlogs();
-        setShowActionMenu(null);
-      } catch (error) {
-        console.error("Failed to delete blog:", error);
-      }
+    // Open the delete confirmation modal
+    setSelectedBlog(blogs.find(blog => blog._id === blogId));
+    dispatch(openModal("delete_blog"));
+    setShowActionMenu(null);
+  };
+
+  // Handle confirm delete
+  const handleConfirmDelete = async () => {
+    if (!selectedBlog?._id) return;
+    
+    try {
+      await axios.delete(`${BASE_URL}/api/blogs/${selectedBlog._id}`);
+      refreshBlogs();
+      dispatch(closeModal());
+    } catch (error) {
+      console.error("Failed to delete blog:", error);
     }
   };
 
@@ -148,7 +155,6 @@ export default function Blogs() {
       const matchesTag = !selectedTagFilter || blog.tags?.includes(selectedTagFilter);
       const matchesSearch = !searchQuery || 
         blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        blog.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
         blog.content.toLowerCase().includes(searchQuery.toLowerCase());
       
       return matchesStatus && matchesTag && matchesSearch;
@@ -176,10 +182,9 @@ export default function Blogs() {
 
   // CSV Export
   const handleExport = () => {
-    const headers = ["Title", "Summary", "Status", "Tags", "Slug", "Date Created"];
+    const headers = ["Title", "Status", "Tags", "Slug", "Date Created"];
     const rows = filteredBlogs.map((blog) => [
       blog.title,
-      blog.summary,
       blog.status,
       blog.tags?.join(', ') || "N/A",
       blog.slug,
@@ -298,7 +303,6 @@ export default function Blogs() {
                 <tr>
                   <th className="px-4 py-3 whitespace-nowrap">Cover Image</th>
                   <th className="px-4 py-3 whitespace-nowrap">Title</th>
-                  <th className="px-4 py-3 whitespace-nowrap">Summary</th>
                   <th className="px-4 py-3 whitespace-nowrap">Tags</th>
                   <th className="px-4 py-3 whitespace-nowrap">Status</th>
                   <th className="px-4 py-3 whitespace-nowrap">Date Created</th>
@@ -331,11 +335,6 @@ export default function Blogs() {
                         <span>{blog.title}</span>
                         <span className="text-xs text-gray-500 mt-1">/{blog.slug}</span>
                       </div>
-                    </td>
-                    <td className="px-4 py-2">
-                      <p className="line-clamp-2 text-sm text-gray-700">
-                        {blog.summary}
-                      </p>
                     </td>
                     <td className="px-4 py-2">
                       <div className="flex flex-wrap gap-1">
@@ -432,21 +431,52 @@ export default function Blogs() {
       {/* Modal for Creating */}
       <Modal
         id="create_blog"
-        title="Create new blog post"
-        btnText="Submit"
+        title="Create New Blog"
         onclick={handleCreateSubmit}
+        btnText="Create"
       >
-        <BlogForm onSuccess={refreshBlogs} />
+        <BlogForm onSuccess={handleCreateSubmit} />
       </Modal>
 
       {/* Modal for Updating */}
       <Modal
         id="update_blog"
-        title="Update blog post"
-        btnText="Update"
+        title="Update Blog"
         onclick={handleUpdateSubmit}
+        btnText="Update"
       >
-        <UpdateBlogForm blog={selectedBlog} onSuccess={refreshBlogs} />
+        <UpdateBlogForm blog={selectedBlog} onSuccess={handleUpdateSubmit} />
+      </Modal>
+
+      {/* Modal for Delete Confirmation */}
+      <Modal
+        id="delete_blog"
+        title="Delete Blog"
+        onclick={handleConfirmDelete}
+        btnText="Delete"
+      >
+        <div className="flex flex-col gap-4">
+          <p className="text-gray-700">
+            Are you sure you want to delete the blog post "{selectedBlog?.title}"?
+          </p>
+          <p className="text-sm text-red-600">
+            This action cannot be undone. All data associated with this blog post will be permanently removed.
+          </p>
+          <div className="flex justify-end gap-3 mt-4">
+            <button
+              onClick={() => dispatch(closeModal())}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleConfirmDelete}
+              className="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </Modal>
     </section>
   );
