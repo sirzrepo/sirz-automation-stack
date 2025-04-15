@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
 // READ - All
 router.get("/", async (_req, res) => {
   try {
-    const blogs = await blogModel.find().sort({ createdAt: -1 }).populate("User");
+    const blogs = await blogModel.find().sort({ createdAt: -1 }).populate("author");
     res.json(blogs);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch blog posts", error: err });
@@ -29,7 +29,7 @@ router.get("/", async (_req, res) => {
 // READ - Published Only
 router.get("/published", async (_req, res) => {
   try {
-    const blogs = await blogModel.find({ status: "Published" }).sort({ createdAt: -1 }).populate("User");
+    const blogs = await blogModel.find({ status: "Published" }).sort({ createdAt: -1 }).populate("author");
     res.json(blogs);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch published blog posts", error: err });
@@ -39,7 +39,7 @@ router.get("/published", async (_req, res) => {
 // READ - By Author
 router.get("/author/:authorId", async (req, res) => {
   try {
-    const blogs = await blogModel.find({ author: req.params.authorId }).sort({ createdAt: -1 }).populate("User");
+    const blogs = await blogModel.find({ author: req.params.authorId }).sort({ createdAt: -1 }).populate("author");
     res.json(blogs);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch blogs for author", error: err });
@@ -49,7 +49,7 @@ router.get("/author/:authorId", async (req, res) => {
 // READ - By Slug
 router.get("/slug/:slug", async (req, res) => {
   try {
-    const blog = await blogModel.findOne({ slug: req.params.slug }).populate("User");
+    const blog = await blogModel.findOne({ slug: req.params.slug }).populate("author");
     if (!blog) return res.status(404).json({ message: "Blog post not found" });
     res.json(blog);
   } catch (err) {
@@ -60,7 +60,7 @@ router.get("/slug/:slug", async (req, res) => {
 // READ - By Tag
 router.get("/tag/:tag", async (req, res) => {
   try {
-    const blogs = await blogModel.find({ tags: req.params.tag }).sort({ createdAt: -1 }).populate("User");
+    const blogs = await blogModel.find({ tags: req.params.tag }).sort({ createdAt: -1 }).populate("author");
     res.json(blogs);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch blogs with tag", error: err });
@@ -70,7 +70,7 @@ router.get("/tag/:tag", async (req, res) => {
 // READ - Single
 router.get("/:id", async (req, res) => {
   try {
-    const blog = await blogModel.findById(req.params.id).populate("User");
+    const blog = await blogModel.findById(req.params.id).populate("author");
     if (!blog) return res.status(404).json({ message: "Blog post not found" });
     res.json(blog);
   } catch (err) {
