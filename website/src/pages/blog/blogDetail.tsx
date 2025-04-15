@@ -8,6 +8,7 @@ import { MainCardBg } from "../../assets";
 import { motion } from "framer-motion";
 import MainCard from "../../components/layout/cards/mainCard";
 import HeaderFormat from "../../components/header";
+import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 
 // Define a type that extends the imported BlogPost
 type ExtendedBlogPost = {
@@ -49,6 +50,7 @@ export default function BlogDetailPage() {
     const [loading, setLoading] = useState(true);
     const [relatedLoading, setRelatedLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [activeSection, setActiveSection] = useState<string>("introduction");
 
     console.log("blog", blog);
 
@@ -104,6 +106,44 @@ export default function BlogDetailPage() {
     const item = {
         hidden: { opacity: 0, y: 20 },
         show: { opacity: 1, y: 0 }
+    };
+
+    // Function to handle social sharing
+    const handleShare = (platform: string) => {
+        if (!blog) return;
+        
+        const url = window.location.href;
+        const title = blog.title;
+        const text = blog.summary || "Check out this article";
+        
+        let shareUrl = "";
+        
+        switch (platform) {
+            case "facebook":
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                break;
+            case "twitter":
+                shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
+                break;
+            case "instagram":
+                // Instagram doesn't have a direct share URL, so we'll copy to clipboard
+                navigator.clipboard.writeText(url);
+                alert("Link copied to clipboard! You can now paste it in Instagram.");
+                return;
+            default:
+                return;
+        }
+        
+        window.open(shareUrl, "_blank", "width=600,height=400");
+    };
+
+    // Function to scroll to section
+    const scrollToSection = (sectionId: string) => {
+        setActiveSection(sectionId);
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
     };
 
     if (loading) {
@@ -195,18 +235,62 @@ export default function BlogDetailPage() {
                             
                             <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
                                 <ul className="space-y-2">
-                                    <li className="text-colorGreen font-medium">Introduction</li>
-                                    <li className="text-gray-600 dark:text-gray-300 hover:text-colorGreen cursor-pointer">Key Points</li>
-                                    <li className="text-gray-600 dark:text-gray-300 hover:text-colorGreen cursor-pointer">Analysis</li>
-                                    <li className="text-gray-600 dark:text-gray-300 hover:text-colorGreen cursor-pointer">Conclusion</li>
+                                    <li 
+                                        className={`${activeSection === "introduction" ? "text-colorGreen font-medium" : "text-gray-600 dark:text-gray-300 hover:text-colorGreen"} cursor-pointer`}
+                                        onClick={() => scrollToSection("introduction")}
+                                    >
+                                        Introduction
+                                    </li>
+                                    <li 
+                                        className={`${activeSection === "key-points" ? "text-colorGreen font-medium" : "text-gray-600 dark:text-gray-300 hover:text-colorGreen"} cursor-pointer`}
+                                        onClick={() => scrollToSection("key-points")}
+                                    >
+                                        Key Points
+                                    </li>
+                                    <li 
+                                        className={`${activeSection === "analysis" ? "text-colorGreen font-medium" : "text-gray-600 dark:text-gray-300 hover:text-colorGreen"} cursor-pointer`}
+                                        onClick={() => scrollToSection("analysis")}
+                                    >
+                                        Analysis
+                                    </li>
+                                    <li 
+                                        className={`${activeSection === "conclusion" ? "text-colorGreen font-medium" : "text-gray-600 dark:text-gray-300 hover:text-colorGreen"} cursor-pointer`}
+                                        onClick={() => scrollToSection("conclusion")}
+                                    >
+                                        Conclusion
+                                    </li>
                                 </ul>
                                 
                                 <div className="mt-6">
                                     <h3 className="font-bold mb-2">Share this article</h3>
                                     <div className="flex space-x-3">
-                                        <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white cursor-pointer">f</div>
-                                        <div className="w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center text-white cursor-pointer">t</div>
-                                        <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white cursor-pointer">in</div>
+                                        <motion.button
+                                            whileHover={{ scale: 1.1 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={() => handleShare("facebook")}
+                                            className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white cursor-pointer"
+                                            aria-label="Share on Facebook"
+                                        >
+                                            <FaFacebookF />
+                                        </motion.button>
+                                        <motion.button
+                                            whileHover={{ scale: 1.1 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={() => handleShare("twitter")}
+                                            className="w-10 h-10 rounded-full bg-blue-400 flex items-center justify-center text-white cursor-pointer"
+                                            aria-label="Share on Twitter"
+                                        >
+                                            <FaTwitter />
+                                        </motion.button>
+                                        <motion.button
+                                            whileHover={{ scale: 1.1 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={() => handleShare("instagram")}
+                                            className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 flex items-center justify-center text-white cursor-pointer"
+                                            aria-label="Share on Instagram"
+                                        >
+                                            <FaInstagram />
+                                        </motion.button>
                                     </div>
                                 </div>
                             </div>
@@ -217,6 +301,7 @@ export default function BlogDetailPage() {
                     <article className="md:w-1/2">
                         {blog.summary && (
                             <motion.div 
+                                id="introduction"
                                 className="mb-8 text-lg font-medium italic bg-gray-100 dark:bg-gray-800 p-6 rounded-lg border-l-4 border-colorGreen"
                                 initial={{ x: -20, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
