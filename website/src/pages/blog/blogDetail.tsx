@@ -52,8 +52,6 @@ export default function BlogDetailPage() {
     const [error, setError] = useState<string | null>(null);
     const [activeSection, setActiveSection] = useState<string>("introduction");
 
-    console.log("blog", blog);
-
     useEffect(() => {
         const loadBlog = async () => {
             if (!id) {
@@ -221,7 +219,7 @@ export default function BlogDetailPage() {
             </motion.button>
 
             {/* Three-column layout */}
-            <div className="max-w-[80%] mx-auto my-12 px-6">
+            <div className="sm:max-w-[85%] mx-auto my-12 px-6">
                 <div className="flex flex-col md:flex-row gap-8">
                     {/* Left column - Additional content */}
                     <aside className="md:w-1/4">
