@@ -112,7 +112,7 @@ export default function BlogDetailPage() {
         
         const url = window.location.href;
         const title = blog.title;
-        const text = blog.summary || "Check out this article";
+        // const text = blog.summary || "Check out this article";
         
         let shareUrl = "";
         
