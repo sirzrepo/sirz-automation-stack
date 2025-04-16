@@ -350,7 +350,11 @@ export default function OnboardingPage() {
                     </motion.div>
 
                     <div className='flex justify-center'>
-                        <Button text="Client portal sign up" onClick={() => { }} className='sm:w-[250px] w-full' />
+                        <Button 
+                            text="Client portal sign up" 
+                            onClick={() => window.open("https://client.sirz.co.uk/", "_blank")} 
+                            className='sm:w-[250px] w-full' 
+                        />
                     </div>
                 </section>
             </motion.section>
