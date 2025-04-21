@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import { useFormik } from "formik";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -8,7 +8,7 @@ import { closeModal } from "../../store/modalSlice";
 import Input from "../../components/common/input";
 import Loader from "../../features/loader";
 import { X } from "lucide-react";
-import { useEditor, EditorContent } from '@tiptap/react';
+import { useEditor, EditorContent, Extension } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Underline from '@tiptap/extension-underline';
@@ -17,6 +17,11 @@ import Color from '@tiptap/extension-color';
 import Highlight from '@tiptap/extension-highlight';
 import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
+import Placeholder from '@tiptap/extension-placeholder';
+import TaskList from '@tiptap/extension-task-list';
+import TaskItem from '@tiptap/extension-task-item';
+import FontFamily from '@tiptap/extension-font-family';
+import { LineHeight } from '../../services/lineHeight';
 
 interface BlogFormProps {
   onSuccess?: () => void;
@@ -32,15 +37,76 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
   const dispatch = useDispatch();
   const { userId } = useAuth();
 
-  // Enhanced TipTap editor setup
+  // Custom line height extension
+  const CustomLineHeight = Extension.create({
+    name: 'customLineHeight',
+    addGlobalAttributes() {
+      return [
+        {
+          types: ['paragraph', 'heading'],
+          attributes: {
+            lineHeight: {
+              default: null,
+              parseHTML: element => element.style.lineHeight,
+              renderHTML: attributes => {
+                if (attributes.lineHeight) {
+                  return { style: `line-height: ${attributes.lineHeight}` };
+                }
+                return {};
+              }
+            }
+          }
+        }
+      ];
+    },
+    addCommands() {
+      return {
+        setLineHeight: (lineHeight: string | number) => ({ chain }) => {
+          return chain().setMark('textStyle', { lineHeight }).run();
+        },
+      };
+    },
+  });
+
+  // Custom font size extension
+  const CustomFontSize = Extension.create({
+    name: 'customFontSize',
+    addGlobalAttributes() {
+      return [
+        {
+          types: ['textStyle'],
+          attributes: {
+            fontSize: {
+              default: null,
+              parseHTML: element => element.style.fontSize,
+              renderHTML: attributes => {
+                if (!attributes.fontSize) {
+                  return {};
+                }
+                return {
+                  style: `font-size: ${attributes.fontSize}`,
+                };
+              },
+            },
+          },
+        },
+      ];
+    },
+    addCommands() {
+      return {
+        setFontSize: (fontSize) => ({ chain }) => {
+          return chain()
+            .setMark('textStyle', { fontSize })
+            .run();
+        },
+      };
+    },
+  });
+
   const editor = useEditor({
     extensions: [
-      StarterKit.configure({
-        // Enable all features by default
-        bulletList: {},
-        orderedList: {},
-        italic: {},
-      }),
+      StarterKit,
+      LineHeight,
       Link.configure({
         openOnClick: false,
       }),
@@ -49,11 +115,25 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
       Color,
       Highlight,
       TextAlign.configure({
-        types: ['heading', 'paragraph', 'listItem'],
+        types: ['heading', 'paragraph'],
       }),
       Image,
+      FontFamily.configure({
+              types: ['textStyle'],
+            }),
+      Placeholder.configure({
+        placeholder: 'Write your blog post here...',
+      }),
+      CustomLineHeight,
+      TaskList,
+      TaskItem,
+      CustomFontSize,
     ],
     content: '',
+    onCreate: ({ editor }) => {
+      // focus editor after creation
+      editor.chain().focus().run();
+    },
     onUpdate: ({ editor }) => {
       formik.setFieldValue("content", editor.getHTML());
     },
@@ -242,6 +322,74 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
             >
               <span className="underline">U</span>
             </button>
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().toggleStrike().run()}
+              className={`px-2 py-1 rounded ${editor?.isActive('strike') ? 'bg-gray-200' : ''}`}
+              title="Strikethrough"
+            >
+              <span className="line-through">S</span>
+            </button>
+            
+            <div className="border-r border-gray-300 mx-1 h-6"></div>
+
+             {/* Font Family */}
+             <select
+              onChange={(e) => {
+                editor?.chain().focus().setFontFamily(e.target.value).run();
+              }}
+              className="px-2 py-1 rounded text-sm bg-white border border-gray-200"
+              title="Font Family"
+            >
+              <option value="">Font</option>
+              <option value="Arial">Arial</option>
+              <option value="Courier New">Courier New</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Verdana">Verdana</option>
+              <option value="Tahoma">Tahoma</option>
+              <option value="Trebuchet MS">Trebuchet MS</option>
+            </select>
+
+            
+            {/* Font Size */}
+            <select
+              onChange={(e) => {
+                editor?.chain().focus().setMark('textStyle', { fontSize: e.target.value }).run();
+              }}
+              className="px-2 py-1 rounded text-sm bg-white border border-gray-200"
+              title="Font Size"
+            >
+              <option value="">Size</option>
+              <option value="8pt">8</option>
+              <option value="10pt">10</option>
+              <option value="12pt">12</option>
+              <option value="14pt">14</option>
+              <option value="16pt">16</option>
+              <option value="18pt">18</option>
+              <option value="20pt">20</option>
+              <option value="24pt">24</option>
+              <option value="30pt">30</option>
+              <option value="36pt">36</option>
+              <option value="48pt">48</option>
+            </select>
+            
+            {/* Line Height */}
+            <select
+              onChange={(e) => {
+                editor?.chain().focus().setLineHeight(e.target.value).run();
+              }}
+              className="px-2 py-1 rounded text-sm bg-white border border-gray-200"
+              title="Line Height"
+            >
+              <option value="">Line Height</option>
+              <option value="1">1.0</option>
+              <option value="1.15">1.15</option>
+              <option value="1.5">1.5</option>
+              <option value="2">2.0</option>
+              <option value="2.5">2.5</option>
+              <option value="3">3.0</option>
+            </select>
             
             <div className="border-r border-gray-300 mx-1 h-6"></div>
             
@@ -290,6 +438,14 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
             >
               1. List
             </button>
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().toggleTaskList().run()}
+              className={`px-2 py-1 rounded ${editor?.isActive('taskList') ? 'bg-gray-200' : ''}`}
+              title="Task List"
+            >
+              ☑ Tasks
+            </button>
             
             <div className="border-r border-gray-300 mx-1 h-6"></div>
             
@@ -317,6 +473,14 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
               title="Align Right"
             >
               →
+            </button>
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().setTextAlign('justify').run()}
+              className={`px-2 py-1 rounded ${editor?.isActive({ textAlign: 'justify' }) ? 'bg-gray-200' : ''}`}
+              title="Justify"
+            >
+              ⇔
             </button>
             
             <div className="border-r border-gray-300 mx-1 h-6"></div>
@@ -354,6 +518,22 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
             >
               <div className="w-4 h-4 bg-green-600"></div>
             </button>
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().setColor('#FFA500').run()}
+              className="px-2 py-1 rounded"
+              title="Orange"
+            >
+              <div className="w-4 h-4 bg-orange-500"></div>
+            </button>
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().setColor('#800080').run()}
+              className="px-2 py-1 rounded"
+              title="Purple"
+            >
+              <div className="w-4 h-4 bg-purple-600"></div>
+            </button>
             
             <div className="border-r border-gray-300 mx-1 h-6"></div>
             
@@ -365,6 +545,22 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
               title="Highlight"
             >
               <span className="bg-yellow-200">H</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().toggleHighlight({ color: '#8CE99A' }).run()}
+              className="px-2 py-1 rounded"
+              title="Green Highlight"
+            >
+              <span className="bg-green-200">H</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().toggleHighlight({ color: '#FF8787' }).run()}
+              className="px-2 py-1 rounded"
+              title="Red Highlight"
+            >
+              <span className="bg-red-200">H</span>
             </button>
             
             <div className="border-r border-gray-300 mx-1 h-6"></div>
@@ -416,10 +612,22 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
             >
               🖼️
             </button>
+            
+            <div className="border-r border-gray-300 mx-1 h-6"></div>
+            
+            {/* Clear Formatting */}
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().clearNodes().unsetAllMarks().run()}
+              className="px-2 py-1 rounded"
+              title="Clear Formatting"
+            >
+              Clear
+            </button>
           </div>
-          <div className="tiptap-editor-content prose prose-sm sm:prose-base prose-headings:font-bold prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:italic prose-ul:list-disc prose-ol:list-decimal">
-            <EditorContent editor={editor} />
-          </div>
+          <div className="tiptap-editor-content prose prose-sm sm:prose-base prose-headings:font-bold prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:italic prose-ul:list-disc prose-ol:list-decimal min-h-[200px] p-3">
+          <EditorContent editor={editor} className="custom-editor" />
+        </div>
         </div>
         {formik.touched.content && formik.errors.content && (
           <p className="text-red-500 text-sm mt-1">{formik.errors.content}</p>

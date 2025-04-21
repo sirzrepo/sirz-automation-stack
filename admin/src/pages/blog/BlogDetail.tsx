@@ -30,7 +30,7 @@ export default function BlogDetail() {
 
   useEffect(() => {
     const fetchBlog = async () => {
-      setIsLoading(true);
+      // setIsLoading(true);
       setError(null);
       
       try {

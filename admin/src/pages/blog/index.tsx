@@ -59,7 +59,7 @@ export default function Blogs() {
 
   // Fetch blogs function
   const fetchBlogs = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     try {
       // If the user is an admin, fetch all blogs, otherwise fetch only user's blogs
       // const endpoint = user?.role === 'admin' 
@@ -67,6 +67,7 @@ export default function Blogs() {
       //   : `${BASE_URL}/api/blogs/author/${userId}`;
       
       const response = await axios.get(`${BASE_URL}/api/blogs`);
+      console.log("Blogs data:", response.data);
       const blogData = response.data || [];
       setBlogs(blogData);
       

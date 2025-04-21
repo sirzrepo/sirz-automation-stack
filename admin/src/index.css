@@ -40,3 +40,22 @@
 .hideScrollBar::-webkit-scrollbar {
   display: none;
 }
+
+.custom-editor {
+  border-radius: 5px;
+  /* background-color: #e6e6f8; */
+  border: 1px solid #e6e6f8;
+  /* min-height: 200px; */
+}
+
+/* .custom-editor textarea, */
+.custom-editor input,
+.custom-editor div[contenteditable="true"] {
+  min-height: 250px !important;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 10px;
+  /* min-height: 100px; */
+  background-color: inherit;
+}

@@ -7,7 +7,7 @@ import { closeModal } from "../../store/modalSlice";
 import Input from "../../components/common/input";
 import Loader from "../../features/loader";
 import { X } from "lucide-react";
-import { useEditor, EditorContent } from '@tiptap/react';
+import { useEditor, EditorContent, Extension } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Underline from '@tiptap/extension-underline';
@@ -16,6 +16,42 @@ import Color from '@tiptap/extension-color';
 import Highlight from '@tiptap/extension-highlight';
 import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
+import FontFamily from '@tiptap/extension-font-family';
+import Typography from '@tiptap/extension-typography';
+import Placeholder from '@tiptap/extension-placeholder';
+import { FontSize } from '@tiptap/extension-font-size';
+import { LineHeight } from "../../services/lineHeight";
+
+  // Custom line height extension
+  const CustomLineHeight = Extension.create({
+    name: 'customLineHeight',
+    addGlobalAttributes() {
+      return [
+        {
+          types: ['paragraph', 'heading'],
+          attributes: {
+            lineHeight: {
+              default: null,
+              parseHTML: element => element.style.lineHeight,
+              renderHTML: attributes => {
+                if (attributes.lineHeight) {
+                  return { style: `line-height: ${attributes.lineHeight}` };
+                }
+                return {};
+              }
+            }
+          }
+        }
+      ];
+    },
+    addCommands() {
+      return {
+        setLineHeight: (lineHeight: string | number) => ({ chain }) => {
+          return chain().setMark('textStyle', { lineHeight }).run();
+        },
+      };
+    },
+  });
 
 interface BlogType {
   _id?: string;
@@ -42,7 +78,7 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [slugError, setSlugError] = useState<string | null>(null);
-  
+
   const dispatch = useDispatch();
 
   // Check if blog is undefined and handle gracefully
@@ -65,21 +101,21 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
     },
     validate: (values) => {
       const errors: Record<string, string> = {};
-      
+
       if (!values.title) {
         errors.title = "Title is required";
       }
-      
+
       if (!values.content) {
         errors.content = "Content is required";
       }
-      
+
       if (!values.slug) {
         errors.slug = "Slug is required";
       } else if (!/^[a-z0-9-]+$/.test(values.slug)) {
         errors.slug = "Slug can only contain lowercase letters, numbers, and hyphens";
       }
-      
+
       return errors;
     },
     onSubmit: async (values) => {
@@ -90,33 +126,33 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
 
       setIsLoading(true);
       setSlugError(null);
-      
+
       try {
         const payload = {
           ...values,
           tags,
           status,
         };
-        
+
         const response = await axios.put(`${BASE_URL}/api/blogs/${blog._id}`, payload);
         setIsLoading(false);
         console.log("Blog updated:", response.data);
         dispatch(closeModal());
-        
+
         // Call the onSuccess callback if provided
         if (onSuccess) {
           onSuccess();
         }
       } catch (error: any) {
         console.error("Failed to update blog:", error);
-        
+
         // Check if it's a duplicate slug error
         if (error.response?.status === 400 && error.response?.data?.error?.code === 11000) {
           setSlugError("This slug is already in use. Please choose a different one.");
         } else {
           setError("Failed to update blog post. Please try again.");
         }
-        
+
         setIsLoading(false);
       }
     },
@@ -139,22 +175,46 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        // Enable all features by default
-        bulletList: {},
-        orderedList: {},
+        // Preserve more of the original formatting
+        bulletList: {
+          keepMarks: true,
+          keepAttributes: true,
+        },
+        orderedList: {
+          keepMarks: true,
+          keepAttributes: true,
+        },
+        paragraph: {
+          HTMLAttributes: {
+            class: 'preserve-whitespace',
+          },
+        },
         italic: {},
       }),
       Link.configure({
         openOnClick: false,
       }),
       Underline,
+      LineHeight,
       TextStyle,
       Color,
       Highlight,
       TextAlign.configure({
         types: ['heading', 'paragraph', 'listItem'],
+        alignments: ['left', 'center', 'right', 'justify'],
       }),
       Image,
+      FontFamily.configure({
+        types: ['textStyle'],
+      }),
+      Typography,
+      Placeholder.configure({
+        placeholder: 'Write something amazing...',
+      }),
+      FontSize.configure({
+        types: ['textStyle'],
+      }),
+      CustomLineHeight,
     ],
     content: blog?.content || '',
     onUpdate: ({ editor }) => {
@@ -283,9 +343,78 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
             >
               <span className="underline">U</span>
             </button>
-            
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().toggleStrike().run()}
+              className={`px-2 py-1 rounded ${editor?.isActive('strike') ? 'bg-gray-200' : ''}`}
+              title="Strikethrough"
+            >
+              <span className="line-through">S</span>
+            </button>
+
             <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
+
+            {/* Font Family */}
+            <select
+              onChange={(e) => {
+                editor?.chain().focus().setFontFamily(e.target.value).run();
+              }}
+              className="px-2 py-1 rounded text-sm bg-white border border-gray-200"
+              title="Font Family"
+            >
+              <option value="">Font</option>
+              <option value="Arial">Arial</option>
+              <option value="Courier New">Courier New</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Verdana">Verdana</option>
+              <option value="Tahoma">Tahoma</option>
+              <option value="Trebuchet MS">Trebuchet MS</option>
+            </select>
+
+            {/* Font Size */}
+            <select
+              onChange={(e) => {
+                editor?.chain().focus().setFontSize(e.target.value).run();
+              }}
+              className="px-2 py-1 rounded text-sm bg-white border border-gray-200"
+              title="Font Size"
+            >
+              <option value="">Size</option>
+              <option value="8pt">8</option>
+              <option value="10pt">10</option>
+              <option value="12pt">12</option>
+              <option value="14pt">14</option>
+              <option value="16pt">16</option>
+              <option value="18pt">18</option>
+              <option value="20pt">20</option>
+              <option value="24pt">24</option>
+              <option value="30pt">30</option>
+              <option value="36pt">36</option>
+              <option value="48pt">48</option>
+              <option value="60pt">60</option>
+              <option value="72pt">72</option>
+            </select>
+
+            {/* Line Height */}
+            <select
+              onChange={(e) => {
+                editor?.chain().focus().setLineHeight(e.target.value).run();
+              }}
+              className="px-2 py-1 rounded text-sm bg-white border border-gray-200"
+              title="Line Height"
+            >
+              <option value="">Line Height</option>
+              <option value="1">1.0</option>
+              <option value="1.15">1.15</option>
+              <option value="1.5">1.5</option>
+              <option value="2">2.0</option>
+              <option value="2.5">2.5</option>
+              <option value="3">3.0</option>
+            </select>
+
+            <div className="border-r border-gray-300 mx-1 h-6"></div>
+
             {/* Headings */}
             <button
               type="button"
@@ -311,9 +440,9 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
             >
               H3
             </button>
-            
+
             <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
+
             {/* Lists */}
             <button
               type="button"
@@ -331,9 +460,17 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
             >
               1. List
             </button>
-            
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().toggleTaskList().run()}
+              className={`px-2 py-1 rounded ${editor?.isActive('taskList') ? 'bg-gray-200' : ''}`}
+              title="Task List"
+            >
+              ☑ Tasks
+            </button>
+
             <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
+
             {/* Alignment */}
             <button
               type="button"
@@ -359,9 +496,17 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
             >
               →
             </button>
-            
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().setTextAlign('justify').run()}
+              className={`px-2 py-1 rounded ${editor?.isActive({ textAlign: 'justify' }) ? 'bg-gray-200' : ''}`}
+              title="Justify"
+            >
+              ⇔
+            </button>
+
             <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
+
             {/* Text Colors */}
             <button
               type="button"
@@ -395,9 +540,25 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
             >
               <div className="w-4 h-4 bg-green-600"></div>
             </button>
-            
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().setColor('#FFA500').run()}
+              className="px-2 py-1 rounded"
+              title="Orange"
+            >
+              <div className="w-4 h-4 bg-orange-500"></div>
+            </button>
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().setColor('#800080').run()}
+              className="px-2 py-1 rounded"
+              title="Purple"
+            >
+              <div className="w-4 h-4 bg-purple-600"></div>
+            </button>
+
             <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
+
             {/* Highlight */}
             <button
               type="button"
@@ -407,9 +568,25 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
             >
               <span className="bg-yellow-200">H</span>
             </button>
-            
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().toggleHighlight({ color: '#8CE99A' }).run()}
+              className="px-2 py-1 rounded"
+              title="Green Highlight"
+            >
+              <span className="bg-green-200">H</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().toggleHighlight({ color: '#FF8787' }).run()}
+              className="px-2 py-1 rounded"
+              title="Red Highlight"
+            >
+              <span className="bg-red-200">H</span>
+            </button>
+
             <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
+
             {/* Quotes & Code */}
             <button
               type="button"
@@ -427,9 +604,9 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
             >
               {'</>'}
             </button>
-            
+
             <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
+
             {/* Link */}
             <button
               type="button"
@@ -457,8 +634,20 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
             >
               🖼️
             </button>
+
+            <div className="border-r border-gray-300 mx-1 h-6"></div>
+
+            {/* Clear Formatting */}
+            <button
+              type="button"
+              onClick={() => editor?.chain().focus().clearNodes().unsetAllMarks().run()}
+              className="px-2 py-1 rounded"
+              title="Clear Formatting"
+            >
+              Clear
+            </button>
           </div>
-          <div className="tiptap-editor-content prose prose-sm sm:prose-base prose-headings:font-bold prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:italic prose-ul:list-disc prose-ol:list-decimal">
+          <div className="tiptap-editor-content prose prose-sm sm:prose-base prose-headings:font-bold prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:italic prose-ul:list-disc prose-ol:list-decimal min-h-[200px] p-3">
             <EditorContent editor={editor} />
           </div>
         </div>
@@ -498,7 +687,7 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
             Add
           </button>
         </div>
-        
+
         {tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-2">
             {tags.map((tag, index) => (
@@ -539,7 +728,7 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
       <div className='flex absolute bottom-0 left-0 right-0 justify-end items-center h-[10%] gap-2 bg-[#FAFAFA]'>
         <button
           type="button"
-          onClick={handleClose} 
+          onClick={handleClose}
           className="text-md w-fit bg-white text-black px-4 py-2 rounded-sm hover:bg-slate-100 border border-colorBlueDeep transition"
         >
           Cancel
@@ -556,4 +745,4 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
       {isLoading && <Loader />}
     </form>
   );
-} 
+}
