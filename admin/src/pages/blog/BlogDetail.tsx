@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { BASE_URL } from "../../utils";
 import Loader from "../../features/loader";
 import { ArrowLeft, Calendar, Tag, User } from "lucide-react";
+import "react-quill/dist/quill.snow.css";
 
 interface BlogPost {
   _id: string;
@@ -62,7 +63,7 @@ export default function BlogDetail() {
   const renderHtmlContent = (content: string) => {
     return (
       <div 
-        className="prose prose-sm sm:prose-base lg:prose-lg max-w-none prose-headings:font-bold prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:italic prose-ul:list-disc prose-ol:list-decimal" 
+        className="ql-editor prose prose-sm sm:prose-base lg:prose-lg max-w-none prose-headings:font-bold prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:italic prose-ul:list-disc prose-ol:list-decimal" 
         dangerouslySetInnerHTML={{ __html: content }} 
       />
     );
@@ -160,7 +161,7 @@ export default function BlogDetail() {
       )}
 
       {/* Content */}
-      <div className="prose max-w-none">
+      <div className="ql-snow">
         {renderHtmlContent(blog.content)}
       </div>
     </article>

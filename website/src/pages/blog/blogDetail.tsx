@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import MainCard from "../../components/layout/cards/mainCard";
 import HeaderFormat from "../../components/header";
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
+import "./styles/quill.css";
 
 // Define a type that extends the imported BlogPost
 type ExtendedBlogPost = {
@@ -51,6 +52,45 @@ export default function BlogDetailPage() {
     const [relatedLoading, setRelatedLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [activeSection, setActiveSection] = useState<string>("introduction");
+    const [contentSections, setContentSections] = useState<{id: string, title: string, level: number}[]>([]);
+
+    // Function to extract headers from HTML content
+    const extractHeaders = (htmlContent: string) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, 'text/html');
+        const headers = Array.from(doc.querySelectorAll('h1, h2, h3, h4, h5, h6'));
+        
+        return headers.map(header => {
+            // Create a slug from the header text
+            const title = header.textContent || '';
+            const id = title.toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+            
+            // Determine the level from the tag name (h1 = 1, h2 = 2, etc.)
+            const level = parseInt(header.tagName.substring(1));
+            
+            return { id, title, level };
+        });
+    };
+
+    // Function to add IDs to headers in HTML content
+    const addIdsToHeaders = (htmlContent: string) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, 'text/html');
+        const headers = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        
+        headers.forEach(header => {
+            const title = header.textContent || '';
+            const id = title.toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+            
+            header.id = id;
+        });
+        
+        return doc.body.innerHTML;
+    };
 
     useEffect(() => {
         const loadBlog = async () => {
@@ -64,7 +104,23 @@ export default function BlogDetailPage() {
                 setLoading(true);
                 const blogData = await fetchBlogById(id);
                 if (blogData) {
-                    setBlog(blogData);
+                    // Process the blog content to extract headers and add IDs
+                    const sections = extractHeaders(blogData.content);
+                    setContentSections(sections);
+                    
+                    // Add IDs to headers in the content
+                    const processedContent = addIdsToHeaders(blogData.content);
+                    setBlog({
+                        ...blogData,
+                        content: processedContent
+                    });
+                    
+                    // Set the active section to the first header or introduction
+                    if (sections.length > 0) {
+                        setActiveSection(sections[0].id);
+                    } else {
+                        setActiveSection("introduction");
+                    }
                     
                     // Load related blogs after main blog is loaded
                     try {
@@ -140,9 +196,61 @@ export default function BlogDetailPage() {
         setActiveSection(sectionId);
         const element = document.getElementById(sectionId);
         if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
+            // Add a small offset to account for fixed headers or navigation
+            const offset = 80; // Adjust this value as needed
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({
+                top: elementPosition - offset,
+                behavior: "smooth"
+            });
         }
     };
+    
+    // Function to handle scroll events and update active section
+    useEffect(() => {
+        if (!blog) return;
+        
+        const handleScroll = () => {
+            // Get all section elements
+            const sections = contentSections.map(section => document.getElementById(section.id));
+            
+            // Add introduction section if it exists
+            if (blog.summary) {
+                const introSection = document.getElementById("introduction");
+                if (introSection) {
+                    sections.unshift(introSection);
+                }
+            }
+            
+            // Find the section that's currently in view
+            const currentSection = sections.reduce((nearest, section) => {
+                if (!section) return nearest;
+                
+                const rect = section.getBoundingClientRect();
+                const offset = 100; // Adjust this value as needed
+                
+                // If the section is in the viewport and closer to the top than the current nearest
+                if (rect.top <= offset && (!nearest || rect.top > nearest.getBoundingClientRect().top)) {
+                    return section;
+                }
+                
+                return nearest;
+            }, null as HTMLElement | null);
+            
+            if (currentSection && currentSection.id !== activeSection) {
+                setActiveSection(currentSection.id);
+            }
+        };
+        
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll);
+        
+        // Call once to set initial active section
+        handleScroll();
+        
+        // Cleanup
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [blog, contentSections, activeSection]);
 
     if (loading) {
         return (
@@ -233,30 +341,26 @@ export default function BlogDetailPage() {
                             
                             <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
                                 <ul className="space-y-2">
-                                    <li 
-                                        className={`${activeSection === "introduction" ? "text-colorGreen font-medium" : "text-gray-600 dark:text-gray-300 hover:text-colorGreen"} cursor-pointer`}
-                                        onClick={() => scrollToSection("introduction")}
-                                    >
-                                        Introduction
-                                    </li>
-                                    <li 
-                                        className={`${activeSection === "key-points" ? "text-colorGreen font-medium" : "text-gray-600 dark:text-gray-300 hover:text-colorGreen"} cursor-pointer`}
-                                        onClick={() => scrollToSection("key-points")}
-                                    >
-                                        Key Points
-                                    </li>
-                                    <li 
-                                        className={`${activeSection === "analysis" ? "text-colorGreen font-medium" : "text-gray-600 dark:text-gray-300 hover:text-colorGreen"} cursor-pointer`}
-                                        onClick={() => scrollToSection("analysis")}
-                                    >
-                                        Analysis
-                                    </li>
-                                    <li 
-                                        className={`${activeSection === "conclusion" ? "text-colorGreen font-medium" : "text-gray-600 dark:text-gray-300 hover:text-colorGreen"} cursor-pointer`}
-                                        onClick={() => scrollToSection("conclusion")}
-                                    >
-                                        Conclusion
-                                    </li>
+                                    {blog.summary && (
+                                        <li 
+                                            className={`${activeSection === "introduction" ? "text-colorGreen font-medium" : "text-gray-600 dark:text-gray-300 hover:text-colorGreen"} cursor-pointer`}
+                                            onClick={() => scrollToSection("introduction")}
+                                        >
+                                            Introduction
+                                        </li>
+                                    )}
+                                    
+                                    {/* Dynamically generated table of contents from headers */}
+                                    {contentSections.map((section) => (
+                                        <li 
+                                            key={section.id}
+                                            className={`${activeSection === section.id ? "text-colorGreen font-medium" : "text-gray-600 dark:text-gray-300 hover:text-colorGreen"} cursor-pointer ${section.level > 1 ? `pl-${(section.level - 1) * 2}` : ""}`}
+                                            onClick={() => scrollToSection(section.id)}
+                                            style={{ paddingLeft: section.level > 1 ? `${(section.level - 1) * 0.75}rem` : 0 }}
+                                        >
+                                            {section.title}
+                                        </li>
+                                    ))}
                                 </ul>
                                 
                                 <div className="mt-6">
@@ -310,12 +414,16 @@ export default function BlogDetailPage() {
                         )}
                         
                         <motion.div 
-                            className="prose prose-lg dark:prose-invert max-w-none"
-                            dangerouslySetInnerHTML={{ __html: blog.content }}
+                            className="ql-snow"
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.6, duration: 0.7 }}
-                        />
+                        >
+                            <div 
+                                className="ql-editor prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:italic prose-ul:list-disc prose-ol:list-decimal"
+                                dangerouslySetInnerHTML={{ __html: blog.content }}
+                            />
+                        </motion.div>
 
                         {blog.tags && blog.tags.length > 0 && (
                             <motion.div 

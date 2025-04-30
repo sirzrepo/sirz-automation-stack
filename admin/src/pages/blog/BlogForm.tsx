@@ -8,20 +8,8 @@ import { closeModal } from "../../store/modalSlice";
 import Input from "../../components/common/input";
 import Loader from "../../features/loader";
 import { X } from "lucide-react";
-import { useEditor, EditorContent, Extension } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Link from '@tiptap/extension-link';
-import Underline from '@tiptap/extension-underline';
-import TextStyle from '@tiptap/extension-text-style';
-import Color from '@tiptap/extension-color';
-import Highlight from '@tiptap/extension-highlight';
-import TextAlign from '@tiptap/extension-text-align';
-import Image from '@tiptap/extension-image';
-import Placeholder from '@tiptap/extension-placeholder';
-import TaskList from '@tiptap/extension-task-list';
-import TaskItem from '@tiptap/extension-task-item';
-import FontFamily from '@tiptap/extension-font-family';
-import { LineHeight } from '../../services/lineHeight';
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 interface BlogFormProps {
   onSuccess?: () => void;
@@ -37,108 +25,6 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
   const dispatch = useDispatch();
   const { userId } = useAuth();
 
-  // Custom line height extension
-  const CustomLineHeight = Extension.create({
-    name: 'customLineHeight',
-    addGlobalAttributes() {
-      return [
-        {
-          types: ['paragraph', 'heading'],
-          attributes: {
-            lineHeight: {
-              default: null,
-              parseHTML: element => element.style.lineHeight,
-              renderHTML: attributes => {
-                if (attributes.lineHeight) {
-                  return { style: `line-height: ${attributes.lineHeight}` };
-                }
-                return {};
-              }
-            }
-          }
-        }
-      ];
-    },
-    addCommands() {
-      return {
-        setLineHeight: (lineHeight: string | number) => ({ chain }) => {
-          return chain().setMark('textStyle', { lineHeight }).run();
-        },
-      };
-    },
-  });
-
-  // Custom font size extension
-  const CustomFontSize = Extension.create({
-    name: 'customFontSize',
-    addGlobalAttributes() {
-      return [
-        {
-          types: ['textStyle'],
-          attributes: {
-            fontSize: {
-              default: null,
-              parseHTML: element => element.style.fontSize,
-              renderHTML: attributes => {
-                if (!attributes.fontSize) {
-                  return {};
-                }
-                return {
-                  style: `font-size: ${attributes.fontSize}`,
-                };
-              },
-            },
-          },
-        },
-      ];
-    },
-    addCommands() {
-      return {
-        setFontSize: (fontSize) => ({ chain }) => {
-          return chain()
-            .setMark('textStyle', { fontSize })
-            .run();
-        },
-      };
-    },
-  });
-
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      LineHeight,
-      Link.configure({
-        openOnClick: false,
-      }),
-      Underline,
-      TextStyle,
-      Color,
-      Highlight,
-      TextAlign.configure({
-        types: ['heading', 'paragraph'],
-      }),
-      Image,
-      FontFamily.configure({
-              types: ['textStyle'],
-            }),
-      Placeholder.configure({
-        placeholder: 'Write your blog post here...',
-      }),
-      CustomLineHeight,
-      TaskList,
-      TaskItem,
-      CustomFontSize,
-    ],
-    content: '',
-    onCreate: ({ editor }) => {
-      // focus editor after creation
-      editor.chain().focus().run();
-    },
-    onUpdate: ({ editor }) => {
-      formik.setFieldValue("content", editor.getHTML());
-    },
-  });
-
   // Generate slug from title
   const generateSlug = (title: string) => {
     return title
@@ -146,6 +32,29 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
   };
+
+  // We'll use a simpler approach for line height
+  // Instead of trying to register a custom format, we'll use CSS classes
+  // The custom CSS file we imported will handle the line height styling
+
+  const modules = {
+    toolbar: [
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'align': [] }],
+      ['link', 'image'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      ['clean']
+    ]
+  }
+
+  const formats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike',
+    'align',
+    'link', 'image',
+    'list', 'bullet'
+  ]
 
   const formik = useFormik({
     initialValues: {
@@ -292,343 +201,17 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
           <h2 className="font-bold">Content</h2>
           <p className="text-sm">Required</p>
         </label>
-        <div className={`border-[1.5px] ${
-          formik.touched.content && formik.errors.content ? "border-red-500" : ""
-        }`}>
-          {/* Text Formatting Toolbar */}
-          <div className="bg-gray-50 border-b border-gray-200 p-2 flex flex-wrap gap-1">
-            {/* Text Style */}
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleBold().run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('bold') ? 'bg-gray-200' : ''}`}
-              title="Bold"
-            >
-              <span className="font-bold">B</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleItalic().run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('italic') ? 'bg-gray-200' : ''}`}
-              title="Italic"
-            >
-              <span className="italic">I</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleUnderline().run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('underline') ? 'bg-gray-200' : ''}`}
-              title="Underline"
-            >
-              <span className="underline">U</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleStrike().run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('strike') ? 'bg-gray-200' : ''}`}
-              title="Strikethrough"
-            >
-              <span className="line-through">S</span>
-            </button>
-            
-            <div className="border-r border-gray-300 mx-1 h-6"></div>
-
-             {/* Font Family */}
-             <select
-              onChange={(e) => {
-                editor?.chain().focus().setFontFamily(e.target.value).run();
-              }}
-              className="px-2 py-1 rounded text-sm bg-white border border-gray-200"
-              title="Font Family"
-            >
-              <option value="">Font</option>
-              <option value="Arial">Arial</option>
-              <option value="Courier New">Courier New</option>
-              <option value="Georgia">Georgia</option>
-              <option value="Times New Roman">Times New Roman</option>
-              <option value="Verdana">Verdana</option>
-              <option value="Tahoma">Tahoma</option>
-              <option value="Trebuchet MS">Trebuchet MS</option>
-            </select>
-
-            
-            {/* Font Size */}
-            <select
-              onChange={(e) => {
-                editor?.chain().focus().setMark('textStyle', { fontSize: e.target.value }).run();
-              }}
-              className="px-2 py-1 rounded text-sm bg-white border border-gray-200"
-              title="Font Size"
-            >
-              <option value="">Size</option>
-              <option value="8pt">8</option>
-              <option value="10pt">10</option>
-              <option value="12pt">12</option>
-              <option value="14pt">14</option>
-              <option value="16pt">16</option>
-              <option value="18pt">18</option>
-              <option value="20pt">20</option>
-              <option value="24pt">24</option>
-              <option value="30pt">30</option>
-              <option value="36pt">36</option>
-              <option value="48pt">48</option>
-            </select>
-            
-            {/* Line Height */}
-            <select
-              onChange={(e) => {
-                editor?.chain().focus().setLineHeight(e.target.value).run();
-              }}
-              className="px-2 py-1 rounded text-sm bg-white border border-gray-200"
-              title="Line Height"
-            >
-              <option value="">Line Height</option>
-              <option value="1">1.0</option>
-              <option value="1.15">1.15</option>
-              <option value="1.5">1.5</option>
-              <option value="2">2.0</option>
-              <option value="2.5">2.5</option>
-              <option value="3">3.0</option>
-            </select>
-            
-            <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
-            {/* Headings */}
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('heading', { level: 1 }) ? 'bg-gray-200' : ''}`}
-              title="Heading 1"
-            >
-              H1
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('heading', { level: 2 }) ? 'bg-gray-200' : ''}`}
-              title="Heading 2"
-            >
-              H2
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('heading', { level: 3 }) ? 'bg-gray-200' : ''}`}
-              title="Heading 3"
-            >
-              H3
-            </button>
-            
-            <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
-            {/* Lists */}
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleBulletList().run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('bulletList') ? 'bg-gray-200' : ''}`}
-              title="Bullet List"
-            >
-              • List
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleOrderedList().run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('orderedList') ? 'bg-gray-200' : ''}`}
-              title="Numbered List"
-            >
-              1. List
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleTaskList().run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('taskList') ? 'bg-gray-200' : ''}`}
-              title="Task List"
-            >
-              ☑ Tasks
-            </button>
-            
-            <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
-            {/* Alignment */}
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().setTextAlign('left').run()}
-              className={`px-2 py-1 rounded ${editor?.isActive({ textAlign: 'left' }) ? 'bg-gray-200' : ''}`}
-              title="Align Left"
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().setTextAlign('center').run()}
-              className={`px-2 py-1 rounded ${editor?.isActive({ textAlign: 'center' }) ? 'bg-gray-200' : ''}`}
-              title="Align Center"
-            >
-              ↔
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().setTextAlign('right').run()}
-              className={`px-2 py-1 rounded ${editor?.isActive({ textAlign: 'right' }) ? 'bg-gray-200' : ''}`}
-              title="Align Right"
-            >
-              →
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().setTextAlign('justify').run()}
-              className={`px-2 py-1 rounded ${editor?.isActive({ textAlign: 'justify' }) ? 'bg-gray-200' : ''}`}
-              title="Justify"
-            >
-              ⇔
-            </button>
-            
-            <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
-            {/* Text Colors */}
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().setColor('#000000').run()}
-              className="px-2 py-1 rounded"
-              title="Black"
-            >
-              <div className="w-4 h-4 bg-black"></div>
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().setColor('#FF0000').run()}
-              className="px-2 py-1 rounded"
-              title="Red"
-            >
-              <div className="w-4 h-4 bg-red-600"></div>
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().setColor('#0000FF').run()}
-              className="px-2 py-1 rounded"
-              title="Blue"
-            >
-              <div className="w-4 h-4 bg-blue-600"></div>
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().setColor('#008000').run()}
-              className="px-2 py-1 rounded"
-              title="Green"
-            >
-              <div className="w-4 h-4 bg-green-600"></div>
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().setColor('#FFA500').run()}
-              className="px-2 py-1 rounded"
-              title="Orange"
-            >
-              <div className="w-4 h-4 bg-orange-500"></div>
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().setColor('#800080').run()}
-              className="px-2 py-1 rounded"
-              title="Purple"
-            >
-              <div className="w-4 h-4 bg-purple-600"></div>
-            </button>
-            
-            <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
-            {/* Highlight */}
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleHighlight().run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('highlight') ? 'bg-gray-200' : ''}`}
-              title="Highlight"
-            >
-              <span className="bg-yellow-200">H</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleHighlight({ color: '#8CE99A' }).run()}
-              className="px-2 py-1 rounded"
-              title="Green Highlight"
-            >
-              <span className="bg-green-200">H</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleHighlight({ color: '#FF8787' }).run()}
-              className="px-2 py-1 rounded"
-              title="Red Highlight"
-            >
-              <span className="bg-red-200">H</span>
-            </button>
-            
-            <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
-            {/* Quotes & Code */}
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleBlockquote().run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('blockquote') ? 'bg-gray-200' : ''}`}
-              title="Quote"
-            >
-              ""
-            </button>
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().toggleCodeBlock().run()}
-              className={`px-2 py-1 rounded ${editor?.isActive('codeBlock') ? 'bg-gray-200' : ''}`}
-              title="Code Block"
-            >
-              {'</>'}
-            </button>
-            
-            <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
-            {/* Link */}
-            <button
-              type="button"
-              onClick={() => {
-                const url = window.prompt('Enter URL');
-                if (url) {
-                  editor?.chain().focus().setLink({ href: url }).run();
-                }
-              }}
-              className={`px-2 py-1 rounded ${editor?.isActive('link') ? 'bg-gray-200' : ''}`}
-              title="Insert Link"
-            >
-              🔗
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                const url = window.prompt('Enter image URL');
-                if (url) {
-                  editor?.chain().focus().setImage({ src: url }).run();
-                }
-              }}
-              className="px-2 py-1 rounded"
-              title="Insert Image"
-            >
-              🖼️
-            </button>
-            
-            <div className="border-r border-gray-300 mx-1 h-6"></div>
-            
-            {/* Clear Formatting */}
-            <button
-              type="button"
-              onClick={() => editor?.chain().focus().clearNodes().unsetAllMarks().run()}
-              className="px-2 py-1 rounded"
-              title="Clear Formatting"
-            >
-              Clear
-            </button>
-          </div>
-          <div className="tiptap-editor-content prose prose-sm sm:prose-base prose-headings:font-bold prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:italic prose-ul:list-disc prose-ol:list-decimal min-h-[200px] p-3">
-          <EditorContent editor={editor} className="custom-editor" />
-        </div>
-        </div>
+          <ReactQuill
+            value={formik.values.content}
+            onChange={(content) => formik.setFieldValue("content", content)}
+            modules={modules}
+            formats={formats}
+            className={`border-[1.5px] ${
+              formik.touched.content && formik.errors.content ? "border-red-500" : ""
+            }`}
+            placeholder="Write your blog post here..."
+            theme="snow"
+          />
         {formik.touched.content && formik.errors.content && (
           <p className="text-red-500 text-sm mt-1">{formik.errors.content}</p>
         )}
