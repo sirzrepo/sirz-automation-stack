@@ -337,7 +337,7 @@ export default function BlogDetailPage() {
                             transition={{ delay: 0.3, duration: 0.5 }}
                             className="sticky top-6"
                         >
-                            <HeaderFormat title="Contents" classNames="text-black dark:text-white" />
+                            <HeaderFormat title="Table of Content" classNames="text-black dark:text-white" />
                             
                             <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
                                 <ul className="space-y-2">
