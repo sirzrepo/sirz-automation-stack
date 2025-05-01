@@ -14,11 +14,14 @@ export interface BlogPost {
 
 export const fetchAllBlogs = async (): Promise<BlogPost[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/api/blogs`);
+    // Add status=Published parameter to only fetch published blogs
+    const response = await fetch(`${BASE_URL}/api/blogs?status=Published`);
     if (!response.ok) {
       throw new Error('Failed to fetch blogs');
     }
-    return await response.json();
+    const blogs = await response.json();
+    // Double-check to filter out any drafts that might have been returned
+    return blogs.filter((blog: any) => blog.status === 'Published');
   } catch (error) {
     console.error('Error fetching blogs:', error);
     return [];
@@ -31,7 +34,15 @@ export const fetchBlogById = async (id: string): Promise<BlogPost | null> => {
     if (!response.ok) {
       throw new Error('Failed to fetch blog');
     }
-    return await response.json();
+    const blog = await response.json();
+    
+    // Check if the blog is published, return null if it's a draft
+    if (blog.status !== 'Published') {
+      console.log('Attempted to access draft blog:', id);
+      return null;
+    }
+    
+    return blog;
   } catch (error) {
     console.error('Error fetching blog:', error);
     return null;
