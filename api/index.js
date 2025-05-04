@@ -11,6 +11,7 @@ const projectIdeaRoutes = require('./src/routes/projectIdeaRoutes');
 const projectRoutes = require('./src/routes/projectRoutes');
 const documentRoutes = require('./src/routes/documentRoutes');
 const blogRoutes = require('./src/routes/blogRoutes');
+const automationRoutes = require('./src/routes/automationRoutes');
 // import axios from "axios";
 
 dotenv.config();
@@ -69,6 +70,7 @@ app.use('/api/project-ideas', projectIdeaRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/documents', documentRoutes);
 app.use('/api/blogs', blogRoutes);
+app.use('/api/automations', automationRoutes);
 
 // API route to send an email
 app.post("/subscribe", async (req, res) => {
