@@ -32,7 +32,7 @@ const AutomationContactForm = () => {
         };
 
         try {
-            const response = await axios.post(`${BASE_URL}/automations`, payload);
+            const response = await axios.post(`${BASE_URL}/api/automations`, payload);
             // const response = await axios.post(`http://localhost:5000/api/automations`, payload);
             console.log("response", response);
             toast.success("Message sent successfully!");

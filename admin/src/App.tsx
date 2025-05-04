@@ -18,6 +18,7 @@ import Clients from './pages/client'
 import ClientProfile from './pages/clientProfile'
 import Blogs from './pages/blog'
 import BlogDetail from './pages/blog/BlogDetail'
+import AI_Inquiries from './pages/ai_inquiries';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -72,9 +73,16 @@ function App() {
                   <Clients />
                 </ProtectedRoute>
               } />
+              {/* AI_Inquiries */}
               <Route path="/client-profile" element={
                 <ProtectedRoute>
                   <ClientProfile />
+                </ProtectedRoute>
+              } />
+
+              <Route path="/ai-inquiries" element={
+                <ProtectedRoute>
+                  <AI_Inquiries />
                 </ProtectedRoute>
               } />
 

@@ -198,7 +198,7 @@ export default function Home() {
                             automationCards.map((data, index) => (
                                 <motion.div 
                                     key={index} 
-                                    className={` px-3 py-3 border-colorGreen pb-8 rounded-xl ${data.inverted ? ' flex flex-col-reverse bg-colorBlueDeep text-white justify-between ' : 'bg-colorLight dark:bg-colorDark border-b-8 border-e-8'}`}
+                                    className={` px-3 py-3 border-colorGreen pb-8 rounded-xl ${data.inverted ? ' flex flex-col-reverse bg-dashboard-form-gradient text-white justify-between ' : 'bg-colorLight dark:bg-colorDark border-b-8 border-e-8'}`}
                                     variants={fadeInUp}
                                     whileHover={{ scale: 1.05 }}
                                 >
