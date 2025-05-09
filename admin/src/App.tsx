@@ -19,6 +19,10 @@ import ClientProfile from './pages/clientProfile'
 import Blogs from './pages/blog'
 import BlogDetail from './pages/blog/BlogDetail'
 import AI_Inquiries from './pages/ai_inquiries';
+import LeadClassifier from './pages/agents/leadClassifier';
+import ContentCreation from './pages/agents/contentCreation';
+import LogoCreator from './pages/agents/logoCreator';
+import DataAnalyst from './pages/agents/dataAnalyst';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -101,6 +105,28 @@ function App() {
               <Route path="/blog/:slug" element={
                 <ProtectedRoute>
                   <BlogDetail />
+                </ProtectedRoute>
+              } />
+
+              {/* Agent routes */}
+              <Route path="/agent/leadClassifier" element={
+                <ProtectedRoute>
+                  <LeadClassifier />
+                </ProtectedRoute>
+              } />
+              <Route path="/agent/contentCreation" element={
+                <ProtectedRoute>
+                  <ContentCreation />
+                </ProtectedRoute>
+              } />
+              <Route path="/agent/logoCreator" element={
+                <ProtectedRoute>
+                  <LogoCreator />
+                </ProtectedRoute>
+              } />
+              <Route path="/agent/dataAnalyst" element={
+                <ProtectedRoute>
+                  <DataAnalyst />
                 </ProtectedRoute>
               } />
               

@@ -4,9 +4,16 @@ import { SirzLogo, DefaultProfileImg } from '../../assets';
 import { useAuth } from '../../context/AuthContext';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { IoHomeOutline, IoSettingsOutline, IoChevronForward, IoChevronBack, IoAnalyticsOutline, IoNewspaperOutline, IoHelpCircleOutline } from 'react-icons/io5';
-import { FaBookOpen, FaSignOutAlt, FaUsers, FaUserTie, FaBlog } from 'react-icons/fa';
+import { IoHomeOutline, IoSettingsOutline, IoChevronForward, IoChevronBack, IoAnalyticsOutline, IoNewspaperOutline, IoHelpCircleOutline, IoChevronDown, IoChevronUp } from 'react-icons/io5';
+import { FaBookOpen, FaSignOutAlt, FaUsers, FaUserTie, FaBlog, FaRobot } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+
+interface NavItem {
+  icon: JSX.Element;
+  label: string;
+  path: string;
+  subItems?: NavItem[];
+}
 
 interface SidebarProps {
   onStateChange?: (collapsed: boolean) => void;
@@ -18,6 +25,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
   const { logout } = useAuth();
   const { userData } = useSelector((state: RootState) => state.user);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
   
   // Check if the viewport is mobile
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -42,7 +50,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
   }, [isCollapsed, onStateChange]);
   
   // Navigation items with icons, labels, and paths
-  const navItems = [
+  const navItems: NavItem[] = [
     { 
       icon: <IoHomeOutline className="text-xl" />, 
       label: 'Home', 
@@ -63,6 +71,33 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
         label: 'Blog', 
         path: '/blog' 
     },
+    {
+      icon: <FaRobot className="text-xl" />, 
+      label: 'Agent', 
+      path: '/agent',
+      subItems: [
+        {
+          icon: <FaRobot className="text-lg" />,
+          label: 'Lead classifier',
+          path: '/agent/leadClassifier'
+        },
+        {
+          icon: <FaRobot className="text-lg" />,
+          label: 'Content creation',
+          path: '/agent/contentCreation'
+        },
+        {
+          icon: <FaRobot className="text-lg" />,
+          label: 'Logo creator',
+          path: '/agent/logoCreator'
+        },
+        {
+          icon: <FaRobot className="text-lg" />,
+          label: 'Data analyst',
+          path: '/agent/dataAnalyst'
+        },
+      ]
+    },
     { 
         icon: <IoNewspaperOutline className="text-xl" />, 
         label: 'newsletters', 
@@ -72,7 +107,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
       icon: <IoNewspaperOutline className="text-xl" />, 
       label: 'AI-Inquiries', 
       path: '/ai-inquiries' 
-  },
+    },
     { 
       icon: <IoAnalyticsOutline className="text-xl" />, 
       label: 'Analytics', 
@@ -92,7 +127,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
         icon: <IoHelpCircleOutline className="text-xl" />, 
         label: 'FAQ', 
         path: '/faq' 
-      },
+    },
   ];
   
   // Animation variants
@@ -107,6 +142,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
     if (isMobile) {
       setIsCollapsed(true);
     }
+  };
+  
+  // Handle dropdown toggle
+  const toggleDropdown = (label: string, event: React.MouseEvent) => {
+    event.stopPropagation();
+    setExpandedItem(expandedItem === label ? null : label);
   };
   
   // Handle logout
@@ -173,7 +214,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
       <nav className="flex-1 overflow-y-auto px-3">
         <ul className="space-y-1">
           {navItems.map((item, index) => {
-            const isActive = location.pathname === item.path;
+            const isActive = location.pathname === item.path || location.pathname.startsWith(item.path + '/');
+            const isExpanded = expandedItem === item.label;
+            const hasSubItems = item.subItems && item.subItems.length > 0;
             
             return (
               <li key={index}>
@@ -183,7 +226,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
                       ? 'bg-gradient-to-r from-blue-50 to-indigo-50' 
                       : 'hover:bg-gray-100'
                   }`}
-                  onClick={() => handleNavigation(item.path)}
+                  onClick={hasSubItems ? (e) => toggleDropdown(item.label, e) : () => handleNavigation(item.path)}
                   whileHover={{ 
                     scale: 1.02,
                     transition: { duration: 0.2 }
@@ -212,22 +255,81 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
                   
                   <AnimatePresence>
                     {!isCollapsed && (
-                      <motion.span
+                      <motion.div
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -10 }}
                         transition={{ duration: 0.2, delay: 0.1 }}
-                        className={`font-normal ml-3 ${
+                        className="flex-1 flex items-center justify-between"
+                      >
+                        <span className={`font-normal ml-3 ${
                           isActive 
                             ? 'text-blue-700' 
                             : 'text-gray-700'
-                        }`}
-                      >
-                        {item.label}
-                      </motion.span>
+                        }`}>
+                          {item.label}
+                        </span>
+                        
+                        {hasSubItems && (
+                          <div className="ml-2 text-gray-500">
+                            {isExpanded ? <IoChevronUp size={16} /> : <IoChevronDown size={16} />}
+                          </div>
+                        )}
+                      </motion.div>
                     )}
                   </AnimatePresence>
                 </motion.div>
+                
+                {/* Dropdown submenu */}
+                {hasSubItems && !isCollapsed && (
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.ul
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="ml-8 mt-1 space-y-1 overflow-hidden"
+                      >
+                        {item.subItems?.map((subItem, subIndex) => {
+                          const isSubActive = location.pathname === subItem.path;
+                          
+                          return (
+                            <motion.li 
+                              key={subIndex}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              exit={{ opacity: 0, x: -10 }}
+                              transition={{ 
+                                duration: 0.2, 
+                                delay: subIndex * 0.05 
+                              }}
+                            >
+                              <div
+                                className={`flex items-center py-2 px-3 rounded-lg cursor-pointer ${
+                                  isSubActive 
+                                    ? 'bg-blue-50 text-blue-600' 
+                                    : 'hover:bg-gray-50 text-gray-600'
+                                }`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleNavigation(subItem.path);
+                                }}
+                              >
+                                <div className="min-w-[24px] flex justify-center items-center">
+                                  {subItem.icon}
+                                </div>
+                                <span className="ml-2 text-sm font-normal">
+                                  {subItem.label}
+                                </span>
+                              </div>
+                            </motion.li>
+                          );
+                        })}
+                      </motion.ul>
+                    )}
+                  </AnimatePresence>
+                )}
               </li>
             );
           })}

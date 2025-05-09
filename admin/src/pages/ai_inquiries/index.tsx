@@ -6,7 +6,6 @@ import { BASE_URL } from "../../utils";
 import { useAuth } from "../../context/AuthContext";
 import { closeModal, openModal } from "../../store/modalSlice";
 import Loader from "../../features/loader";
-import Button from "../../components/common/button";
 import Modal from "../../components/layout/modal";
 
 // Define BlogType interface
@@ -205,11 +204,6 @@ export default function AI_Inquiries() {
               </div>
             </div>
             <p className="text-lg mb-4">No inquiries yet</p>
-            <Button
-              text="+ Create your first blog post"
-              onClick={() => dispatch(openModal("create_blog"))}
-              className="text-[15px] hover:bg-blue-600"
-            />
           </section>
         </div>
       ) : (
