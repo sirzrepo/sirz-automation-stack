@@ -96,6 +96,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
           label: 'Data analyst',
           path: '/agent/dataAnalyst'
         },
+        {
+          icon: <FaRobot className="text-lg" />,
+          label: 'Chat',
+          path: '/agent/chat'
+        },
       ]
     },
     { 

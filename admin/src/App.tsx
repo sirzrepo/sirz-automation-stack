@@ -23,6 +23,7 @@ import LeadClassifier from './pages/agents/leadClassifier';
 import ContentCreation from './pages/agents/contentCreation';
 import LogoCreator from './pages/agents/logoCreator';
 import DataAnalyst from './pages/agents/dataAnalyst';
+import Chat from './pages/agents/chat';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -127,6 +128,11 @@ function App() {
               <Route path="/agent/dataAnalyst" element={
                 <ProtectedRoute>
                   <DataAnalyst />
+                </ProtectedRoute>
+              } />
+              <Route path="/agent/chat" element={
+                <ProtectedRoute>
+                  <Chat />
                 </ProtectedRoute>
               } />
               
