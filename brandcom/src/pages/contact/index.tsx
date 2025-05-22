@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Input from '../../components/common/input';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type FormData = {
   firstName: string;
@@ -29,6 +30,18 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (submitStatus) {
+      setIsModalOpen(true);
+      // Auto-close the modal after 5 seconds
+      const timer = setTimeout(() => {
+        setIsModalOpen(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [submitStatus]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -85,7 +98,71 @@ export default function Contact() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="relative bg-white rounded-lg shadow-md overflow-hidden">
+      {/* Success/Error Modal */}
+      <AnimatePresence>
+        {isModalOpen && submitStatus && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="fixed inset-0 flex items-center justify-center z-50 px-4"
+          >
+            <div 
+              className="fixed inset-0 bg-black bg-opacity-50"
+              onClick={() => setIsModalOpen(false)}
+            />
+            <motion.div 
+              className={`relative max-w-md w-full p-6 rounded-lg shadow-xl ${
+                submitStatus.success ? 'bg-green-50' : 'bg-red-50'
+              }`}
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+            >
+              <div className="flex items-start">
+                <div className={`flex-shrink-0 h-6 w-6 ${
+                  submitStatus.success ? 'text-green-500' : 'text-red-500'
+                }`}>
+                  {submitStatus.success ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  )}
+                </div>
+                <div className="ml-3">
+                  <h3 className={`text-lg font-medium ${
+                    submitStatus.success ? 'text-green-800' : 'text-red-800'
+                  }`}>
+                    {submitStatus.success ? 'Success!' : 'Error'}
+                  </h3>
+                  <div className={`mt-2 text-sm ${
+                    submitStatus.success ? 'text-green-700' : 'text-red-700'
+                  }`}>
+                    <p>{submitStatus.message}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsModalOpen(false);
+                  }}
+                  className="ml-auto -mx-1.5 -my-1.5 p-1.5 inline-flex h-8 w-8 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors"
+                  aria-label="Close"
+                >
+                  <span className="sr-only">Close</span>
+                  <svg className="h-5 w-5 text-gray-500 hover:text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="md:grid md:grid-cols-2 gap-20 py-20 md:w-[80%] w-[90%] mx-auto">
         <div className="md:col-span-1">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
