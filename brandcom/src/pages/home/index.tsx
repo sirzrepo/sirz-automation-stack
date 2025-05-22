@@ -54,7 +54,7 @@ export default function Home() {
                     <div>
                         {/* group34252, group34242, exclamationLines */}
                         <img src={group34255} alt="" className="absolute bottom-0 max-sm:w-[150px] " />
-                        <img src={Component4} alt="" className="absolute sm:bottom-20 bottom-0  sm:right-20 right-0 max-sm:w-[150px] " />
+                        <img src={Component4} alt="" className="absolute sm:bottom-20 bottom-0 z-10 sm:right-20 right-0 max-sm:w-[150px] " />
                         <img src={group34252} alt="" className="absolute top-5 max-sm:w-[150px]" />
                         <img src={group34242} alt="" className="absolute top-5 right-0 max-sm:w-[150px]" />
                     </div>

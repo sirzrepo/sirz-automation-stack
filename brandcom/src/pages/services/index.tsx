@@ -10,9 +10,12 @@ import Video from "../../components/layout/video";
 import { NumberCardWrapper } from "../../components/layout/cards/numberCard/wrapper";
 import { getServiceCardByKey, pageCardSelections, serviceCards } from "../../constants/serviceCards";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../constants/routes/desc";
 
 
 export default function Services() {
+    const navigate = useNavigate();
     const {service} = useParams();
     const card = getServiceCardByKey(`${service}`);
 
@@ -61,14 +64,16 @@ export default function Services() {
                 <p className="text-lg text-gray-700 leading-relaxed mb-8">
                     {card?.longDescription}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <div className="flex sm:flex-row gap-4 justify-center md:justify-start">
                     <button
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    onClick={() => navigate(ROUTES.CONTACT.PATH)}
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-3 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                     Get Demo
                     </button>
                     <button
-                    className="bg-white hover:bg-gray-100 border border-indigo-600 text-indigo-600 font-semibold py-3 px-6 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    onClick={() => navigate(ROUTES.CONTACT.PATH)}
+                    className="bg-white hover:bg-gray-100 border border-indigo-600 text-indigo-600 font-semibold py-3 px-3 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                     Get Started Free
                     </button>

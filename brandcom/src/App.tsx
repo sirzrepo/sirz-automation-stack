@@ -13,7 +13,7 @@ function App() {
   }
 
   return (
-    <div className=" dark:bg-black dark:text-white">
+    <div className="">
       <ToastContainer />
       <RouterProvider router={routes(user)} />
       <DarkModeToggle isNotVisible />

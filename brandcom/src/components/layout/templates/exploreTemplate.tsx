@@ -11,7 +11,7 @@ className,
     return(
         <motion.div className={`border border-gray-400w-full ${className} text-black rounded-lg`}>
         <div className="flex items-center flex-col text-center justify-center sm:w-[80%] py-16  mx-auto ">
-            <img src={image ? image : group34257} alt="" className="w-full object-cover" />
+            <img src={image ? image : group34257} alt="" className="w-full max-sm:h-[300px] object-cover" />
             <div className=" py-20 sm:w-[75%] w-[90%] text-primary-700">
                 {
                     header ? (
