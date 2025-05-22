@@ -127,9 +127,9 @@ export default function NavBar() {
                                 </div>
                             ))}
                             <div className="pt-4 pb-3 border-t border-gray-200">
-                                <div className="mt-3 space-y-1">
+                                <div className="mt-3 space-y-1 grid grid-cols-2 gap-3 w-[90%] mx-auto">
                                     <Button color text="Log in" className="w-full justify-center px-4 py-2 text-base font-medium" />
-                                    <Button text="Get Demo" className="w-full justify-center px-4 py-2 text-base font-medium mt-2" />
+                                    <Button text="Get Demo" className="w-full justify-center px-4 py-2 text-base font-medium" />
                                 </div>
                             </div>
                         </div>

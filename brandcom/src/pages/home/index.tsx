@@ -6,7 +6,6 @@ import ExploreTemplate from "../../components/layout/templates/exploreTemplate";
 import { AuthCardWrapper } from "../../components/layout/cards/authCard/wrapper";
 import { SimpleCardWrapper } from "../../components/layout/cards/simpleCard/wrapper";
 import HumanTemplate from "../../components/layout/templates/humanTouch";
-import QuestionCard from "../../components/layout/cards/questionCard";
 import SectionTemplate from "../../components/layout/templates/sectionTemplate";
 import ButtonTemplate from "../../components/layout/templates/buttonTemplate";
 import { pageCardSelections, serviceCards } from "../../constants/serviceCards";
@@ -105,14 +104,14 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="flex overflow-x-scroll">
+            {/* <section className="flex overflow-x-scroll">
                 <QuestionCard />
                 <QuestionCard />
                 <QuestionCard />
                 <QuestionCard />
-            </section>
+            </section> */}
 
-            <section className="pt-32">
+            <section className="pt-20">
                 <SectionTemplate />
             </section>
 
