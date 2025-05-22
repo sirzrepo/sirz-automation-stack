@@ -12,6 +12,7 @@ const projectRoutes = require('./src/routes/projectRoutes');
 const documentRoutes = require('./src/routes/documentRoutes');
 const blogRoutes = require('./src/routes/blogRoutes');
 const automationRoutes = require('./src/routes/automationRoutes');
+const brandcomFormRoutes = require('./src/routes/brandcomFormRoutes');
 // import axios from "axios";
 
 dotenv.config();
@@ -71,6 +72,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/documents', documentRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/automations', automationRoutes);
+app.use('/api/brandcom-form', brandcomFormRoutes);
 
 // API route to send an email
 app.post("/subscribe", async (req, res) => {

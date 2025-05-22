@@ -46,25 +46,28 @@ export default function Modal(props: Idata) {
             </div>
 
             <section className='p-6 h-[80%] overflow-y-scroll hideScrollBar'>
-             {children}
+              {children}
             </section>
 
-            {/* <div className='flex justify-end items-center h-[10%] gap-2 bg-[#FAFAFA]'>
+            <div className='flex justify-end items-center h-[10%] gap-2 bg-[#FAFAFA] p-4'>
               <button
                 onClick={handleClose} 
-                className="text-md w-fit bg-white text-black px-4 py-2 rounded-sm hover:bg-slate-100 border border-colorBlueDeep transition "
+                className="text-md w-fit bg-white text-black px-4 py-2 rounded-sm hover:bg-slate-100 border border-colorBlueDeep transition"
               >
                 Cancel
               </button>
 
               <button
-                onClick={onclick}
-                type='submit'
-                className="text-md w-fit bg-colorBlueDeep text-white px-4 py-2 rounded-sm hover:bg-blue-600 transition "
+                onClick={(e) => {
+                  e.stopPropagation();
+                  props.onclick();
+                }}
+                type='button'
+                className="text-md w-fit bg-colorBlueDeep text-white px-4 py-2 rounded-sm hover:bg-blue-600 transition"
               >
-                {btnText}
+                {props.btnText}
               </button>
-            </div> */}
+            </div>
 
           </div>
     </section>

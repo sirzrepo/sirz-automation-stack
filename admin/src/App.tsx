@@ -24,6 +24,7 @@ import ContentCreation from './pages/agents/contentCreation';
 import LogoCreator from './pages/agents/logoCreator';
 import DataAnalyst from './pages/agents/dataAnalyst';
 import Chat from './pages/agents/chat';
+import BrandcomInquiries from './pages/brandcom_inquiries';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -88,6 +89,12 @@ function App() {
               <Route path="/ai-inquiries" element={
                 <ProtectedRoute>
                   <AI_Inquiries />
+                </ProtectedRoute>
+              } />
+
+              <Route path="/brandcom-inquiries" element={
+                <ProtectedRoute>
+                  <BrandcomInquiries />
                 </ProtectedRoute>
               } />
 

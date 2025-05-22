@@ -114,6 +114,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
       path: '/ai-inquiries' 
     },
     { 
+      icon: <IoNewspaperOutline className="text-xl" />, 
+      label: 'Brandcom Inquiries', 
+      path: '/brandcom-inquiries' 
+    },
+    { 
       icon: <IoAnalyticsOutline className="text-xl" />, 
       label: 'Analytics', 
       path: '/analytics' 
