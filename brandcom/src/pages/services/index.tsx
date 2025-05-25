@@ -29,77 +29,120 @@ export default function Services() {
             transition={{ duration: 0.5 }}
             className="overflow-hidden bg-primary-100"
         >
-            {/* Hero Section */}
-            {/* <section className=" min-h-screen relative text-white pb-16 md:py-24">
-                    <motion.div className=" text-black rounded-lg">
-                    <div className="lg:grid grid-cols-2 w-[80%] gap-10 mx-auto  ">
-
-                        <div className="flex 2xl:w-[80%] flex-col sm:mt-20 relative z-10 lg:py-16 ">
-                            <div className=" pb-20 max-md:pt-10">
-                                <h2 className="text-3xl font-bold text-primary-700 sm:text-4xl lg:text-5xl ">
-                                    {card?.title}
-                                </h2>
-                                <div className="text-lg leading-relaxed py-8 text-gray-700 ">
-                                {card?.longDescription}
-                                </div>
-                                <div className="gap-6">
-                                    <ButtonTemplate firstBtnTxt={`Book Now`} classname="" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <img src={card?.image} alt="" className=" mx-auto w-full  object-cover  " />
-                    </div>
-                </motion.div>
-                <img src={Component4} alt="" className="absolute sm:bottom-20 bottom-0  sm:right-20 right-0 max-sm:w-[150px] " />
-            </section> */}
-
-
-            <div className=" min-h-screen  py-16 md:py-24">
-            <div className="container mx-auto px-6 md:px-8 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-10 lg:gap-20">
+            <div className="relative min-h-screen py-16 md:py-24 overflow-hidden">
+              {/* Animated Background Elements */}
+              <motion.div 
+                className="absolute inset-0 -z-10 overflow-hidden"
+                initial="hidden"
+                animate="visible"
+              >
+                {/* Floating Circles */}
+                <motion.div
+                  className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-indigo-100 opacity-20 blur-3xl"
+                  animate={{
+                    y: [0, 30, 0],
+                    x: [0, 20, 0],
+                  }}
+                  transition={{
+                    duration: 15,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                <motion.div
+                  className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-purple-100 opacity-20 blur-3xl"
+                  animate={{
+                    y: [0, -25, 0],
+                    x: [0, -15, 0],
+                  }}
+                  transition={{
+                    duration: 18,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1,
+                  }}
+                />
+                {/* Animated Grid */}
+                <motion.div 
+                  className="absolute inset-0 opacity-5"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='%2392a2b8'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`,
+                    backgroundSize: '32px 32px'
+                  }}
+                  animate={{
+                    backgroundPosition: ['0% 0%', '100% 100%']
+                  }}
+                  transition={{
+                    duration: 60,
+                    repeat: Infinity,
+                    ease: 'linear'
+                  }}
+                />
+              </motion.div>
+              
+              <div className="container relative z-10 mx-auto px-6 md:px-8 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-10 lg:gap-20">
                 <div className="md:w-1/2 text-center md:text-left">
-                <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl mb-4">
+                  <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl mb-4">
                     {card?.title}
-                </h2>
-                <p className="text-lg text-gray-700 leading-relaxed mb-8">
+                  </h2>
+                  <p className="text-lg text-gray-700 leading-relaxed mb-8">
                     {card?.longDescription}
-                </p>
-                <div className="flex sm:flex-row gap-4 justify-center md:justify-start">
+                  </p>
+                  <div className="flex sm:flex-row gap-4 justify-center md:justify-start">
                     <button
-                    onClick={() => navigate(ROUTES.CONTACT.PATH)}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-3 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      onClick={() => navigate(ROUTES.CONTACT.PATH)}
+                      className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200"
                     >
-                    Get Demo
+                      Get Demo
                     </button>
                     <button
-                    onClick={() => navigate(ROUTES.CONTACT.PATH)}
-                    className="bg-white hover:bg-gray-100 border border-indigo-600 text-indigo-600 font-semibold py-3 px-3 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      onClick={() => navigate(ROUTES.CONTACT.PATH)}
+                      className="bg-white hover:bg-gray-100 border border-indigo-600 text-indigo-600 font-semibold py-3 px-6 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200"
                     >
-                    Get Started Free
+                      Get Started Free
                     </button>
+                  </div>
                 </div>
-                </div>
-                <div className="md:w-1/2 relative">
-                <div className="rounded-lg shadow-xl overflow-hidden">
-                    <img
-                    src={card?.image}
-                    alt="Website Builder Mockup"
-                    className="w-full h-auto object-cover"
+                <motion.div 
+                  className="md:w-1/2 relative"
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <motion.div 
+                    className="rounded-2xl shadow-2xl overflow-hidden border-4 border-white/10"
+                    whileHover={{ 
+                      scale: 1.02,
+                      boxShadow: '0 25px 50px -12px rgba(79, 70, 229, 0.25)'
+                    }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <motion.img
+                      src={card?.image}
+                      alt="Website Builder Mockup"
+                      className="w-full h-auto object-cover"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
                     />
-                </div>
-                <div className="absolute bottom-4 right-4 rounded-full bg-indigo-600 text-white w-16 h-16 flex items-center justify-center shadow-lg">
+                  </motion.div>
+                  <motion.div 
+                    className="absolute bottom-4 right-4 rounded-full bg-indigo-600 text-white w-16 h-16 flex items-center justify-center shadow-lg cursor-pointer"
+                    whileHover={{ scale: 1.1, rotate: 10 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.943 12.97 3 11.43 3 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9h6v2H7V9z" clipRule="evenodd" />
+                      <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.943 12.97 3 11.43 3 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9h6v2H7V9z" clipRule="evenodd" />
                     </svg>
-                </div>
-                </div>
-            </div>
+                  </motion.div>
+                </motion.div>
+              </div>
             </div>
 
             
 
             <section className="w-[85%] mx-auto">
-                <Video />
+                <Video video={card?.video} />
             </section>
 
 

@@ -54,7 +54,7 @@ export default function NavBar() {
                             onClick={() => navigate(ROUTES.HOME.PATH)}
                             className="cursor-pointer"
                         >
-                            <b className="font-extrabold text-black text-xl sm:text-2xl">Brandcome.ai</b>
+                            <b className="font-extrabold text-black text-xl sm:text-2xl">Brandcom.ai</b>
                         </div>
                     </div>
 

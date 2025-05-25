@@ -1,4 +1,4 @@
-import { component5, component51, component52, component53, component54, component55, component56, component57, component58, component59 } from "../assets";
+import { component5, component51, component52, component53, component54, component55, component56, component57, component58, component59, contentCreationVideo, crmVideo, leadScoringVideo, salesChatBotVideo } from "../assets";
 
 export const serviceCards = [
     {
@@ -138,6 +138,7 @@ export const serviceCards = [
           text: "Produce more without more effort."
         },
       },
+      video: contentCreationVideo,
         get url() {
           return `/services/${this.key}`;
         },
@@ -158,6 +159,7 @@ export const serviceCards = [
           text: " Capture leads automatically."
         },
       },
+      video: salesChatBotVideo,
         get url() {
           return `/services/${this.key}`;
         },
@@ -166,7 +168,7 @@ export const serviceCards = [
         key: "crmSync",
         image: component58,
         title: "CRM Sync",
-        description: "Sync your AI tools with existing CRMs for better data flow.",
+        description: "Create customize CRM for better data flow",
         longDescription: `Sync your AI tools with existing CRMs for better data flow. It ensures lead and customer info is always up-to-date.`,
       cards: {
         firstCard: {
@@ -178,6 +180,7 @@ export const serviceCards = [
           text: " Keep your data consistent and clean."
         },
       },
+      video: crmVideo,
         get url() {
           return `/services/${this.key}`;
         },
@@ -198,6 +201,7 @@ export const serviceCards = [
           text: "Shorten your sales process with AI."
         },
       },
+      video: leadScoringVideo,
         get url() {
           return `/services/${this.key}`;
         },

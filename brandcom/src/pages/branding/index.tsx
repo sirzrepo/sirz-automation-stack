@@ -71,7 +71,7 @@ export default function Branding() {
             </section>
 
             <section>
-                <Video />
+                <Video video={""} />
             </section>
 
             <section>

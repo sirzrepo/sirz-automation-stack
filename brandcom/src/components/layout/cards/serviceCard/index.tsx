@@ -21,7 +21,7 @@ export default function ServiceCard({title, description, linkText, image, classN
             <div className="px-5">
                 <h2 className="text-[34px] font-normal py-8">{title}</h2>
                 <div className="text-lg ">{description || ""}</div>
-                <div className="text-primary-500 font-bold text-lg text-center pt-7 pb-2" > {linkText || "Learn more about logo design"}</div>
+                <div className="text-primary-500 font-bold text-lg text-center pt-7 pb-2" > {linkText || ""}</div>
             </div>
         </motion.div>
     )

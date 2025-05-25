@@ -71,7 +71,7 @@ export default function Ecommerce() {
             </section>
 
             <section>
-                <Video />
+                <Video video={""} />
             </section>
 
             <section>

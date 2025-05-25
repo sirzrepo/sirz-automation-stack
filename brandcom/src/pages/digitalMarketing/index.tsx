@@ -71,7 +71,7 @@ export default function DigitalMarketing() {
             </section>
 
             <section>
-                <Video />
+                <Video video={""} />
             </section>
 
             <section>

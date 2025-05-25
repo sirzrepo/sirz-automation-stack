@@ -37,13 +37,19 @@ import icon from './images/icon.png';
 import star from './images/star.png';
 import store from './images/store.png';
 import womanOnSwing from './images/woman on a swing.png';
-import video from './videos/WhatsApp Video 2025-05-14 at 10.21.18 AM.mp4'
+
 
 import ecommerceImg from './images/ecommerce.png';
 import brandingImg from './images/brandcom.png';
 import digitalImg from './images/digitalM.png';
 import vector1 from './images/Vector 7 (1).png';
 import vector2 from './images/Vector 7.png';
+
+import defaultVideo from './videos/WhatsApp Video 2025-05-14 at 10.21.18 AM.mp4';
+import crmVideo from './videos/crm.mp4';
+import contentCreationVideo from './videos/contentCreator.mp4';
+import leadScoringVideo from './videos/leadScoring.mp4';
+import salesChatBotVideo from './videos/chatbot.mp4';
 
 // Export icons
 export {
@@ -91,5 +97,10 @@ export {
   ecommerceImg,
   brandingImg,
   digitalImg,
-  video
+
+  defaultVideo,
+  crmVideo,
+  contentCreationVideo,
+  leadScoringVideo,
+  salesChatBotVideo,
 };

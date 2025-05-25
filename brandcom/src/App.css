@@ -166,6 +166,13 @@
   display: none;
 }
 
+/* Try to hide the mute/unmute button */
+.video-wrapper video::-webkit-media-controls-mute-button {
+  display: none !important;
+}
+.video-wrapper video::-webkit-media-controls-volume-slider {
+  display: none !important;
+}
 
 
 
