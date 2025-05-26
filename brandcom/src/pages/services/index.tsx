@@ -173,8 +173,10 @@ export default function Services() {
                         selectedCards.map((data, index) => (
                             <div key={index} className="min-w-[350px]">
                                 <ServiceCard 
+                                image={data.image}
                                 title={data.title}
                                 description={data.description}
+                                url={data.url}
                                 />
                             </div>
                         ))

@@ -9,6 +9,10 @@ export default function ServiceCard({title, description, linkText, image, classN
     const handleClick = () => {
         if (url) {
             navigate(url)
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            })
         }
     }
     return(
@@ -19,7 +23,7 @@ export default function ServiceCard({title, description, linkText, image, classN
             className="w-full object-cover"
             />
             <div className="px-5">
-                <h2 className="text-[34px] font-normal py-8">{title}</h2>
+                <h2 className="text-[24px] font-semibold whitespace-nowrap py-8">{title}</h2>
                 <div className="text-lg ">{description || ""}</div>
                 <div className="text-primary-500 font-bold text-lg text-center pt-7 pb-2" > {linkText || ""}</div>
             </div>
