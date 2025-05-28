@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchBlogById, fetchRelatedBlogs } from "../../features/blogApi";
+import { fetchBlogBySlug, fetchRelatedBlogs } from "../../features/blogApi";
 import { formatDate } from "../../utils";
 import { IoIosArrowBack } from "react-icons/io";
 import { ROUTES } from "../../constants/routes/desc";
@@ -26,7 +26,7 @@ type ExtendedBlogPost = {
   coverImage?: string;
   tags?: string[];
   status?: string;
-  slug?: string;
+  slug: string;
   createdAt: string;
   updatedAt?: string;
   readTime?: string;
@@ -44,7 +44,7 @@ const getAuthorName = (author: any) => {
 };
 
 export default function BlogDetailPage() {
-    const { id } = useParams<{ id: string }>();
+    const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
     const [blog, setBlog] = useState<ExtendedBlogPost | null>(null);
     const [relatedBlogs, setRelatedBlogs] = useState<ExtendedBlogPost[]>([]);
@@ -94,46 +94,48 @@ export default function BlogDetailPage() {
 
     useEffect(() => {
         const loadBlog = async () => {
-            if (!id) {
-                setError("Blog ID not found");
+            if (!slug) {
+                setError("Blog slug not found");
                 setLoading(false);
                 return;
             }
 
             try {
                 setLoading(true);
-                const blogData = await fetchBlogById(id);
-                if (blogData) {
-                    // Process the blog content to extract headers and add IDs
-                    const sections = extractHeaders(blogData.content);
-                    setContentSections(sections);
-                    
-                    // Add IDs to headers in the content
-                    const processedContent = addIdsToHeaders(blogData.content);
-                    setBlog({
-                        ...blogData,
-                        content: processedContent
-                    });
-                    
-                    // Set the active section to the first header or introduction
-                    if (sections.length > 0) {
-                        setActiveSection(sections[0].id);
-                    } else {
-                        setActiveSection("introduction");
-                    }
-                    
-                    // Load related blogs after main blog is loaded
-                    try {
-                        setRelatedLoading(true);
-                        const relatedData = await fetchRelatedBlogs(id, 3);
-                        setRelatedBlogs(relatedData);
-                    } catch (relatedErr) {
-                        console.error("Error loading related blogs:", relatedErr);
-                    } finally {
-                        setRelatedLoading(false);
-                    }
+                const blogData = await fetchBlogBySlug(slug);
+                if (!blogData) {
+                    setError("Blog not found or not published");
+                    setLoading(false);
+                    return;
+                }
+
+                // Process the blog content to extract headers and add IDs
+                const sections = extractHeaders(blogData.content);
+                setContentSections(sections);
+                
+                // Add IDs to headers in the content
+                const processedContent = addIdsToHeaders(blogData.content);
+                setBlog({
+                    ...blogData,
+                    content: processedContent
+                });
+                
+                // Set the active section to the first header or introduction
+                if (sections.length > 0) {
+                    setActiveSection(sections[0].id);
                 } else {
-                    setError("Blog not found");
+                    setActiveSection("introduction");
+                }
+                
+                // Load related blogs after main blog is loaded
+                try {
+                    setRelatedLoading(true);
+                    const related = await fetchRelatedBlogs(blogData.slug, 4);
+                    setRelatedBlogs(related);
+                } catch (relatedErr) {
+                    console.error("Error loading related blogs:", relatedErr);
+                } finally {
+                    setRelatedLoading(false);
                 }
             } catch (err) {
                 setError("Failed to load blog");
@@ -144,7 +146,7 @@ export default function BlogDetailPage() {
         };
 
         loadBlog();
-    }, [id]);
+    }, [slug]);
 
     // Animation variants
     const container = {
@@ -351,10 +353,10 @@ export default function BlogDetailPage() {
                                     )}
                                     
                                     {/* Dynamically generated table of contents from headers */}
-                                    {contentSections.map((section) => (
+                                    {contentSections.map((section, index) => (
                                         <li 
-                                            key={section.id}
-                                            className={`${activeSection === section.id ? "text-colorGreen font-medium" : "text-gray-600 dark:text-gray-300 hover:text-colorGreen"} cursor-pointer ${section.level > 1 ? `pl-${(section.level - 1) * 2}` : ""}`}
+                                            key={`${section.id}-${index}`}
+                                            className={`${activeSection === section.id ? "text-colorGreen font-medium" : "text-gray-600 dark:text-gray-300 hover:text-colorGreen"} cursor-pointer`}
                                             onClick={() => scrollToSection(section.id)}
                                             style={{ paddingLeft: section.level > 1 ? `${(section.level - 1) * 0.75}rem` : 0 }}
                                         >
@@ -474,11 +476,11 @@ export default function BlogDetailPage() {
                                     initial="hidden"
                                     animate="show"
                                 >
-                                    {relatedBlogs.map((relatedBlog) => (
+                                    {relatedBlogs.map((relatedBlog, index) => (
                                         <motion.div 
-                                            key={relatedBlog._id} 
+                                            key={`${relatedBlog._id}-${index}`} 
                                             variants={item}
-                                            onClick={() => navigate(`${ROUTES.BLOG.PATH}/${relatedBlog._id}`)}
+                                            onClick={() => navigate(`${ROUTES.BLOG.PATH}/${relatedBlog.slug || relatedBlog._id}`)}
                                             style={{ cursor: 'pointer' }}
                                         >
                                             <MainCard blog={relatedBlog} />

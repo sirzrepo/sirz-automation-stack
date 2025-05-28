@@ -4,12 +4,20 @@ export interface BlogPost {
   _id: string;
   title: string;
   content: string;
-  summary: string;
-  author: string;
-  createdAt: string;
-  readTime: string;
-  coverImage: string;
+  summary?: string;
+  author: string | {
+    _id: string;
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+  };
+  coverImage?: string;
   tags?: string[];
+  status?: string;
+  slug: string;
+  createdAt: string;
+  updatedAt?: string;
+  readTime?: string;
 }
 
 export const fetchAllBlogs = async (): Promise<BlogPost[]> => {
@@ -49,6 +57,28 @@ export const fetchBlogById = async (id: string): Promise<BlogPost | null> => {
   }
 };
 
+export const fetchBlogBySlug = async (slug: string): Promise<BlogPost | null> => {
+  console.log("slug*****************", slug)
+  try {
+    const response = await fetch(`${BASE_URL}/api/blogs/slug/${slug}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch blog');
+    }
+    const blog = await response.json();
+    
+    // Check if the blog is published, return null if it's a draft
+    if (blog.status !== 'Published') {
+      console.log('Attempted to access draft blog with slug:', slug);
+      return null;
+    }
+    
+    return blog;
+  } catch (error) {
+    console.error('Error fetching blog by slug:', error);
+    return null;
+  }
+};
+
 /**
  * Fetch related blogs based on the current blog's ID
  * This function tries to get blogs with similar tags or from the same author
@@ -61,7 +91,7 @@ export const fetchRelatedBlogs = async (currentBlogId: string, limit: number = 4
 
     // First, try the dedicated endpoint if it exists
     try {
-      const response = await fetch(`${BASE_URL}/api/blogs/${currentBlogId}/related?limit=${limit}`);
+      const response = await fetch(`${BASE_URL}/api/blogs/slug/${currentBlogId}/related?limit=${limit}`);
       if (response.ok) {
         return await response.json();
       }

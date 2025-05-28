@@ -54,7 +54,7 @@ export const ROUTES = {
         ELEMENT: <OurBlogPage />
     },
     BLOG_DETAIL: {
-        PATH: "/blog/:id",
+        PATH: "/blog/:slug",
         ELEMENT: <BlogDetailPage />
     },
     CONTACT: {

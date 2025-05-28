@@ -76,7 +76,7 @@ export default function OurBlogPage() {
                             <div className="sm:w-[50%] pt-10">
                                 <Button 
                                     text='Read now' 
-                                    onClick={() => navigate(`/blog/${featuredBlog._id}`)} 
+                                    onClick={() => navigate(`/blog/${featuredBlog.slug || featuredBlog._id}`)} 
                                 />
                             </div>
                         </div>

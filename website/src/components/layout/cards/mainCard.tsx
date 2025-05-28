@@ -3,22 +3,10 @@ import { MainCardBg } from "../../../assets";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../constants/routes/desc";
 import { formatDate } from "../../../utils";
-
-// Define a more flexible blog type
-type BlogType = {
-  _id: string;
-  title: string;
-  content?: string;
-  summary?: string;
-  author?: any;
-  coverImage?: string;
-  tags?: string[];
-  createdAt?: string;
-  readTime?: string;
-};
+import { BlogPost } from "../../../features/blogApi";
 
 interface MainCardProps {
-    blog?: BlogType;
+    blog?: BlogPost;
 }
 
 export default function MainCard({ blog }: MainCardProps) {
@@ -53,7 +41,7 @@ export default function MainCard({ blog }: MainCardProps) {
     
     return (
         <div 
-        onClick={() => navigate(blog?._id ? `${ROUTES.BLOG.PATH}/${blog._id}` : ROUTES.BLOG.PATH)}
+        onClick={() => navigate(blog?.slug ? `${ROUTES.BLOG.PATH}/${blog.slug}` : ROUTES.BLOG.PATH)}
         className=" bg-colorLight dark:bg-colorDark p-2 cursor-pointer rounded-2xl pb-5">
             <img src={imageUrl} alt={title} className="w-full object-cover rounded-2xl h-[250px]" />
             <section className=" font-light text-[14px]">
@@ -65,7 +53,7 @@ export default function MainCard({ blog }: MainCardProps) {
                     {contentPreview}
                 </div>
                 <button
-                    onClick={() => navigate(blog?._id ? `${ROUTES.BLOG.PATH}/${blog._id}` : ROUTES.BLOG.PATH)}
+                    onClick={() => navigate(blog?.slug ? `${ROUTES.BLOG.PATH}/${blog.slug}` : ROUTES.BLOG.PATH)}
                     className="flex items-center gap-1 text-colorBlueDeep font-normal text-[17px] pt-5">
                     Read more..
                     <ImArrowRight2 />
