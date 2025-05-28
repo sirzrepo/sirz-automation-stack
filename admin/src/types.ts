@@ -16,6 +16,8 @@ export interface IInputProps {
     value: string;
     required?: boolean;
     error?: string | boolean | undefined;
+    className?: string;
+    icon?: React.ReactNode;
 };
 
 export interface ITextareaProps {

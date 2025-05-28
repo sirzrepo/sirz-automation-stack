@@ -5,6 +5,7 @@ import { BASE_URL } from "../../utils";
 import Loader from "../../features/loader";
 import { ArrowLeft, Calendar, Tag, User } from "lucide-react";
 import "react-quill/dist/quill.snow.css";
+import { Image, Transformation } from "cloudinary-react";
 
 interface BlogPost {
   _id: string;
@@ -112,15 +113,10 @@ export default function BlogDetail() {
 
       {/* Cover image */}
       {blog.coverImage && (
-        <div className="mb-8 rounded-lg overflow-hidden h-96 bg-gray-100">
-          <img 
-            src={blog.coverImage} 
-            alt={blog.title} 
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = "https://via.placeholder.com/1200x600?text=Blog+Cover";
-            }}
-          />
+        <div className="mb-8 rounded-lg overflow-hidden bg-gray-100">
+          <Image publicId={blog.coverImage} cloudName="dy4nvvdwd" className="w-full h-full object-cover">
+            <Transformation width="800" dpr="auto" crop="fill" />
+          </Image>
         </div>
       )}
 

@@ -10,6 +10,7 @@ import Button from "../../components/common/button";
 import Modal from "../../components/layout/modal";
 import BlogForm from "./BlogForm";
 import UpdateBlogForm from "./UpdateBlogForm";
+import { Image, Transformation } from "cloudinary-react";
 
 // Define BlogType interface
 interface BlogType {
@@ -316,14 +317,9 @@ export default function Blogs() {
                     <td className="px-4 py-2">
                       {blog.coverImage ? (
                         <div className="w-16 h-16 rounded overflow-hidden">
-                          <img 
-                            src={blog.coverImage} 
-                            alt={blog.title} 
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).src = "https://via.placeholder.com/150";
-                            }} 
-                          />
+                          <Image publicId={blog.coverImage} cloudName="dy4nvvdwd" className="w-full h-full object-cover">
+                            <Transformation width="800" height="450" crop="fill" />
+                          </Image>
                         </div>
                       ) : (
                         <div className="w-16 h-16 rounded bg-gray-200 flex items-center justify-center">

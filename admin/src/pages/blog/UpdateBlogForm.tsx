@@ -6,9 +6,10 @@ import { BASE_URL } from "../../utils";
 import { closeModal } from "../../store/modalSlice";
 import Input from "../../components/common/input";
 import Loader from "../../features/loader";
-import { X } from "lucide-react";
+import { LinkIcon, Upload, X } from "lucide-react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import ImageUploadComponent from "../../services/cloudinary";
 
 
 interface BlogType {
@@ -30,6 +31,11 @@ interface UpdateBlogFormProps {
 }
 
 export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps) {
+  console.log(blog);
+  const [uploadMethod, setUploadMethod] = useState<'url' | 'file'>('url');
+  const [hasImageError, setHasImageError] = useState(false);
+  const [coverImageId, setCoverImageId] = useState('');
+
   // ReactQuill configuration with text alignment
   const modules = {
     toolbar: [
@@ -145,6 +151,13 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
         slug: blog.slug || "",
       });
       setStatus(blog.status || "Draft");
+      setTags(blog.tags || []);
+      
+      // Set the initial upload method based on coverImage
+      if (blog.coverImage) {
+        setUploadMethod(blog.coverImage.startsWith('http') ? 'url' : 'file');
+        setCoverImageId(blog.coverImage);
+      }
     }
   }, [blog]);
 
@@ -249,13 +262,115 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
             </div>
 
       {/* Cover Image URL Input */}
-      <Input
-        name="coverImage"
-        value={formik.values.coverImage}
-        title="Cover Image URL (Optional)"
-        placeholder="Enter URL to cover image..."
-        onChange={formik.handleChange}
-      />
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Cover Image
+          <span className="text-gray-500 text-sm ml-1">(Optional)</span>
+        </label>
+        
+        {/* Tabs for upload method */}
+        <div className="flex border-b border-gray-200 mb-4">
+          <button
+            type="button"
+            className={`flex items-center px-4 py-2 text-sm font-medium ${
+              uploadMethod === 'file'
+                ? 'border-b-2 border-blue-500 text-blue-600'
+                : 'text-gray-500 hover:text-gray-700'
+            }`}
+            onClick={() => {
+              setUploadMethod('file');
+              if (formik.values.coverImage?.startsWith?.('http')) {
+                formik.setFieldValue('coverImage', '');
+              }
+            }}
+          >
+            <Upload className="w-4 h-4 mr-2" />
+            Upload File
+          </button>
+          <button
+            type="button"
+            className={`flex items-center px-4 py-2 text-sm font-medium ${
+              uploadMethod === 'url'
+                ? 'border-b-2 border-blue-500 text-blue-600'
+                : 'text-gray-500 hover:text-gray-700'
+            }`}
+            onClick={() => {
+              setUploadMethod('url');
+              if (formik.values.coverImage && !formik.values.coverImage.startsWith('http')) {
+                formik.setFieldValue('coverImage', '');
+              }
+            }}
+          >
+            <LinkIcon className="w-4 h-4 mr-2" />
+            Image URL
+          </button>
+        </div>
+
+        {/* Content based on selected tab */}
+        {uploadMethod === 'url' ? (
+          <div>
+            <Input
+              name="coverImage"
+              value={formik.values.coverImage || ''}
+              placeholder="https://example.com/image.jpg"
+              onChange={(e) => {
+                formik.handleChange(e);
+                setHasImageError(false);
+              }}
+              title=""
+              className="mb-0"
+              icon={<LinkIcon className="w-4 h-4 text-gray-400" />}
+            />
+            <p className="mt-2 text-sm text-gray-500">
+              Paste the URL of your cover image
+            </p>
+          </div>
+        ) : (
+          <div>
+            <ImageUploadComponent
+              onUpload={(publicId) => {
+                // When we get a new publicId from Cloudinary, we need to construct the full URL
+                const cloudinaryUrl = `https://res.cloudinary.com/dy4nvvdwd/image/upload/${publicId}`;
+                setCoverImageId(publicId);
+                formik.setFieldValue('coverImage', cloudinaryUrl);
+                setHasImageError(false);
+              }}
+              buttonText="Upload Cover Image"
+              className="w-full"
+              initialPublicId={coverImageId}
+            />
+            <p className="mt-2 text-sm text-gray-500 text-center">
+              Upload a cover image (recommended size: 1200x630px)
+            </p>
+          </div>
+        )}
+        
+        {/* Preview for both URL and File upload */}
+        {formik.values.coverImage && (
+          <div className="mt-4">
+            <p className="text-sm font-medium text-gray-700 mb-2">Preview</p>
+            <div className="relative w-full h-48 rounded-md overflow-hidden border border-gray-200">
+              {!hasImageError ? (
+                <img 
+                  src={formik.values.coverImage} 
+                  alt="Cover preview" 
+                  className="w-full h-full object-cover"
+                  onError={() => setHasImageError(true)}
+                  onLoad={() => setHasImageError(false)}
+                />
+              ) : (
+                <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
+                  <p className="text-gray-500 text-sm">
+                    {uploadMethod === 'url' 
+                      ? 'Invalid image URL or failed to load' 
+                      : 'Failed to load image'}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* Tags Input */}
       <div className="mb-4">
