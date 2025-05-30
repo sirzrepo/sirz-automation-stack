@@ -45,12 +45,13 @@ export default function Home() {
                     <OurBlog />
                 </motion.div>
                 <motion.div {...fadeInUp}>
-                    <CustomerReviews />
-                </motion.div>
-                <motion.div {...fadeInUp}>
                     <GetInTouch />
                 </motion.div>
             </div>
+                
+            <motion.div {...fadeInUp}>
+                <CustomerReviews />
+            </motion.div>   
         </motion.div>
     );
 }

@@ -45,7 +45,7 @@ export default function GetInTouch() {
                     <div className="text-center">
                         <header>Get in touch with us!</header>
                         <h4 className=" font-bold sm:w-[60%] m-auto pb-8 pt-3 text-[40px] ">
-                            Whether you're launching a business or scaling one, our blog keeps you informed and inspired. Read the latest now!
+                        Got questions or need expert support? We're here to help! Reach out and let's make your business thrive
                         </h4>
                     </div>
                     <section className=" py-12 grid sm:grid-cols-2 gap-8 ">
