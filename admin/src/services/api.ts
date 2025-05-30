@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { BASE_URL } from '../utils';
 
-const API_URL = 'https://sirz-be.onrender.com/api';
+const API_URL = `${BASE_URL}/api`;
 
 const api = axios.create({
   baseURL: API_URL,
