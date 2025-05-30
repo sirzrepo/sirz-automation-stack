@@ -22,44 +22,12 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// const FLODESK_FORM_URL = "https://form.flodesk.com/forms/67d03f6eb474bab7e8a3ec18/submit";
-// // const FLODESK_FORM_URL = "https://form.flodesk.com/forms/67d04295f85cd58f9c13e205/submit";
-
-// // POST endpoint to handle form submission
-// app.post("/submit-form", async (req, res) => {
-//   try {
-//     const formData = req.body;
-
-//     console.log("req.body", req.body)
-
-//     // Convert data to Flodesk format
-//     const formattedData = new URLSearchParams();
-//     Object.entries(formData).forEach(([key, value]) => {
-//       formattedData.append(`fields.${key}`, value);
-//     });
-
-//     // Send data to Flodesk
-//     const response = await axios.post(FLODESK_FORM_URL, formattedData.toString(), {
-//       headers: {
-//         "Content-Type": "application/x-www-form-urlencoded",
-//       },
-//     });
-
-//     console.log("response", response)
-
-//     if (response.status === 200) {
-//       return res.json({ success: true, message: "Form submitted successfully!" });
-//     } else {
-//       return res.status(400).json({ success: false, message: "Flodesk submission failed." });
-//     }
-//   } catch (error) {
-//     console.error("Error submitting form:", error);
-//     return res.status(500).json({ success: false, message: "Server error. Try again later." });
-//   }
-// });
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://mhatons:51Wr8TGOKkVyU40v@cluster0.zqzqy.mongodb.net/sirz_db?retryWrites=true&w=majority&tls=true&tlsAllowInvalidCertificates=true', {
+mongoose.connect(
+  process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 })
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));
