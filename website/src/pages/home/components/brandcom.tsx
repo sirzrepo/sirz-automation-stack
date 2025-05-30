@@ -1,11 +1,8 @@
 import { motion, useAnimation } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../../constants/routes/desc';
 import { BrandcomBg } from '../../../assets';
 import { useEffect } from 'react';
 
 export const BrandCom = () => {
-    const navigate = useNavigate();
     const controls = useAnimation();
 
     useEffect(() => {
@@ -32,18 +29,6 @@ export const BrandCom = () => {
             opacity: 1,
             y: 0,
             transition: { duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] },
-        },
-    };
-
-    const pulseVariants = {
-        pulse: {
-            scale: [1, 1.05, 1],
-            transition: {
-                duration: 4,
-                repeat: Infinity,
-                repeatType: 'reverse',
-                ease: 'easeInOut',
-            },
         },
     };
 

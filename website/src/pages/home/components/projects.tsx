@@ -1,6 +1,6 @@
 import Button from "../../../components/common/button";
 import HeaderFormat from "../../../components/header";
-import { BlogCardFour, BlogCardOne, BlogCardThree, BlogCardTwo, domesticiaImg, InstagramBg, iroseImg } from "../../../assets";
+import { domesticiaImg, iroseImg } from "../../../assets";
 import ButtonCard from "../../../components/layout/cards/buttonCard";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../constants/routes/desc";
