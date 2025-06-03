@@ -14,7 +14,7 @@ type FormData = {
   country: string;
 };
 
-const BASE_URL = `https://api.sirz.co.uk`;
+const BASE_URL = `https://sirz-xfqp.onrender.com`;
 
 
 export default function Contact() {

@@ -18,13 +18,14 @@ import Clients from './pages/client'
 import ClientProfile from './pages/clientProfile'
 import Blogs from './pages/blog'
 import BlogDetail from './pages/blog/BlogDetail'
-import AI_Inquiries from './pages/ai_inquiries';
+import AI_Inquiries from './pages/inquiries/ai_inquiries';
 import LeadClassifier from './pages/agents/leadClassifier';
 import ContentCreation from './pages/agents/contentCreation';
 import LogoCreator from './pages/agents/logoCreator';
 import DataAnalyst from './pages/agents/dataAnalyst';
 import Chat from './pages/agents/chat';
-import BrandcomInquiries from './pages/brandcom_inquiries';
+import BrandcomInquiries from './pages/inquiries/brandcom_inquiries';
+import LeadScoringInquiries from './pages/inquiries/leadScoringInquiries';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -89,6 +90,12 @@ function App() {
               <Route path="/ai-inquiries" element={
                 <ProtectedRoute>
                   <AI_Inquiries />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/lead-scoring" element={
+                <ProtectedRoute>
+                  <LeadScoringInquiries />
                 </ProtectedRoute>
               } />
 

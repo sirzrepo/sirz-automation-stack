@@ -108,15 +108,27 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
         label: 'newsletters', 
         path: '/newsletters' 
     },
-    { 
+    {
       icon: <IoNewspaperOutline className="text-xl" />, 
-      label: 'AI-Inquiries', 
-      path: '/ai-inquiries' 
-    },
-    { 
-      icon: <IoNewspaperOutline className="text-xl" />, 
-      label: 'Brandcom Inquiries', 
-      path: '/brandcom-inquiries' 
+      label: 'Inquiries', 
+      path: '/inquiries',
+      subItems: [
+        {
+          icon: <IoNewspaperOutline className="text-lg" />,
+          label: 'AI Inquiries',
+          path: '/ai-inquiries'
+        },
+        {
+          icon: <IoNewspaperOutline className="text-lg" />,
+          label: 'Brandcom Inquiries',
+          path: '/brandcom-inquiries'
+        },
+        {
+          icon: <IoNewspaperOutline className="text-lg" />,
+          label: 'Lead Scoring',
+          path: '/lead-scoring'
+        }
+      ]
     },
     { 
       icon: <IoAnalyticsOutline className="text-xl" />, 
