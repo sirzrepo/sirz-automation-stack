@@ -59,7 +59,7 @@ export default function Footer() {
                 <img src={sirzLogoWhite} alt="" />
                 <div className=' sm:text-[20px] text-white pt-5'>SIRz is your one-stop shop for E-commerce, Branding, and Digital Marketing, we help businesses launch, scale, and dominate in the digital space.</div>
               </div>
-              <div className='sm:col-span-3 max-sm:hidden max-sm:pt-10 grid sm:grid-cols-4 grid-cols-2 gap-4'>
+              <div className='sm:col-span-3 max-sm:hidden max-sm:pt-10 grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-2 gap-4'>
                 <div>
                   {
                     company.map((item, index) => (

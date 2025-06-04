@@ -32,7 +32,7 @@ export default function SirzIsGreat() {
             }} className=" sm:pt-24 pt-36 pb-5">
             <section className="sm:w-[85%] w-[90%] pb-10 m-auto">
                 <h4 className="text-white font-semibold">SIRz is great for people who?</h4>
-                <section className=" grid sm:grid-cols-3 pt-7 gap-x-5 gap-y-8 max-sm:m-auto">
+                <section className=" grid md:grid-cols-3 pt-7 gap-x-5 gap-y-8 max-sm:m-auto">
                     {
                         data.map((item, index) => (
                             <div className="flex items-center justify-center bg-colorDefaultLight dark:bg-colorDark h-[200px] rounded-3xl">

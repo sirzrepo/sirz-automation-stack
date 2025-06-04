@@ -345,7 +345,7 @@ export default function Contact() {
               </select>
             </div>
             <div className="text-sm text-gray-500 py-2">
-              We're committed to your privacy. HubSpot uses the information you provide to us to contact you about our relevant content, products, and services. You may unsubscribe from these communications at any time. For more information, check out our <a href="#" className="text-indigo-600 hover:underline">Privacy Policy</a>.
+              We're committed to your privacy. SIRZ uses the information you provide to us to contact you about our relevant content, products, and services. You may unsubscribe from these communications at any time. For more information, check out our <a href="#" className="text-indigo-600 hover:underline">Privacy Policy</a>.
             </div>
             {submitStatus && (
               <div className={`p-4 rounded-md ${submitStatus.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>

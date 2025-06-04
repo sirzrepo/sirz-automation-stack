@@ -11,12 +11,12 @@ const Footer = () => {
         <div>
           <h4 className="font-semibold mb-4">Popular Features</h4>
           <ul className="space-y-2">
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'socialMediaTemplates'}`)}>Social Media Templates</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'adCreatives'}`)}>Ad Creatives</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'leadScoringAgent'}`)}>AI Lead Score Tool</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'seoBomber'}`)}>SEO Scoring Ai Tool</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'brandkitGenerator'}`)}>Branding Kits</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'websiteGrader'}`)}>Website Grader</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'socialMediaTemplates'}`)}>Social Media Templates</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'adCreatives'}`)}>Ad Creatives</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'leadScoringAgent'}`)}>AI Lead Score Tool</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'seoBomber'}`)}>SEO Scoring Ai Tool</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'brandkitGenerator'}`)}>Branding Kits</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'websiteGrader'}`)}>Website Grader</li>
           </ul>
         </div>
 
@@ -24,18 +24,18 @@ const Footer = () => {
         <div>
           <h4 className="font-semibold mb-4">Free AI Tools</h4>
           <ul className="space-y-2">
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'websiteBuilder'}`)}>Website Builder</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'marketingAnalytics'}`)}>Marketing Analytics</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'landingPageBuilder'}`)}>Landing Page Builder</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'websiteGrader'}`)}>Website Grader</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'brandkitGenerator'}`)}>Brand Kit Generator</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'tweetGenerator'}`)}>Tweet Generator</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'storyGenerator'}`)}>Story Generator</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'seoBomber'}`)}>SEO Bomber</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'aiContentCreator'}`)}>AI Content Creator</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'crmSync'}`)}>CRM Sync</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'leadScoringAgent'}`)}>Lead Scoring Agent</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/services/${'smartChatbot'}`)}>Smart Chat Bot</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'websiteBuilder'}`)}>Website Builder</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'marketingAnalytics'}`)}>Marketing Analytics</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'landingPageBuilder'}`)}>Landing Page Builder</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'websiteGrader'}`)}>Website Grader</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'brandkitGenerator'}`)}>Brand Kit Generator</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'brandkitGenerator'}`)}>Tweet Generator</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'aiContentCreator'}`)}>Story Generator</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'seoBomber'}`)}>SEO Bomber</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'aiContentCreator'}`)}>AI Content Creator</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'crmSync'}`)}>CRM Sync</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'leadScoringAgent'}`)}>Lead Scoring Agent</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/services/${'smartChatbot'}`)}>Smart Chat Bot</li>
           </ul>
         </div>
 
@@ -43,10 +43,10 @@ const Footer = () => {
         <div>
           <h4 className="font-semibold mb-4">Sitemap</h4>
           <ul className="space-y-2">
-            <li className="cursor-pointer" onClick={() => navigate(`/`)}>Home</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/ecommerce`)}>E-Commerce Automation</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/branding`)}>Branding Automation</li>
-            <li className="cursor-pointer" onClick={() => navigate(`/digital-marketing`)}>Digital Marketing</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/`)}>Home</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/ecommerce`)}>E-Commerce Automation</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/branding`)}>Branding Automation</li>
+            <li className="cursor-pointer hover:text-indigo-600" onClick={() => navigate(`/digital-marketing`)}>Digital Marketing</li>
           </ul>
         </div>
 
@@ -55,8 +55,8 @@ const Footer = () => {
           <h4 className="font-semibold mb-4">Get In Touch</h4>
           <ul className="space-y-2">
             <li className="cursor-pointer" onClick={() => navigate(`/contact`)}>Book A Consultation</li>
-            <li>+122 555 555</li>
-            <li>info@brandcom.ai</li>
+            <li>074 07245685</li>
+            <li>support@sirz.co.uk</li>
           </ul>
         </div>
       </div>

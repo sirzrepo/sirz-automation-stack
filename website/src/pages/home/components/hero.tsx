@@ -83,7 +83,7 @@ export default function Hero() {
                     </div>
                 </div>
 
-                <div className="grid sm:grid-cols-3 mt-[-4em] relative gap-5 w-[90%] py-8 m-auto">
+                <div className="grid md:grid-cols-3 mt-[-4em] relative gap-5 w-[90%] py-8 m-auto">
                     {cardContent.map((item, index) => (
                         <motion.div
                             key={index}

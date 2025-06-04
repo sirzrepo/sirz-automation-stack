@@ -77,18 +77,18 @@ export default function CaseStudies() {
             </section>
 
             <section>
-                <div className=" grid sm:grid-cols-2 sm:w-[85%] w-[90%] py-14 m-auto xxxm:grid-cols-2 gap-8">
+                <div className=" grid sm:grid-cols-2 md:w-[85%] w-[95%] py-14 m-auto gap-8">
                     {
                         caseStudies.map((data, index) => (
                             <div key={index} className=" pb-5 bg-colorLight dark:bg-colorDark rounded-md">
                                 <img src={data.image} alt="" className="w-full object-cover rounded-t-md " />
-                                <section className=" sm:w-[80%] px-3">
+                                <section className=" md:w-[80%] px-3">
                                     <div className="pt-4 pb-4">
                                         <header className=" sm:text-[22px] font-bold">{data.title}</header>
                                         <div className=" sm:text-[15px] text-[13px]">{data.text}</div>
                                     </div>
                                     <div className=" grid grid-cols-3 gap-3 text-black font-light">
-                                        <div className="bg-[#CFD7FE] text-[10px] py-2 rounded-full flex items-center justify-center whitespace-nowrap">Branding</div>
+                                        <div className="bg-[#CFD7FE] text-[10px] py-2 px-4 rounded-full flex items-center justify-center whitespace-nowrap">Branding</div>
                                         <div className="bg-[#CFD7FE] text-[10px] py-2 rounded-full flex items-center justify-center whitespace-nowrap">Visual identity</div>
                                         <div className="bg-[#CFD7FE] text-[10px] py-2 rounded-full flex items-center justify-center whitespace-nowrap">Logo design</div>
                                     </div>

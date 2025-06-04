@@ -64,7 +64,7 @@ export default function OurBlog() {
                 </div>
             ) : blogs.length > 0 ? (
                 <motion.section 
-                    className="grid sm:grid-cols-3 gap-8"
+                    className="grid lg:grid-cols-3 md:grid-cols-2 gap-8"
                     variants={container}
                     initial="hidden"
                     animate="show"

@@ -31,7 +31,7 @@ export default function WhySirz() {
                         <section
                             key={index}
                             style={{ backgroundColor: item.backgroundColor }}
-                            className={`sm:grid grid-cols-8 max-sm:flex items-center flex-col sm:gap-2 max-sm:px-4 rounded-2xl sm:ps-12 py-8 `}
+                            className={`md:grid grid-cols-8 max-sm:flex items-center flex-col sm:gap-2 max-sm:px-4 rounded-2xl md:ps-12 sm:ps-4 py-8 `}
                         >
                             {<WhyIcon />}
                             <div className="sm:text-[22px] text-lg col-span-7 dark:text-colorDark">

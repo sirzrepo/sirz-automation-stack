@@ -55,7 +55,7 @@ export default function OurProjects() {
                         variants={item}
                         className="group relative overflow-hidden rounded-2xl transition-all duration-300"
                     >
-                        <div className="grid md:grid-cols-6 gap-8 items-center">
+                        <div className="lg:grid md:grid-cols-6 gap-8 items-center">
                             <div className="md:col-span-4 overflow-hidden">
                                 <img 
                                     src={domesticiaImg} 
@@ -80,7 +80,7 @@ export default function OurProjects() {
                         variants={item}
                         className="group relative overflow-hidden rounded-2xl transition-all duration-300 "
                     >
-                        <div className="grid md:grid-cols-6 gap-8 items-center md:flex-row-reverse">
+                        <div className="lg:grid md:grid-cols-6 gap-8 items-center sm:flex-row-reverse">
                             <div className="md:col-span-4 overflow-hidden order-1 md:order-2">
                                 <img 
                                     src={iroseImg} 
@@ -97,6 +97,13 @@ export default function OurProjects() {
                                     onClick={() => navigate(ROUTES.PROJECTS.PATH)}
                                 />
                             </div>
+                            {/* <div className="md:col-span-4 overflow-hidden max-sm:hidden order-1 md:order-2">
+                                <img 
+                                    src={iroseImg} 
+                                    alt="Irose Fashion e-commerce" 
+                                    className="w-full h-full object-cover transform transition-transform duration-500"
+                                />
+                            </div> */}
                         </div>
                     </motion.section>
 
