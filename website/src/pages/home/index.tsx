@@ -8,7 +8,7 @@ import OurBlog from "./components/ourBlog";
 import GetInTouch from "./components/getInTouch";
 import CustomerReviews from "./components/customerReviews";
 import { motion } from "framer-motion";
-import { BrandCom } from "./components/brandcom";
+// import { BrandCom } from "./components/brandcom";
 import { SocialMedia } from "./components/socialMedia";
 
 const fadeInUp = {
@@ -43,9 +43,9 @@ export default function Home() {
                 <motion.div {...fadeInUp}>
                     <OurProjects />
                 </motion.div>
-                <motion.div {...fadeInUp}>
+                {/* <motion.div {...fadeInUp}>
                     <BrandCom />
-                </motion.div>
+                </motion.div> */}
                 <motion.div {...fadeInUp}>
                     <SocialMedia />
                 </motion.div>
