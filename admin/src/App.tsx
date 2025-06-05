@@ -26,6 +26,7 @@ import DataAnalyst from './pages/agents/dataAnalyst';
 import Chat from './pages/agents/chat';
 import BrandcomInquiries from './pages/inquiries/brandcom_inquiries';
 import LeadScoringInquiries from './pages/inquiries/leadScoringInquiries';
+import LandingPageInquiries from './pages/inquiries/landingPageInquiries';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -102,6 +103,12 @@ function App() {
               <Route path="/brandcom-inquiries" element={
                 <ProtectedRoute>
                   <BrandcomInquiries />
+                </ProtectedRoute>
+              } />
+
+              <Route path="/landing-page-inquiries" element={
+                <ProtectedRoute>
+                  <LandingPageInquiries />
                 </ProtectedRoute>
               } />
 
