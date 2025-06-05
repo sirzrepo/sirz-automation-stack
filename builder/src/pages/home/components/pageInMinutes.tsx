@@ -83,7 +83,7 @@ export default function PageInMinutes() {
 
         {/* CTA Button */}
         <div className="text-center pb-16">
-          <Button size="lg" className="bg-white text-[#001f3e] hover:bg-gray-100 font-semibold px-8 py-3 rounded-full">
+          <Button style={{ color: '#001f3e' }} size="lg" className=" bg-white hover:bg-gray-100 font-semibold px-8 py-3 rounded-full">
             Create your first website
             <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
