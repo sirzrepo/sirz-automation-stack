@@ -27,6 +27,7 @@ import Chat from './pages/agents/chat';
 import BrandcomInquiries from './pages/inquiries/brandcom_inquiries';
 import LeadScoringInquiries from './pages/inquiries/leadScoringInquiries';
 import LandingPageInquiries from './pages/inquiries/landingPageInquiries';
+import ContentAgentInquiries from './pages/inquiries/content_agent_inquiries';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -109,6 +110,12 @@ function App() {
               <Route path="/landing-page-inquiries" element={
                 <ProtectedRoute>
                   <LandingPageInquiries />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/content-agent-inquiries" element={
+                <ProtectedRoute>
+                  <ContentAgentInquiries />
                 </ProtectedRoute>
               } />
 

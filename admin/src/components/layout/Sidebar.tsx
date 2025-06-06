@@ -132,6 +132,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
           icon: <IoNewspaperOutline className="text-lg" />,
           label: 'Landing Page',
           path: '/landing-page-inquiries'
+        },
+        {
+          icon: <IoNewspaperOutline className="text-lg" />,
+          label: 'Content Agent',
+          path: '/content-agent-inquiries'
         }
       ]
     },

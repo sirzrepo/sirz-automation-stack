@@ -15,6 +15,7 @@ const automationRoutes = require('./src/routes/automationRoutes');
 const brandcomFormRoutes = require('./src/routes/brandcomFormRoutes');
 const leadScoringRoutes = require('./src/routes/leadScoringRoutes');
 const landingPageRoutes = require('./src/routes/landingPageRoutes');
+const contentAgentRoutes = require('./src/routes/contentAgenRoutes');
 // import axios from "axios";
 
 dotenv.config();
@@ -45,6 +46,7 @@ app.use('/api/automations', automationRoutes);
 app.use('/api/brandcom-form', brandcomFormRoutes);
 app.use('/api/lead-scoring', leadScoringRoutes);
 app.use('/api/landing-page', landingPageRoutes);
+app.use('/api/content-agent', contentAgentRoutes);
 
 // API route to send an email
 app.post("/subscribe", async (req, res) => {
