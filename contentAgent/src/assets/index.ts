@@ -4,17 +4,11 @@ import heroImg from './img/ca-Group 1000004262.svg';
 import sirzLogo from './img/sirz logo png 1.svg';
 import sirzLogoLight from './img/sirz logo_light.svg';
 import defaultProfileImg from './img/profile.svg';
-import analyticsImg from './img/lpb-Frame 6.svg';
 import createContentImg from './img/content.svg';
-import stunningImg from './img/lpb-Image.svg'; 
-
-// why choose use
-import setUpSmall from './img/lpb-Courses_icon.svg'
-import setUpLarge from './img/lpb-Container.svg'
-import designsSmall from './img/lpb-Membership_icon.svg'
-import designsLarge from './img/lpb-Container (1).svg'
-import hostSmall from './img/lpb-Emails_icon.svg'
-import hostLarge from './img/lpb-Figure.svg'
+import star from './img/star.svg';
+import pillarVector01 from './img/ca-Text input 1.svg';
+import pillarVector02 from './img/ca-Text input 2.svg';
+import pillarVector03 from './img/Text input.svg';
 
 
 // avatar
@@ -42,6 +36,10 @@ import featureFourImg from './img/ca-Frame 1618873308.svg';
 // new
 export const HeroImg = heroImg;
 export const CreateContentImg = createContentImg;
+export const Star = star;
+export const PillarVector01 = pillarVector01;
+export const PillarVector02 = pillarVector02;
+export const PillarVector03 = pillarVector03;
 
 // avatar
 export const Avatar_1 = avatar_1;
@@ -66,20 +64,8 @@ export const ContentVideo = contentVideo;
 
 
 
-export const SetUpSmall = setUpSmall;
-export const SetUpLarge = setUpLarge;
-export const DesignsSmall = designsSmall;
-export const DesignsLarge = designsLarge;
-export const HostSmall = hostSmall;
-export const HostLarge = hostLarge;
-
-
-
 
 export const SirzLogo = sirzLogo;
 export const SirzLogoLight = sirzLogoLight;
 export const DefaultProfileImg = defaultProfileImg;
-export const AnalyticsImg = analyticsImg;
-
-export const StunningImg = stunningImg;
 

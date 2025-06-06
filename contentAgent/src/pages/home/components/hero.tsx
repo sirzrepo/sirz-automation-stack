@@ -1,11 +1,15 @@
 import { ArrowRight } from "lucide-react"
 import Button from "../../../components/common/ui/Button"
+import { PillarVector01, PillarVector02, PillarVector03, Star } from "../../../assets"
 
 export default function LeadScoringHero() {
   return (
-    <div className="flex flex-col items-center justify-center  px-4 mt-20">
+    <div className="flex flex-col md:w-[80%] w-[95%] mx-auto items-center justify-center relative px-4 mt-20">
       <div className="flex space-x-2 mb-16">
-        <div className="text-[#737373] text-xl">SIRz AI Content Generator</div>
+        <div className="text-[#3752E9] bg-[#EFF2FF] flex items-center gap-2 rounded-md px-8 py-2 text-sm font-semibold">
+          <img src={Star} alt="" />
+          SIRz AI Content Generator
+          </div>
       </div>
 
       <h1
@@ -23,7 +27,11 @@ export default function LeadScoringHero() {
           <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
       </div>
-      {/* <img src={HeroImg} alt="" /> */}
+      <div className="max-xl:hidden">
+        <img src={PillarVector02} alt="" className="absolute top-0 left-0" />
+        <img src={PillarVector01} alt="" className="absolute bottom-0 right-0" />
+        <img src={PillarVector03} alt="" className="absolute bottom-[-7em] right-[8em]" />
+      </div>
     </div>
   )
 }

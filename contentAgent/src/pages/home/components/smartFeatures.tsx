@@ -50,7 +50,7 @@ export default function SmartFeatures() {
             }`}
         >
             <div className={`${feature.invert ? 'md:order-2' : ''} w-full md:w-[70%] flex flex-col justify-center p-8`}>
-                <img src={feature.icon} alt="" className="w-20 h-20 mb-6" />
+                <img src={feature.icon} alt="" className="w-16 h-16 sm:w-20 sm:h-20 mb-6" />
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">
                     {feature.title}
                 </h2>
