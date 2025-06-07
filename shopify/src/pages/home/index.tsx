@@ -1,34 +1,24 @@
 // import { FacebookIcon, InstagramIcon, LinkedlnIcon } from '../../assets/icons/svg';
 import { socialLinks } from '../../utils';
-import { motion, useScroll, useTransform, useAnimation } from 'framer-motion';
-import { SirzLogo, SirzLogoLight } from '../../assets';
+import { motion, useAnimation } from 'framer-motion';
+import { SirzLogoLight } from '../../assets';
 import { useEffect, useRef } from 'react';
 
 // images
 import heroframe from '../../assets/img/shopify-Frame 12.png';
 import heroFrame2 from '../../assets/img/shopify-image 2.png';
-import heroFrame3 from '../../assets/img/Group 8 (1).png';
 
 import detailImg from '../../assets/img/shopify-lucide_store.png';
 import detailImg2 from '../../assets/img/shopify-mdi_stars.png';
 import detailImg3 from '../../assets/img/shopify-ic_round-more-time.png';
 
-
-// AI marketing model images
-import seoImg from '../../assets/img/Frame 1773.png';
-import contentImg from '../../assets/img/Frame 1776.png';
-import leadImg from '../../assets/img/Frame 1773 (1).png';
-import chatbotImg from '../../assets/img/Frame 1773 (2).png';
-import crmImg from '../../assets/img/Frame 1773 (3).png';
-import actionImg from '../../assets/img/Frame 1785.png';
-
-import agentImg from '../../assets/img/shopify-Group 5.png';
 import shopifyAnaluticsImg from '../../assets/img/shopify-Frame 1798.png';
 import shopifyAnaluticsImg2 from '../../assets/img/shopify-Frame 1793.png';
 import rectangleImg from '../../assets/img/Rectangle 3.png';
-import { NotebookIcon } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import AutomationContactForm from '../../components/Forms/contactForm';
 import { IoLogoFacebook, IoLogoInstagram, IoLogoLinkedin } from 'react-icons/io5';
+import Checklist from '../../components/checklist';
 
 
 const metricsCards = [
@@ -81,19 +71,19 @@ const details = [
 
 const automationStack = [
     {
-        img: NotebookIcon,
+        img: ShoppingCart,
         title: `High cart abandonment`,
     },
     {
-        img: NotebookIcon,
+        img: ShoppingCart,
         title: `Poor mobile experience`,
     },
     {
-        img: NotebookIcon,
+        img: ShoppingCart,
         title: `Confusing navigation`,
     },
     {
-        img: NotebookIcon,
+        img: ShoppingCart,
         title: `Low trust signals`,
     },
 ];
@@ -103,18 +93,6 @@ export default function Home() {
     const fadeInUp = {
         initial: { opacity: 0, y: 20 },
         animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.6 }
-    };
-
-    const fadeInLeft = {
-        initial: { opacity: 0, x: -50 },
-        animate: { opacity: 1, x: 0 },
-        transition: { duration: 0.6 }
-    };
-
-    const fadeInRight = {
-        initial: { opacity: 0, x: 50 },
-        animate: { opacity: 1, x: 0 },
         transition: { duration: 0.6 }
     };
 
@@ -158,7 +136,7 @@ export default function Home() {
     }, [controls]);
 
     return (
-        <div className="w-[80%] mx-auto">
+        <div className=" mx-auto">
             <motion.section 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -181,7 +159,7 @@ export default function Home() {
                                 variants={scaleIn}
                                 initial="initial"
                                 animate="animate"
-                                className='absolute top-0 left-0 right-0 flex items-center justify-center bg-colorGreenDeeper py-3 md:py-4'
+                                className='absolute top-0 left-0 right-0 flex items-center justify-center bg-colorGreenDeeper py-5 md:py-6'
                             >
                                 <img src={SirzLogoLight} alt="SIRz Logo" className='w-[60px] md:w-[70px]' />
                             </motion.div>
@@ -204,7 +182,7 @@ export default function Home() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                    <img src={heroframe} alt="Shopify Hero" className='mx-auto pb-4 md:pb-6 w-[90%] md:w-auto' />
+                    <img src={heroframe} alt="Shopify Hero" className='mx-auto pb-4 md:pb-6 object-cover md:w-auto' />
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -217,7 +195,7 @@ export default function Home() {
             </motion.section>
 
             <motion.section 
-                className='w-full mx-auto py-8 md:py-10'
+                className='w-full mx-auto pb-8'
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-50px" }}
@@ -225,7 +203,7 @@ export default function Home() {
                 ref={ref}
             >
                 <motion.div 
-                        className='w-[95%] sm:w-[90%] lg:w-[80%] mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-8'
+                        className='w-[95%] sm:w-[90%] lg:w-[80%] mx-auto grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-8'
                         variants={staggerContainer}
                         initial="initial"
                         animate={controls}
@@ -247,7 +225,7 @@ export default function Home() {
                 </motion.div>
             </motion.section>
 
-            <motion.section 
+            {/* <motion.section 
                 className='bg-colorLight w-[95%] sm:w-[90%] lg:w-[80%] mx-auto dark:bg-colorDark'
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -262,9 +240,8 @@ export default function Home() {
                     transition={{ duration: 0.5 }}
                 >
                     <div className='text-center mx-auto px-4'>
-                        <h1 className='font-semibold text-[28px] md:text-[35px]'>What’s Inside the <i className=' text-colorGreen'>Free</i> Checklist?</h1>
-                        {/* <img src={titleBorder} alt="" className='w-[120px] mx-auto max-sm:pb-5' /> */}
-                        <i className='text-sm md:text-base'>This actionable checklist is designed to help Shopify store owners identify hidden leaks in their funnel and turn more visitors into paying customers — fast.</i>
+                        <h1 className='font-bold text-[28px] md:text-[40px]'>What&apos;s Inside the <i className=' text-colorGreen italic'>Free</i> Checklist?</h1>
+                        <i className='text-sm md:text-base '>This actionable checklist is designed to help Shopify store owners identify hidden leaks in their funnel and turn more visitors into paying customers — fast.</i>
                     </div>
                 </motion.header>
                 <div className='mx-auto grid grid-cols-1 sm:grid-cols-5 gap-8 md:gap-14 py-8 md:py-12 px-4'>
@@ -299,7 +276,9 @@ export default function Home() {
                         <img src={agentImg} alt="SIRz AI Agents" className='w-full rounded-lg shadow-md' />
                     </motion.div>
                 </div>
-            </motion.section>
+            </motion.section> */}
+
+            <Checklist />
 
             <motion.section
                 initial={{ opacity: 0, y: 30 }}
@@ -334,20 +313,20 @@ export default function Home() {
                             variants={fadeInUp}
                             whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                         >
-                            <data.img className='bg-colorBlueLight p-1 rounded-full' />
-                            <h4 className='text-[11px] md:text-[12px] py-2 font-medium'>{data.title}</h4>
+                            <data.img height={40} width={40} className='bg-colorBlueLight text-colorBlueDeep p-2 rounded-full' />
+                            <h4 className='text-sm md:text-lg py-2 font-medium'>{data.title}</h4>
                         </motion.div>
                     ))}
                 </motion.div>
 
                 <motion.div 
-                    className='flex items-center justify-center py-5 flex-col'
+                    className='flex items-center justify-center py-10 flex-col'
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                    <div className='text-center text-sm md:text-base px-4'>Our free audit identifies these issues — and shows you how to fix them</div>
+                    <div className='text-center text-lg md:text-2xl pb-5 italic font-medium px-4'>Our free audit identifies these issues — and shows you how to fix them</div>
                     <motion.button 
                         className="tracking-widest w-[80%] sm:w-[50%] md:w-[35%] lg:w-[25%] mt-4 bg-colorBlueDeep text-white border-2 border-colorBlueLight rounded-full py-3 md:py-4 cursor-pointer text-xs md:text-sm px-6 md:px-8 whitespace-nowrap font-medium floating-button"
                         whileHover={{ scale: 1.05, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
@@ -376,7 +355,7 @@ export default function Home() {
                     transition={{ duration: 0.5 }}
                 >
                     <div className='text-center max-w-[800px] mx-auto px-4'>
-                        <h1 className='font-semibold text-[28px] md:text-[35px]'>Real Results from Our Shopify Audit Process - Case Study</h1>
+                        <h1 className='font-bold text-[28px] md:text-[45px]'>Real Results from Our Shopify Audit Process - Case Study</h1>
                     </div>
                 </motion.header>
                 <motion.div 
@@ -423,9 +402,9 @@ export default function Home() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                 >
-                    <div className='text-center max-w-[800px] mx-auto px-4'>
-                        <h1 className='font-semibold text-[28px] md:text-[35px]'>From Stuck to Scaled: What Changed After the Free Audit?</h1>
-                        <i className='text-sm md:text-base'>Data-backed improvements that speak for themselves.</i>
+                    <div className='text-center max-w-[90%] mx-auto px-4'>
+                        <h1 className='font-bold text-[28px] md:text-[25px]'>From Stuck to Scaled: What Changed After the Free Audit?</h1>
+                        <i className='text-sm md:text-lg'>Data-backed improvements that speak for themselves.</i>
                     </div>
                 </motion.header>
                 <motion.div
@@ -439,15 +418,15 @@ export default function Home() {
                             metricsCards.map((data, index) => (
                                 <motion.div 
                                     key={index} 
-                                    className='flex flex-col text-sm p-4 md:p-5 text-zinc-600 shadow-md rounded-2xl hover:shadow-lg transition-shadow duration-300'
+                                    className='flex flex-col text-sm p-4 md:p-5 text-zinc-600 shadow-lg rounded-2xl hover:shadow-lg transition-shadow duration-300'
                                     variants={fadeInUp}
                                     whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                                 >
                                     <h4 className='text-[18px] md:text-[20px] text-colorBlueDeep font-semibold py-2'>{data.title}</h4>
                                     <h4 className='font-semibold pt-3 text-[14px] md:text-[16px]'>Before:</h4>
-                                    <p className='leading-7 md:leading-8 tracking-wide md:tracking-wider text-xs md:text-sm'>{data.text}</p>
+                                    <p className='tracking-wide md:tracking-wider text-xs md:text-sm'>{data.text}</p>
                                     <h4 className='font-semibold pt-3 text-[14px] md:text-[16px]'>After:</h4>
-                                    <p className='leading-7 md:leading-8 tracking-wide md:tracking-wider text-xs md:text-sm'>{data.text2}</p>
+                                    <p className='tracking-wide md:tracking-wider text-xs md:text-sm'>{data.text2}</p>
                                 </motion.div>
                             ))
                         }
@@ -512,7 +491,7 @@ export default function Home() {
                         transition={{ duration: 0.6 }}
                     >
                         <div className='text-center flex items-center justify-center flex-col max-w-[800px] mx-auto'>
-                            <img src={SirzLogo} alt="SIRz Logo" className='w-[100px] md:w-auto' />
+                            <img src={SirzLogoLight} alt="SIRz Logo" className='w-[100px] md:w-auto' />
                             <div className='text-[16px] md:text-[20px] text-white pt-5'>
                                 SIRz is your one-stop shop for E-commerce, Branding, and Digital Marketing, we help businesses launch, scale, and dominate in the digital space.
                             </div>

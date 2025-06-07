@@ -14,6 +14,7 @@ const AutomationContactForm = () => {
         lastName: "",
         email: "",
         website: "",
+        challenge: "",
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -29,6 +30,7 @@ const AutomationContactForm = () => {
             lastName: formData.lastName,
             email: formData.email,
             website: formData.website,
+            challenge: formData.challenge,
         };
 
         try {
@@ -99,15 +101,26 @@ const AutomationContactForm = () => {
                         <div className="relative pt-2">
                             <input
                                 type="text"
-                                name="website"
+                                name="Shopify Store URL"
                                 value={formData.website}
                                 onChange={handleChange}
                                 className={`w-full p-3 border border-gray-300 dark:bg-colorDefaultDark rounded-lg bg-tranparent dark:bg-background_dark placeholder:text-[12px] focus:outline-none focus:ring-1 dark:focus:ring-secondary focus:border-none focus:ring-primary`}
-                                placeholder={'website'}
+                                placeholder={'input url'}
                             />
-                            <div className=" absolute top-0 left-3 bg-white px-2 text-[12px] text-zinc-500 font-comfortaa dark:bg-colorDefaultDark">{'Website (optional)'}</div>
+                            <div className=" absolute top-0 left-3 bg-white px-2 text-[12px] text-zinc-500 font-comfortaa dark:bg-colorDefaultDark">{'Shopify Store URL'}</div>
                         </div>
                     </section>
+                    <div className="relative pt-2">
+                            <input
+                                type="text"
+                                name="challenge"
+                                value={formData.challenge}
+                                onChange={handleChange}
+                                className={`w-full p-3 border border-gray-300 dark:bg-colorDefaultDark rounded-lg bg-tranparent dark:bg-background_dark placeholder:text-[12px] focus:outline-none focus:ring-1 dark:focus:ring-secondary focus:border-none focus:ring-primary`}
+                                placeholder={'Type here'}
+                            />
+                            <div className=" absolute top-0 left-3 bg-white px-2 text-[12px] text-zinc-500 font-comfortaa dark:bg-colorDefaultDark">{`What's Your Biggest Store Challenge Right Now?`}</div>
+                        </div>
                 </div>
 
                 <section className="mt-6">

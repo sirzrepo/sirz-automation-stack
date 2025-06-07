@@ -15,6 +15,7 @@ interface InquiryType {
   lastName: string;
   email: string;
   website: string;
+  challenge: string;
   createdAt: string;
   updatedAt?: string;
 }
@@ -244,6 +245,11 @@ export default function AI_Inquiries() {
                     <td className="px-4 py-2">
                       <div className="flex flex-col">
                         <span>{inquiry.website}</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-2">
+                      <div className="flex flex-col">
+                        <span>{inquiry.challenge}</span>
                       </div>
                     </td>
                     <td className="px-4 py-2">

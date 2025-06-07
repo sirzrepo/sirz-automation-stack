@@ -17,6 +17,9 @@ const AutomationDataSchema = new mongoose.Schema(
     website: { 
         type: String, 
     },
+    challenge: { 
+      type: String, 
+  },
   },
   { timestamps: true }
 );
