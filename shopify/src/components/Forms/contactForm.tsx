@@ -61,7 +61,7 @@ const AutomationContactForm = () => {
                         <div className="absolute top-3 right-0"><img src={SirzLogo} alt="" className=" h-3" /></div>
                     </header>
 
-                    <section className="grid grid-cols-2 gap-5">
+                    <section className="grid sm:grid-cols-2 gap-5">
                         <div className="relative pt-2">
                             <input
                                 type="text"
@@ -101,7 +101,7 @@ const AutomationContactForm = () => {
                         <div className="relative pt-2">
                             <input
                                 type="text"
-                                name="Shopify Store URL"
+                                name="website"
                                 value={formData.website}
                                 onChange={handleChange}
                                 className={`w-full p-3 border border-gray-300 dark:bg-colorDefaultDark rounded-lg bg-tranparent dark:bg-background_dark placeholder:text-[12px] focus:outline-none focus:ring-1 dark:focus:ring-secondary focus:border-none focus:ring-primary`}
@@ -119,7 +119,7 @@ const AutomationContactForm = () => {
                                 className={`w-full p-3 border border-gray-300 dark:bg-colorDefaultDark rounded-lg bg-tranparent dark:bg-background_dark placeholder:text-[12px] focus:outline-none focus:ring-1 dark:focus:ring-secondary focus:border-none focus:ring-primary`}
                                 placeholder={'Type here'}
                             />
-                            <div className=" absolute top-0 left-3 bg-white px-2 text-[12px] text-zinc-500 font-comfortaa dark:bg-colorDefaultDark">{`What's Your Biggest Store Challenge Right Now?`}</div>
+                            <div className=" absolute top-0 left-3 whitespace-nowrap bg-white px-2 text-[12px] text-zinc-500 font-comfortaa dark:bg-colorDefaultDark">{`What's Your Biggest Store Challenge?`}</div>
                         </div>
                 </div>
 

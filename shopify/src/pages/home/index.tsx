@@ -389,7 +389,7 @@ export default function Home() {
 
 
             <motion.section 
-                className='bg-[#FAFAFA] dark:bg-colorDefaultDark pb-10 md:pb-14'
+                className='bg-whitedark:bg-colorDefaultDark sm:w-[80%] w-[95%] mx-auto py-10 md:py-14'
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
