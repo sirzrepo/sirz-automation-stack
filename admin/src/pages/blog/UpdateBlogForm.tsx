@@ -18,6 +18,7 @@ interface BlogType {
   content: string;
   author: string;
   coverImage?: string;
+  coverImagePublicId?: string;
   tags?: string[];
   status: string;
   slug: string;
@@ -34,7 +35,7 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
   console.log(blog);
   const [uploadMethod, setUploadMethod] = useState<'url' | 'file'>('url');
   const [hasImageError, setHasImageError] = useState(false);
-  const [coverImageId, setCoverImageId] = useState('');
+  const [coverImage, setCoverImage] = useState({ publicId: '', url: '' });
 
   // ReactQuill configuration with text alignment
   const modules = {
@@ -80,6 +81,7 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
       title: blog?.title || "",
       content: blog?.content || "",
       coverImage: blog?.coverImage || "",
+      coverImagePublicId: "",
       slug: blog?.slug || "",
     },
     validate: (values) => {
@@ -148,16 +150,11 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
         title: blog.title || "",
         content: blog.content || "",
         coverImage: blog.coverImage || "",
+        coverImagePublicId: blog.coverImagePublicId || "",
         slug: blog.slug || "",
       });
       setStatus(blog.status || "Draft");
       setTags(blog.tags || []);
-      
-      // Set the initial upload method based on coverImage
-      if (blog.coverImage) {
-        setUploadMethod(blog.coverImage.startsWith('http') ? 'url' : 'file');
-        setCoverImageId(blog.coverImage);
-      }
     }
   }, [blog]);
 
@@ -328,16 +325,14 @@ export default function UpdateBlogForm({ blog, onSuccess }: UpdateBlogFormProps)
         ) : (
           <div>
             <ImageUploadComponent
-              onUpload={(publicId) => {
-                // When we get a new publicId from Cloudinary, we need to construct the full URL
-                const cloudinaryUrl = `https://res.cloudinary.com/dy4nvvdwd/image/upload/${publicId}`;
-                setCoverImageId(publicId);
-                formik.setFieldValue('coverImage', cloudinaryUrl);
-                setHasImageError(false);
+              onUpload={({ publicId, url }) => {
+                setCoverImage({ publicId, url });
+                formik.setFieldValue('coverImage', url);
+                formik.setFieldValue('coverImagePublicId', publicId);
               }}
               buttonText="Upload Cover Image"
               className="w-full"
-              initialPublicId={coverImageId}
+              initialPublicId={coverImage.publicId}
             />
             <p className="mt-2 text-sm text-gray-500 text-center">
               Upload a cover image (recommended size: 1200x630px)

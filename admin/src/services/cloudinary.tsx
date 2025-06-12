@@ -44,7 +44,7 @@ import { CloudinaryContext, Image, Transformation } from 'cloudinary-react';
 import { ImageIcon, Loader2 } from 'lucide-react';
 
 interface Props {
-  onUpload: (publicId: string) => void;
+  onUpload: (result: { publicId: string; url: string }) => void;
   initialPublicId?: string;
   buttonText?: string;
   className?: string;
@@ -77,7 +77,10 @@ const ImageUploadComponent: React.FC<Props> = ({
 
       const result = await res.json();
       setPublicId(result.public_id);
-      onUpload(result.public_id);
+      onUpload({
+        publicId: result.public_id,
+        url: result.secure_url
+      });
     } catch (error) {
       console.error('Upload failed:', error);
     } finally {

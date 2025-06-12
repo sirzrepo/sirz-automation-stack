@@ -24,7 +24,7 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
   const [slugError, setSlugError] = useState<string | null>(null);
   const [uploadMethod, setUploadMethod] = useState<'url' | 'file'>('url');
   const [hasImageError, setHasImageError] = useState(false);
-  const [coverImageId, setCoverImageId] = useState('');
+  const [coverImage, setCoverImage] = useState({ publicId: '', url: '' });
 
   const dispatch = useDispatch();
   const { userId } = useAuth();
@@ -65,6 +65,7 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
       title: "",
       content: "",
       coverImage: "",
+      coverImagePublicId: "",
       slug: "",
     },
     validate: (values) => {
@@ -285,13 +286,14 @@ export default function BlogForm({ onSuccess }: BlogFormProps) {
         ) : (
           <div>
           <ImageUploadComponent
-            onUpload={(id) => {
-              setCoverImageId(id);
-              formik.setFieldValue('coverImage', id); // Optional
+            onUpload={({ publicId, url }) => {
+              setCoverImage({ publicId, url });
+              formik.setFieldValue('coverImage', url);
+              formik.setFieldValue('coverImagePublicId', publicId);
             }}
             buttonText="Upload Cover Image"
             className="w-full"
-            initialPublicId={coverImageId}
+            initialPublicId={coverImage.publicId}
           />
           <p className="mt-2 text-sm text-gray-500 text-center">
             Upload a cover image (recommended size: 1200x630px)
