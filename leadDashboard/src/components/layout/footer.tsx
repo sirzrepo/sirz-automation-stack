@@ -4,6 +4,34 @@ import { socialLinks } from "../../utils";
 import { motion } from "framer-motion";
 
 export const Footer = () => {
+
+const handleAPICall = async () => {
+    try {
+        const response = await fetch('http://localhost:5000/api/run-vectorshift', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            inputs: {
+            input_0: "string",
+            input_1: "string",
+            input_2: "string",
+            input_3: "string"
+            }
+        })
+        });
+    
+        const data = await response.json();
+        console.log("data", data);
+    } catch (error) {
+        console.error("API error", error);
+    }
+    }
+      
+
+
+
     return (
         <motion.footer
             className="bg-colorGreenDeeper pt-4 mt-10 pb-8 relative"
@@ -40,6 +68,7 @@ export const Footer = () => {
                         <a href="mailto:support@sirz.co.uk">
                             support@sirz.co.uk
                         </a>
+                        <button onClick={handleAPICall}>Call API</button>
                     </h4>
                 </div>
             </div>
