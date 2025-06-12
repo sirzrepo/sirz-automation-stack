@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import Button from "../../../components/common/ui/Button"
-import { Person } from "../../../assets"
+import { Person, Person2, Person3 } from "../../../assets"
 
 export default function Testimonials() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
@@ -25,7 +25,7 @@ export default function Testimonials() {
         "The AI chatbot doesn't just respond to customers—it understands them. It's like having our best salesperson available 24/7, handling objections and closing deals even when we're not there.",
       name: "Marcus Johnson",
       title: "CEO, TechFlow Solutions",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bWFsZXxlbnwwfHwwfHx8MA%3D%3D",
+      image: Person2
     },
     {
       id: 3,
@@ -34,7 +34,7 @@ export default function Testimonials() {
         "Our customers love the instant responses and personalized recommendations. The chatbot has transformed our customer service from reactive to proactive, and our team can focus on strategic growth.",
       name: "Sarah Chen",
       title: "Director of Operations, StyleHub",
-      image: "https://images.unsplash.com/photo-1618509681862-58a29bf6eee6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fGJsYWNrJTIwZmVtYWxlfGVufDB8fDB8fHww",
+      image: Person3,
     },
   ]
 

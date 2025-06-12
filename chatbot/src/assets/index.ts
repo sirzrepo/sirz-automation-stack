@@ -16,6 +16,8 @@ import growImg from './img/c-Group 1000004270.svg';
 import whyChooseImg from './img/Screenshot from 2025-06-11 13-01-11.png';
 
 import person from './img/person.svg';
+import person2 from './img/albert-dera.jpg';
+import person3 from './img/aiony-haust.jpg';
 import chatbotVideo from './img/chatbot.mp4';
 import heroImg from './img/Hero.png'
 
@@ -40,6 +42,9 @@ export const GrowImg = growImg;
 export const WhyChooseImg = whyChooseImg;
 
 export const Person = person;
+export const Person2 = person2;
+export const Person3 = person3;
+
 export const ChatbotVideo = chatbotVideo;
 export const HeroImg = heroImg;
 
