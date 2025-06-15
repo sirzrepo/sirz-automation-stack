@@ -2,7 +2,7 @@
 // import { FacebookIcon, InstagramIcon, LinkedlnIcon } from '../../assets/icons/svg';
 import { socialLinks } from '../../utils';
 import { motion } from 'framer-motion';
-import { SirzLogo } from '../../assets';
+import { SirzLogo, SirzLogoLight } from '../../assets';
 import demoVideo from '../../assets/img/Full Demo.mp4';
 
 import titleBorder from '../../assets/img/Ellipse 6.svg';
@@ -88,13 +88,15 @@ export default function Home() {
                 >
                     <div className='py-16 sm:w-[80%] w-[90%] mx-auto'>
                         <div className='flex items-center justify-center min-h-screen flex-col px-4'>
-                            <motion.div
-                                initial={{ scale: 0.8, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ duration: 0.6 }}
-                            >
-                                <img src={SirzLogo} alt="" />
-                            </motion.div>
+                            <div className='border-b border-gray-300 w-full flex items-center justify-center pb-5'>
+                                <motion.div
+                                    initial={{ scale: 0.8, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    transition={{ duration: 0.6 }}
+                                >
+                                    <img src={SirzLogo} alt="" className="sm:w-[130px] w-[70px] object-cover" />
+                                </motion.div>
+                            </div>
                             <motion.h4 
                                 className='text-[30px] mt-16 text-black sm:text-[45px] sm:w-[60%] font-bold pb-12 text-center'
                                 {...fadeInUp}
@@ -280,7 +282,7 @@ export default function Home() {
                         <i>No fluff. Just results</i>
                     </div>
                 </header>
-                <div className="max-w-[800px] mx-auto sm:mt-8 mt-5 px-4">
+                <div className="max-w-[60%] mx-auto sm:mt-8 mt-5 px-4">
                     <AutomationContactForm />
                 </div>
             </motion.section>
@@ -292,21 +294,10 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
             >
-                {/* <div className='absolute top-[-75px] right-0 left-0 bg-colorGreen max-w-[800px] mx-auto rounded-lg sm:py-10 py-5'>
-                    <div className='max-w-[700px] mx-auto flex items-center gap-8 px-4'>
-                        <img src={emailImg} alt="" className='h-[80px]' />
-                        <div>
-                            <h4 className='font-semibold leading-4 pb-3'>
-                                Need some help or assistance? Or maybe you want to make an enquiry.
-                            </h4>
-                            <div className='text-sm'>Reach out to <a href="mailto:support@sirz.co.uk">[support@sirz.co.uk]</a></div>
-                        </div>
-                    </div>
-                </div> */}
                 <div className='max-w-[1200px] mx-auto sm:rounded-2xl sm:px-10 px-5 pt-28 pb-8'>
                     <div className="pb-12 border-b border-gray-400">
                         <div className='text-center flex items-center justify-center flex-col max-w-[800px] mx-auto'>
-                            <img src={SirzLogo} alt="" />
+                            <img src={SirzLogoLight} alt="" />
                             <div className='text-[20px] text-white pt-5'>
                                 SIRz is your one-stop shop for E-commerce, Branding, and Digital Marketing, we help businesses launch, scale, and dominate in the digital space.
                             </div>

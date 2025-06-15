@@ -33,7 +33,6 @@ const AutomationContactForm = () => {
 
         try {
             const response = await axios.post(`${BASE_URL}/api/automations`, payload);
-            // const response = await axios.post(`http://localhost:5000/api/automations`, payload);
             console.log("response", response);
             toast.success("Message sent successfully!");
             setIsLoading(false);
@@ -47,13 +46,13 @@ const AutomationContactForm = () => {
     return (
         <>
             <form onSubmit={handleSubmit} action="">
-                <div className=" grid sm:grid-colws-2 gap-5 py-8     
-                px-6 border-b-[6px] border-s-[5px] border-e-[7px] border-colorGreen rounded-xl bg-white dark:bg-colorDefaultDark">
+                <div className=" grid sm:grid-colws-2 gap-5 py-16 
+                px-10 border-b-[6px] border-s-[5px] border-e-[7px] border-colorGreen rounded-xl bg-white dark:bg-colorDefaultDark">
                     <header className="relative">
                         <div className=" sm:w-[70%]">
-                            <h4 className=" font-bold">Let's get started</h4>
-                            <p className="  max-sm:text-justify pt-1 sm:text-[13px] text-[13px]">
-                            Fill out the form below to receive your personalized Strategy PDF . It takes less than 2 minutes!
+                            <h4 className=" font-semibold text-[30px]">Let's get started</h4>
+                            <p className="  max-sm:text-justify pt-1 text-sm">
+                            Fill out the form below to receive your personalized Strategy PDF. It takes less than 2 minutes!
                             </p>
                         </div>
                         <div className="absolute top-3 right-0"><img src={SirzLogo} alt="" className=" h-3" /></div>
@@ -66,7 +65,7 @@ const AutomationContactForm = () => {
                                 name="firstName"
                                 value={formData.firstName}
                                 onChange={handleChange}
-                                className={`w-full p-3 border border-gray-300 dark:bg-colorDefaultDark rounded-lg bg-tranparent dark:bg-background_dark placeholder:text-[12px] focus:outline-none focus:ring-1 dark:focus:ring-secondary focus:border-none focus:ring-primary`}
+                                className={`w-full p-5 mt-3 border border-gray-300 dark:bg-colorDefaultDark rounded-lg bg-tranparent dark:bg-background_dark placeholder:text-[12px] focus:outline-none focus:ring-1 dark:focus:ring-secondary focus:border-none focus:ring-primary`}
                                 placeholder={'first name'}
                             />
                             <div className=" absolute top-0 left-3 bg-white px-2 text-[12px] text-zinc-500 font-comfortaa dark:bg-colorDefaultDark">{'First Name'}</div>
@@ -78,7 +77,7 @@ const AutomationContactForm = () => {
                                 name="lastName"
                                 value={formData.lastName}
                                 onChange={handleChange}
-                                className={`w-full p-3 border border-gray-300 dark:bg-colorDefaultDark rounded-lg bg-tranparent dark:bg-background_dark placeholder:text-[12px] focus:outline-none focus:ring-1 dark:focus:ring-secondary focus:border-none focus:ring-primary`}
+                                className={`w-full p-5 mt-3 border border-gray-300 dark:bg-colorDefaultDark rounded-lg bg-tranparent dark:bg-background_dark placeholder:text-[12px] focus:outline-none focus:ring-1 dark:focus:ring-secondary focus:border-none focus:ring-primary`}
                                 placeholder={'last name'}
                             />
                             <div className=" absolute top-0 left-3 bg-white px-2 text-[12px] text-zinc-500 font-comfortaa dark:bg-colorDefaultDark">{'Last Name'}</div>
@@ -90,7 +89,7 @@ const AutomationContactForm = () => {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className={`w-full p-3 border border-gray-300 dark:bg-colorDefaultDark rounded-lg bg-tranparent dark:bg-background_dark placeholder:text-[12px] focus:outline-none focus:ring-1 dark:focus:ring-secondary focus:border-none focus:ring-primary`}
+                                className={`w-full p-5 mt-3 border border-gray-300 dark:bg-colorDefaultDark rounded-lg bg-tranparent dark:bg-background_dark placeholder:text-[12px] focus:outline-none focus:ring-1 dark:focus:ring-secondary focus:border-none focus:ring-primary`}
                                 placeholder={'email'}
                             />
                             <div className=" absolute top-0 left-3 bg-white px-2 text-[12px] text-zinc-500 font-comfortaa dark:bg-colorDefaultDark">{'Email Address'}</div>
@@ -102,7 +101,7 @@ const AutomationContactForm = () => {
                                 name="website"
                                 value={formData.website}
                                 onChange={handleChange}
-                                className={`w-full p-3 border border-gray-300 dark:bg-colorDefaultDark rounded-lg bg-tranparent dark:bg-background_dark placeholder:text-[12px] focus:outline-none focus:ring-1 dark:focus:ring-secondary focus:border-none focus:ring-primary`}
+                                className={`w-full p-5 mt-3 border border-gray-300 dark:bg-colorDefaultDark rounded-lg bg-tranparent dark:bg-background_dark placeholder:text-[12px] focus:outline-none focus:ring-1 dark:focus:ring-secondary focus:border-none focus:ring-primary`}
                                 placeholder={'website'}
                             />
                             <div className=" absolute top-0 left-3 bg-white px-2 text-[12px] text-zinc-500 font-comfortaa dark:bg-colorDefaultDark">{'Website (optional)'}</div>
@@ -115,11 +114,11 @@ const AutomationContactForm = () => {
                         isLoading ? (
                             <Loader />
                         ) : (
-                            <div className=" sm:w-[40%] w-[80%] max-sm:m-auto flex justify-end">
+                            <div className=" sm:w-[30%] w-[80%] max-sm:m-auto flex justify-end">
                                 <button
                                     type="submit"
                                     className={`tracking-widest bg-white text-black rounded-full w-full max-sm:mt-5
-                                'w-full flex align-center justify-center py-4 cursor-pointer text-sm px-8 font-medium floating-button`}
+                                'w-full flex align-center justify-center py-5 cursor-pointer text-sm px-8 font-medium floating-button`}
                                 >
                                     Claim mt strategy PDF
                                 </button>
