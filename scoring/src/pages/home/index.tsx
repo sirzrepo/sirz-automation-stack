@@ -86,7 +86,7 @@ export default function Home() {
                     }}
                     className='rounded-lg overflow-hidden'
                 >
-                    <div className='py-16 sm:w-[80%] w-[90%] mx-auto'>
+                    <div className='pb-16 pt-8 sm:w-[80%] w-[90%] mx-auto'>
                         <div className='flex items-center justify-center min-h-screen flex-col px-4'>
                             <div className='border-b border-gray-300 w-full flex items-center justify-center pb-5'>
                                 <motion.div
