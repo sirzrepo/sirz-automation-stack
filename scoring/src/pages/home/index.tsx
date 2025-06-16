@@ -236,14 +236,13 @@ export default function Home() {
                     <i className='text-lg font-normal'>See how our AI pinpoints high-intent keywords and connects them directly to your ideal customers — in real time.</i>
                 </div>
                 <motion.button 
-                            className="tracking-widest sm:w-[25%] mt-4 bg-colorBlueDeep text-white  border-2 border-colorBlueLight rounded-full w-full py-4 cursor-pointer text-sm px-8 whitespace-nowrap font-medium floating-button"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            // onClick={() => navigate(ROUTES.DASHBOARD.PATH)}
-                            {...fadeInUp}
-                        >
-                            Contact sales
-                        </motion.button>
+                    className="tracking-widest sm:w-[25%] mt-4 bg-colorBlueDeep text-white  border-2 border-colorBlueLight rounded-full w-full py-4 cursor-pointer text-sm px-8 whitespace-nowrap font-medium floating-button"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    {...fadeInUp}
+                >
+                    Contact sales
+                </motion.button>
             </header>
 
                 <div>
