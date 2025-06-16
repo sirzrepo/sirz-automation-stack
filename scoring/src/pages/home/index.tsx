@@ -281,7 +281,7 @@ export default function Home() {
                         <i>No fluff. Just results</i>
                     </div>
                 </header>
-                <div className="sm:w-[60%] w-[90%] mx-auto sm:mt-8 mt-5 px-4">
+                <div className="sm:w-[60%] w-[95%] mx-auto sm:mt-8 mt-5 px-4">
                     <AutomationContactForm />
                 </div>
             </motion.section>

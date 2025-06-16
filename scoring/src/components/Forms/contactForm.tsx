@@ -46,9 +46,9 @@ const AutomationContactForm = () => {
     return (
         <>
             <form onSubmit={handleSubmit} action="">
-                <div className=" grid sm:grid-colws-2 gap-5 py-16 
-                px-10 border-b-[6px] border-s-[5px] border-e-[7px] border-colorGreen rounded-xl bg-white dark:bg-colorDefaultDark">
-                    <header className="relative">
+                <div className=" pb-16
+                sm:px-10 px-5 border-b-[6px] border-s-[5px] border-e-[7px] border-colorGreen rounded-xl bg-white dark:bg-colorDefaultDark">
+                    <header className="relative sm:py-12 pt-10">
                         <div className=" sm:w-[70%]">
                             <h4 className=" font-semibold text-[30px]">Let's get started</h4>
                             <p className="  max-sm:text-justify pt-1 text-sm">
@@ -58,7 +58,7 @@ const AutomationContactForm = () => {
                         <div className="absolute top-3 right-0"><img src={SirzLogo} alt="" className=" h-3" /></div>
                     </header>
 
-                    <section className="grid grid-cols-2 gap-5">
+                    <section className="grid sm:grid-cols-2 max-sm:pt-10 gap-5">
                         <div className="relative pt-2">
                             <input
                                 type="text"
