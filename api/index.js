@@ -116,6 +116,19 @@ app.post("/contact", async (req, res) => {
 });
 
 
+// API route to send an email from Mr Femi's portfolio
+app.post("/portfolio-leads", async (req, res) => {
+  const { from, subject, text, html } = req.body;
+
+  if (!from || !subject || (!text && !html)) {
+    return res.status(400).json({ success: false, message: "Missing email parameters." });
+  }
+
+  const result = await sendMail(from, subject, text, html);
+  res.json(result);
+});
+
+
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
