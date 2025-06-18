@@ -9,6 +9,7 @@ import HowItWorks from './components/howItWorks';
 import Tailored from './components/tailored';
 import Testimonials from './components/testimonials';
 import { HeroImg } from '../../assets';
+import Contact from './components/contact';
 
 
 export default function Home() {
@@ -41,6 +42,7 @@ export default function Home() {
             <Tailored />
             <Testimonials />
             <Video />
+            <Contact />
             <Footer />
         </div>
     )

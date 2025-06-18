@@ -49,10 +49,10 @@ export default function Testimonials() {
   const current = testimonials[currentTestimonial]
 
   return (
-    <div className=" bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 flex items-center justify-center p-6">
-      <div className="lg:w-[80%] w-[95%] mx-auto pt-20">
+    <div className=" bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 flex items-center justify-center sm:p-6 p-4">
+      <div className="lg:w-[80%] md:w-[95%] mx-auto pt-20">
         {/* Main Testimonial Card */}
-        <div className="bg-white/10  backdrop-blur-sm rounded-lg p-8 mb-8 border border-white/20 shadow-2xl">
+        <div className="bg-white/10  backdrop-blur-sm rounded-lg sm:p-8 p-4 mb-8 border border-white/20 shadow-2xl">
           <div className="md:grid md:grid-cols-5 gap-8 lg:gap-12 items-center">
             {/* Left Side - Image */}
             <div className="col-span-2 max-md:pb-6 max-md:flex items-center justify-center">
