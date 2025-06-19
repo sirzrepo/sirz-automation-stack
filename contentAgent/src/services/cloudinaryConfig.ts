@@ -14,7 +14,7 @@
 
 // cloudinaryConfig.js
 
-import { Cloudinary } from '@cloudinary/url-gen';
+import { Cloudinary } from '@cloudinary/url-gen/index';
 
 export const cld = new Cloudinary({
   cloud: {
