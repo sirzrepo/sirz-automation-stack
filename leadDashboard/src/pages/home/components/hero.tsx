@@ -1,5 +1,6 @@
 import { PlayCircle } from "lucide-react"
 import Button from "../../../components/common/ui/Button"
+import { scrollToElement } from "../../../utils"
 
 export default function LeadScoringHero() {
   return (
@@ -22,10 +23,16 @@ export default function LeadScoringHero() {
       </p>
 
       <div className="grid grid-cols-2 gap-4">
-        <Button className="bg-colorBlueDeep hover:bg-blue-700 text-white sm:px-8 px-2 sm:py-4 py-2 sm:text-lg text-sm rounded-md">Book a demo</Button>
+        <Button 
+          onClick={() => scrollToElement('agent-section')}
+          className="bg-colorBlueDeep hover:bg-blue-700 text-white sm:px-8 px-2 sm:py-4 py-2 sm:text-lg text-sm rounded-md transition-colors duration-200"
+        >
+          Create a demo
+        </Button>
         <Button
+          onClick={() => scrollToElement('video-section')}
           variant="outline"
-          className="border-colorBlueDeep text-colorBlueDeep hover:bg-blue-950/30 sm:px-8 px-4 sm:py-4 py-2 sm:text-lg text-sm rounded-md"
+          className="border-colorBlueDeep text-colorBlueDeep hover:bg-blue-950/30 sm:px-8 px-4 sm:py-4 py-2 sm:text-lg text-sm rounded-md transition-colors duration-200"
         >
           <PlayCircle className="sm:mr-3 mr-1 h-7 w-7" /> Watch a video
         </Button>

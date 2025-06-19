@@ -1,8 +1,9 @@
-import { Play, Sparkles, X } from "lucide-react"
+import { Sparkles, X } from "lucide-react"
 import Button from "../../../components/common/ui/Button"
 import { Video } from "../../../assets"
 import { useState } from "react";
 import axios from "axios";
+import { BASE_URL, scrollToElement } from "../../../utils";
 
 type MessageType = 'success' | 'error' | 'loading' | null;
 
@@ -17,9 +18,6 @@ export default function VideoSection() {
   const [status, setStatus] = useState<StatusMessage>({ type: null, message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   console.log("isSubmitting", isSubmitting)
-
-  // const BASE_URL = `http://localhost:5000`;
-  const BASE_URL = `https://sirz-xfqp.onrender.com`;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -106,7 +104,7 @@ export default function VideoSection() {
 
 
   return (
-    <div className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 flex items-center justify-center p-8">
+    <div id="video-section" className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 flex items-center justify-center p-8">
       {/* Status Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -162,12 +160,6 @@ export default function VideoSection() {
                 onChange={(e) => setCompanyUrl(e.target.value)} 
                 placeholder="Company URL" 
                 className="w-full p-4 border border-gray-300 bg-white text-gray-900 rounded outline-none" />
-              {/* <select className="w-full p-4 border border-gray-300 bg-white text-gray-900 rounded">
-                <option value="">Company URL</option>
-                <option value="example1">example1.com</option>
-                <option value="example2">example2.com</option>
-                <option value="example3">example3.com</option>
-              </select> */}
             </div>
             <Button className="bg-[#190343] hover:bg-[#190343]/80 text-white px-8 h-14 text-lg" onClick={handleSubmit}>
               Submit <Sparkles className="ml-2 h-5 w-5" />
@@ -181,15 +173,15 @@ export default function VideoSection() {
           </p>
 
           <div className="sm:flex gap-4">
-            <Button className="bg-white  max-sm:w-full text-gray-900 hover:bg-gray-100 px-8 py-4 text-lg">Book a demo</Button>
-            <Button variant="outline" className="border-white max-sm:w-full max-sm:mt-2 text-white hover:bg-white/10 px-8 py-4 text-lg">
+            <button onClick={() => scrollToElement('agent-section')} className="bg-white  max-sm:w-full rounded-lg text-gray-900 hover:bg-gray-100 px-8 py-4 text-lg">Create a demo</button>
+            {/* <Button variant="outline" className="border-white max-sm:w-full max-sm:mt-2 text-white hover:bg-white/10 px-8 py-4 text-lg">
               <Play className="mr-2 h-5 w-5" /> Watch a video
-            </Button>
+            </Button> */}
           </div>
         </div>
 
         {/* Right Demo Video Card */}
-        <div className="bg-white rounded-2xl sm:px-4 sm:py-4  shadow-2xl relative">
+        <div className="bg-white rounded-2xl sm:px-4 sm:py-4 shadow-2xl relative">
           <div className=" bottom-0 right-0">
            <video src={Video} controls className="w-full rounded-lg" />
           </div>

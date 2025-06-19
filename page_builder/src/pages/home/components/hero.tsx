@@ -1,4 +1,5 @@
 import Button from "../../../components/common/ui/Button"
+import { scrollToElement } from "../../../utils"
 
 export default function LeadScoringHero() {
   return (
@@ -15,7 +16,7 @@ export default function LeadScoringHero() {
         Sirz Landing Page Agent helps you generate a sleek, high-converting landing page with just your business name and a short description. No design skills needed.
       </p>
 
-      <div className="">
+      <div onClick={() => scrollToElement('agent-section')} className="">
         <Button className="bg-colorBlueDeep hover:bg-blue-700 text-white sm:px-8 px-2 sm:py-4 py-2 sm:text-lg text-sm rounded-md">Create your first website</Button>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react"
 import Button from "../../../components/common/ui/Button"
 import { PillarVector01, PillarVector02, PillarVector03, Star } from "../../../assets"
+import { scrollToElement } from "../../../utils"
 
 export default function LeadScoringHero() {
   return (
@@ -22,7 +23,7 @@ export default function LeadScoringHero() {
       </p>
 
       <div className="">
-        <Button className="bg-gradient-to-r from-[#45C4F9] via-[#7D0977] to-[#FF0BE3] hover:bg-blue-700 text-white sm:px-8 px-2 sm:py-4 py-2 sm:text-lg text-sm rounded-lg">
+        <Button onClick={() => scrollToElement('agent-section')} className="bg-gradient-to-r from-[#45C4F9] via-[#7D0977] to-[#FF0BE3] hover:bg-blue-700 text-white sm:px-8 px-2 sm:py-4 py-2 sm:text-lg text-sm rounded-lg">
           Generate My First Content
           <ArrowRight className="w-4 h-4 ml-2" />
           </Button>

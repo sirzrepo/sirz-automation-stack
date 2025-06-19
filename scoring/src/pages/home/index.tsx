@@ -22,6 +22,7 @@ import { Calendar1Icon, NotebookIcon } from 'lucide-react';
 import AutomationContactForm from '../../components/Forms/contactForm';
 import { IoLogoFacebook, IoLogoInstagram, IoLogoLinkedin } from 'react-icons/io5';
 import Automation from './automation';
+import { Agent } from './agent';
 
 const heroPictures = [
     heroFrame2,
@@ -267,6 +268,8 @@ export default function Home() {
                     <img src={workImg} alt="" className=' object-cover w-full' />
                 </div>
             </motion.section>
+
+            <Agent />
 
             <motion.section 
                 className="bg-colorLight dark:bg-colorDark py-10 bg-dashboard-form-gradient"
