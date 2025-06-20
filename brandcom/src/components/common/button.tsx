@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { BUTTON_LINKS } from "../../utils";
 
 
-export default function Button({ text, className, color }: {
+export default function Button({ text, className, color, onClick }: {
   text: string;
   className?: string;
   color?: boolean
+  onClick?: () => void
 }) {
 
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export default function Button({ text, className, color }: {
     if (path) {
       navigate(path);
     } else {
+      onClick?.()
       console.warn(`No path mapped for button text: "${text}"`);
     }
   };

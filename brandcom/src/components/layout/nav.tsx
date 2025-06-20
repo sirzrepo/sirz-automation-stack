@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { allReduxSliceInfo, setIsOpen, setShowServices } from "../../features/reduxSlice";
 import { ROUTES } from "../../constants/routes/desc";
 import Button from "../common/button";
+import { scrollToElement } from "../../utils";
 
 // Hamburger icon component
 const MenuIcon = ({ isOpen, toggle }: { isOpen: boolean; toggle: () => void }) => (
@@ -87,9 +88,10 @@ export default function NavBar() {
 
                     {/* Desktop Auth Buttons */}
                     <div className="hidden md:ml-4 md:flex md:items-center md:space-x-4">
-                        <Button color text="Log in" className="px-4 py-2 text-sm" />
-                        <Button text="Get Demo" className="px-6 py-2 text-sm" />
-                    </div>
+                        {/* <Button color text="Log in" className="px-4 py-2 text-sm" /> */}
+                        <Button onClick={() => navigate(ROUTES.CONTACT.PATH)} color text="Get started" className="px-4 py-2 text-sm" />
+                        <Button onClick={() => scrollToElement('agent-section')} text="Get Demo" className="px-6 py-2 text-sm" />
+                    </div> 
 
                     {/* Mobile menu button */}
                     <div className="md:hidden flex items-center">

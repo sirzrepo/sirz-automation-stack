@@ -12,6 +12,7 @@ import { getServiceCardByKey, pageCardSelections, serviceCards } from "../../con
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes/desc";
+import { scrollToElement } from "../../utils";
 
 
 export default function Services() {
@@ -90,7 +91,7 @@ export default function Services() {
                   </p>
                   <div className="flex sm:flex-row gap-4 justify-center md:justify-start">
                     <button
-                      onClick={() => navigate(ROUTES.CONTACT.PATH)}
+                      onClick={() => scrollToElement('agent-section')}
                       className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200"
                     >
                       Get Demo

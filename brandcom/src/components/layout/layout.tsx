@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import NavBar from "./nav";
 import Footer from "./footer";
 import ScrollToTop from "../../features/scrollToTop";
+import { Agent } from "../agent";
 
 export default function Layout() {
     return (
@@ -11,6 +12,7 @@ export default function Layout() {
                 <ScrollToTop />
                 <Outlet />
             </div>
+            <Agent />
             <Footer />
         </div>
     )
