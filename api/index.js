@@ -4,6 +4,8 @@ const dotenv = require("dotenv");
 const { default: axios } = require("axios");
 const mongoose = require('mongoose');
 const sendMail = require("./src/emailService");
+const path = require('path');
+const bodyParser = require('body-parser');
 
 const authRoutes = require('./src/routes/auth');
 const userRoutes = require('./src/routes/users');
@@ -17,6 +19,7 @@ const leadScoringRoutes = require('./src/routes/leadScoringRoutes');
 const landingPageRoutes = require('./src/routes/landingPageRoutes');
 const contentAgentRoutes = require('./src/routes/contentAgenRoutes');
 const chatbotRoutes = require('./src/routes/chatbot');
+const brandconAIRoutes = require('./src/routes/brandcomAIRoutes');
 // import axios from "axios";
 
 dotenv.config();
@@ -36,6 +39,18 @@ mongoose.connect(
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));
 
+
+//  middleware
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+// multer middleware
+const fs = require('fs');
+const uploadsPath = path.join(__dirname, '../../uploads');
+
+if (!fs.existsSync(uploadsPath)) {
+  fs.mkdirSync(uploadsPath, { recursive: true });
+}
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
@@ -49,6 +64,7 @@ app.use('/api/lead-scoring', leadScoringRoutes);
 app.use('/api/landing-page', landingPageRoutes);
 app.use('/api/content-agent', contentAgentRoutes);
 app.use('/api/chatbot', chatbotRoutes);
+app.use('/api/brandcomAI', brandconAIRoutes)
 // API route to send an email
 app.post("/subscribe", async (req, res) => {
   const { from, subject, text, html } = req.body;
