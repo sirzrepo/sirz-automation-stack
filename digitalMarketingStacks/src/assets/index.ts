@@ -4,7 +4,6 @@ import googleLog from './img/devicon_google.svg';
 import sirzLogoLight from './img/sirz logo_light.svg';
 import or from './img/Frame 1659.svg';
 import projectIcon from './img/Frame 1171275943.svg';
-
 import defaultProfileImg from './img/profile.svg';
 
 
