@@ -149,7 +149,7 @@ export default function Services() {
 
             <div className="flex items-center flex-col text-center justify-center lg:w-[60%] w-[90%] py-16  mx-auto ">
                 <div className=" pb-20">
-                    <h2 className="sm:text-[53px] mx-auto text-[33px] text-primary-700 font-medium ">Wht You're  <CircleTopic text="Getting" /></h2>
+                    <h2 className="sm:text-[53px] mx-auto text-[33px] text-primary-700 font-medium ">What You're  <CircleTopic text="Getting" /></h2>
                 </div>
 
                 <NumberCardWrapper 
