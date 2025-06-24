@@ -92,7 +92,6 @@ app.post("/consultation-booking", async (req, res) => {
 });
 
 app.post('/api/run-vectorshift', async (req, res) => {
-  console.log("req.body", req.body);
   try {
     const apiRes = await fetch('https://api.vectorshift.ai/v1/pipeline/67efaf5ac7dcc9c27ee9e510/run', {
       method: 'POST',
@@ -104,16 +103,13 @@ app.post('/api/run-vectorshift', async (req, res) => {
         inputs: req.body.inputs,
       }),
     });
-    console.log("apiRes", apiRes);
 
     if (!apiRes.ok) {
       const errorText = await apiRes.text();
-      console.error(`VectorShift error: ${apiRes.status} - ${errorText}`);
       return res.status(apiRes.status).json({ error: 'Failed to call VectorShift API', details: errorText });
     }
 
     const data = await apiRes.json();
-    console.log("data", data);
     res.status(200).json(data);
   } catch (err) {
     console.error('Server error:', err);
