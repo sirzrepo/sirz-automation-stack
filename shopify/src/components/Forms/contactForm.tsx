@@ -134,7 +134,7 @@ const AutomationContactForm = () => {
                                     className={`tracking-widest bg-white text-black rounded-full w-full max-sm:mt-5
                                 'w-full flex align-center justify-center py-4 cursor-pointer text-sm px-8 font-medium floating-button`}
                                 >
-                                    Claim mt strategy PDF
+                                    Claim my strategy PDF
                                 </button>
                             </div>
                         )

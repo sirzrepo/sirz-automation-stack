@@ -37,7 +37,7 @@ const automationCards = [
         title: `SEO Keyword Bomber Agent`,
         text: `Know exactly what your customers are searching for. Our SEO agent maps high-intent keywords to buyer journeys and sends real-time insights into your content pipeline.`,
         url: "Learn more about SEO Keyword Agent",
-        link: "https://ai-agents.sirz.co.uk/"
+        link: "https://seo-bomber.sirz.co.uk/"
     },
     {
         img: contentImg,

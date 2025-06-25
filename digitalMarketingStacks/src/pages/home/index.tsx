@@ -35,7 +35,7 @@ const automationStack = [
     {
         img: SearchIcon,
         title: `SEO Keyword Bomber Agent`,
-        link: "https://ai-agents.sirz.co.uk/"
+        link: "https://seo-bomber.sirz.co.uk/"
     },
     {
         img: PencilIcon,
