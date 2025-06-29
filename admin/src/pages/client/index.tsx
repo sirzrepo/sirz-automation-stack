@@ -10,6 +10,7 @@ import { closeModal, openModal } from "../../store/modalSlice";
 import Modal from "../../components/layout/modal";
 import { BASE_URL } from "../../utils";
 import axios from "axios";
+import { useAuth } from "../../context/AuthContext";
 
 // Define user type for type safety
 interface User {
@@ -29,6 +30,7 @@ const Clients = () => {
   const [clients, setClients] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const {user} = useAuth();
   
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -418,18 +420,26 @@ const Clients = () => {
                           >
                             <div className="mr-3">👁️</div> View Profile
                           </button>
-                          <button 
-                            onClick={() => openEditModal(client)}
-                            className="w-full text-left flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          >
-                            <Edit size={16} className="mr-3 text-gray-500" /> Edit Role
-                          </button>
-                          <button 
-                            onClick={() => openDeleteModal(client)}
-                            className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                          >
-                            <Trash2 size={16} className="mr-3 text-red-500" /> Delete
-                          </button>
+                          
+                          {
+                            user?.role === 'admin' && client.role !== "admin" && (
+                              <button 
+                                onClick={() => openEditModal(client)}
+                                className="w-full text-left flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              >
+                                <Edit size={16} className="mr-3 text-gray-500" /> Edit Role
+                              </button>
+                            )
+                          }
+                          {
+                            user?.role === 'admin' && client.role !== "admin" && (
+                              <button 
+                                onClick={() => openDeleteModal(client)}
+                                className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                              >
+                                <Trash2 size={16} className="mr-3 text-red-500" /> Delete
+                              </button> 
+                          )}
                         </div>
                       )}
                     </td>

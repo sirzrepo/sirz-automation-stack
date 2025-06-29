@@ -4,7 +4,7 @@ const Role = require('../models/role');
 const checkPermission = require('../middleware/permission');
 
 // CREATE
-router.post("/", async (req, res) => {
+router.post("/", checkPermission("admin"), async (req, res) => {
   try {
     const role = await Role.create(req.body);
     res.status(201).json({
