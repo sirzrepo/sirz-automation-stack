@@ -6,7 +6,7 @@ import { FaUsers } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../store/modalSlice";
+import { closeModal, openModal } from "../../store/modalSlice";
 import Modal from "../../components/layout/modal";
 import { BASE_URL } from "../../utils";
 import axios from "axios";
@@ -208,6 +208,7 @@ const Clients = () => {
       await clientsAPI.updateClient(editingUser._id, { role: selectedRole });
       // Refresh the clients list
       fetchClients();
+      dispatch(closeModal());
       toast.success('User role updated successfully');
     } catch (error) {
       console.error('Error updating user role:', error);
@@ -382,7 +383,9 @@ const Clients = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full
                         ${client.role === 'admin' ? 'bg-purple-100 text-purple-800' : 
-                         client.role === 'client' ? 'bg-blue-100 text-blue-800' : 
+                          client.role === 'content creator' ? 'bg-green-100 text-green-800' : 
+                          client.role === 'developer' ? 'bg-blue-100 text-blue-800' : 
+                          client.role === 'user' ? 'bg-gray-100 text-gray-800' : 
                          'bg-gray-100 text-gray-800'}`}>
                         {client.role || 'User'}
                       </span>
@@ -524,8 +527,11 @@ const Clients = () => {
                 onChange={(e) => setSelectedRole(e.target.value)}
                 className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
               >
-                <option value="admin">Admin</option>
-                <option value="client">Client</option>
+                {roles.map((role) => (
+                  <option key={role} value={role} selected={role === selectedRole}>
+                    {role}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
