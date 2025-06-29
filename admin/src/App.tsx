@@ -29,6 +29,8 @@ import LeadScoringInquiries from './pages/inquiries/leadScoringInquiries';
 import LandingPageInquiries from './pages/inquiries/landingPageInquiries';
 import ContentAgentInquiries from './pages/inquiries/content_agent_inquiries';
 import ChatbotInquiries from './pages/inquiries/chatbot';
+import Roles from './pages/roles';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -59,7 +61,7 @@ function App() {
         <div 
           className={`
             bg-[#FAFAFA] 
-            ${!hideNavbar ? 'pt-[70px]' : ''} 
+            ${!hideNavbar ? 'pt-[40px]' : ''} 
             ${!hideNavbar ? (isSidebarCollapsed ? 'md:ml-[80px] ml-[80px]' : 'md:ml-[280px] ml-[80px]') : ''}
             min-h-screen 
             transition-all 
@@ -78,7 +80,7 @@ function App() {
                   <Home />
                 </ProtectedRoute>
               } />
-              <Route path="/clients" element={
+              <Route path="/users" element={
                 <ProtectedRoute>
                   <Clients />
                 </ProtectedRoute>
@@ -129,6 +131,12 @@ function App() {
               <Route path="/profile" element={
                 <ProtectedRoute>
                   <Profile />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/roles" element={
+                <ProtectedRoute>
+                  <Roles />
                 </ProtectedRoute>
               } />
               
@@ -189,6 +197,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <ToastContainer />
         <Layout />
       </Router>
     </AuthProvider>

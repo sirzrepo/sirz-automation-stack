@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { BASE_URL } from '../utils';
 
 const API_URL = `${BASE_URL}/api`;
@@ -109,3 +109,90 @@ export const clientsAPI = {
     return response.data;
   }
 }; 
+
+
+
+
+export const axiosApiCall = async (
+    method: 'get' | 'post' | 'put' | 'delete',
+    url: string,
+    data?: object, // make the data parameter optional
+    config: AxiosRequestConfig = {},
+) => {
+    try {
+        // Retrieve the token from local storage
+        const token = localStorage.getItem('token');
+
+        // Add Authorization header if token exists
+        const headers = {
+            ...config?.headers, // Preserve existing headers from config
+            ...(token ? { Authorization: `Bearer ${token}` } : {}), // Add Authorization header
+        };
+
+        const response = await axios({
+            method,
+            url,
+            data,
+            ...config,
+            headers, // Use the merged headers
+        });
+
+        // You can handle the response or extract data here if needed
+        return response.data;
+    } catch (error) {
+        // Handle errors (e.g., log them, show a notification, etc.)
+        console.error("API Call Error:", error);
+        throw error; // Re-throw the error so it can be handled by the caller
+    }
+};
+
+
+
+// sample usage
+// Delete a role
+// const deleteRole = async (roleId: string) => {
+//   try {
+//     await axiosApiCall('delete', `/api/roles/${roleId}`);
+//   } catch (error) {
+//     console.error('Error deleting role:', error);
+//     throw error;
+//   }
+// };
+
+// Update a role
+// const updateRole = async (roleId: string, updates: { name?: string, description?: string }) => {
+//   try {
+//     const updatedRole = await axiosApiCall('put', `/api/roles/${roleId}`, updates);
+//     return updatedRole;
+//   } catch (error) {
+//     console.error('Error updating role:', error);
+//     throw error;
+//   }
+// };
+
+// Create a new role
+// const createRole = async (roleData: { name: string, description: string }) => {
+//   try {
+//     const newRole = await axiosApiCall('post', '/api/roles', roleData);
+//     return newRole;
+//   } catch (error) {
+//     console.error('Error creating role:', error);
+//     throw error;
+//   }
+// };
+
+// Fetch all roles
+// const fetchRoles = async () => {
+//   try {
+//     const roles = await axiosApiCall('get', '/api/roles');
+//     console.log(roles);
+//     return roles;
+//   } catch (error) {
+//     console.error('Error fetching roles:', error);
+//   }
+// };
+
+// // With query parameters
+// const fetchUser = async (userId: string) => {
+//   return await axiosApiCall('get', `/api/users/${userId}`);
+// };

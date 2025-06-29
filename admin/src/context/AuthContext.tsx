@@ -23,6 +23,8 @@ interface AuthContextType {
   }>;
 }
 
+const roles = ["admin", "content creator", "brand manager", "brand owner", "developer"];
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -58,10 +60,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // function to get user
-  const fetchUser = async (userId: string) => {
+  const fetchUser = async (userId: string): Promise<IUser | null> => {
     try {
       const response = await authAPI.getUser(userId);
-      const userData = response.data;
+      const userData: IUser = response.data;
 
       setUser(userData); // Store full user object
 
@@ -72,29 +74,74 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email: userData.email,
         role: userData.role,
         image: userData.image || "",
-      }))
+      }));
+      
+      return userData;
     } catch (error) {
       console.error('Failed to fetch user data', error);
+      return null;
     }
   };
+
+  // const login = async (email: string, password: string) => {
+  //   try {
+  //     setError(null);
+  //     setIsLoading(true);
+
+  //     const response = await authAPI.login(email, password);
+  //     localStorage.setItem('token', response.token);
+
+  //     // Decode token to get userId
+  //     const decodedToken: any = jwtDecode(response.token);
+  //     const id = decodedToken.userId;
+
+  //     setUserId(id);
+  //     setIsAuthenticated(true);
+  //     await fetchUser(id);
+  //   } catch (err: any) {
+  //     setError(err.response?.data?.message || 'Login failed');
+  //     throw err;
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const login = async (email: string, password: string) => {
     try {
       setError(null);
       setIsLoading(true);
-
+  
       const response = await authAPI.login(email, password);
+      
+      // Store the token first so we can make authenticated requests
       localStorage.setItem('token', response.token);
-
+  
       // Decode token to get userId
       const decodedToken: any = jwtDecode(response.token);
       const id = decodedToken.userId;
-
+  
+      // Fetch user data which includes role
+      const userData: IUser | null = await fetchUser(id);
+      
+      // Check if user has a role and if it's in the allowed roles
+      if (!userData?.role || !roles.includes(userData.role)) {
+        // If no role or invalid role, clean up and log out
+        localStorage.removeItem('token');
+        setError('You do not have permission to access this application');
+        setIsAuthenticated(false);
+        setUser(null);
+        setUserId(null);
+        throw new Error('Access denied: Invalid user role');
+      }
+  
+      // If we get here, user has a valid role
       setUserId(id);
       setIsAuthenticated(true);
-      await fetchUser(id);
+      setUser(userData);
+      dispatch(loginUserRedux(userData));
+      
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed');
+      setError(err.response?.data?.message || err.message || 'Login failed');
       throw err;
     } finally {
       setIsLoading(false);

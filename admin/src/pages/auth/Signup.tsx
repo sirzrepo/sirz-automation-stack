@@ -203,7 +203,7 @@ const Signup = () => {
                 required
               />
               <div className="absolute top-0 left-3 bg-white px-2 text-[12px] text-zinc-500 font-comfortaa dark:bg-colorDefaultDark">
-                Password
+                Confirm Password
               </div>
             </div>
 

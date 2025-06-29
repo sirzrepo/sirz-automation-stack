@@ -1,9 +1,15 @@
-import { ChevronLeft, ChevronRight, Download, MoreVertical } from "lucide-react";
+import { ChevronLeft, ChevronRight, Download, MoreVertical, Trash2, Edit } from "lucide-react";
 import { useEffect, useState } from "react";
 import { clientsAPI } from "../../services/api";
 import { DefaultProfileImg } from "../../assets";
 import { FaUsers } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../store/modalSlice";
+import Modal from "../../components/layout/modal";
+import { BASE_URL } from "../../utils";
+import axios from "axios";
 
 // Define user type for type safety
 interface User {
@@ -35,9 +41,29 @@ const Clients = () => {
   const [sortBy, setSortBy] = useState("createdAt");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [selectedRole, setSelectedRole] = useState("all");
+  const [roles, setRoles] = useState<string[]>([]);
   
   // Action menu state
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  
+  // State for modals
+  const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [userToDelete, setUserToDelete] = useState<User | null>(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/roles`);
+        // Extract just the role names from the response data
+        const roleNames = response.data.map((role: { name: string }) => role.name);
+        setRoles(roleNames);
+      } catch (err: any) {
+        console.error("Error fetching roles:", err);
+      }
+    };
+    fetchRoles();
+  }, []);
   
   // Fetch clients with pagination, filtering, and sorting
   const fetchClients = async () => {
@@ -106,15 +132,17 @@ const Clients = () => {
   };
   
   // Handle delete client
-  const handleDeleteClient = async (clientId: string) => {
-    if (window.confirm("Are you sure you want to delete this client?")) {
-      try {
-        await clientsAPI.deleteClient(clientId);
-        // Refresh client list
-        fetchClients();
-      } catch (err: any) {
-        setError(err.message || "Failed to delete client");
-      }
+  const handleDeleteClient = async () => {
+    if (!userToDelete) return;
+    
+    try {
+      await clientsAPI.deleteClient(userToDelete._id);
+      // Refresh the clients list
+      fetchClients();
+      toast.success('Client deleted successfully');
+    } catch (error) {
+      console.error('Error deleting client:', error);
+      toast.error('Failed to delete client');
     }
   };
   
@@ -159,6 +187,34 @@ const Clients = () => {
     navigate(`/client-profile?id=${clientId}`);
   };
   
+  const openEditModal = (user: User) => {
+    setEditingUser(user);
+    setSelectedRole(user.role || 'client');
+    dispatch(openModal('edit-user'));
+    setActiveMenu(null);
+  };
+  
+  const openDeleteModal = (user: User) => {
+    setUserToDelete(user);
+    dispatch(openModal('delete-user'));
+    setActiveMenu(null);
+  };
+  
+  
+  const handleRoleUpdate = async () => {
+    if (!editingUser || !selectedRole) return;
+    
+    try {
+      await clientsAPI.updateClient(editingUser._id, { role: selectedRole });
+      // Refresh the clients list
+      fetchClients();
+      toast.success('User role updated successfully');
+    } catch (error) {
+      console.error('Error updating user role:', error);
+      toast.error('Failed to update user role');
+    }
+  };
+  
   return (
     <div className="w-full">
       {/* Page header */}
@@ -188,9 +244,11 @@ const Clients = () => {
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="all">All Roles</option>
-            <option value="client">Client</option>
-            <option value="admin">Admin</option>
-            <option value="user">User</option>
+            {roles.map((role) => (
+              <option key={role} value={role}>
+                {role}
+              </option>
+            ))}
           </select>
           
           <select
@@ -301,7 +359,7 @@ const Clients = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {clients.map((client) => (
-                  <tr key={client._id} className="hover:bg-gray-50 cursor-pointer" onClick={() => handleClientSelect(client._id)}>
+                  <tr key={client._id} className="hover:bg-gray-50 cursor-pointer">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-10 w-10 relative">
@@ -340,7 +398,7 @@ const Clients = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatDate(client.createdAt)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium relative">
+                    <td className="px-6 py-4 whitespace-nowrap basic  text-right text-sm font-medium relative">
                       <button
                         onClick={() => toggleActionMenu(client._id)}
                         className="text-gray-400 hover:text-gray-500"
@@ -349,24 +407,25 @@ const Clients = () => {
                       </button>
                       
                       {activeMenu === client._id && (
-                        <div className="absolute right-6 top-10 z-10 bg-white rounded-md shadow-lg py-1 min-w-[160px] border border-gray-200">
-                          <a
-                            href={`/clients/${client._id}`}
+                        <div className="absolute right-6 top-10 z-20  bg-white rounded-md shadow-lg py-1 min-w-[160px] border border-gray-200">
+                          <button
+                          onClick={() => handleClientSelect(client._id)}
+                            // href={`/clients/${client._id}`}
                             className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           >
                             <div className="mr-3">👁️</div> View Profile
-                          </a>
-                          <a
-                            href={`/clients/${client._id}/edit`}
-                            className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          </button>
+                          <button 
+                            onClick={() => openEditModal(client)}
+                            className="w-full text-left flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           >
-                            <FaUsers size={16} className="mr-3 text-gray-500" /> Edit
-                          </a>
-                          <button
-                            onClick={() => handleDeleteClient(client._id)}
+                            <Edit size={16} className="mr-3 text-gray-500" /> Edit Role
+                          </button>
+                          <button 
+                            onClick={() => openDeleteModal(client)}
                             className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
                           >
-                            <FaUsers size={16} className="mr-3 text-red-500" /> Delete
+                            <Trash2 size={16} className="mr-3 text-red-500" /> Delete
                           </button>
                         </div>
                       )}
@@ -446,6 +505,48 @@ const Clients = () => {
           </div>
         </div>
       )}
+      
+      {/* Edit User Role Modal */}
+      <Modal 
+        id="edit-user"
+        title="Edit User Role"
+        btnText="Save Changes"
+        onclick={handleRoleUpdate}
+      >
+        {editingUser && (
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Role for {editingUser.first_name || editingUser.email}
+              </label>
+              <select
+                value={selectedRole}
+                onChange={(e) => setSelectedRole(e.target.value)}
+                className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="admin">Admin</option>
+                <option value="client">Client</option>
+              </select>
+            </div>
+          </div>
+        )}
+      </Modal>
+
+      {/* Delete Confirmation Modal */}
+      <Modal
+        id="delete-user"
+        title="Confirm Deletion"
+        btnText="Delete User"
+        onclick={handleDeleteClient}
+      >
+        {userToDelete && (
+          <div className="space-y-4">
+            <p className="text-gray-700">
+              Are you sure you want to delete <span className="font-semibold">{userToDelete.first_name || userToDelete.email}</span>? This action cannot be undone.
+            </p>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };

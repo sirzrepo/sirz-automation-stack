@@ -43,6 +43,45 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Update user role
+router.put('/:id/role', async (req, res) => {
+  try {
+    const { role } = req.body;
+    
+    if (!role) {
+      return res.status(400).json({
+        success: false,
+        message: 'Role is required'
+      });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { role },
+      { new: true, runValidators: true }
+    ).select('-password');
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'User role updated successfully',
+      data: user
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Error updating user role',
+      error: error.message
+    });
+  }
+});
+
 // Update user
 router.put('/:id', async (req, res) => {
   try {

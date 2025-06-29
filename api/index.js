@@ -21,6 +21,7 @@ const contentAgentRoutes = require('./src/routes/contentAgenRoutes');
 const chatbotRoutes = require('./src/routes/chatbot');
 const generateRoutes = require('./src/routes/generateRoutes');
 const brandDataRoutes = require('./src/routes/brandData');
+const roleRoutes = require('./src/routes/role');
 // import axios from "axios";
 
 dotenv.config();
@@ -67,6 +68,7 @@ app.use('/api/content-agent', contentAgentRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/generate-assets', generateRoutes);
 app.use('/api/brand-data', brandDataRoutes);
+app.use('/api/roles', roleRoutes);
 // API route to send an email
 app.post("/subscribe", async (req, res) => {
   const { from, subject, text, html } = req.body;

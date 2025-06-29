@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { IoHomeOutline, IoSettingsOutline, IoChevronForward, IoChevronBack, IoAnalyticsOutline, IoNewspaperOutline, IoHelpCircleOutline, IoChevronDown, IoChevronUp } from 'react-icons/io5';
-import { FaBookOpen, FaSignOutAlt, FaUsers, FaUserTie, FaBlog, FaRobot } from 'react-icons/fa';
+import { FaBookOpen, FaSignOutAlt, FaUsers, FaBlog, FaRobot } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavItem {
@@ -58,13 +58,8 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
     },
     { 
         icon: <FaUsers className="text-xl" />, 
-        label: 'clients', 
-        path: '/clients' 
-    },
-    { 
-        icon: <FaUserTie className="text-xl" />, 
-        label: 'employees', 
-        path: '/employees' 
+        label: 'Users', 
+        path: '/users' 
     },
     { 
         icon: <FaBlog className="text-xl" />, 
@@ -144,6 +139,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
           path: '/chatbot-inquiries'
         }
       ]
+    },
+    {
+      icon: <IoNewspaperOutline className="text-xl" />, 
+      label: 'Roles', 
+      path: '/roles' 
     },
     { 
       icon: <IoAnalyticsOutline className="text-xl" />, 
