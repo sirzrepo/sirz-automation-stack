@@ -134,13 +134,32 @@ export default function Roles() {
     // e.preventDefault();
     try {
       if (isEditing && selectedRole?._id) {
-        await axios.put(`${BASE_URL}/api/roles/${selectedRole._id}`, formData);
+        // await axios.put(`${BASE_URL}/api/roles/${selectedRole._id}`, formData);
+        try {
+          const updatedRole = await axiosApiCall('put', `${BASE_URL}/api/roles/${selectedRole?._id}`, formData);
+          toast.success("Role updated successfully");
+          fetchRoles();
+          dispatch(closeModal());
+          return updatedRole;
+        } catch (error) {
+          console.error('Error updating role:', error);
+          toast.error("Failed to update role");
+          throw error;
+        }
       } else {
-        await axios.post(`${BASE_URL}/api/roles`, formData);
+        // await axios.post(`${BASE_URL}/api/roles`, formData);
+        try {
+          const newRole = await axiosApiCall('post', `${BASE_URL}/api/roles`, formData);
+          toast.success("Role created successfully");
+          fetchRoles();
+          dispatch(closeModal());
+          return newRole;
+        } catch (error) {
+          console.error('Error creating role:', error);
+          toast.error("Failed to create role");
+          throw error;
+        }
       }
-      fetchRoles();
-      dispatch(closeModal());
-      toast.success("Role saved successfully");
     } catch (error: any) {
       console.error("Failed to save role:", error);
       toast.error(error.message || "Failed to save role");
