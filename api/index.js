@@ -71,19 +71,19 @@ app.use('/api/brand-data', brandDataRoutes);
 app.use('/api/roles', roleRoutes);
 // API route to send an email
 app.post("/subscribe", async (req, res) => {
-  const { from, subject, text, html } = req.body;
+  const { subject, text, html } = req.body;
 
-  if (!from || !subject || (!text && !html)) {
+  if (!subject || (!text && !html)) {
     return res.status(400).json({ success: false, message: "Missing email parameters." });
   }
 
-  const result = await sendMail(from, subject, text, html);
+  const result = await sendMail(subject, text, html);
   res.json(result);
 });
 
 // API route to send an email for consultation booking
 app.post("/consultation-booking", async (req, res) => {
-  const {  subject, text, html } = req.body;
+  const { subject, text, html } = req.body;
 
   if (!subject || (!text && !html)) {
     return res.status(400).json({ success: false, message: "Missing email parameters." });
@@ -122,26 +122,28 @@ app.post('/api/run-vectorshift', async (req, res) => {
 
 // API route to send an email
 app.post("/contact", async (req, res) => {
-  const { from, subject, text, html } = req.body;
+  const { subject, text, html } = req.body;
 
-  if (!from || !subject || (!text && !html)) {
+  if (!subject || (!text && !html)) {
     return res.status(400).json({ success: false, message: "Missing email parameters." });
   }
 
-  const result = await sendMail(from, subject, text, html);
+  const result = await sendMail(subject, text, html);
   res.json(result);
 });
 
 
 // API route to send an email from Mr Femi's portfolio
 app.post("/portfolio-leads", async (req, res) => {
-  const { from, subject, text, html } = req.body;
+  console.log("portfolio-leads", req.body);
+  const { subject, text, html} = req.body;
 
-  if (!from || !subject || (!text && !html)) {
+  if (!subject || (!text && !html)) {
     return res.status(400).json({ success: false, message: "Missing email parameters." });
   }
 
-  const result = await sendMail(from, subject, text, html);
+  const result = await sendMail(subject, text, html);
+  console.log("portfolio-leads", result);
   res.json(result);
 });
 
