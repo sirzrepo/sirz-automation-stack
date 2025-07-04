@@ -31,6 +31,8 @@ import ContentAgentInquiries from './pages/inquiries/content_agent_inquiries';
 import ChatbotInquiries from './pages/inquiries/chatbot';
 import Roles from './pages/roles';
 import { ToastContainer } from 'react-toastify';
+import Assets from './pages/assets';
+import AssetDetails from './pages/assets/[id]';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -137,6 +139,17 @@ function App() {
               <Route path="/roles" element={
                 <ProtectedRoute>
                   <Roles />
+                </ProtectedRoute>
+              } />
+
+              <Route path="/assets" element={
+                <ProtectedRoute>
+                  <Assets />
+                </ProtectedRoute>
+              } />
+              <Route path="/assets/:id" element={
+                <ProtectedRoute>
+                  <AssetDetails />
                 </ProtectedRoute>
               } />
               

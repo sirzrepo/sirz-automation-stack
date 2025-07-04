@@ -3,6 +3,34 @@ const router = express.Router();
 const BrandData = require('../models/brandData');
 const { uploadFile, uploadMultipleFiles } = require('../middleware/upload');
 
+// Get all brand data
+router.get("/", async (req, res) => {
+  try {
+    const allBrandData = await BrandData.find({});
+    res.status(200).json(allBrandData);
+  } catch (error) {
+    console.error("Error fetching all brand data:", error);
+    res.status(500).json({ message: "Error fetching brand data", error: error.message });
+  }
+});
+
+// Get all companies with essential details
+router.get("/companies", async (req, res) => {
+  try {
+    const companies = await BrandData.find({}, {
+      'companyData.companyName': 1,
+      'companyData.industry': 1,
+      'userId': 1,
+      'createdAt': 1,
+      '_id': 1
+    });
+    res.status(200).json(companies);
+  } catch (error) {
+    console.error("Error fetching companies:", error);
+    res.status(500).json({ message: "Error fetching companies", error: error.message });
+  }
+});
+
 // Create or Update Company Data
 router.post("/company", async (req, res) => {
   try {
@@ -217,72 +245,6 @@ router.get("/company-assets/:userId", async (req, res) => {
       error: err.message,
       companyData: {},
       assets: []
-    });
-  }
-});
-
-// Get All Companies Data (Admin Only)
-router.get("/admin/companies", async (req, res) => {
-  try {
-    // In a real app, you'd want to add authentication/authorization here
-    // Example: check if the requesting user is an admin
-    // if (!req.user || !req.user.isAdmin) {
-    //   return res.status(403).json({ message: "Unauthorized" });
-    // }
-
-    
-    const companies = await BrandData.find({})
-      .populate('userId', 'email name') // Assuming you want to include some user info
-      .select('userId companyData assets')
-      .sort({ 'companyData.companyName': 1 });
-
-    const formattedCompanies = companies.map(company => ({
-      _id: company._id,
-      userId: company.userId,
-      companyName: company.companyData?.companyName || 'Unnamed Company',
-      industry: company.companyData?.industry,
-      email: company.companyData?.email,
-      assetsCount: company.assets?.length || 0,
-      lastUpdated: company.updatedAt
-    }));
-
-    res.json({
-      total: companies.length,
-      companies: formattedCompanies
-    });
-  } catch (err) {
-    console.error('Error fetching companies:', err);
-    res.status(500).json({
-      message: 'Failed to fetch companies',
-      error: err.message,
-      companies: []
-    });
-  }
-});
-
-// Get Full Company Details by ID (Admin Only)
-router.get("/admin/company/:id", async (req, res) => {
-  try {
-    // Add admin check here in production
-    const company = await BrandData.findById(req.params.id)
-      .populate('userId', 'email name');
-      
-    if (!company) {
-      return res.status(404).json({ message: "Company not found" });
-    }
-
-    res.json({
-      _id: company._id,
-      userId: company.userId,
-      companyData: company.companyData || {},
-      assets: company.assets || [],
-      createdAt: company.createdAt,
-      updatedAt: company.updatedAt
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: 'Error fetching company details',
-      error: err.message
     });
   }
 });
