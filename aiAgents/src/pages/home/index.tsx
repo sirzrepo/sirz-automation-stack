@@ -34,7 +34,7 @@ heroFrame3
 const automationCards = [
     {
         img: seoImg,
-        title: `SEO Keyword Bomber Agent`,
+        title: `SEO Keyword Bomber Agent//`,
         text: `Know exactly what your customers are searching for. Our SEO agent maps high-intent keywords to buyer journeys and sends real-time insights into your content pipeline.`,
         url: "Learn more about SEO Keyword Agent",
         link: "https://seo-bomber.sirz.co.uk/"
@@ -80,7 +80,7 @@ const automationStack = [
     {
         img: SearchIcon,
         title: `SEO Keyword Bomber Agent`,
-        link: "https://ai-agents.sirz.co.uk/"
+        link: "https://seo-bomber.sirz.co.uk/"
     },
     {
         img: PencilIcon,
@@ -295,7 +295,7 @@ export default function Home() {
                 >
                     {automationStack.map((data, index) => (
                         <motion.div 
-                        onClick={() => window.open(data.link, '_blank')}
+                            onClick={() => window.open(data.link, '_blank')}
                             key={index} 
                             className='bg-colorLight text-center flex flex-col items-center text-sm dark:bg-colorDark px-4 py-5 text-zinc-600 rounded-xl cursor-pointer'
                             variants={fadeInUp}
