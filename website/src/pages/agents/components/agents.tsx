@@ -68,7 +68,7 @@ export default function SirzAgents() {
                 <h2 className="text-3xl font-bold leading-relaxed text-gray-900 dark:text-white sm:text-4xl lg:text-5xl mb-4">
                     Introducing Sirz AI Agents — Your <span className=" italic text-colorBlueDeep">Smart</span> Business Team.
                 </h2>
-                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8 max-w-[60%] py-4 mx-auto">
+                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8 sm:max-w-[60%] py-4 mx-auto">
                     Sirz&apos;s AI-powered agents are digital specialists designed to help you launch brands, generate leads, build landing pages, create content, and automate sales—faster and smarter.
                 </p>
             </div>
