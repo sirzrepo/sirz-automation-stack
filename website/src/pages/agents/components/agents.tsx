@@ -13,7 +13,7 @@ export default function SirzAgents() {
             title: `Brandcom AI`,
             intro: `Hi, I’m your branding agent.`,
             description: `My role is to create your brand identity, and my personality is creative and sharp.`,
-            link: "#",
+            link: "https://brandcom.ai.sirz.co.uk/",
             linkText: "Explore BrandcomAi"
         },
         {
