@@ -18,6 +18,7 @@ import Nureva from "../../pages/caseStudies/nureva";
 import Purvia from "../../pages/caseStudies/purvia";
 import OnboardingPage from "../../pages/dashboard";
 import SalesFunnel from "../../pages/salesFunnel";
+import Agents from "../../pages/agents";
 
 export const ROUTES = {
     LAYOUT: {
@@ -104,5 +105,9 @@ export const ROUTES = {
     CASE_STUDY_PURVIA: {
         PATH: "/case-study-purvia",
         ELEMENT: <Purvia />
+    },
+    AGENTS: {
+        PATH: "/agents",
+        ELEMENT: <Agents />
     },
 }

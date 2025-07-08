@@ -40,7 +40,7 @@ export default function Footer() {
   return (
     <>
       <footer
-        className=" bg-colorGreenDeeper pt-4 pb-8"
+        className=" bg-colorGreenDeeper py-12"
       >
         <div className='w-[90%] bg-colorBlueDeep m-auto sm:rounded-2xl sm:px-10 px-5 py-16'>
           <div className=" pb-12 border-b border-gray-400 mx-auto">

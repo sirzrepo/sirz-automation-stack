@@ -83,6 +83,10 @@ const routes = (user: Iuser) =>
                     path: (ROUTES.WELCOME.PATH),
                     element: (ROUTES.WELCOME.ELEMENT),
                 },
+                {
+                    path: (ROUTES.AGENTS.PATH),
+                    element: (ROUTES.AGENTS.ELEMENT),
+                },
             ],
         },
         {

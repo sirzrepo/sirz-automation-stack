@@ -1,5 +1,5 @@
 import { FaBars } from "react-icons/fa6";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import DarkModeToggle from "../../features/darkMode";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
@@ -12,7 +12,6 @@ import Button from "../common/button";
 import { calendyLink } from "../../utils";
 
 export default function NavBar() {
-    // const [isOpen, setIsOpen] = useState(false);
     const dispatch = useAppDispatch();
     const location = useLocation();
     const { isDarkMode, isOpen } = useAppSelector(allReduxSliceInfo)
@@ -27,14 +26,6 @@ export default function NavBar() {
             title: "About us",
             action: ROUTES.ABOUT.PATH,
         },
-        // {
-        //     title: "Contact",
-        //     action: ROUTES.CONTACT.PATH,
-        // },
-        // {
-        //     title: "Market place",
-        //     action: ROUTES.CONTACT.PATH,
-        // },
         {
             title: <NavbarDropdown />,
             icon: "",
@@ -56,6 +47,10 @@ export default function NavBar() {
             title: "Contact us",
             action: ROUTES.CONTACT.PATH,
         },
+        {
+            title: "Sirz Ai agents",
+            action: ROUTES.AGENTS.PATH
+        }
     ];
 
     const toggleMenu = () => {
@@ -82,7 +77,6 @@ export default function NavBar() {
                     className={`flex max-md:hidden items-center dark:text-white text-black lg:w-[55%] w-[50%] text-background_dark font-normal text-[15px] gap-5 justify-between transition-all`}
                 >
                     {menuItem.map((item, index) => (
-                        <>
                         <li
                             className={`whitespace-nowrap flex items-center gap-2 lg:text-sm text-[12px] hover:text-colorBlueDeep 
                                 ${location.pathname.startsWith(item.action) && item.action !== ""
@@ -101,9 +95,7 @@ export default function NavBar() {
                             {item?.title}
                             {item.icon}
                         </li>
-                        </>
                     ))}
-                    <Link to="https://ai-agents.sirz.co.uk/" className="whitespace-nowrap flex items-center gap-2 lg:text-sm text-[12px] hover:text-colorBlueDeep cursor-pointer"> Sirz Ai agents</Link>
 
                 </ul>
 
@@ -152,7 +144,6 @@ export default function NavBar() {
                                 {item.icon}
                             </li>
                         ))}
-                        <Link to="https://ai-agents.sirz.co.uk/" className="whitespace-nowrap flex items-center gap-2 my-6 hover:text-colorBlueDeep cursor-pointer"> Sirz Ai agents</Link>
                         <li className="flex items-center gap-4">
                             toggle mode
                             <DarkModeToggle />
