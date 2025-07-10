@@ -10,7 +10,7 @@ import SmartFeatures from './components/smartFeatures';
 import Gallery from './components/gallery';
 import VideoSection from './components/videoSection';
 import { Footer } from '../../components/layout/footer';
-import { Agent } from './components/agent';
+import AgentWrapper from './components/agent/wrapper';
 
 
 export default function Home() {
@@ -39,7 +39,7 @@ export default function Home() {
             <SmartFeatures />
             <VideoSection />
             <Gallery />
-            <Agent />
+            <AgentWrapper />
 
             <Footer />
         </div>

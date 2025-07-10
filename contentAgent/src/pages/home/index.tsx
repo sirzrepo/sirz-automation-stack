@@ -8,7 +8,7 @@ import BuiltFor from './components/builtFor';
 import Section from './components/section';
 import TestimonialSection from './components/testimonial';
 import Video from './components/video';
-import { Agent } from './components/agent';
+import AgentWrapper from './components/agent/wrapper';
 
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
             <TestimonialSection />
             <Section />
             <Video />
-            <Agent />
+            <AgentWrapper />
             <Footer />
         </div>
     )

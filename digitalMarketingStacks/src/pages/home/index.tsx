@@ -108,7 +108,7 @@ export default function Home() {
                                 className='text-[30px] mt-16 text-black sm:text-[45px] sm:w-[60%] font-bold pb-12 text-center'
                                 {...fadeInUp}
                             >
-                                AUtomate Your <i className='text-colorBlueDeep'>Digital Marketing</i> Funnel From Search to Sale
+                                Automate Your <i className='text-colorBlueDeep'>Digital Marketing</i> Funnel From Search to Sale
                                 <p className='text-sm font-normal w-[60%] mx-auto'>SEO Agent. Content Agent. Lead Scoring. Chatbots. CRM Sync. Fully automated. Totally connected.</p>
                             </motion.h4>
                             <section className='flex flex-col sm:flex-row gap-4 sm:w-[50%] pb-6 '>

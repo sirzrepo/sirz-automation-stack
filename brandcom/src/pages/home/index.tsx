@@ -42,10 +42,10 @@ export default function Home() {
                  <motion.div className=" w-full text-black rounded-lg">
                     <div className="flex items-center flex-col relative z-10 bg-[#FFFFFFa8] text-center justify-center 2xl:w-[50%] sm:w-[80%] w-[90%] py-16  mx-auto ">
                         <div className=" pb-20 max-md:pt-10">
-                            <h2 className="sm:text-[53px] text-[43px] text-primary-700 font-medium ">Create Your Dream  <CircleTopic text="Brand" /> with <CircleTopic text="AI" /> </h2>
+                            <h2 className="sm:text-[53px] text-[43px] text-primary-700 font-bold ">Create Your Dream  <CircleTopic text="Brand" /> with <CircleTopic text="AI" /> </h2>
                             <div className="sm:text-[27px] text-[20px] py-6 sm:w-[70%] mx-auto ">Brandcom is an AI-powered automation platform built to streamline branding, e-commerce, and digital marketing — all in one place.</div>
-                            <div className="flex relative justify-center gap-6  mx-auto">
-                                <ButtonTemplate firstBtnTxt={"Learn More"} notSecondBtn={true} classname="2xl:w-[50%]" />
+                            <div className="flex relative justify-center gap-6 mt-8  mx-auto">
+                                <ButtonTemplate firstBtnTxt={"Learn More"} notSecondBtn={true} classname="lg:w-[50%]" />
                                 <img src={exclamationLines} alt="" className="absolute right-[-30px] top-0" />
                             </div>
                         </div>
