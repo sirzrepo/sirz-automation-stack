@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { allReduxSliceInfo, setIsOpen, setShowServices } from "../../features/reduxSlice";
 import { ROUTES } from "../../constants/routes/desc";
 import Button from "../common/button";
-import { scrollToElement } from "../../utils";
 
 // Hamburger icon component
 const MenuIcon = ({ isOpen, toggle }: { isOpen: boolean; toggle: () => void }) => (
@@ -89,8 +88,8 @@ export default function NavBar() {
                     {/* Desktop Auth Buttons */}
                     <div className="hidden md:ml-4 md:flex md:items-center md:space-x-4">
                         {/* <Button color text="Log in" className="px-4 py-2 text-sm" /> */}
-                        <Button onClick={() => navigate(ROUTES.CONTACT.PATH)} color text="Get started" className="px-4 py-2 text-sm" />
-                        <Button onClick={() => scrollToElement('agent-section')} text="Get Demo" className="px-6 py-2 text-sm" />
+                        <Button onClick={() => window.open("https://www.brandcom.store/", "_blank")} color text="Log in" className="px-4 py-2 text-sm" />
+                        <Button onClick={() => navigate(ROUTES.CONTACT.PATH)} text="Get Demo" className="px-6 py-2 text-sm" />
                     </div> 
 
                     {/* Mobile menu button */}
@@ -130,8 +129,8 @@ export default function NavBar() {
                             ))}
                             <div className="pt-4 pb-3 border-t border-gray-200">
                                 <div className="mt-3 space-y-1 grid grid-cols-2 gap-3 w-[90%] mx-auto">
-                                    <Button color text="Log in" className="w-full justify-center px-4 py-2 text-base font-medium" />
-                                    <Button text="Get Demo" className="w-full justify-center px-4 py-2 text-base font-medium" />
+                                    <Button onClick={ () => window.open("https://www.brandcom.store/", "_blank")} color text="Log in" className="w-full justify-center px-4 py-2 text-base font-medium" />
+                                    <Button onClick={ () => navigate(ROUTES.CONTACT.PATH)} text="Get Demo" className="w-full justify-center px-4 py-2 text-base font-medium" />
                                 </div>
                             </div>
                         </div>

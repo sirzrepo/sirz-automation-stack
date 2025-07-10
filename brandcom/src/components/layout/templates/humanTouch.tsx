@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import Button from "../../common/button";
 import { group34241 } from "../../../assets";
-// import { useNavigate } from "react-router-dom";
 import { IhumanTemplateProps } from "../../../types";
-import { scrollToElement } from "../../../utils";
+import { ROUTES } from "../../../constants/routes/desc";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -14,6 +14,7 @@ description,
 image,
 className,
 }: IhumanTemplateProps) {
+    const navigate = useNavigate()
 
     // const navigate = useNavigate()
     return(
@@ -22,7 +23,7 @@ className,
                 <div className="w-[90%] mx-auto max-xl:text-center">
                     <h2 className="sm:text-[55px] text-[40px] text-primary-700 font-medium ">{ header ? header : "Need a Human Touch"}</h2>
                     <div className="text-[22px] py-6 ">{ description ? description : "Book a personalized 1:1 strategy session with our team at Sirz and get expert support to guide your journey"}</div>
-                    <Button onClick={() => scrollToElement('agent-section')} className="underline py-4 px-14" text="Get Demo" />
+                    <Button onClick={() => navigate(ROUTES.CONTACT.PATH)} className="underline py-4 px-14" text="Get Demo" />
                 </div>
                 <img src={ image ? image : group34241} alt="" className="sm:w-[90%] object-cover" />
             </div>
