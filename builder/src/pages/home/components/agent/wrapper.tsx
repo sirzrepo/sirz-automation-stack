@@ -17,7 +17,7 @@ export default function AgentWrapper() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-500 to-indigo-600 animate-gradient-shift px-4 sm:py-8 py-16 relative overflow-hidden">
+    <div className="min-h-screen  bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 px-4 sm:py-8 py-16 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Orbs */}
@@ -61,7 +61,7 @@ export default function AgentWrapper() {
 
       <div className=" sm:w-[80%] w-full mx-auto grid lg:grid-cols-5 gap-8 items-center min-h-screen relative z-20">
         {/* Left Side - Promotional Card */}
-        <div className="relative overflow-hidden md:col-span-2 col-span-1 h-[700px] rounded-xl border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 animate-slide-in-left">
+        <div className="relative overflow-hidden md:col-span-2 col-span-1 h-[800px] rounded-xl border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105 animate-slide-in-left">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 animate-gradient-shift"></div>
 
           {/* Decorative Circles */}
@@ -84,32 +84,17 @@ export default function AgentWrapper() {
               </div>
 
               <h2 className="text-4xl lg:text-5xl font-bold leading-tight animate-fade-in-up delay-300">
-                    AI-Powered Lead
+                    Create Your Website In 
                 <br />
                 <span className="bg-gradient-to-r from-yellow-300 to-cyan-300 bg-clip-text text-transparent animate-gradient-x">
-                    Classifier
+                    Minutes
                 </span>
               </h2>
 
               <p className="text-lg lg:text-xl text-white leading-relaxed animate-fade-in-up delay-500">
-                Automatically classify and prioritize your leads with our intelligent scoring system. 
-                Our AI analyzes lead data to help you focus on the most promising opportunities.
+                Create a stunning, engaging website in seconds with our powerful AI landing page builder. 
+                Just describe what you need and let our technology do the rest!
               </p>
-
-              {/* <div className="space-y-4 animate-fade-in-up delay-700">
-                <div className="flex items-center space-x-3 text-blue-100">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span>AI-Powered Content Generation</span>
-                </div>
-                <div className="flex items-center space-x-3 text-blue-100">
-                  <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse delay-200"></div>
-                  <span>High-Intent Content Discovery</span>
-                </div>
-                <div className="flex items-center space-x-3 text-blue-100">
-                  <div className="w-2 h-2 bg-pink-400 rounded-full animate-pulse delay-400"></div>
-                  <span>Instant Results & Insights</span>
-                </div>
-              </div> */}
 
               <div className="flex items-center space-x-4 animate-fade-in-up delay-900">
                 <div className="flex -space-x-2">

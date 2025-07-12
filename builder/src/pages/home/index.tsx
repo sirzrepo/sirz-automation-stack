@@ -9,7 +9,7 @@ import { Footer } from '../../components/layout/footer';
 import PageInMinutes from './components/pageInMinutes';
 import Stunning from './components/stunning';
 import PageGeneratorForm from './components/pageGeneratorForm';
-import { Agent } from './components/agent';
+import AgentWrapper from './components/agent/wrapper';
 
 
 export default function Home() {
@@ -30,7 +30,7 @@ export default function Home() {
 
             <PageInMinutes />
             <SmartFeatures />
-            <Agent />
+            <AgentWrapper />
             <PageGeneratorForm />
             <Stunning />
 

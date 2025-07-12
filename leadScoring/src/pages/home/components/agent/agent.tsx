@@ -6,7 +6,7 @@ export const Agent = () => {
                     <div className="bg-white p-1">
                         <iframe 
                             src="https://app.vectorshift.ai/forms/embedded/67fab916e217c237cc9133bd" 
-                            className="w-full h-[700px] border-0"
+                            className="w-full sm:h-[700px] h-[750px] border-0"
                             allow="clipboard-read; clipboard-write; microphone"
                             title="AI Lead Classifier"
                         />

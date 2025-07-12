@@ -17,7 +17,7 @@ export default function AgentWrapper() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-500 to-indigo-600 animate-gradient-shift px-4 sm:py-8 py-16 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 px-4 sm:py-8 py-16 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Orbs */}
@@ -84,16 +84,16 @@ export default function AgentWrapper() {
               </div>
 
               <h2 className="text-4xl lg:text-5xl font-bold leading-tight animate-fade-in-up delay-300">
-                    AI-Powered Lead
+                    Try Our AI Lead 
                 <br />
                 <span className="bg-gradient-to-r from-yellow-300 to-cyan-300 bg-clip-text text-transparent animate-gradient-x">
-                    Classifier
+                    Scoring Engine
                 </span>
               </h2>
 
               <p className="text-lg lg:text-xl text-white leading-relaxed animate-fade-in-up delay-500">
-                Automatically classify and prioritize your leads with our intelligent scoring system. 
-                Our AI analyzes lead data to help you focus on the most promising opportunities.
+                Create stunning, engaging content in seconds with our powerful AI assistant. 
+                Just describe what you need and let our technology do the rest!
               </p>
 
               {/* <div className="space-y-4 animate-fade-in-up delay-700">

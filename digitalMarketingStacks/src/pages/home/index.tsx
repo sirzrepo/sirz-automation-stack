@@ -22,8 +22,8 @@ import { BarChartIcon, PencilIcon, SearchIcon } from 'lucide-react';
 import AutomationContactForm from '../../components/Forms/contactForm';
 import { IoLogoFacebook, IoLogoInstagram, IoLogoLinkedin } from 'react-icons/io5';
 import Automation from './automation';
-import { Agent } from './agent';
 import { MdChatBubbleOutline, MdUpdate } from 'react-icons/md';
+import AgentWrapper from './agent/wrapper';
 
 const heroPictures = [
     heroFrame2,
@@ -276,7 +276,7 @@ export default function Home() {
                 </div>
             </motion.section>
 
-            <Agent />
+            <AgentWrapper />
 
             <motion.section 
                 className="bg-colorLight dark:bg-colorDark py-10 bg-dashboard-form-gradient"

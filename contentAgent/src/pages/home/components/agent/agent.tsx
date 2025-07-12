@@ -13,7 +13,7 @@ export const Agent = () => {
             <div className="w-full ">
                 <iframe 
                     src="https://app.vectorshift.ai/forms/embedded/67f3d302fdd9c0f8b2efb290" 
-                    className="w-full h-[700px] h-auto border-0 rounded-xl shadow-xl transition-all duration-300 hover:shadow-2xl"
+                    className="w-full h-[750px] h-auto border-0 rounded-xl shadow-xl transition-all duration-300 hover:shadow-2xl"
                     allow="clipboard-read; clipboard-write; microphone"
                     title="AI Content Generator"
                 />
