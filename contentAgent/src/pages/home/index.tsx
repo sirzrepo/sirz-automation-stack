@@ -9,6 +9,7 @@ import Section from './components/section';
 import TestimonialSection from './components/testimonial';
 import Video from './components/video';
 import AgentWrapper from './components/agent/wrapper';
+import AgentTwoWrapper from './components/agentTwo/wrapper';
 
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
             <NavBar />
             <LeadScoringHero />
             <Analytics />
+            <AgentTwoWrapper />
             <CreateToday />
             <BuiltFor />
             <SmartFeatures />
