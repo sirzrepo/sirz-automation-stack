@@ -62,7 +62,7 @@ export default function WebQuestionnaireInquiries() {
   const fetchInquiries = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5000/api/web-form-questionnaire`);
+      const response = await axios.get(`${BASE_URL}/api/web-form-questionnaire`);
       setInquiries(response.data.data || []);
       console.log("inquiries", inquiries);
     } catch (error) {
