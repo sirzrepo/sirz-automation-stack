@@ -33,6 +33,7 @@ import Roles from './pages/roles';
 import { ToastContainer } from 'react-toastify';
 import Assets from './pages/assets';
 import AssetDetails from './pages/assets/[id]';
+import WebQuestionnaireInquiries from './pages/inquiries/web_form_inquiries';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -127,6 +128,12 @@ function App() {
               <Route path="/chatbot-inquiries" element={
                 <ProtectedRoute>
                   <ChatbotInquiries />
+                </ProtectedRoute>
+              } />
+              
+              <Route path="/web-form-inquiries" element={
+                <ProtectedRoute>
+                  <WebQuestionnaireInquiries />
                 </ProtectedRoute>
               } />
 

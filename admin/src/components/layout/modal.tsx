@@ -7,9 +7,10 @@ import { closeModal } from "../../store/modalSlice";
 interface Idata {
     children: React.ReactNode;
     title: string;
-    onclick: () => void;
-    btnText: string;
+    onclick?: () => void;
+    btnText?: string;
     id?: string | undefined | null;
+    modalType?: string;
   }
 
 
@@ -57,16 +58,18 @@ export default function Modal(props: Idata) {
                 Cancel
               </button>
 
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onclick();
-                }}
-                type='button'
-                className="text-md w-fit bg-colorBlueDeep text-white px-4 py-2 rounded-sm hover:bg-blue-600 transition"
-              >
-                {props.btnText}
-              </button>
+              {props.onclick && props.btnText && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    props.onclick && props.onclick();
+                  }}
+                  type='button'
+                  className="text-md w-fit bg-colorBlueDeep text-white px-4 py-2 rounded-sm hover:bg-blue-600 transition"
+                >
+                  {props.btnText}
+                </button>
+              )}
             </div>
 
           </div>
