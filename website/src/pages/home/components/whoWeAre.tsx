@@ -13,12 +13,12 @@ export default function WhoAreWe() {
                     <section className="flex items-center gap-3  pb-5">
                         <HeaderFormat title="Who are we?" />
                     </section>
-                    <header className="sm:text-[40px] text-[30px] leading-tight font-bold">Ready to build a <i className=" text-colorBlueDeep">brand</i> that thrives? Let's make it happen!</header>
+                    <header className="md:text-7xl sm:text-5xl text-4xl leading-tight font-bold">Ready to build a <i className=" text-colorBlueDeep">brand</i> that thrives? Let's make it happen!</header>
                     <div className="sm:w-[40%] w-[80%] py-8 ">
                         <Button text="Learn more" onClick={() => navigate(ROUTES.SERVICE_BRANDING.PATH)} />
                     </div>
                 </div>
-                <div className="text-[20px] leading-8 text-zinc-500 text-justify font-normal ">
+                <div className="text-2xl sm:text-3xl leading-8  text-justify font-normal ">
                     <div>
                         At SIRz, we don’t just build brands—we fuel their success. As your one-stop shop for E-commerce, Branding, and Digital Marketing, we help businesses launch, scale, and dominate in the digital space.
                     </div>

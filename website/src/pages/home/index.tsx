@@ -1,5 +1,5 @@
 import Hero from "./components/hero";
-import OurProjects from "./components/projects";
+// import OurProjects from "./components/projects";
 import WhoAreWe from "./components/whoWeAre";
 import OurExpertise from "./components/ourExpertise";
 import WhySirz from "./components/whySirz";
@@ -10,6 +10,8 @@ import CustomerReviews from "./components/customerReviews";
 import { motion } from "framer-motion";
 import { SocialMedia } from "./components/socialMedia";
 import BrandBanner from "./components/brandBanner";
+import DashboardServices from "./components/services";
+import WhatIsSirz from "./components/whatIsSirz";
 
 const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -35,14 +37,20 @@ export default function Home() {
                     <OurExpertise />
                 </motion.div>
                 <motion.div {...fadeInUp}>
+                    <WhatIsSirz />
+                </motion.div>
+                <motion.div {...fadeInUp}>
+                    <DashboardServices />
+                </motion.div>
+                <motion.div {...fadeInUp}>
                     <WhySirz />
                 </motion.div>
                 <motion.div {...fadeInUp}>
                     <SirzIsGreat />
                 </motion.div>
-                <motion.div {...fadeInUp}>
+                {/* <motion.div {...fadeInUp}>
                     <OurProjects />
-                </motion.div>
+                </motion.div> */}
                 <motion.div {...fadeInUp}>
                     {/* <BrandCom /> */}
                     <BrandBanner />

@@ -12,6 +12,7 @@ import slatedFrame from './imgs/Frame 15.svg';
 import sirz from './imgs/sirz logo png 1 (1).svg';
 import sirz_2 from './imgs/sirz logo png 1.svg';
 import sirzIsGreat from './imgs/Rectangle 15.svg';
+import whatIsSirz from './imgs/whatissirz.svg';
 
 import starHalf from './imgs/Star 1 (1).svg';
 import starSmall from './imgs/Star 1.svg';
@@ -26,6 +27,15 @@ import elipse from './imgs/Ellipse 2 (1).svg';
 import blueBox from './imgs/Frame 52.svg';
 
 import mainCardBg from './imgs/Frame 78.svg'
+
+// Hero slider images
+import sliderImage1 from './imgs/sliderImages/Property 1=frame 5.svg';
+import sliderImage2 from './imgs/sliderImages/Property 1=frame 6.svg';
+import sliderImage3 from './imgs/sliderImages/Property 1=frame 7.svg';
+import sliderImage4 from './imgs/sliderImages/Property 1=frame 1.svg';
+import sliderImage5 from './imgs/sliderImages/Property 1=frame 2 (2).svg';
+import sliderImage6 from './imgs/sliderImages/Property 1=frame 3 (1).svg';
+import sliderImage7 from './imgs/sliderImages/Property 1=frame 4.svg';
 
 import aboutBg from './imgs/Frame 90.svg';
 import aboutStoryBg from './imgs/Frame 96.svg';
@@ -108,6 +118,16 @@ export const HomeBanner = homeBanner;
 export const InstagramBg = instagramBg;
 export const HomeVector = homeVector;
 export const DashbordVector = dashbordVector;
+export const WhatIsSirzImg = whatIsSirz;
+
+// Hero slider images
+export const SliderImage1 = sliderImage1;
+export const SliderImage2 = sliderImage2;
+export const SliderImage3 = sliderImage3;
+export const SliderImage4 = sliderImage4;
+export const SliderImage5 = sliderImage5;
+export const SliderImage6 = sliderImage6;
+export const SliderImage7 = sliderImage7;
 
 
 import mossGlowBg from './imgs/Frame 1807.svg';

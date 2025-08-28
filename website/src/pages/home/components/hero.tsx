@@ -1,10 +1,10 @@
-import { HomeBanner, HomeVector } from "../../../assets";
+import { HomeBanner, HomeVector, SliderImage1, SliderImage2, SliderImage3, SliderImage4, SliderImage5, SliderImage6, SliderImage7 } from "../../../assets";
 import Button from "../../../components/common/button";
-import bgImg from '../../../assets/imgs/Screenshot (602).png'
+import bgImg from '../../../assets/imgs/Screenshot (602).png';
 import { ROUTES } from "../../../constants/routes/desc";
 import { useNavigate } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 
 const cardContent = [
     {
@@ -21,6 +21,54 @@ const cardContent = [
     },
 ]
 
+const ImageSlider = () => {
+    const images = [
+        HomeBanner, 
+        SliderImage1, 
+        SliderImage2, 
+        SliderImage3, 
+        SliderImage4, 
+        SliderImage5, 
+        SliderImage6, 
+        SliderImage7, 
+    ];
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => 
+                prevIndex === images.length - 1 ? 0 : prevIndex + 1
+            );
+        }, 5000); // Change image every 5 seconds
+
+        return () => clearInterval(interval);
+    }, [images.length]);
+
+    return (
+        <div className="relative w-full h-full">
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={currentIndex}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1.5 }}
+                    className="absolute inset-0 w-full h-full"
+                >
+                    <motion.img
+                        src={images[currentIndex]}
+                        alt={`Slide ${currentIndex + 1}`}
+                        className="w-full h-full object-cover"
+                        initial={{ scale: 1.1 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 10 }} // Slow zoom effect
+                    />
+                </motion.div>
+            </AnimatePresence>
+        </div>
+    );
+};
+
 export default function Hero() {
     const navigate = useNavigate();
     const sectionRef = useRef(null);
@@ -29,11 +77,11 @@ export default function Hero() {
         offset: ["start start", "end start"]
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+    const y = useTransform(scrollYProgress, [0, 4], ["0%", "50%"]);
+    const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
     return (
-        <section ref={sectionRef} className="bg-colorGreenDeeper relative pt-6 overflow-hidden">
+        <section ref={sectionRef}  className="bg-colorGreenDeeper relative pt-6 overflow-hidden">
             <motion.div 
                 style={{ y, opacity }}
                 className="container mx-auto px-4 sm:px-6 lg:px-8"
@@ -46,17 +94,8 @@ export default function Hero() {
                     <img src={bgImg} alt="Background" className="w-full h-auto" />
                 </motion.div>
                 
-                <div className="relative border-l-[5px] max-sm:h-[300px] border-b-[10px] sm:rounded-3xl border-colorGreen overflow-hidden mt-8">
-                    <motion.img 
-                        src={HomeBanner} 
-                        alt="Hero Banner" 
-                        className="h-full w-full object-cover"
-                        initial={{ scale: 1.1 }}
-                        animate={{ scale: 1 }}
-                        transition={{ duration: 1.5 }}
-                        whileHover={{ scale: 1.05 }}
-                        // transition={{ duration: 0.3 }}
-                    />
+                <div className="relative border-l-[5px] max-sm:h-[500px] h-[700px] border-b-[10px] sm:rounded-3xl border-colorGreen overflow-hidden mt-8">
+                    <ImageSlider />
                     <div className="absolute top-0 bottom-0 right-0 left-0 bg-gradient-to-r from-[#000000a8] to-[#00000080] flex items-center sm:ps-20">
                         <div className="max-sm:w-[90%] max-sm:m-auto">
                             <motion.header 
@@ -102,7 +141,7 @@ export default function Hero() {
                             >
                                 {item.title}
                             </motion.header>
-                            <div className="text-sm text-gray-600">{item.description}</div>
+                            <div className="sm:text-2xl text-xl text-gray-600">{item.description}</div>
                         </motion.div>
                     ))}
                 </div>
@@ -110,7 +149,7 @@ export default function Hero() {
             <motion.img 
                 src={HomeVector} 
                 alt="Vector" 
-                className="w-full"
+                className="w-full "
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.5 }}

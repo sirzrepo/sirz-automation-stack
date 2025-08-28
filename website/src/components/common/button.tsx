@@ -16,7 +16,7 @@ export default function Button({ type, text, className, onClick, loading, disabl
     ${type === "inverted" ? " bg-[#fff] text-colorBlueDeep  rounded-full " :
         " bg-colorBlueDeep text-colorDefaultLight  rounded-full "}  
     ${className?.length ? ` ${className}` :
-        'w-full'} flex align-center justify-center py-4 cursor-pointer text-[12px] px-8 font-normal floating-button 
+        'w-full'} flex align-center justify-center py-4 cursor-pointer px-8 font-normal floating-button 
     ${loading || disabled ? "opacity-25" : ""} `}
       style={{ cursor: `${loading || disabled ? "not-allowed" : ""}` }}
       onClick={onClick}>

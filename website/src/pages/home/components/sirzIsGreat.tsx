@@ -29,15 +29,17 @@ export default function SirzIsGreat() {
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover'
 
-            }} className=" sm:pt-24 pt-36 pb-5">
-            <section className="sm:w-[85%] w-[90%] pb-10 m-auto">
-                <h4 className="text-white font-semibold">SIRz is great for people who?</h4>
+            }} 
+            className=" sm:pt-30 pt-40 pb-10"
+        >
+            <section className="max-w-7xl mx-auto w-[90%] pb-10">
+                <h4 className="text-white text-xl font-semibold">SIRz is great for people who?</h4>
                 <section className=" grid md:grid-cols-3 pt-7 gap-x-5 gap-y-8 max-sm:m-auto">
                     {
                         data.map((item, index) => (
                             <div className="flex items-center justify-center bg-colorDefaultLight dark:bg-colorDark h-[200px] rounded-3xl">
                                 <div key={index} className=" grid grid-cols-5 m-auto gap-2  px-8 text-left">
-                                    <div className=" font-bold text-[30px] col-span-1 text-colorBlueDeep">0{index + 1}</div>
+                                    <div className=" font-extrabold text-5xl col-span-1 text-colorBlueDeep">0{index + 1}</div>
                                     <div className="text-[20px] col-span-4 ">{item.description}</div>
                                 </div>
                             </div>
