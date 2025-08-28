@@ -34,12 +34,12 @@ export default function DashboardServices() {
             description: "Goal: Retain customers and scale operations with AI-driven engagement.",
             features: [
                 "Cross-Border Sales Automation",
-                "AI-Powered Email Campaigns",
-                "AI-Predictive Retention Campaigns",
-                "AI-Powered Chatbot",
-                "AI-Powered Customer Support",
-                "AI-Powered Customer Support",
-                "AI-Powered Customer Support",
+                "Revenue Ops Workflows",
+                "Behavioral Retargeting",
+                "Competitor Ads Intelligence",
+                "Retention Sequence",
+                "Retention agents that auto-adjust email frequency, offers, and reactivation flows.",
+                "Workflow-level monitoring of customer journeys across multiple channels.",
             ]
         }
     ]
