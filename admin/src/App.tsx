@@ -34,6 +34,8 @@ import { ToastContainer } from 'react-toastify';
 import Assets from './pages/assets';
 import AssetDetails from './pages/assets/[id]';
 import WebQuestionnaireInquiries from './pages/inquiries/web_form_inquiries';
+import ScheduleDemoInquiries from './pages/inquiries/scheduleDemoInquiries';
+import DemoEntries from './pages/inquiries/demoEntries';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -134,6 +136,18 @@ function App() {
               <Route path="/web-form-inquiries" element={
                 <ProtectedRoute>
                   <WebQuestionnaireInquiries />
+                </ProtectedRoute>
+              } />
+
+              <Route path="/schedule-demo-inquiries" element={
+                <ProtectedRoute>
+                  <ScheduleDemoInquiries />
+                </ProtectedRoute>
+              } />
+
+              <Route path="/demo-entries" element={
+                <ProtectedRoute>
+                  <DemoEntries />
                 </ProtectedRoute>
               } />
 

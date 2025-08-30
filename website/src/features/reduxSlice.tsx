@@ -8,6 +8,9 @@ interface IReduxState {
     showServices: boolean;
     isOpen: boolean;
     currentService: string | null
+    showSuccessModal: boolean
+    showScheduleDemoModal: boolean
+    getStarted: boolean
 }
 
 const initialState: IReduxState = {
@@ -16,7 +19,10 @@ const initialState: IReduxState = {
     isDarkMode: false,
     showServices: false,
     isOpen: false,
-    currentService: ""
+    currentService: "",
+    showSuccessModal: false,
+    showScheduleDemoModal: false,
+    getStarted: false
 }
 
 const slice = createSlice({
@@ -41,6 +47,15 @@ const slice = createSlice({
         setCurrentService(state, action: PayloadAction<string | null>) {
             state.currentService = action.payload
         },
+        setShowSuccessModal(state, action: PayloadAction<boolean>) {
+            state.showSuccessModal = action.payload
+        },
+        setShowScheduleDemoModal(state, action: PayloadAction<boolean>) {
+            state.showScheduleDemoModal = action.payload
+        },
+        setGetStarted(state, action: PayloadAction<boolean>) {
+            state.getStarted = action.payload
+        }
     }
 })
 
@@ -53,5 +68,8 @@ export const {
     setCurrentService,
     setShowServices,
     setIsOpen,
+    setShowSuccessModal,
+    setShowScheduleDemoModal,
+    setGetStarted
 } = slice.actions;
 export default slice.reducer

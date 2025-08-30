@@ -23,6 +23,8 @@ const generateRoutes = require('./src/routes/generateRoutes');
 const brandDataRoutes = require('./src/routes/brandData');
 const roleRoutes = require('./src/routes/role');
 const webFormRoutes = require('./src/routes/webFormRoutes');
+const demoDataRoutes = require('./src/routes/demoData');
+const scheduleDemoRoutes = require('./src/routes/scheduleDemo');
 // import axios from "axios";
 
 dotenv.config();
@@ -71,6 +73,8 @@ app.use('/api/generate-assets', generateRoutes);
 app.use('/api/brand-data', brandDataRoutes);
 app.use('/api/roles', roleRoutes);
 app.use('/api/web-form-questionnaire', webFormRoutes);
+app.use('/api/demo-data', demoDataRoutes);
+app.use('/api/schedule-demo', scheduleDemoRoutes);
 // API route to send an email
 app.post("/subscribe", async (req, res) => {
   const { subject, text, html } = req.body;

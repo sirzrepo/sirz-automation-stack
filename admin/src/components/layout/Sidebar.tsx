@@ -143,10 +143,20 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
           label: 'Web Form',
           path: '/web-form-inquiries'
         },
+        {
+          icon: <IoNewspaperOutline className="text-lg" />,
+          label: 'Schedule Demo',
+          path: '/schedule-demo-inquiries'
+        },
+        {
+          icon: <IoNewspaperOutline className="text-lg" />,
+          label: 'Demo Entries',
+          path: '/demo-entries'
+        },
       ]
     },
     {
-      icon: <IoNewspaperOutline className="text-xl" />, 
+      icon: <IoNewspaperOutline className="text-xl" />,
       label: 'Roles', 
       path: '/roles' 
     },
