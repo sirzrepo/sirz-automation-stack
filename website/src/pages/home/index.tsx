@@ -8,7 +8,6 @@ import OurBlog from "./components/ourBlog";
 import GetInTouch from "./components/getInTouch";
 import CustomerReviews from "./components/customerReviews";
 import { motion } from "framer-motion";
-import { SocialMedia } from "./components/socialMedia";
 import BrandBanner from "./components/brandBanner";
 import DashboardServices from "./components/services";
 import WhatIsSirz from "./components/whatIsSirz";
