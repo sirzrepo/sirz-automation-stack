@@ -55,9 +55,9 @@ export default function Home() {
                     {/* <BrandCom /> */}
                     <BrandBanner />
                 </motion.div>
-                <motion.div {...fadeInUp}>
+                {/* <motion.div {...fadeInUp}>
                     <SocialMedia />
-                </motion.div>
+                </motion.div> */}
                 <motion.div {...fadeInUp}>
                     <OurBlog />
                 </motion.div>
