@@ -4,7 +4,7 @@ import initiateIcon from "../../../../assets/imgs/initiateIcon.svg";
 
 export default function InitiateLevels({ step, setStep }: { step: number; setStep: (step: number) => void }) {
   return (
-    <div className="w-full max-w-4xl p-16 text-center bg-white border-r-[0.6em] border-l-[0.6em] border-b-[0.2em] border-teal-400  shadow-2xl border-0 relative rounded-3xl">
+    <div className="w-full max-w-4xl sm:p-16 max-sm:py-16 max-sm:px-6 text-center bg-white border-r-[0.6em] border-l-[0.6em] border-b-[0.2em] border-teal-400  shadow-2xl border-0 relative rounded-3xl">
         {/* Subtle glow effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 via-blue-400/20 to-purple-400/20 rounded-lg blur-xl -z-10" />
 

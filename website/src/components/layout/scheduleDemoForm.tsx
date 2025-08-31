@@ -77,7 +77,7 @@ export default function ScheduleDemoForm() {
         <div>
           <X onClick={handleCloseModal} size={40} className="text-5xl absolute top-4 right-4 cursor-pointer bg-white p-2 rounded-full" />
         </div>
-      <div className="w-full max-w-4xl p-8 bg-white shadow-2xl  border-r-[0.6em] border-l-[0.6em] border-b-[0.2em] border-teal-400 rounded-3xl border-0 relative">
+      <div className="w-full max-w-4xl p-8 bg-white shadow-2xl  border-r-[0.6em] border-l-[0.6em] border-b-[0.2em] max-sm:max-h-[86vh] overflow-y-auto border-teal-400 rounded-3xl border-0 relative">
         {/* Subtle glow effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 via-blue-400/20 to-purple-400/20 rounded-lg blur-xl -z-10" />
 

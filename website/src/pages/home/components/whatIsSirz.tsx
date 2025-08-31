@@ -7,7 +7,7 @@ import ScheduleDemoForm from "../../../components/layout/scheduleDemoForm";
 export default function WhatIsSirz() {
     const dispatch = useAppDispatch()
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 mx-6 gap-10 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 mx-6 gap-10 sm:max-w-7xl w-[90%] mx-auto">
            <div>
             <img 
                 className=" object-cover"
@@ -18,7 +18,7 @@ export default function WhatIsSirz() {
            <div>
                 <h2 className="text-5xl font-bold mb-4">What is Sirz?</h2>
                 <section className="py-8">
-                    <div className="text-2xl">
+                    <div className="sm:text-2xl text-xl">
                         Sirz is a digital marketing automation software  for E-commerce brand. Sirz AI powered platform   consist of a 3 layer growth and automation ecosystem.
                     </div>
                     <div className="text-2xl mt-4">
