@@ -40,7 +40,7 @@ export default function StepOne({ step, setStep, value, setValue }: { step: numb
             key={businessType}
             className={`h-auto py-4 px-3 text-lg font-bold border rounded-lg text-gray-900 transition-colors text-center bg-transparent
                 ${isSelected ?
-                "border-blue-700 bg-blue-200 shadow-md" :
+                "border-blue-700 bg-blue-300 shadow-md" :
                 "border-blue-600 hover:border-blue-500 hover:bg-blue-100"}
             `}
             onClick={() => setSelectedType(businessType)}

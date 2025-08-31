@@ -37,7 +37,7 @@ export default function StepThree({ step, setStep, value, setValue }: { step: nu
                 key={challenge}
                 className={`h-auto py-3 px-3 text-lg font-bold border rounded-lg text-gray-900 transition-colors text-center bg-transparent
                   ${isSelected ?
-                    "border-blue-700 bg-blue-200 shadow-md" :
+                    "border-blue-700 bg-blue-300 shadow-md" :
                     "border-blue-600 hover:border-blue-500 hover:bg-blue-100"}
                 `}
                 onClick={() => setSelectedChallenge(challenge)}
