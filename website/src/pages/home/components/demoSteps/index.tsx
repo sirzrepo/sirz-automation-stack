@@ -16,6 +16,7 @@ import { BASE_URL } from "../../../../utils";
 
 export default function DemoSteps() {
     const [step, setStep] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
     const { getStarted } = useAppSelector(allReduxSliceInfo)
     const dispatch = useAppDispatch()
     const [formData, setFormData] = useState({
@@ -41,6 +42,7 @@ export default function DemoSteps() {
 
     const handleSubmit = async () => {
         try {
+            setIsLoading(true);
             const response = await axios.post(`${BASE_URL}/api/demo-data`, formData);
             console.log('response', response);
             dispatch(setShowSuccessModal(true));
@@ -60,6 +62,8 @@ export default function DemoSteps() {
             }, 10000);
         } catch (error) {
             console.error('Error:', error);
+        } finally {
+            setIsLoading(false);
         }
     };
     
@@ -113,6 +117,9 @@ export default function DemoSteps() {
             <SuccessModal 
                 message="You&apos;re in! Thanks for getting started with us. Our team will reach out shortly to guide you through the next steps"
             />
+            {isLoading && <div className="fixed top-0 left-0 right-0 bottom-0 z-50 bg-black/50 flex items-center justify-center">
+                <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
+            </div>}
         </div>
     );
 }

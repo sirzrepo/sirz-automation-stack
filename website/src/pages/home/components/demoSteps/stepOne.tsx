@@ -38,7 +38,7 @@ export default function StepOne({ step, setStep, value, setValue }: { step: numb
         return (
             <button
             key={businessType}
-            className={`h-auto py-4 px-3 text-lg font-bold border rounded-lg text-gray-900 transition-colors text-center bg-transparent
+            className={`h-auto py-4 px-3 text-lg font-bold border rounded-lg text-gray-900 transition-colors text-center
                 ${isSelected ?
                 "border-blue-700 bg-blue-300 shadow-md" :
                 "border-blue-600 hover:border-blue-500 hover:bg-blue-100"}

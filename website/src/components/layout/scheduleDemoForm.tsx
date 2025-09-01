@@ -13,7 +13,8 @@ import axios from "axios"
 import { BASE_URL } from "../../utils"
 
 export default function ScheduleDemoForm() {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const { showScheduleDemoModal } = useAppSelector(allReduxSliceInfo)
   const [error, setError] = useState("")
   const [formData, setFormData] = useState({
@@ -38,7 +39,8 @@ export default function ScheduleDemoForm() {
     }
 
      try {
-          const response = await axios.post(`${BASE_URL}/api/chedule-demo`, formData);
+          setIsLoading(true);
+          const response = await axios.post(`${BASE_URL}/api/schedule-demo`, formData);
           console.log('response', response);
           dispatch(setShowSuccessModal(true));
           setTimeout(() => {
@@ -58,6 +60,8 @@ export default function ScheduleDemoForm() {
       } catch (error) {
           console.error('Error:', error);
           setError("Something went wrong")
+      } finally {
+          setIsLoading(false);
       }
   }
 
@@ -226,10 +230,18 @@ export default function ScheduleDemoForm() {
             />
           </div>
         </form>
+        {
+          isLoading && (
+            <div className="fixed top-0 left-0 right-0 bottom-0 z-50 bg-black/50 flex items-center justify-center">
+              <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
+          </div>
+          )
+        }
         <SuccessModal 
-        title="Thank you for requesting a demo!" 
-        message="Our team will be in touch shortly to schedule your session. We can&apos;t wait to show you how our product can help you simplify your workflow" 
-        buttonLabel="Okay, thanks!" />
+          title="Thank you for requesting a demo!" 
+          message="Our team will be in touch shortly to schedule your session. We can&apos;t wait to show you how our product can help you simplify your workflow" 
+          buttonLabel="Okay, thanks!" 
+        />
       </div>
       </div>
     </div>
