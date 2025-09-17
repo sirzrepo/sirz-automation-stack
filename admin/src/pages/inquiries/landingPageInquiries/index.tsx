@@ -30,7 +30,7 @@ export default function LandingPageInquiries() {
   const [refreshTrigger] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [inquiriesPerPage] = useState(5);
+  const [inquiriesPerPage] = useState(50);
 
   // Fetch inquiries function
   const fetchInquiries = async () => {
