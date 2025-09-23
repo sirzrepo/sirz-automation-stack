@@ -1,5 +1,6 @@
 import { useState } from "react";
-import StepOne from "./stepOne";
+import UserData from "./stepOne";
+import StepOne from "./userData";
 import StepTwo from "./stepTwo";
 import StepThree from "./stepThree";
 import StepFour from "./stepFour";
@@ -20,6 +21,8 @@ export default function DemoSteps() {
     const { getStarted } = useAppSelector(allReduxSliceInfo)
     const dispatch = useAppDispatch()
     const [formData, setFormData] = useState({
+        name: "",
+        email: "",
         businessType: "",
         currentPlatform: "",
         challenge: "",
@@ -32,6 +35,8 @@ export default function DemoSteps() {
     console.log('formData', formData);
 
     // Setters for each step
+    const setName = (value: string) => setFormData(prev => ({ ...prev, name: value }));
+    const setEmail = (value: string) => setFormData(prev => ({ ...prev, email: value }));
     const setBusinessType = (value: string) => setFormData(prev => ({ ...prev, businessType: value }));
     const setCurrentPlatform = (value: string) => setFormData(prev => ({ ...prev, currentPlatform: value }));
     const setChallenge = (value: string) => setFormData(prev => ({ ...prev, challenge: value }));
@@ -51,6 +56,8 @@ export default function DemoSteps() {
                 dispatch(setGetStarted(false))
                 setStep(1)
                 setFormData({
+                    name: "",
+                    email: "",
                     businessType: "",
                     currentPlatform: "",
                     challenge: "",
@@ -77,8 +84,12 @@ export default function DemoSteps() {
             component: <InitiateLevels step={step} setStep={setStep} />
         },
         {
-            title: "Step 1",
-            component: <StepOne step={step} setStep={setStep} value={formData.businessType} setValue={setBusinessType} />
+            title: "User Info",
+            component: <StepOne step={step} setStep={setStep} name={formData.name} setName={setName} email={formData.email} setEmail={setEmail} />
+        },
+        {
+            title: "Business Type",
+            component: <UserData step={step} setStep={setStep} value={formData.businessType} setValue={setBusinessType} />
         },
         {
             title: "Step 2",
