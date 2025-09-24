@@ -3,7 +3,6 @@ import { useState, useEffect } from "react"
 import {
   Users,
   DollarSign,
-  ShoppingCart,
   TrendingUp,
   Activity,
   ArrowUpRight,
@@ -11,60 +10,110 @@ import {
   MoreHorizontal,
   Eye,
   Download,
+  ListTodo,
 } from "lucide-react"
 import { BASE_URL } from "../../utils"
 import axios from "axios"
 
 const recentOrders = [
   {
-    id: "ORD-001",
-    customer: "Olivia Martin",
-    email: "olivia.martin@email.com",
+    id: "CLI-001",
+    customer: "FashionNova UK",
+    email: "contact@fashionnova-uk.com",
     status: "completed",
-    amount: "$1,999.00",
-    initials: "OM",
+    amount: "£1,200",
+    initials: "FU",
   },
   {
-    id: "ORD-002",
-    customer: "Jackson Lee",
-    email: "jackson.lee@email.com",
-    status: "processing",
-    amount: "$39.00",
-    initials: "JL",
-  },
-  {
-    id: "ORD-003",
-    customer: "Isabella Nguyen",
-    email: "isabella.nguyen@email.com",
+    id: "CLI-002",
+    customer: "CleanLife EU",
+    email: "info@cleanlife-eu.com",
     status: "completed",
-    amount: "$299.00",
-    initials: "IN",
+    amount: "£1,500",
+    initials: "CE",
   },
   {
-    id: "ORD-004",
-    customer: "William Kim",
-    email: "will@email.com",
-    status: "pending",
-    amount: "$99.00",
-    initials: "WK",
-  },
-  {
-    id: "ORD-005",
-    customer: "Sofia Davis",
-    email: "sofia.davis@email.com",
+    id: "CLI-003",
+    customer: "FitGear Sports",
+    email: "sales@fitgear-sports-uk.com",
     status: "completed",
-    amount: "$39.00",
-    initials: "SD",
+    amount: "£1,800",
+    initials: "FS",
+  },
+  {
+    id: "CLI-004",
+    customer: "Glamour Jewels",
+    email: "hello@glamour-jewels-uk.com",
+    status: "completed",
+    amount: "£1,100",
+    initials: "GJ",
+  },
+  {
+    id: "CLI-005",
+    customer: "HomeStyle NG",
+    email: "support@homestyle-ng.com",
+    status: "completed",
+    amount: "£950",
+    initials: "HN",
+  },
+  {
+    id: "CLI-006",
+    customer: "StyleHub UK",
+    email: "info@stylehub-uk.com",
+    status: "completed",
+    amount: "£1,300",
+    initials: "SU",
+  },
+  {
+    id: "CLI-007",
+    customer: "EcoClean EU",
+    email: "contact@ecoclean-eu.com",
+    status: "completed",
+    amount: "£1,200",
+    initials: "EE",
+  },
+  {
+    id: "CLI-008",
+    customer: "ActiveWear Sports",
+    email: "sales@activewear-sports-uk.com",
+    status: "completed",
+    amount: "£1,700",
+    initials: "AS",
+  },
+  {
+    id: "CLI-009",
+    customer: "Trendy Threads UK",
+    email: "hello@trendy-threads-uk.com",
+    status: "completed",
+    amount: "£1,400",
+    initials: "TT",
+  },
+  {
+    id: "CLI-010",
+    customer: "PureCare EU",
+    email: "info@purecare-eu.com",
+    status: "completed",
+    amount: "£1,100",
+    initials: "PE",
+  },
+  {
+    id: "CLI-011",
+    customer: "Elite Fitness NG",
+    email: "support@elite-fitness-ng.com",
+    status: "completed",
+    amount: "£800",
+    initials: "EN",
+  },
+  {
+    id: "CLI-012",
+    customer: "Urban Living UK",
+    email: "contact@urbanliving-uk.com",
+    status: "completed",
+    amount: "£1,040",
+    initials: "UU",
   },
 ]
 
-const topProducts = [
-  { name: "Wireless Headphones", sales: 1234, revenue: "$24,680", growth: 12 },
-  { name: "Smart Watch", sales: 987, revenue: "$19,740", growth: 8 },
-  { name: "Laptop Stand", sales: 756, revenue: "$15,120", growth: -3 },
-  { name: "USB-C Cable", sales: 543, revenue: "$5,430", growth: 15 },
-  { name: "Phone Case", sales: 432, revenue: "$8,640", growth: 5 },
-]
 
 const DashboardMain = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
@@ -98,35 +147,35 @@ const DashboardMain = () => {
 const metrics = [
     {
       title: "Total Revenue",
-      value: "$45,231.89",
-      change: "+20.1%",
+      value: "£11,850.00",
+      change: "+100%",
       trend: "up",
       icon: DollarSign,
-      description: "from last month",
+      description: "from launch",
     },
     {
-      title: "Active Users",
-      value: totalUsers,
-      change: "+180.1%",
+      title: "Paying Clients",
+      value: "12",
+      change: "+100%",
       trend: "up",
       icon: Users,
-      description: "from last month",
+      description: "in first 9 months",
     },
     {
-      title: "Sales",
-      value: "12,234",
-      change: "+19%",
+      title: "Sectors Served",
+      value: "5",
+      change: "+25%",
       trend: "up",
-      icon: ShoppingCart,
-      description: "from last month",
+      icon: ListTodo,
+      description: "different industries",
     },
     {
-      title: "Conversion Rate",
-      value: "3.2%",
-      change: "-4.3%",
-      trend: "down",
+      title: "Global Reach",
+      value: "3",
+      change: "+200%",
+      trend: "up",
       icon: TrendingUp,
-      description: "from last month",
+      description: "countries served",
     },
   ]
 
@@ -148,40 +197,12 @@ const metrics = [
     })
   }
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "completed":
-        return (
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-            Completed
-          </span>
-        )
-      case "processing":
-        return (
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-            Processing
-          </span>
-        )
-      case "pending":
-        return (
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-            Pending
-          </span>
-        )
-      default:
-        return (
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-            {status}
-          </span>
-        )
-    }
-  }
 
   return (
-    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-        <p className="text-sm text-gray-500">Note* - most of the data contained within this page are mock data</p>
+    <div className="flex-1 space-y-4 py-4 md:p-8 pt-6">
+        {/* <p className="text-sm text-gray-500">Note* - most of the data contained within this page are mock data</p> */}
       {/* Header */}
-      <div className="flex items-center justify-between space-y-2">
+      <div className="sm:flex items-center justify-between space-y-2">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
         <div className="flex items-center space-x-2">
           <button className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -229,7 +250,7 @@ const metrics = [
       </div>
 
             {/* Activity Overview with System Time */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 pt-6">
         {/* System Time Card */}
         <div className="relative bg-white shadow rounded-lg overflow-hidden">
           {/* Animated Background */}
@@ -318,17 +339,17 @@ const metrics = [
         <div className="bg-white shadow rounded-lg">
           <div className="px-4 py-5 sm:p-6">
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-medium text-gray-900">Storage</h3>
+              <h3 className="text-base font-medium text-gray-900">Active Clients</h3>
               <Activity className="h-5 w-5 text-gray-400" />
             </div>
             <div className="mt-2">
-              <div className="text-2xl font-bold text-gray-900">1.2TB</div>
-              <p className="text-xs text-gray-500">of 2TB used</p>
+              <div className="text-2xl font-bold text-gray-900">{totalUsers.toString()}</div>
+              <p className="text-xs text-gray-500">registered users</p>
               <div className="mt-4">
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-blue-600 h-2 rounded-full" style={{ width: "60%" }}></div>
+                  <div className="bg-blue-600 h-2 rounded-full" style={{ width: "100%" }}></div>
                 </div>
-                <p className="text-xs text-gray-500 mt-2">60% capacity</p>
+                <p className="text-xs text-gray-500 mt-2">100% capacity</p>
               </div>
             </div>
           </div>
@@ -361,21 +382,100 @@ const metrics = [
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7 pt-6">
+        {/* Client & Revenue Overview */}
+        <div className="rounded-lg border overflow-x-auto bg-card text-card-foreground shadow-sm col-span-4">
+          <div className="flex flex-col space-y-1.5 p-6 pb-2">
+            <h3 className="text-2xl font-semibold leading-none tracking-tight">Sectoral Reach</h3>
+            <p className="text-sm text-muted-foreground">Distribution of clients across different sectors</p>
+          </div>
+          <div className="p-6 pt-0">
+            <div className="space-y-4">
+              {[
+                { sector: 'Fashion & Apparel', count: 2 },
+                { sector: 'Cleaning & Care Brands', count: 3 },
+                { sector: 'Sports & Fitness', count: 3 },
+                { sector: 'Accessories & Jewellery', count: 2 },
+                { sector: 'Home & Lifestyle', count: 2 },
+              ].map((item, index) => (
+                <div key={index} className="flex items-center space-y-3">
+                  <div className="w-48 text-sm font-medium">{item.sector}</div>
+                  <div className="flex-1">
+                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-blue-600 rounded-full" 
+                        style={{ width: `${(item.count / 12) * 100}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                  <div className="ml-4 w-8 text-sm text-right font-medium">{item.count}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Top Products */}
+        <div className="rounded-lg border bg-card text-card-foreground shadow-sm col-span-3">
+          <div className="flex flex-col space-y-1.5 p-6 pb-2">
+            <h3 className="text-2xl font-semibold leading-none tracking-tight">Geographic Reach</h3>
+            <p className="text-sm text-muted-foreground">Client distribution by region</p>
+          </div>
+          <div className="p-6 pt-0">
+            <div className="space-y-6">
+              {[
+                { region: 'United Kingdom', count: 7, percentage: 58 },
+                { region: 'European Union', count: 3, percentage: 25 },
+                { region: 'Nigeria', count: 2, percentage: 17 },
+              ].map((item, index) => (
+                <div key={index}>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="font-medium">{item.region}</span>
+                    <span className="text-muted-foreground">{item.count} clients</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2.5">
+                    <div 
+                      className="bg-blue-600 h-2.5 rounded-full" 
+                      style={{ width: `${item.percentage}%` }}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 pt-6 border-t">
+              <div className="text-center">
+                <p className="text-2xl font-bold">£12,000.00</p>
+                <p className="text-sm text-muted-foreground">Total Revenue Generated</p>
+                <p className="text-xs text-muted-foreground mt-2">From 12 paying clients plus subscriptions in first 9 months</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="pt-6">
         {/* Recent Orders */}
         <div className="col-span-4 bg-white shadow rounded-lg">
           <div className="px-4 py-5 sm:p-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">Recent Orders</h3>
-            <p className="mt-1 text-sm text-gray-500">You have {recentOrders.length} orders this week.</p>
-            <div className="mt-6 overflow-hidden">
+            <div className="flex justify-between items-center">
+              <div>
+                <h3 className="text-lg leading-6 font-medium text-gray-900">Client Overview</h3>
+                <p className="mt-1 text-sm text-gray-500">{recentOrders.length} paying clients in the last 9 months</p>
+              </div>
+              <div className="text-right">
+                <p className="text-sm text-gray-500">Total Revenue</p>
+                <p className="text-lg font-semibold text-gray-900">£11,850.00</p>
+              </div>
+            </div>
+            <div className="mt-6 overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Customer
+                      Client
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
+                      Region
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Amount
@@ -390,7 +490,7 @@ const metrics = [
                     <tr key={order.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
-                          <div className="flex-shrink-0 h-8 w-8">
+                          <div className="flex-shrink-0">
                             <div className="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center text-sm font-medium text-gray-700">
                               {order.initials}
                             </div>
@@ -401,7 +501,9 @@ const metrics = [
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(order.status)}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {order.email.includes('uk.com') ? 'UK' : order.email.includes('eu.com') ? 'EU' : 'NG'}
+                      </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{order.amount}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button className="text-gray-400 hover:text-gray-600">
@@ -417,7 +519,7 @@ const metrics = [
         </div>
 
         {/* Top Products */}
-        <div className="col-span-3 bg-white shadow rounded-lg">
+        {/* <div className="col-span-3 bg-white shadow rounded-lg">
           <div className="px-4 py-5 sm:p-6">
             <h3 className="text-lg leading-6 font-medium text-gray-900">Top Products</h3>
             <p className="mt-1 text-sm text-gray-500">Best performing products this month</p>
@@ -440,7 +542,7 @@ const metrics = [
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
