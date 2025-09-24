@@ -148,7 +148,7 @@ const metrics = [
     {
       title: "Total Revenue",
       value: "£11,850.00",
-      change: "+100%",
+      change: "+45%",
       trend: "up",
       icon: DollarSign,
       description: "from launch",
@@ -156,7 +156,7 @@ const metrics = [
     {
       title: "Paying Clients",
       value: "12",
-      change: "+100%",
+      change: "+55%",
       trend: "up",
       icon: Users,
       description: "in first 9 months",
@@ -347,9 +347,9 @@ const metrics = [
               <p className="text-xs text-gray-500">registered users</p>
               <div className="mt-4">
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-blue-600 h-2 rounded-full" style={{ width: "100%" }}></div>
+                  <div className="bg-blue-600 h-2 rounded-full" style={{ width: "43%" }}></div>
                 </div>
-                <p className="text-xs text-gray-500 mt-2">100% capacity</p>
+                <p className="text-xs text-gray-500 mt-2">43% capacity</p>
               </div>
             </div>
           </div>
