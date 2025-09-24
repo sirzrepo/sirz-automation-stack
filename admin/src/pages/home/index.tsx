@@ -21,7 +21,7 @@ const recentOrders = [
     customer: "FashionNova UK",
     email: "contact@fashionnova-uk.com",
     status: "completed",
-    amount: "£1,200",
+    amount: "£1,560",
     initials: "FU",
   },
   {
