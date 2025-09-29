@@ -21,6 +21,8 @@ interface AuthContextType {
     data?: any; 
     message?: string 
   }>;
+  resetPassword: (email: string, otp: string, password: string) => Promise<{ userId: string }>;
+  forgotPassword: (email: string) => Promise<{ userId: string }>;
 }
 
 const roles = ["admin", "content creator", "brand manager", "brand owner", "developer"];
@@ -162,11 +164,39 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const verifyOTP = async (userId: string, otp: string) => {
+  const resetPassword = async (email: string, otp: string, password: string) => {
     try {
       setError(null);
       setIsLoading(true);
-      const response = await authAPI.verifyOTP(userId, otp);
+      const response = await authAPI.resetPassword(email, otp, password);
+      return { userId: response.userId };
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Password reset failed');
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const forgotPassword = async (email: string) => {
+    try {
+      setError(null);
+      setIsLoading(true);
+      const response = await authAPI.forgotPassword(email);
+      return { userId: response.userId };
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Password reset failed');
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const verifyOTP = async (email: string, otp: string) => {
+    try {
+      setError(null);
+      setIsLoading(true);
+      const response = await authAPI.verifyOTP(email, otp);
 
       localStorage.setItem('token', response.token);
       setIsAuthenticated(true);
@@ -184,11 +214,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const resendOTP = async (userId: string) => {
+  const resendOTP = async (email: string) => {
     try {
       setError(null);
       setIsLoading(true);
-      await authAPI.resendOTP(userId);
+      await authAPI.resendOTP(email);
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to resend OTP');
       throw err;
@@ -260,7 +290,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         register, 
         verifyOTP, 
         resendOTP,
-        updateUserProfile
+        updateUserProfile,
+        resetPassword,
+        forgotPassword
       }}
     >
       {children}

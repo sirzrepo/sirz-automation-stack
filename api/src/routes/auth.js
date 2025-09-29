@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const sendMail = require('../emailService');
+const generateEmailTemplate = require('../middleware/emailTemplate');
 
 // Register route
 router.post('/register', async (req, res) => {
@@ -24,13 +25,14 @@ router.post('/register', async (req, res) => {
 
     // Send OTP email
     const emailSubject = 'Verify Your Email';
-    const emailText = `Your verification code is: ${otp}. This code will expire in 10 minutes.`;
-    const emailHtml = `
-      <h1>Email Verification</h1>
-      <p>Your verification code is: <strong>${otp}</strong></p>
-      <p>This code will expire in 10 minutes.</p>
-      <p>If you didn't request this code, please ignore this email.</p>
-    `;
+    const emailText = `Welcome to Sirz! Your verification code is: ${otp}. This code will expire in 10 minutes.`;
+    const emailHtml = generateEmailTemplate({
+      title: 'Verify Your Email',
+      message: emailText,
+      resetToken: otp,
+    });
+
+    console.log("email to be sent", emailSubject, emailText, emailHtml, email)
 
     await sendMail(emailSubject, emailText, emailHtml, email);
 
@@ -52,9 +54,16 @@ router.post('/register', async (req, res) => {
 // Verify OTP route
 router.post('/verify-otp', async (req, res) => {
   try {
-    const { userId, otp } = req.body;
+    const { email, otp } = req.body;
 
-    const user = await User.findById(userId);
+    let user;
+
+    if (email) {
+      user = await User.findOne({ email });
+    }
+
+    console.log("user from verify otp", user)
+
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -104,9 +113,14 @@ router.post('/verify-otp', async (req, res) => {
 // Resend OTP route
 router.post('/resend-otp', async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { email } = req.body;
 
-    const user = await User.findById(userId);
+    let user;
+
+    if (email) {
+      user = await User.findOne({ email });
+    }
+
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -128,13 +142,14 @@ router.post('/resend-otp', async (req, res) => {
     // Send OTP email
     const emailSubject = 'Verify Your Email';
     const emailText = `Your new verification code is: ${otp}. This code will expire in 10 minutes.`;
-    const emailHtml = `
-      <h1>Email Verification</h1>
-      <p>Your new verification code is: <strong>${otp}</strong></p>
-      <p>This code will expire in 10 minutes.</p>
-      <p>If you didn't request this code, please ignore this email.</p>
-    `;
+    const emailHtml = generateEmailTemplate({
+      title: 'Verify Your Email',
+      message: emailText,
+      resetToken: otp,
+    });
 
+
+    console.log("email to be sent", emailSubject, emailText, emailHtml, user.email)
     await sendMail(emailSubject, emailText, emailHtml, user.email);
 
     res.json({
@@ -207,5 +222,118 @@ router.post('/login', async (req, res) => {
     });
   }
 });
+
+// Forgot password route
+router.post('/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    console.log("email to be sent", email)
+
+    // Find user
+    const user = await User.findOne({ email });
+    console.log("user from forgot password", user)
+    if (!user) {
+      // For security reasons, don't reveal if the email exists or not
+      return res.json({
+        success: true,
+        message: 'If your email exists in our system, you will receive a password reset link.'
+      });
+    }
+
+    // Generate reset token (expires in 1 hour)
+    const resetToken = user.generateOTP();
+    await user.save();
+    console.log("reset token saved", resetToken)
+
+
+    const emailSubject = 'Password Reset Request';
+    const emailText = `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n`;
+    
+    const emailHtml = generateEmailTemplate({
+      title: 'Password Reset Request',
+      message: emailText,
+      resetToken: resetToken,
+    });
+
+    await sendMail(emailSubject, emailText, emailHtml, email);
+    console.log("email sent")
+
+    res.json({
+      success: true,
+      message: 'If your email exists in our system, you will receive a password reset link.'
+    });
+  } catch (error) {
+    console.error('Forgot password error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error processing your request',
+      error: error.message
+    });
+  }
+});
+
+// Reset password route
+router.post('/reset-password', async (req, res) => {
+  try {
+    const { email, otp, password } = req.body;
+
+    if (!email || !otp || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email, OTP and new password are required'
+      });
+    }
+
+    // Find user with email + matching reset token + not expired
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    const isValid = user.verifyOTP(otp);
+    if (!isValid) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid or expired OTP'
+      });
+    }
+
+    // Set new password
+    user.password = password;
+    user.otp = undefined;
+
+    await user.save();
+
+    // Send confirmation email
+    const emailSubject = 'Password Changed Successfully';
+    const emailText = `Hello,\n\nThis is a confirmation that the password for your account (${user.email}) has just been changed.\n`;
+    
+    const emailHtml = generateEmailTemplate({
+      title: 'Password Changed Successfully',
+      message: emailText,
+    });
+
+    await sendMail(emailSubject, emailText, emailHtml, user.email);
+
+    res.json({
+      success: true,
+      message: 'Password has been reset successfully. You can now log in with your new password.'
+    });
+  } catch (error) {
+    console.error('Reset password error:', error);
+
+    res.status(500).json({
+      success: false,
+      message: 'Error resetting password',
+      error: error.message
+    });
+  }
+});
+
 
 module.exports = router; 

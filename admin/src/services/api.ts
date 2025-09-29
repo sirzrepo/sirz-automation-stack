@@ -25,13 +25,23 @@ export const authAPI = {
     return response.data;
   },
 
-  verifyOTP: async (userId: string, otp: string) => {
-    const response = await api.post('/auth/verify-otp', { userId, otp });
+  verifyOTP: async (email: string, otp: string) => {
+    const response = await api.post('/auth/verify-otp', { email, otp });
     return response.data;
   },
 
-  resendOTP: async (userId: string) => {
-    const response = await api.post('/auth/resend-otp', { userId });
+  forgotPassword: async (email: string) => {
+    const response = await api.post('/auth/forgot-password', { email });
+    return response.data;
+  },
+
+  resetPassword: async (email: string, otp: string, password: string) => {
+    const response = await api.post('/auth/reset-password', { email, otp, password });
+    return response.data;
+  },  
+
+  resendOTP: async (email: string) => {
+    const response = await api.post('/auth/resend-otp', { email });
     return response.data;
   },
 

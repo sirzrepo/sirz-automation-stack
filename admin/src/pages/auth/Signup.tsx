@@ -137,7 +137,7 @@ const Signup = () => {
 
   return (
     <section className="bg-colorLight dark:bg-colorDark py-10 bg-dashboard-form-gradient min-h-screen">
-      <div className="sm:w-[60%] md:w-[50%] lg:w-[30%] w-[90%] m-auto flex items-center justify-center mt-10">
+      <div className="sm:w-[60%]  lg:w-[40%] w-[90%] m-auto flex items-center justify-center mt-10">
       <form onSubmit={handleSubmit} className="py-12 px-12 mt-10 border-b-[6px] border-e-[7px] border-colorGreen rounded-xl bg-white dark:bg-colorDefaultDark">
           <section className="">
             <div className="flex justify-center items-center mb-10">
@@ -222,8 +222,9 @@ const Signup = () => {
             )}
 
             <div className="text-center mt-4">
-              <a href="/login" className="text-primary-600 hover:text-primary-700">
-              Already have an account? login
+              Already have an account?
+              <a href="/login" className="text-blue-600 ps-2 font-bold italic hover:text-blue-700">
+               login
               </a>
             </div>
           </section>

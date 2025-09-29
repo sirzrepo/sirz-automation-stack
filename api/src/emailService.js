@@ -23,7 +23,7 @@ const sendMail = async (subject, text, html, to) => {
     try {
         const mailOptions = {
             from: `"SIRz" <${process.env.SMTP_USER}>`,
-            to: process.env.SMTP_USER,
+            to,
             subject, // Email subject
             text, // Plain text body
             html, // HTML body
