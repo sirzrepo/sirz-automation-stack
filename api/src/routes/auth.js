@@ -228,11 +228,8 @@ router.post('/forgot-password', async (req, res) => {
   try {
     const { email } = req.body;
 
-    console.log("email to be sent", email)
-
     // Find user
     const user = await User.findOne({ email });
-    console.log("user from forgot password", user)
     if (!user) {
       // For security reasons, don't reveal if the email exists or not
       return res.json({
@@ -244,20 +241,19 @@ router.post('/forgot-password', async (req, res) => {
     // Generate reset token (expires in 1 hour)
     const resetToken = user.generateOTP();
     await user.save();
-    console.log("reset token saved", resetToken)
 
 
     const emailSubject = 'Password Reset Request';
     const emailText = `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n`;
+    const emailHtml = `hello from html your reset token is ${resetToken}`;
     
-    const emailHtml = generateEmailTemplate({
-      title: 'Password Reset Request',
-      message: emailText,
-      resetToken: resetToken,
-    });
+    // const emailHtml = generateEmailTemplate({
+    //   title: 'Password Reset Request',
+    //   message: emailText,
+    //   resetToken: resetToken,
+    // });
 
     await sendMail(emailSubject, emailText, emailHtml, email);
-    console.log("email sent")
 
     res.json({
       success: true,
