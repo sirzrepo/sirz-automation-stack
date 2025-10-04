@@ -88,14 +88,37 @@
     </style>
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GW505LLK9H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GW505LLK9H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-GW505LLK9H');
-</script>
+      gtag('config', 'G-GW505LLK9H');
+    </script>
+
+    <!-- ✅ Quora Pixel Code -->
+    <!-- DO NOT MODIFY -->
+    <script>
+      !function(q,e,v,n,t,s){
+        if(q.qp) return;
+        n=q.qp=function(){
+          n.qp ? n.qp.apply(n,arguments) : n.queue.push(arguments);
+        };
+        n.queue=[];
+        t=document.createElement(e);
+        t.async=!0;
+        t.src=v;
+        s=document.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s);
+      }(window, 'script', 'https://a.quora.com/qevents.js');
+
+      qp('init', '4f4877309d8642428323321811b1b65f');
+      qp('track', 'ViewContent');
+    </script>
+
+    <script>qp('track', 'GenerateLead');</script>
+    <!-- End of Quora Pixel Code -->
   </head>
   <body>
     <div id="root"></div>
@@ -149,5 +172,14 @@
         }
       });
     </script>
+
+<noscript>
+  <img
+    height="1"
+    width="1"
+    style="display:none"
+    src="https://q.quora.com/_/ad/4f4877309d8642428323321811b1b65f/pixel?tag=ViewContent&noscript=1"
+  />
+</noscript>
   </body>
 </html>

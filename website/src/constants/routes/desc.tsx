@@ -19,6 +19,7 @@ import Purvia from "../../pages/caseStudies/purvia";
 import OnboardingPage from "../../pages/dashboard";
 import SalesFunnel from "../../pages/salesFunnel";
 import Agents from "../../pages/agents";
+import ThankYouPage from "../../pages/thankyou";
 
 export const ROUTES = {
     LAYOUT: {
@@ -109,5 +110,9 @@ export const ROUTES = {
     AGENTS: {
         PATH: "/agents",
         ELEMENT: <Agents />
+    },
+    THANKYOU: {
+        PATH: "/thankyou",
+        ELEMENT: <ThankYouPage />
     },
 }

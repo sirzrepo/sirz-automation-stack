@@ -97,6 +97,10 @@ const routes = (user: Iuser) =>
             path: (ROUTES.SALES_FUNNEL.PATH),
             element: (ROUTES.SALES_FUNNEL.ELEMENT),
         },
+        {
+            path: (ROUTES.THANKYOU.PATH),
+            element: (ROUTES.THANKYOU.ELEMENT),
+        },
     ])
 
 export default routes;
