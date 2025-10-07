@@ -102,4 +102,17 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// UPDATE - Views
+router.put("/:id/views", async (req, res) => {
+  try {
+    const updated = await blogModel.findByIdAndUpdate(req.params.id, { viewsCount: req.body.viewsCount }, {
+      new: true,
+    });
+    if (!updated) return res.status(404).json({ message: "Blog post not found" });
+    res.json(updated);
+  } catch (err) {
+    res.status(400).json({ message: "Update failed", error: err });
+  }
+});
+
 module.exports = router; 

@@ -18,6 +18,7 @@ export interface BlogPost {
   createdAt: string;
   updatedAt?: string;
   readTime?: string;
+  viewsCount?: number;
 }
 
 export const fetchAllBlogs = async (): Promise<BlogPost[]> => {
@@ -84,6 +85,30 @@ export const fetchBlogBySlug = async (slug: string): Promise<BlogPost | null> =>
  * This function tries to get blogs with similar tags or from the same author
  * If the backend doesn't have a dedicated endpoint, we'll fetch all blogs and filter locally
  */
+/**
+ * Update the view count for a blog post
+ */
+export const updateBlogViews = async (blogId: string, newViewCount: number): Promise<{success: boolean}> => {
+  try {
+    const response = await fetch(`${BASE_URL}/api/blogs/${blogId}/views`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ viewsCount: newViewCount }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update view count');
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error('Error updating view count:', error);
+    return { success: false };
+  }
+};
+
 export const fetchRelatedBlogs = async (currentBlogId: string, limit: number = 4): Promise<BlogPost[]> => {
   try {
     // Ideally, the backend would have an endpoint like `/api/blogs/${currentBlogId}/related`

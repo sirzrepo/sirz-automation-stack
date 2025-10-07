@@ -14,6 +14,10 @@ const BlogSchema = new mongoose.Schema({
     ref: "users",
     required: true
   },
+  viewsCount: { 
+    type: Number,
+    default: 0
+  },
   coverImage: { 
     type: String 
   },

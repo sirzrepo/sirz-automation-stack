@@ -72,6 +72,8 @@ export default function OurBlogPage() {
                                 By {getAuthorName(featuredBlog.author)} 
                                 <div className="h-2 w-2 rounded-full bg-colorGreen"></div> 
                                 {featuredBlog.readTime} read
+                                <div className="h-2 w-2 rounded-full bg-colorGreen"></div>
+                                {featuredBlog.viewsCount} views
                             </p>
                             <div className="sm:w-[50%] pt-10">
                                 <Button 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchBlogBySlug, fetchRelatedBlogs } from "../../features/blogApi";
+import { fetchBlogBySlug, fetchRelatedBlogs, updateBlogViews } from "../../features/blogApi";
 import { formatDate } from "../../utils";
 import { IoIosArrowBack } from "react-icons/io";
 import { ROUTES } from "../../constants/routes/desc";
@@ -30,6 +30,7 @@ type ExtendedBlogPost = {
   createdAt: string;
   updatedAt?: string;
   readTime?: string;
+  viewsCount?: number;
 };
 
 // Helper function to get author name
@@ -74,6 +75,8 @@ export default function BlogDetailPage() {
         });
     };
 
+   
+
     // Function to add IDs to headers in HTML content
     const addIdsToHeaders = (htmlContent: string) => {
         const parser = new DOMParser();
@@ -90,6 +93,22 @@ export default function BlogDetailPage() {
         });
         
         return doc.body.innerHTML;
+    };
+
+    // Function to update view count
+    const updateViews = async (blogId: string, currentViews: number = 0) => {
+        const hasViewed = sessionStorage.getItem(`viewed_${blogId}`);
+        
+        if (!hasViewed && blogId) {
+            try {
+                await updateBlogViews(blogId, currentViews + 1);
+                sessionStorage.setItem(`viewed_${blogId}`, 'true');
+                // Update the local state to reflect the new view count
+                setBlog(prev => prev ? { ...prev, viewsCount: (prev.viewsCount || 0) + 1 } : null);
+            } catch (error) {
+                console.error('Error updating view count:', error);
+            }
+        }
     };
 
     useEffect(() => {
@@ -126,6 +145,9 @@ export default function BlogDetailPage() {
                 } else {
                     setActiveSection("introduction");
                 }
+                
+                // Update view count
+                updateViews(blogData._id, blogData.viewsCount || 0);
                 
                 // Load related blogs after main blog is loaded
                 try {
@@ -314,6 +336,8 @@ export default function BlogDetailPage() {
                             <span>{formatDate(blog.createdAt)}</span>
                             <div className="h-2 w-2 rounded-full bg-colorGreen"></div>
                             <span>{blog.readTime} read</span>
+                            <div className="h-2 w-2 rounded-full bg-colorGreen"></div>
+                            <span>{blog.viewsCount} views</span>
                         </div>
                     </motion.div>
                 </div>

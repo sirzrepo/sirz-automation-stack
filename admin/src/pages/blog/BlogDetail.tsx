@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import { BASE_URL } from "../../utils";
 import Loader from "../../features/loader";
-import { ArrowLeft, Calendar, Tag, User } from "lucide-react";
+import { ArrowLeft, Calendar, Eye, Tag, User } from "lucide-react";
 import "react-quill/dist/quill.snow.css";
 import { Image, Transformation } from "cloudinary-react";
 
@@ -22,6 +22,7 @@ interface BlogPost {
   status: string;
   slug: string;
   createdAt: string;
+  viewsCount?: number;
 }
 
 export default function BlogDetail() {
@@ -136,6 +137,11 @@ export default function BlogDetail() {
               {getAuthorName(blog.author)}
             </div>
           )}
+
+          <div className="flex items-center">
+            <Eye size={16} className="mr-2" />
+            {blog?.viewsCount} views
+          </div>
         </div>
       </div>
 

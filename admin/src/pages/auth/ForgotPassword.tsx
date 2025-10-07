@@ -26,10 +26,6 @@ const ForgotPassword = () => {
 
   console.log(error)
 
-
-
-
-
   return (
     <section className="bg-colorLight dark:bg-colorDark py-10 bg-dashboard-form-gradient min-h-screen">
       <div className="sm:w-[60%] lg:w-[40%] w-[90%] m-auto flex items-center justify-center mt-10">
