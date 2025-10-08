@@ -67,6 +67,20 @@ router.get("/tag/:tag", async (req, res) => {
   }
 });
 
+// GET top viewed blogs
+router.get("/top-views", async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 12;
+    const blogs = await blogModel.find({ status: "Published" })
+      .sort({ viewsCount: -1 })
+      .limit(limit)
+      .populate("author");
+    res.json(blogs);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch top viewed blogs", error: err });
+  }
+});
+
 // READ - Single
 router.get("/:id", async (req, res) => {
   try {

@@ -115,10 +115,23 @@ const recentOrders = [
 ]
 
 
+interface Blog {
+  _id: string;
+  title: string;
+  slug: string;
+  viewsCount: number;
+  author: {
+    first_name: string;
+    last_name: string;
+  };
+}
+
 const DashboardMain = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   // const [users, setUsers] = useState([]);
   const [totalUsers, setTotalUsers] = useState(0);
+  const [topBlogs, setTopBlogs] = useState<Blog[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -134,6 +147,22 @@ const DashboardMain = () => {
     };
     fetchUsers();
   }, [totalUsers]);
+
+  useEffect(() => {
+    const fetchTopBlogs = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/blogs/top-views`);
+        setTopBlogs(response.data);
+        console.log("blogs", response)
+      } catch (error) {
+        console.error('Error fetching top blogs:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTopBlogs();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -453,9 +482,49 @@ const metrics = [
         </div>
       </div>
 
-      <div className="pt-6">
+      {/* Top Blogs Section */}
+      <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-12 pt-6">
+        <div className="bg-white shadow rounded-lg lg:col-span-6">
+          <div className="px-4 py-5 sm:p-6">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">Top Blogs</h3>
+            <p className="mt-1 text-sm text-gray-500">Most viewed blogs</p>
+            
+            <div className="mt-6 space-y-4">
+              {isLoading ? (
+                <div className="flex justify-center items-center h-40">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                </div>
+              ) : topBlogs.length > 0 ? (
+                <div className="space-y-4">
+                  {topBlogs.map((blog, index) => (
+                    <div key={blog._id} className="flex items-start space-x-3">
+                      <span className="flex-shrink-0 flex items-center justify-center h-6 w-6 rounded-full bg-blue-100 text-blue-800 text-xs font-medium">
+                        {index + 1}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm max-w-[85%] font-medium text-gray-900 truncate">
+                          {blog.title}
+                        </p>
+                        <div className="flex justify-between mt-1 text-xs text-gray-500">
+                          <span>{blog.author?.first_name + ' ' + blog.author?.last_name || 'Unknown Author'}</span>
+                          <span className="flex items-center text-lg">
+                            <Eye className="h-4 w-4 mr-1" /> 
+                            {blog.viewsCount}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-gray-500 text-center py-4">No blog data available</p>
+              )}
+            </div>
+          </div>
+        </div>
+
         {/* Recent Orders */}
-        <div className="col-span-4 bg-white shadow rounded-lg">
+        <div className="col-span-4 bg-white shadow rounded-lg lg:col-span-6">
           <div className="px-4 py-5 sm:p-6">
             <div className="flex justify-between items-center">
               <div>
@@ -517,32 +586,6 @@ const metrics = [
             </div>
           </div>
         </div>
-
-        {/* Top Products */}
-        {/* <div className="col-span-3 bg-white shadow rounded-lg">
-          <div className="px-4 py-5 sm:p-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">Top Products</h3>
-            <p className="mt-1 text-sm text-gray-500">Best performing products this month</p>
-            <div className="mt-6 space-y-4">
-              {topProducts.map((product, index) => (
-                <div key={index} className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-gray-900">{product.name}</p>
-                    <p className="text-sm text-gray-500">
-                      {product.sales} sales • {product.revenue}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <div className={`text-sm font-medium ${product.growth > 0 ? "text-green-600" : "text-red-600"}`}>
-                      {product.growth > 0 ? "+" : ""}
-                      {product.growth}%
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   )
