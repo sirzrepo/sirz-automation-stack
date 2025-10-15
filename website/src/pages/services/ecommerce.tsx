@@ -9,24 +9,44 @@ export default function Ecommerce() {
     const navigate = useNavigate();
 
     const Methods = [
-        { num: "01", header: "Store Setup", detail: "From choosing the right platform (Shopify, Amazon, and more) to designing a visually appealing storefront, we handle it all.", },
-        { num: "02", header: "Product Listing", detail: "We create persuasive, SEO-friendly product descriptions and high-quality images to effectively showcase your products.", },
-        { num: "03", header: "Operational Setup", detail: "We streamline your store's operations—covering inventory management, shipping, and payment processing. We also handle demand forecasting and real-time troubleshooting that only humans can manage.", },
-        { num: "04", header: "Ongoing Support Beyond Automation", detail: "Our dedicated team offers continuous assistance with in-depth performance analysis, strategic guidance, and proactive issue resolution that software alone can’t provide, ensuring your store runs smoothly..", },
+        { num: "01", header: "Store Setup", detail: "We build your storefront on Shopify, Amazon, or WooCommerce with conversion-focused designs powered by AI.", },
+        { num: "02", header: "Product Listing", detail: " Our system creates SEO-optimised product descriptions, pricing, and media — all tailored for better visibility and conversions.", },
+        { num: "03", header: "Operations Automation", detail: "We connect your store to smart workflows that manage inventory, orders, payments, and fulfilment automatically.", },
+        { num: "04", header: "Ongoing Optimization & Support", detail: "We don’t stop at setup. Our team and dashboards continually track performance, identify inefficiencies, and enhance conversion rates on a monthly basis.", },
     ];
 
     const methodsData = [
-        { features: "Quality Consistency", SIRz: "Consistent, high-quality work from a dedicated team", freelancers: "Varies by freelancer; quality can be inconsistent", },
-        { features: "Comprehensive Support", SIRz: "Ongoing support and troubleshooting included", freelancers: "Limited post-launch support; may require additional hires", },
-        { features: "Integrated Solutions", SIRz: "Complete setup, management, and support in one package", freelancers: "May require multiple freelancers for different tasks, leading to potential gaps", },
-        { features: "Efficiency", SIRz: "Streamlined process with a single point of contact", freelancers: "Multiple freelancers can lead to coordination issues and delays", },
-        { features: "Cost-Effectiveness", SIRz: "Transparent pricing with no hidden costs", freelancers: "Initial low costs can lead to hidden fees and extra charges", },
+        { 
+            features: "Automation-Ready Store", 
+            SIRz: "Connected to workflows, CRM, and analytics from day one.", 
+            freelancers: "Manual setup, no system integration.", 
+        },
+        { 
+            features: "Quality Consistency", 
+            SIRz: "Dedicated team ensures every store meets top standards.", 
+            freelancers: "Varies by freelancer; quality fluctuates.", 
+        },
+        { 
+            features: "Comprehensive Support", 
+            SIRz: "Continuous automation updates and expert guidance.", 
+            freelancers: "Limited help after setup; pay extra for fixes.", 
+        },
+        { 
+            features: "Efficiency", 
+            SIRz: "Streamlined build process powered by AI tools.", 
+            freelancers: "Disconnected processes cause delays.", 
+        },
+        { 
+            features: "Cost-Effectiveness", 
+            SIRz: "Simple subscription pricing, no hidden costs.", 
+            freelancers: "Low entry cost, hidden maintenance fees.", 
+        },
     ];
 
     const Whysirz = [
-        { num: "01", title: "We’re redefining e-commerce", detail: "Our approach is a blend of cutting-edge technology, deep industry expertise, and a customer-centric philosophy. We don’t just build online stores; we create digital experiences that drive sales and build lasting customer relationships.", },
-        { num: "02", title: "We go the extra mile", detail: "From meticulous store design to practical insights from analytics, we deliver unparalleled results. We’re not just meeting expectations; we’re exceeding them.", },
-        { num: "03", title: "Partners in Progress", detail: "With SIRz, you’re not just getting a service; you’re partnering with a team committed to revolutionizing your online presence and driving actual growth.", },
+        { num: "01", title: "Built for the Future", detail: "Our AI-driven ecosystem connects your store, marketing, and CRM to scale effortlessly.", },
+        { num: "02", title: "We Go Beyond Setup", detail: "We deliver performance analytics, SEO insights, and automated optimization that drive measurable growth.", },
+        { num: "03", title: "Partners in Progress", detail: "With SIRz, you’re not just subscribing to a tool — you’re partnering with a team committed to your success and scalability.", },
     ];
 
 
@@ -37,9 +57,10 @@ export default function Ecommerce() {
                 <section className=" sm:w-[85%] mx-auto bg-colorGreenDeeper mb-32 sm:rounded-2xl relative p-6 sm:p-12 flex flex-col sm:flex-row items-center sm:items-start">
                     <div className=" text-white sm:pt-4 pt-16 sm:ps-4">
                         <div className="sm:w-[70%]">
-                            <h2 className=" sm:text-[45px] text-[25px] font-bold leading-[1.2em]">Launch & Scale <br /> Your Online <span className="text-colorGreen italic">Store</span> with Ease</h2>
+                            <h2 className=" sm:text-[45px] text-[25px] font-bold leading-[1.2em]">Launch & Scale <br /> Your <span className="text-colorGreen italic">E-Commerce Brand</span> with AI Power</h2>
                             <p className="text-white mb-6 mt-6">
-                                Your journey to a thriving eCommerce business starts here. We help you build, optimize, and grow your online store. Let’s talk
+                            Your journey to a smarter, automated online store starts here.
+                            SIRz helps you launch, optimize, and grow your e-commerce business using our all-in-one automation stack, designed to save time, boost sales, and simplify operations.
                             </p>
                         </div>
                         <button className={` tracking-widest bg-white text-black rounded-full sm:w-[23%] w-full mt-10 max-sm:mt-5
@@ -61,22 +82,21 @@ export default function Ecommerce() {
             <div className=" grid sm:grid-cols-2 md:flex-row w-[90%] sm:w-[85%] mx-auto sm:py-16 pb-16 gap-8">
                 {/* Left Section */}
                 <section className="">
-                    <HeaderFormat title="Launch Your Online Store with Ease" />
+                    <HeaderFormat title="Launch Your Smart Store with Ease" />
                     <h1 className="font-bold text-1xl sm:text-3xl italic w-full my-6 ">
-                        E-commerce Business Setup from only £99.99
+                        E-Commerce Automation Setup from only £99.99/month
                     </h1>
                     <Button
                         text='Get started'
                         onClick={() => navigate(ROUTES.DASHBOARD.PATH)}
-                        className="w-full sm:w-[50%] md:w-[40%]"
+                        className="w-full sm:w-[60%] md:w-[50%]"
                     />
                 </section>
 
                 {/* Right Section */}
                 <section className="">
                     <p className=" text-justify text-base sm:text-lg">
-                        Bring your E-commerce business desire to reality with a hands-on, results-driven approach that covers it all—strategy, measurement,
-                        execution, and operations. Our team of copywriters, developers, designers, store managers, and social media managers, is all at your disposal.
+                        Bring your e-commerce dream to life with automation built for growth. From storefront design to CRM, fulfillment, and analytics, the SIRz stack connects every part of your business, so you can focus on scaling, not managing.
                     </p>
                 </section>
             </div>
@@ -89,8 +109,7 @@ export default function Ecommerce() {
 
                     <div>
                         <h1 className="text-base sm:text-lg md:text-xl font-bold">
-                            Are you a small or medium-sized business looking to expand online? Or an individual with a great
-                            product idea ready to sell? Our e-commerce setup service supports you every step of the way.
+                            Whether you’re launching your first product or scaling your next million in sales, SIRz automates your e-commerce engine from setup to success.
                         </h1>
                     </div>
                 </section>
@@ -120,9 +139,7 @@ export default function Ecommerce() {
             <div>
                 <div className="bg-colorGreenDeeper py-11 sm:p-10 text-center">
                     <h1 className="italic sm:w-[75%] w-[90%] text-lg sm:text-2xl sm:font-bold text-white mb-6 mx-auto">
-                        You can find cheaper options for setting up your online store. But trust us, you get what you pay for.
-                        With SIRZ, you’re not just saving money; you’re investing in a high-quality e-commerce store that’ll
-                        actually make you money. We offer the whole package – setup, management, and support – to give you value for your money.
+                        We go beyond store setup — we give you a complete growth engine built for automation and scale.
                     </h1>
                     <a href={calendyLink} target="_blank" rel="noopener noreferrer">
                         <button
@@ -140,7 +157,7 @@ export default function Ecommerce() {
                     <HeaderFormat title="How SIRz Compares:" />
                     <div>
                         <h1 className="text-xl sm:text-2xl lg:text-3xl sm:font-bold">
-                            We go beyond the basics—offering smarter strategies, better support, and real results for your eCommerce success. Here’s what makes us different.
+                            We go beyond store setup — we give you a complete growth engine built for automation and scale.
                         </h1>
                     </div>
                 </section>
@@ -181,7 +198,7 @@ export default function Ecommerce() {
 
             <div className="m-auto w-full py-8 px-4 dark:bg-colorGreenDeeper">
                 <h1 className="font-bold text-xl sm:text-2xl md:text-3xl text-center mb-5 w-[90%] sm:w-[70%] m-auto">
-                    What we offer? Tailored <span className="italic text-colorBlueDeep">E-commerce</span> Store Design Exclusively for Your Brand
+                    What we offer? Tailored <span className="italic text-colorBlueDeep">E-commerce</span> Automation for Your Brand
                 </h1>
 
                 <div className=" sm:w-[85%] m-auto grid sm:grid-cols-5 sm:gap-5 gap-y-8 h-auto md:h-auto">
@@ -193,8 +210,9 @@ export default function Ecommerce() {
                     {/* Text Section */}
                     <section className=" col-span-2 sm:rounded-3xl py-8 bg-[#F0F0F0] dark:bg-colorDark text-justify ">
                         <p className=" sm:text-base w-[85%] m-auto leading-loose ">
-                            Your online store is your digital storefront. Let's make it unforgettable. Our design team crafts custom e-commerce experiences that align perfectly with your brand identity. From captivating visuals to intuitive navigation, we create online spaces that not only look stunning but also drive conversions.
-                            Whether you're selling high-end fashion or everyday essentials, we'll design a store that reflects your unique selling proposition and leaves a lasting impression on your customers.
+                            Your online store isn’t just a website — it’s your digital engine.
+                            Our automation stack makes it smarter: integrating sales, customer data, and analytics into one seamless system.
+                            From beautiful, branded storefronts to AI-powered upsells and CRM integration, SIRz builds the foundation for sustainable growth.
                         </p>
                     </section>
                 </div>
@@ -202,10 +220,10 @@ export default function Ecommerce() {
 
             <div className="py-8 bg-colorLight dark:bg-colorDark px-4">
                 <section className="w-[95%] sm:w-[85%] m-auto pt-7 mb-7">
-                    <HeaderFormat title="Why use SIRz for your e-commerce business" />
+                    <HeaderFormat title="Why Choose SIRz for Your E-Commerce Business" />
                     <div>
                         <h1 className="text-xl sm:text-2xl md:text-3xl font-medium italic w-full sm:w-[80%]">
-                            We're not just another e-commerce business setup solution. We're a revolution.
+                            We’re not just building stores — we’re redefining how e-commerce works.
                         </h1>
                     </div>
                 </section>
@@ -234,8 +252,9 @@ export default function Ecommerce() {
             <div className="w-full p-6 sm:p-10 bg-colorGreenDeeper">
                 <div className="w-[95%] sm:w-[90%] m-auto text-center sm:text-left">
                     <h1 className="text-white text-xl sm:text-2xl md:text-3xl mb-5 sm:mb-7 w-full sm:w-[80%]">
-                        Elevate your e-commerce store with our setup services.
-                        We handle everything for a low monthly price, so you can focus on growing your business.
+                        Elevate Your Store with the Power of Automation
+                        We handle everything — setup, management, and optimization — all for one affordable monthly price.
+                        You focus on growth. We handle the system.
                     </h1>
                     <a href={calendyLink} target="_blank" rel="noopener noreferrer">
                         <button

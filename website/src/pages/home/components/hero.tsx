@@ -8,16 +8,16 @@ import { useRef, useState, useEffect } from "react";
 
 const cardContent = [
     {
-        title: "Customized Strategies",
-        description: "No cookie-cutter solutions here! We tailor every strategy to fit your business needs, ensuring you get the best results for your brand's growth."
+        title: "Automation Engine",
+        description: "Free your team from repetitive tasks with workflows that run on autopilot."
     },
     {
-        title: "Dedicated Support",
-        description: "Forget bots—our expert team is here to guide you every step of the way. We are real people, with real solutions and we deliver real success!"
+        title: "CRM & Client Hub",
+        description: "Keep every lead, sale, and customer interaction organized in one place."
     },
     {
-        title: "Proven Growth",
-        description: "We don't just promise results—we deliver them. Our data-driven approach has helped businesses scale and thrive in the digital space. Yours is next!"
+        title: "Analytics & Insights",
+        description: "Turn your data into action with real-time dashboards that guide smarter decisions."
     },
 ]
 
@@ -104,11 +104,11 @@ export default function Hero() {
                                 transition={{ duration: 0.8, delay: 0.2 }}
                                 className="sm:text-[40px] text-white text-[25px] relative z-10 leading-tight sm:font-bold"
                             >
-                                Power Up Your <motion.i 
+                                The SIRz Stack is designed to eliminate <motion.i 
                                     className="text-colorGreen"
                                     whileHover={{ scale: 1.1 }}
                                     transition={{ type: "spring", stiffness: 300 }}
-                                >Brand</motion.i> with Expert <br className="max-sm:hidden" /> E-commerce, Branding & Marketing <br className="max-sm:hidden" /> Solutions!
+                                >inefficiencies and fuel sustainable business growth</motion.i>  delivered as a subscription, not a one-off service.
                             </motion.header>
                             <motion.div 
                                 initial={{ opacity: 0, y: 20 }}

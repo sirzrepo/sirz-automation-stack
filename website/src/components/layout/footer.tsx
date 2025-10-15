@@ -45,7 +45,8 @@ export default function Footer() {
         <div className='w-[90%] bg-colorBlueDeep m-auto sm:rounded-2xl sm:px-10 px-5 py-16'>
           <div className=" pb-12 border-b border-gray-400 mx-auto">
             <section className=' flex items-start max-sm:flex-col justify-between m-auto'>
-              <h4 className='sm:text-[30px] max-sm:text-center font-bold sm:w-[70%] text-white'>Grow Your Online Business With the Most Reliable Team and Strategy.</h4>
+              <h4 className='sm:text-[30px] max-sm:text-center font-bold sm:w-[70%] text-white'>Grow Your Business with the Power of Automation.</h4>
+              <div className='text-white'>Get started today with SIRz — the all-in-one AI-powered stack for e-commerce growth.</div>
               <button className={` tracking-widest bg-white dark:text-black rounded-full sm:w-[23%] w-full max-sm:mt-5
                   'w-full flex align-center justify-center py-4 cursor-pointer text-sm px-8 font-medium floating-button  
                   `}
@@ -57,7 +58,8 @@ export default function Footer() {
             <section className=' sm:py-10 grid sm:grid-cols-5 sm:gap-10'>
               <div className='sm:col-span-2 pt-16'>
                 <img src={sirzLogoWhite} alt="" />
-                <div className=' sm:text-[20px] text-white pt-5'>SIRz is your one-stop shop for E-commerce, Branding, and Digital Marketing, we help businesses launch, scale, and dominate in the digital space.</div>
+                <h4 className='text-white font-bold pt-5'>Your All-in-One Growth Partner</h4>
+                <div className=' sm:text-[20px] text-white pt-2'>SIRz helps you launch, scale, and dominate the digital space with expert E-commerce, Branding, and Digital Marketing solutions.</div>
               </div>
               <div className='sm:col-span-3 max-sm:hidden max-sm:pt-10 grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-2 gap-4'>
                 <div>

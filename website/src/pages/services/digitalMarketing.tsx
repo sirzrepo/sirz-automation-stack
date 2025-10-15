@@ -4,18 +4,22 @@ import HeaderFormat from "../../components/header";
 import { ROUTES } from "../../constants/routes/desc";
 
 const Methods = [
-    { num: "01", header: "Consultation", detail: "We begin with a discovery session to understand your brand, goals, and target audience. You'll also complete a brief questionnaire to help us tailor the perfect strategy for your business.", },
-    { num: "02", header: 'Strategy Development', detail: "Based on our insights, we craft a data-driven marketing plan, selecting the best platforms and techniques to enhance your online presence.", },
-    { num: "03", header: "Execution", detail: "   Our team brings your strategy to life, managing everything from content creation and ad campaigns to social media engagement and email marketing.", },
-    { num: "04", header: "Optimization", detail: "We continuously track performance, refine strategies, and make data-driven adjustments to maximize results.", },
-    { num: "05", header: "Reporting & Growth", detail: "You'll receive regular performance reports with actionable insights to help your business scale and achieve long-term success.", },
+    { num: "01", header: "Client Onboarding on SIRz App", detail: `Your automation journey begins here.
+ We guide you through a quick setup inside the SIRz App — defining your goals, target audience, and preferred marketing channels. Once onboarded, your brand data connects seamlessly to our automation system.`, },
+    { num: "02", header: 'Strategy Development', detail: `Our AI engine analyzes your inputs and creates a tailored, data-driven marketing strategy.
+ From audience segmentation to platform selection, the system builds a roadmap designed to grow your brand efficiently.`, },
+    { num: "03", header: "Execution", detail: `Once your strategy is ready, campaigns go live automatically across platforms.
+ From ad creatives to content publishing, the SIRz system handles your day-to-day marketing — saving you hours of manual work.` },
+    { num: "04", header: "Optimization", detail: `We track key metrics like CTR, CPA, and ROAS in real time.
+ The system continuously refines targeting, content, and timing to maximize performance while keeping your costs low.`, },
+    { num: "05", header: "Reporting & Growth", detail: `Access your live dashboard anytime to view performance insights and growth trends.
+ Use the data to plan your next steps, adjust strategies, or scale campaigns — all within one intuitive platform.`, },
 ];
 
 const BrandMatters = [
-    { title: "Regain your time", details: "With more free time, you can focus on your core business.", },
-    { title: "Make relevant content.", details: "With streamlined workflows, you put out quality content faster.", },
-    { title: "Proven Growth", details: "Say goodbye to missed deadlines and inconsistent work.", },
-    { title: " Proven Growth", details: "Say goodbye to missed deadlines and inconsistent work.", },
+    { title: "Regain your time", details: "Spend less time creating and scheduling posts. Let automation handle it while you focus on strategy and growth.", },
+    { title: "Make relevant content.", details: "AI creates platform-ready content, optimized for engagement and aligned with your brand tone.", },
+    { title: "Proven Growth", details: "Track CTR, ROAS, and CPA in real-time dashboards, no missed deadlines, no guesswork, just results.", },
 ];
 
 const DigitalHeroCard = [
@@ -25,16 +29,20 @@ const DigitalHeroCard = [
     BlogCardFour,
 ];
 const sirzOffer = [
-    { title: "Social Media Branding & Management", detail: "We develop engaging content, foster community interaction, and monitor performance to ensure your social media channels effectively connect with your target audience", bgColor: "#F9F6FF", },
-    { title: "Copywriting and Content Marketing", detail: "From blog posts to social media updates, our content strategies are designed to attract and retain customers, positioning your brand as an authority in your industry.", bgColor: "#F8FCED", },
-    { title: "Digital Advertising Campaigns", detail: "Our experts design and manage targeted digital advertising campaigns across platforms like Google Ads and various social media networks.", bgColor: "#FFFCEB", },
-    { title: " Email Marketing", detail: "We develop personalized email marketing campaigns that nurture customer relationships and drive conversions. our strategies are tailored to keep your audience engaged.", bgColor: "#F0F0F0", },
+    { title: "Social Media Automation & Management", detail: " We create, schedule, and optimize posts automatically. AI content agents tailor visuals and captions for each platform.", bgColor: "#F9F6FF", },
+    { title: "AI Copywriting & Content Marketing", detail: " Generate on-brand content that drives engagement. From carousels to blog posts, our system handles it end-to-end.", bgColor: "#F8FCED", },
+    { title: "Ad Campaign Automation", detail: "Launch Meta, Google, and TikTok ads in one click. The system tests variations and optimizes for conversions.", bgColor: "#FFFCEB", },
+    { title: " Email & Retargeting Automation", detail: "Personalized emails are triggered by customer behavior — helping you turn interest into repeat purchases.", bgColor: "#F0F0F0", },
 ];
 
 const methodsData = [
-    { SIRz: "All-round transparency We prioritize your vision and preferences. Our platform allows you to review and approve all content, ensuring it meets your standards.", Others: "No transparency Other agencies are paid expensive retainers. Those fees need to come from somewhere. We streamlined our operations to stay competitive. This means lower, simpler, and fair prices.", },
-    { SIRz: "Low-cost, high quality Most agencies hit you with high charges before you even understand what you're getting into. We're a lean team. Our efficient workflows allow us to charge much less.", Others: "High charges Big agencies need to fund large payrolls and expensive offices. They don't know what it's like to work with small businesses like yours.", },
-    { SIRz: "Cancel anytime Your time is valuable. Stay as long as you love it – or leave whenever. No long-term contracts, no hassles", Others: "Long-term contracts Other agencies prefer long-term commitments. We don't believe in tying you down. Our focus is on building lasting relationships, not contracts", },
+    { SIRz: "Automation-First Approach – AI runs your content and ads efficiently.", Others: "Manual work and slow delivery.", },
+    { SIRz: "Transparent Reports – See results in real time.", Others: "Hidden data and inconsistent updates.", },
+    { SIRz: "Fair Pricing – Simple subscription model.", Others: "High retainers and hidden fees.", },
+    { SIRz: "Cancel Anytime – Stay for the results, not the contracts.", Others: "Long-term lock-ins.", },
+    { SIRz: "Built for E-Commerce – Connects directly with Shopify, TikTok, and Amazon.", Others: "Generic campaigns with no store integration.", },
+    { SIRz: "", Others: "", },
+
 ];
 
 export default function DigitalMarketing() {
@@ -46,11 +54,11 @@ export default function DigitalMarketing() {
                 <div className="w-full bg-colorGreenDeeper sm:min-h-[60vh] min-h-[45vh] flex items-center">
                     <section className="w-[90%] sm:w-[80%] m-auto sm:p-6 text-center relative text-white">
                         <h1 className="text-[30px] sm:text-3xl lg:text-4xl relative z-10 font-medium mb-4 leading-tight">
-                            Digital Marketing for <span className="italic text-colorGreen">Brands</span>
+                            Digital Marketing Automation for E-Commerce <span className="italic text-colorGreen">Brands</span>
                         </h1>
                         <p className="text-lg sm:text-xl lg:text-2xl m-auto leading-relaxed">
-                            We produce top-notch digital marketing content for your business. You approve.
-                            And if you want, we schedule and post for you.
+                        We help your business create, manage, and optimize digital marketing campaigns — automatically.
+                        From AI-generated content to data-driven ad management, SIRz connects your brand to customers across platforms like Meta, Google, and TikTok, all from one smart system.
                         </p>
                         <div className=" absolute top-[-20px] sm:right-[48%] flex items-center justify-center">
                             <img src={StarMultiple} alt="" className="" />
@@ -100,8 +108,8 @@ export default function DigitalMarketing() {
                 <section className="w-[90%] sm:w-[80%] m-auto mb-7">
                     <HeaderFormat title="What we offer" />
                     <div className="text-lg sm:text-xl lg:text-2xl pt-4 font-bold leading-snug">
-                        At SIRZ, we offer a comprehensive suite of digital marketing and social media management
-                        services designed to elevate your brand's online presence and drive business growth.
+                        At SIRz, we’ve transformed digital marketing into a product-driven experience.
+                        Our automation suite combines AI, design, and analytics, giving small businesses the same power as big marketing teams.
                     </div>
                 </section>
 
@@ -133,10 +141,10 @@ export default function DigitalMarketing() {
 
                     <div>
                         <h1 className="text-base sm:text-lg md:text-xl font-bold">
-                            We’re the affordable, streamlined partner for small businesses and solopreneurs looking
-                            to dominate the online world. And to do that, we follow a structured approach to ensure your
-                            digital marketing efforts drive real results.
+                            At SIRz, everything starts inside the SIRz App, your all-in-one dashboard for automated digital marketing.
+                            From onboarding to campaign execution, our system combines AI-driven strategy, creative automation, and real-time analytics to help your business grow smarter, faster & effortlessly.
                         </h1>
+                        <h4 className="text-base sm:text-lg md:text-xl text-zinc-700 font-bold mt-4">Here’s how it works:</h4>
                     </div>
                 </section>
 
@@ -170,7 +178,7 @@ export default function DigitalMarketing() {
 
                     <div>
                         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold">
-                            We go beyond the basics—offering smarter strategies, better support, and real results for your eCommerce success. Here’s what makes us different.
+                            We don’t just manage campaigns — we automate them. Here’s what makes SIRz different.
                         </h1>
                     </div>
                 </section>
@@ -209,8 +217,7 @@ export default function DigitalMarketing() {
                         <h2 className="font-medium text-xl text-white">Let’s Elevate Your Brand! 🚀</h2>
                     </div>
                     <h1 className="text-white text-xl sm:text-2xl md:text-3xl mb-5 sm:mb-7 w-full sm:w-[80%]">
-                        Ready to take your digital presence to the next level? Whether you need expert social media management, high-converting ad campaigns, or engaging content marketing, SIRZ is here to help.
-                        Get in touch today and let’s craft a winning digital strategy for your business!
+                    Ready to automate your marketing and grow faster? Whether it’s social media management, ad campaigns, or content strategy, SIRz helps your eCommerce brand scale effortlessly.
                     </h1>
                     <button
                         className="tracking-widest bg-white text-black rounded-full w-full sm:w-auto sm:min-w-[200px] flex items-center justify-center py-3 sm:py-4 cursor-pointer text-sm px-6 sm:px-8 font-medium floating-button"

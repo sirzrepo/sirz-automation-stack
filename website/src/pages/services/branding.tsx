@@ -6,24 +6,24 @@ import { ROUTES } from "../../constants/routes/desc";
 import { calendyLink } from "../../utils";
 
 const Methods = [
-    { num: "01", header: "Brand Discovery", detail: "We uncover the core identity, values, and target audience that make your brand unique.", },
-    { num: "02", header: "Brand Strategy", detail: "We create a roadmap to guide your market positioning, from product development to marketing campaigns.", },
-    { num: "03", header: "Brand Logo & Visual Identity", detail: "We design a unique logo and visual elements that leave a lasting impression on your audience", },
-    { num: "04", header: "Brand Book & Style Guide", detail: "We create a comprehensive guide outlining your brand's core values, mission, and target audience. This ensures consistency across all materials and provides a clear reference for your team and partners.", },
+    { num: "01", header: " Brand Discovery (AI-Powered Audit)", detail: "We start by analyzing your current brand assets and audience behavior using AI tools to uncover insights about what’s working — and what’s missing.", },
+    { num: "02", header: "Strategy & System Setup", detail: "We build your automated brand hub: logos, palettes, voice guides, and asset templates — all integrated with your campaigns and dashboards.", },
+    { num: "03", header: "Visual Identity & Content Sync", detail: "We generate optimized versions of your brand visuals and messaging for each platform (website, Meta, Google, TikTok, Amazon).", },
+    { num: "04", header: " Brand Book 2.0", detail: "Your digital brand guide becomes a living system — automatically updated with new campaigns, assets, and design rules.", },
 ];
 
 const BrandMatters = [
-    { title: "Building trust", details: "Customers are more likely to choose and stick with a brand they know and trust.", },
-    { title: "Brand Identity", details: "A unique brand identity helps you stand out in a crowded market.", },
-    { title: "Customers & Pricing", details: "Strong brands command premium prices and attract more customers", },
-    { title: "Reputation", details: "People want to work for companies with a strong reputation.", },
-    { title: "Search Engine", details: "Improve search engine visibility and increase organic traffic.", },
+    { title: "Consistency Drives Growth", details: "Brands with consistent messaging see up to 10%+ more revenue growth.", },
+    { title: "Trust Wins Customers", details: "Automated brand alignment ensures your visuals and voice never fall out of sync.", },
+    { title: "Identity at Scale", details: "Stand out with instantly adaptable brand kits for every channel.", },
+    { title: "Smarter Reputation Managemen", details: "Monitor, adjust, and update your brand assets from one dashboard.", },
+    { title: "SEO & Visibility", details: "Optimized visuals and copy improve ranking and engagement across platforms.", },
 ];
 
 const SlSocialInsta = [
-    { title: "Instagram Post", url: "#", },
-    { title: "Instagram Stories", url: "#", },
-    { title: "Website design", url: "#", },
+    { title: "Instagram Ads", url: "#", },
+    { title: "Landing Pages", url: "#", },
+    { title: "Brand Systems", url: "#", },
     { title: "Client Logos", url: "#", },
 ];
 
@@ -41,10 +41,13 @@ export default function Branding() {
 
                     {/* Text & List Section */}
                     <div className=" sm:col-span-3 m-auto sm:text-left ml-7 md:ml-8">
-                        <h1 className="font-bold md:text-[40px] text-[20px] w-full mb-7 md:w-[95%] ">
-                            Define, design and build a standout <span className="italic text-colorBlueDeep">identity</span> for your business or product, locally and globally.
+                        <h1 className="font-bold md:text-[40px] text-[20px] w-full mb-3 md:w-[95%] ">
+                        Build a Brand That Runs on <span className="italic text-colorBlueDeep">Automation</span>.
                         </h1>
-                        <Button text="Request a proposal" onClick={() => { }} className="min:w-[30%] mb-7 md:mb-0" />
+                        <p className="text-3xl sm:text-2xl mb-7">
+                            Define, design, and automate your brand identity across every platform.
+                        </p>
+                        <Button text="See it in action" onClick={() => { }} className="min:w-[30%] mb-7 md:mb-0" />
                     </div>
                 </section>
             </div>
@@ -53,12 +56,13 @@ export default function Branding() {
                 <section className="w-full">
                     <div className="flex gap-3 items-center mb-2">
                         <img src={startSmallImg} alt="" className="w-6 h-6 sm:w-8 sm:h-8" />
-                        <h2 className="font-normal text-lg sm:text-sm">Why Your Brand Matters?</h2>
+                        <h2 className="font-normal text-lg sm:text-sm">Why Automated Branding Matters</h2>
                     </div>
                     <p className="text-sm sm:text-base">
-                        8% of businesses credit brand consistency for 10%+ revenue growth.
-                        46% of consumers are more likely to buy from trusted brands.
-                        Is your brand helping you achieve these goals?
+                        Your brand isn’t just your logo, it’s the system that connects your product, story, and customers. At SIRz, we turn branding into a scalable digital asset powered by automation.
+                    </p>
+                    <p className="mt-2">
+                    From visual identity to campaign templates, we build AI-driven brand systems that keep your messaging, visuals, and tone consistent, everywhere your customers shop or scroll.
                     </p>
                 </section>
 
@@ -124,21 +128,18 @@ export default function Branding() {
 
                     {/* Text & List Section */}
                     <div className="w-[80%] max-sm:w-[90%] max-sm:py-10 text-white m-auto col-span-3 ">
-                        <h1 className="font-bold text-3xl italic w-full mb-7 sm:mr-8 mr-0 ">Knowing Your Brand is Our Business</h1>
+                        <h1 className="font-bold text-3xl italic w-full mb-7 sm:mr-8 mr-0 ">Understanding Your Brand, Amplified by AI</h1>
                         <p className=" mb-7 text-justify ">
-                            At SIRz, we believe that understanding your brand is the cornerstone of building a powerful brand identity. We dig deep into your business, getting to know your
-                            teams, your goals, and what makes your brand unique. We uncover the qualities that resonate with your audience, to ensure your brand connects on a deeper level.
-                            Our expertise goes beyond your company. We thoroughly research your industry, examining consumer trends, business practices, and your competition. With this knowledge,
-                            we craft strategies that speak directly to your audience, moving your brand forward.
+                            At SIRz, we combine creative expertise with intelligent automation to make branding simpler, faster, and smarter. Our systems help you maintain a cohesive identity while freeing your team to focus on innovation and sales.
                         </p>
                         <p className=" mb-8">
-                            Let’s work together to elevate your brand to new heights.
+                            We study your business, audience, and competitors — then transform that knowledge into automated brand systems that evolve with you.
                         </p>
-                        <button className={` tracking-widest bg-white text-black rounded-full mb-0 sm:mb-6 sm:w-[30%] w-[80%] max-md:m-auto max-sm:mt-5
+                        <button className={` tracking-widest bg-white text-black rounded-full mb-0 sm:mb-6 sm:w-[40%] w-[80%] max-md:m-auto max-sm:mt-5
                             'w-full flex align-center justify-center py-4 cursor-pointer text-sm px-8 font-medium floating-button  
                             `}
                             onClick={() => navigate(ROUTES.DASHBOARD.PATH)}>
-                            Get in touch
+                            Book a Demo
                         </button>
                     </div>
                 </section>
@@ -149,13 +150,12 @@ export default function Branding() {
                 <section className="w-[95%] sm:w-[85%] m-auto pt-7 ">
                     <div className="flex gap-3 items-center mb-2">
                         <img src={startSmallImg} alt="" className="w-5 sm:w-6" />
-                        <h2 className="font-bold text-lg sm:text-xl">Our Past Projects</h2>
+                        <h2 className="font-bold text-lg sm:text-xl">See Our Work</h2>
                     </div>
 
                     <div>
                         <h1 className="text-lg sm:text-2xl lg:text-3xl font-medium italic leading-snug">
-                            Explore our portfolio to see how our branding and design teams have
-                            brought exceptional projects to life.
+                        Explore how SIRz has helped brands evolve from static visuals to scalable, AI-powered identities.
                         </h1>
                     </div>
                 </section>

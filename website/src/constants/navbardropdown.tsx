@@ -19,11 +19,11 @@ export default function NavbarDropdown() {
 
     const servicePages = [
         {
-            title: "branding",
+            title: "Branding Automation",
             url: ROUTES.SERVICE_BRANDING.PATH
         },
         {
-            title: "digital marketing",
+            title: "Digital Marketing Automation",
             url: ROUTES.SERVICE_DIGITALMARKETING.PATH
         },
         {
@@ -89,7 +89,7 @@ export default function NavbarDropdown() {
                                     className="cursor-pointer whitespace-nowrap capitalize my-2"
                                     onClick={() => { dispatch(setShowServices(false)); navigate(`${item.url}`) }}
                                 >
-                                    <div className=" text-2xl text-white gap-6 px-8 mt-6 rounded-full w-[40%] bg-colorBlueDeep hover:w-[45%] duration-700 py-3 flex items-center">
+                                    <div className=" text-2xl text-white gap-6 px-8 mt-6 rounded-full lg:w-[60%] w-full bg-colorBlueDeep hover:w-[65%] duration-700 py-3 flex items-center">
                                         <TbChecks className="text-[40px]" />
                                         {item?.title}
                                     </div>

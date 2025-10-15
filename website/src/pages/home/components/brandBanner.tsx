@@ -86,7 +86,7 @@ export default function BrandBanner() {
                                     Create Your{' '}
                                     <span className="relative inline-block">
                                         <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-400">
-                                            Dream Brand
+                                        Growth Engine
                                         </span>
                                         <span className="absolute bottom-3 left-0 w-full h-4 bg-white/20 -z-0 rounded-full blur-sm"></span>
                                     </span>{' '}
@@ -102,8 +102,7 @@ export default function BrandBanner() {
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-purple-200 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-1000">
-            Brandcom is an AI-powered automation platform built to streamline branding, e-commerce, and digital
-            marketing — all in one place.
+          SIRz is an AI-powered automation stack that unifies e-commerce, CRM, and analytics — all in one subscription.
           </p>
 
           {/* CTA Button */}

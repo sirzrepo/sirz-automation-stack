@@ -2,22 +2,22 @@ import { greatBg } from "../../../assets";
 
 const data = [
     {
-        description: `Are starting a new business and need help with e-commerce setup and branding`
+        description: `Are launching a new business and want a ready-to-go e-commerce growth stack without hiring a full team.`
     },
     {
-        description: `Are making the leap from employee to business owner and want to establish a strong digital presence`
+        description: `Are transitioning from employee to entrepreneur and need a scalable digital foundation powered by automation.`
     },
     {
-        description: `Are struggling to attract, retain and monetize customers and are seeking to run successful email campaigns`
+        description: ` Struggle to attract, retain, and monetize customers—and want automated campaigns that convert consistently.`
     },
     {
-        description: `Have an existing business and want to optimize processes and improve their online visibility`
+        description: `Already run a business but want to optimize operations, streamline workflows, and cut inefficiencies.`
     },
     {
-        description: `Struggle with managing social media and need expert assistance to grow their online audience`
+        description: `Feel overwhelmed by managing multiple tools and want a centralized CRM + automation hub that keeps everything in sync.`
     },
     {
-        description: `Want to improve their website's performance and require SEO-optimized content to boost search rankings`
+        description: `Want to unlock data-driven growth, with real-time insights and SEO-optimized visibility to boost performance.`
     },
 ]
 

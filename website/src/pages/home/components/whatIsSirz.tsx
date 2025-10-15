@@ -19,10 +19,13 @@ export default function WhatIsSirz() {
                 <h2 className="text-5xl font-bold mb-4">What is Sirz?</h2>
                 <section className="py-8">
                     <div className="sm:text-2xl text-xl">
-                        Sirz is a digital marketing automation software  for E-commerce brand. Sirz AI powered platform   consist of a 3 layer growth and automation ecosystem.
+                    SIRz is a <b>product-led digital technology company</b> built for scaling e-commerce brands. Our AI-powered platform delivers growth as a service through a 3-layer automation ecosystem designed to eliminate inefficiencies, centralize operations, and unlock smarter decision-making.
+                    </div>
+                    <div className="sm:text-2xl text-xl mt-4">
+                    Instead of piecing together multiple tools, SIRz gives you one subscription-based stack that grows with your business.
                     </div>
                     <div className="text-2xl mt-4">
-                        Get a demo to learn more about our premium automation products. 
+                    Get a demo today and see how our premium automation stack transforms the way you scale.
                     </div>
                 </section>
                 <section className="py-4 space-x-4">
