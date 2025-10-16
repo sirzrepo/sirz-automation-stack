@@ -12,37 +12,37 @@ export default function CaseStudies() {
             image: CaseStudiesImg.caseMoss,
             url: ROUTES.CASE_STUDY_MOSS_GLOW_BEAUTY.PATH,
             title: "Moss & Glow Beauty",
-            text: "Moss & Glow Beauty is a skincare brand dedicated to offering natural, sustainable, and eco-friendly products."
+            text: " From Manual Marketing to Automated Growth with BrandCom."
         },
         {
             image: CaseStudiesImg.caseWellness,
             url: ROUTES.CASE_STUDY_WELLNESS_STUDIO.PATH,
             title: "Wellness Studio 360",
-            text: "Wellness Studio 360 is a home fitness and wellbeing brand designed for busy individuals who want to stay healthy, fit..."
+            text: " From Manual Engagement to AI-Driven Personalization with LeadScoring AI."
         },
         {
             image: CaseStudiesImg.caseDentiq,
             url: ROUTES.CASE_STUDY_DENTIQ.PATH,
             title: "DentiQ",
-            text: "DentiQ is a premium, patient-focused dental clinic and oral care brand that combines advanced technology with a ..."
+            text: "From Concept to AI-Optimized Web Presence with Landing Page Builder."
         },
-        {
-            image: CaseStudiesImg.caseBrandcom,
-            url: ROUTES.CASE_STUDY_BRANDCOM.PATH,
-            title: "Brandcom",
-            text: "Moss & Glow Beauty is a skincare brand dedicated to offering natural, sustainable, and eco-friendly products."
-        },
+        // {
+        //     image: CaseStudiesImg.caseBrandcom,
+        //     url: ROUTES.CASE_STUDY_BRANDCOM.PATH,
+        //     title: "Brandcom",
+        //     text: "Moss & Glow Beauty is a skincare brand dedicated to offering natural, sustainable, and eco-friendly products."
+        // },
         {
             image: CaseStudiesImg.casePurvia,
             url: ROUTES.CASE_STUDY_PURVIA.PATH,
             title: "Purvia",
-            text: "DentiQ is a premium, patient-focused dental clinic and oral care brand that combines advanced technology with a ..."
+            text: " From Manual Messaging to Automated Brand Storytelling with Content Agent."
         },
         {
             image: CaseStudiesImg.caseNuvera,
             url: ROUTES.CASE_STUDY_NUREVA.PATH,
             title: "Nureva",
-            text: "Nureva is a modern healthcare brand dedicated to accessible, compassionate, and patient-centered healthcare solutions..."
+            text: "From Manual Patient Engagement to AI-Powered Healthcare Support with Smart Sales Chatbot."
         },
     ]
     return (

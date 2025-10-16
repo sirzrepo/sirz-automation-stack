@@ -1,4 +1,6 @@
 import { DentiqAchievedImgs, DentiqBg, DentiqTeethImg, DentiqWomanTeethImg, greatBg } from "../../assets";
+import UniversalChart from "../../features/rechart";
+import { calendyLink } from "../../utils";
 
 const data = [
     {
@@ -10,6 +12,25 @@ const data = [
     {
         description: `Holistic Oral Health Approach: Beyond treatment—education, prevention, and wellness-focused dental plans.`
     },
+]
+
+const chartData = [
+    {
+        name: "Appointment Bookings",
+        value: 52
+    },
+    {
+        name: "Page Creation and Updates",
+        value: 45
+    },
+    {
+        name: "Visitor-to-Lead Conversion",
+        value: 38
+    },
+    {
+        name: "Manual Design Effort (Reduction)",
+        value: 70
+    }
 ]
 
 export default function DentiQ() {
@@ -52,9 +73,8 @@ export default function DentiQ() {
                 <div className=" w-[90%] m-auto sm:grid grid-cols-3 py-10">
                     <header className=" font-bold sm:text-[40px] text-[25px] col-span-1">Brand Overview</header>
                     <div className=" col-span-2 sm:text-[20px] text-sm sm:leading-10 leading-8 text-justify">
-                        DentiQ is a premium, patient-focused dental clinic and oral care brand that combines advanced technology with a personalized touch to redefine the dental experience.
-                        With a commitment to precision, comfort, and innovation, DentiQ ensures that every patient receives cutting-edge treatment in a spa-like, stress-free environment.
-                        Their tagline, "Smart Smiles, Lasting Impressions," reflects their dedication to providing high-quality dental care that enhances both oral health and confidence.
+                        DentiQ is a premium dental care brand focused on tech-driven, patient-centered services. Their
+                        offerings include AI-assisted diagnostics, pain-free laser treatments, and 3D smile simulations.
                     </div>
                 </div>
             </section>
@@ -63,9 +83,7 @@ export default function DentiQ() {
                     <div className="text-justify m-auto sm:w-[80%] w-[90%] max-sm:pt-5 col-span-3">
                         <header className="sm:text-[40px] text-[25px] font-bold">The Client's Aim</header>
                         <p className=" pt-5 leading-8">
-                            DentiQ wanted a modern and sophisticated brand identity that positioned them as a trustworthy, tech-driven, and patient-centered dental care provider.
-                            They aimed to differentiate themselves through a luxury dental experience, holistic oral health approach,
-                            and the integration of AI-assisted diagnostics, pain-free laser treatments, and 3D smile simulations.
+                            Manually designing landing pages that reflected DentiQ’s luxury, tech-forward identity was timeintensive and inconsistent.
                         </p>
                     </div>
                     <div className=" col-span-2 ">
@@ -81,6 +99,65 @@ export default function DentiQ() {
                     <div className=" rounded-full flex items-center justify-center sm:py-4 py-2 max-sm:w-[120px] bg-[#FD7000]">Friendly</div>
                     <div className=" rounded-full flex items-center justify-center sm:py-4 py-2 max-sm:w-[120px] bg-colorBlueDeep">Educational</div>
                     <div className=" rounded-full flex items-center justify-center sm:py-4 py-2 max-sm:w-[120px] bg-[#FD7000]">Appreachable</div>
+                </div>
+            </section>
+
+            {/* Solution */}
+            <section className="py-16 bg-white dark:bg-[#222222]">
+                <div className="w-[90%] max-w-6xl mx-auto">
+                    <h2 className="text-4xl font-bold text-center mb-12">Solution – Powered by Landing Page Builder</h2>
+                    <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-8">
+                            <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg">
+                                <h3 className="text-xl font-semibold mb-3">AI-Optimized Web Presence</h3>
+                                <p className="text-gray-600 dark:text-white">
+                                    Sirz implemented Landing Page Builder, our AI-driven page generator, to create optimized web pages that reflect DentiQ's luxury, tech-forward identity.
+                                </p>
+                            </div>
+                            <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg">
+                                <h3 className="text-xl font-semibold dark:text-white mb-3">Key Capabilities</h3>
+                                <ul className="space-y-3 text-gray-600 dark:text-white">
+                                    <li className="flex items-start">
+                                        <span className="mr-2">•</span>
+                                        <span>Generate high-converting, on-brand landing pages quickly</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="mr-2">•</span>
+                                        <span>Integrate services, testimonials, and AI features automatically</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="mr-2">•</span>
+                                        <span>Optimize layout and calls-to-action using predictive AI</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="mr-2">•</span>
+                                        <span>Continuously test and refine pages based on engagement data</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="bg-gradient-to-br from-colorBlueDeep to-[#FD7000] rounded-lg p-8 text-white flex flex-col justify-center">
+                            <h3 className="text-2xl font-bold mb-4">The Result:</h3>
+                            <p className="text-lg mb-6">
+                                DentiQ transformed its digital presence with an AI-powered system that delivers 
+                                high-performing, on-brand landing pages while significantly reducing design and development time.
+                            </p>
+                            <div className="mt-4 space-y-4">
+                                <div className="flex items-center">
+                                    <div className="w-3 h-3 bg-white rounded-full mr-3"></div>
+                                    <span>52% increase in appointment bookings</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <div className="w-3 h-3 bg-white rounded-full mr-3"></div>
+                                    <span>45% faster page creation and updates</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <div className="w-3 h-3 bg-white rounded-full mr-3"></div>
+                                    <span>70% reduction in manual web design effort</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -127,6 +204,73 @@ export default function DentiQ() {
             </section>
             <section className=" py-14">
                 <img src={DentiqTeethImg} alt="" className=" w-full object-cover" />
+            </section>
+
+            <section className="relative my-10">
+                <img src={DentiqBg} alt="" className=" sm:h-[500px] h-[250px] w-full object-cover" />
+                <div className=" bg-[#030202d1] absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center">
+                    <div className=" w-[70%] m-auto text-center flex justify-center flex-col items-center">
+                        <h4 className="font-bold sm:text-[30px] text-[20px] text-white pb-8">
+                            DentiQ shifted to a fully automated, AI-optimized digital presence, reinforcing their luxury and
+                            tech-driven brand while maximizing patient engagement.
+                        </h4>
+                        <a href={calendyLink} target="_blank" rel="noopener noreferrer" className={` bg-white text-black rounded-full sm:w-[30%] w-full max-sm:mt-5
+                                    'w-full flex align-center justify-center py-3 cursor-pointer text-[16px] px-8 font-medium floating-button  
+                                    `}>
+                            <button 
+                                onClick={() => { }}>
+                                Schedule a demo
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section className=" py-16">
+                <div className="w-[90%] max-w-6xl mx-auto">
+                    <h2 className="text-4xl font-bold text-center mb-12">Impact (from the Landing Page Builder Dashboard)</h2>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg text-center">
+                            <div className="text-4xl mb-3">📈</div>
+                            <p className="text-3xl font-bold text-[#4CAF50]">52%</p>
+                            <p className="text-gray-600 dark:text-white mt-2">increase in appointment bookings</p>
+                        </div>
+                        <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg text-center">
+                            <div className="text-4xl mb-3">⚡</div>
+                            <p className="text-3xl font-bold text-[#2196F3]">45%</p>
+                            <p className="text-gray-600 dark:text-white mt-2">faster page creation and updates</p>
+                        </div>
+                        <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg text-center">
+                            <div className="text-4xl mb-3">🖥</div>
+                            <p className="text-3xl font-bold text-[#FF9800]">38%</p>
+                            <p className="text-gray-600 dark:text-white mt-2">higher visitor-to-lead conversion</p>
+                        </div>
+                        <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg text-center">
+                            <div className="text-4xl mb-3">⏱</div>
+                            <p className="text-3xl font-bold text-[#9C27B0]">70%</p>
+                            <p className="text-gray-600 dark:text-white mt-2">reduction in manual web design effort</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="py-12 bg-white  dark:bg-[#222222]">
+                <div className="w-[90%] max-w-4xl mx-auto">
+                    <UniversalChart 
+                        type="bar" 
+                        data={chartData} 
+                        dataKeyX="name" 
+                        dataKeyY="value" 
+                        height={500}
+                    />
+                    <div className="mt-12 p-6 bg-gray-50 dark:bg-[#424242] rounded-lg">
+                        <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Insight for Product Evolution</h3>
+                        <p className="text-gray-600 dark:text-white">
+                            This refined the Landing Page Builder’s Brand Alignment Engine, ensuring AI-generated pages
+                            consistently reflect luxury and innovation.
+                        </p>
+                    </div>
+                </div>
             </section>
         </div>
     )
