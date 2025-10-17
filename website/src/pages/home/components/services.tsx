@@ -4,33 +4,42 @@ export default function DashboardServices() {
 
     const services = [
         {
-            title: "Automation Engine",
-            description: "Goal: Save time and reduce operational inefficiency by automating repetitive workflows.",
+            title: "Smart Automation",
+            description: "Goal: Drive targeted awareness and engagement through AI-powered campaigns.",
             features: [
-                "Workflow automation for routine tasks",
-                "Trigger-based processes (emails, notifications, updates)",
-                "Integration with existing tools",
-                "Error reduction through standardized processes",
+                "AI-Powered SEO & Copywriting",
+                "Traffic Campaign Orchestration",
+                "AI-Predictive Ad Optimization",
+                "Organic Content Automation",
+                "Automated reminders and nurture flows.",
+                "Campaign workflows auto-sync with analytics agents.",
+                "Multi-agent collaboration (SEO agent, Ads agent, Content agent) with shared goals.",
             ]
         },
         {
-            title: " CRM & Client Hub",
-            description: "Centralize customer management and improve collaboration across teams.",
+            title: "Conversion Intelligence",
+            description: "Goal: Maximize lead-to-customer conversions with dynamic, AI-driven funnels.",
             features: [
-                "Unified database for leads, clients, and interactions",
-                "Sales pipeline tracking and management",
-                "Integrated customer support tools",
-                "Collaboration space for sales, marketing, and service teams",
+                "AI Chatbot Agent",
+                "AI Lead Scoring",
+                "Dynamic Landing Page Generator",
+                "Lead Magnet Funnels",
+                "Conversion Dashboard",
+                "Workflow builder for funnel experiments.",
+                "Conversion agent integrates with ads + landing pages for closed-loop feedback",
             ]
         },
         {
-            title: "Analytics & Insights",
-            description: "Goal: Provide visibility into performance and enable data-driven decision-making.",
+            title: "Retention & Ops",
+            description: "Goal: Retain customers and scale operations with AI-driven engagement.",
             features: [
-                "Real-time dashboards",
-                "Customizable reporting tools",
-                "KPI and performance tracking",
-                "Predictive insights for smarter planning",
+                "Cross-Border Sales Automation",
+                "Revenue Ops Workflows",
+                "Behavioral Retargeting",
+                "Competitor Ads Intelligence",
+                "Retention Sequence",
+                "Retention agents that auto-adjust email frequency, offers, and reactivation flows.",
+                "Workflow-level monitoring of customer journeys across multiple channels.",
             ]
         }
     ]

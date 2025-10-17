@@ -174,7 +174,7 @@ export default function ScheduleDemoForm() {
               </label>
               <input
                 id="website"
-                type="url"
+                type="text"
                 value={formData.website}
                 onChange={(e) => handleInputChange("website", e.target.value)}
                 className="h-12 border-gray-300 rounded-lg border border-gray-300 px-3 rounded-lg"
