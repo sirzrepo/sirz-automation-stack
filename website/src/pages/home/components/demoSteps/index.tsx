@@ -71,6 +71,7 @@ export default function DemoSteps() {
             console.error('Error:', error);
         } finally {
             setIsLoading(false);
+            setStep(1)
         }
     };
     
@@ -121,7 +122,7 @@ export default function DemoSteps() {
         <div className="fixed top-0 left-0 right-0 bottom-0 z-50">
             <div className="min-h-screen bg-gradient-to-br from-[#032247] via-[#2743b7] to-blue-300 flex items-center justify-center p-4">
                 <div>
-                  <X onClick={handleCloseModal} size={40} className="text-5xl absolute top-4 right-4 cursor-pointer bg-white p-2 rounded-full" />
+                  <X onClick={handleCloseModal} size={40} className="text-5xl absolute top-4 right-4 cursor-pointer bg-white dark:bg-zinc-900 p-2 rounded-full" />
                 </div>
                 {steps[step - 1].component}
             </div>

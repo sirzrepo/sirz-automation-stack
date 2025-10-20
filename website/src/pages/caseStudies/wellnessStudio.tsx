@@ -1,25 +1,15 @@
-import { WellnessAchievedLogo, WellnessAchievedPalete, WellnessAchievedTagling, WellnessAchievedTypography, WellnessAchievedUser, WellnessAchievedVisual, WellnesslogoHalf, WellnessStudioBg, WellnessStudioBg2, WellnessWoman } from "../../assets";
-import UniversalChart from "../../features/rechart";
+import { WellnessAchievedLogo, WellnessAchievedPalete, WellnessAchievedTagling, WellnessAchievedTypography, WellnessAchievedUser, WellnessAchievedVisual, WellnessGraphImgFive, WellnessGraphImgFour, WellnessGraphImgOne, WellnessGraphImgThree, WellnessGraphImgTwo, WellnesslogoHalf, WellnessStudioBg, WellnessStudioBg2, WellnessWoman } from "../../assets";
+import GraphLayout from "../../components/layout/graphLayout";
 import { calendyLink } from "../../utils";
 
-const data = [
-    {
-        name: "Daily Engagement",
-        value: 46
-    },
-    {
-        name: "Returning Users",
-        value: 33
-    },
-    {
-        name: "Workflow Execution",
-        value: 60
-    },
-    {
-        name: "Personalization Accuracy",
-        value: 100
-    }
-]
+
+   const imageGridData = [
+        WellnessGraphImgOne,
+        WellnessGraphImgTwo,
+        WellnessGraphImgThree,
+        WellnessGraphImgFour,
+        WellnessGraphImgFive
+    ]
 
 export default function WellnessStudio360() {
     const achieveData = [
@@ -175,7 +165,7 @@ export default function WellnessStudio360() {
             </section>
 
             <section className="relative my-10">
-                <img src={WellnessAchievedLogo} alt="" className=" sm:h-[500px] h-[250px] w-full object-cover" />
+                <img src={WellnessAchievedLogo} alt="" className=" sm:h-[500px] h-[400px] w-full object-cover" />
                 <div className=" bg-[#030202d1] absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center">
                     <div className=" w-[70%] m-auto text-center flex justify-center flex-col items-center">
                         <h4 className="font-bold sm:text-[30px] text-[20px] text-white pb-8">
@@ -194,7 +184,7 @@ export default function WellnessStudio360() {
                 </div>
             </section>
 
-            <section className=" py-16">
+            {/* <section className=" py-16">
                 <div className="w-[90%] max-w-6xl mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-12">Impact (from the LeadScoring AI Dashboard)</h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -220,10 +210,11 @@ export default function WellnessStudio360() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <section className="py-12 bg-white dark:bg-[#222222]">
-                <div className="w-[90%] max-w-4xl mx-auto">
+                <GraphLayout images={imageGridData} />
+                {/* <div className="w-[90%] max-w-4xl mx-auto">
                     <UniversalChart 
                         type="area" 
                         data={data} 
@@ -238,7 +229,7 @@ export default function WellnessStudio360() {
                             automated engagement for wellness brands.
                         </p>
                     </div>
-                </div>
+                </div> */}
             </section>
         </div>
     )

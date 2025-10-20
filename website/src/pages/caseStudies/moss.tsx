@@ -1,26 +1,23 @@
-import { AchievementImg_Five, AchievementImg_Four, AchievementImg_one, AchievementImg_Three, AchievementImg_Two, MossClientImg, MossGlowBg, MossGlowBg2, MossGlowLastBg } from "../../assets";
-import UniversalChart from "../../features/rechart";
+import { 
+    AchievementImg_Five, 
+    AchievementImg_Four, AchievementImg_one, AchievementImg_Three, AchievementImg_Two, MossAchievedImgFive, MossAchievedImgFour, MossAchievedImgOne, MossAchievedImgSix, MossAchievedImgThree, MossAchievedImgTwo, MossClientImg, MossGlowBg, MossGlowBg2, MossGlowLastBg } from "../../assets";
+import GraphLayout from "../../components/layout/graphLayout";
 import { calendyLink } from "../../utils";
 
 export default function MossGlowBeauty() {
-    const data = [
-        {
-            name: "Returning Customers",
-            value: 37
-        },
-        {
-            name: "Campaign ROIe Executions Speed",
-            value: 42
-        },
-        {
-            name: "Engagement Rate",
-            value: 28
-        }
+
+    const imageGridData = [
+        MossAchievedImgOne,
+        MossAchievedImgTwo,
+        MossAchievedImgThree,
+        MossAchievedImgFour,
+        MossAchievedImgFive,
+        MossAchievedImgSix
     ]
     return (
         <div>
             <section className="relative">
-                <img src={MossGlowBg} alt="" className=" sm:h-[500px] h-[250px] w-full object-cover" />
+                <img src={MossGlowBg} alt="" className=" sm:h-[500px] h-[400px] w-full object-cover" />
                 <div className=" bg-[#0302022b] flex justify-center items-center absolute top-0 bottom-0 left-0 right-0">
                     <h4 className="font-bold sm:text-[40px] text-[20px] text-white">Moss & Glow Beauty</h4>
                 </div>
@@ -198,7 +195,7 @@ export default function MossGlowBeauty() {
                 </div>
             </section>
 
-            <section className=" py-16">
+            {/* <section className=" py-16">
                 <div className="w-[90%] max-w-6xl mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-12">Impact (from the BrandCom Dashboard)</h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -224,10 +221,11 @@ export default function MossGlowBeauty() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <section className="py-12 bg-white dark:bg-[#222222]">
-                <div className="w-[90%] max-w-4xl mx-auto">
+                <GraphLayout images={imageGridData} />
+                {/* <div className="w-[90%] max-w-4xl mx-auto">
                     <UniversalChart 
                         type="bar" 
                         data={data} 
@@ -242,7 +240,7 @@ export default function MossGlowBeauty() {
                             campaigns for eco-conscious brands without compromising authenticity.
                         </p>
                     </div>
-                </div>
+                </div> */}
             </section>
 
             

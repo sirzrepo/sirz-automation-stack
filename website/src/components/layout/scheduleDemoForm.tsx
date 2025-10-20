@@ -7,7 +7,7 @@ import { X } from "lucide-react"
 import Button from "../common/button"
 import { useAppDispatch, useAppSelector } from "../../app/hook"
 import { allReduxSliceInfo, setShowScheduleDemoModal, setShowSuccessModal } from "../../features/reduxSlice"
-import { sirzLogo } from "../../assets"
+import { sirzLogo, sirzLogoWhite } from "../../assets"
 import SuccessModal from "./successModal"
 import axios from "axios"
 import { BASE_URL } from "../../utils"
@@ -15,7 +15,7 @@ import { BASE_URL } from "../../utils"
 export default function ScheduleDemoForm() {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const { showScheduleDemoModal } = useAppSelector(allReduxSliceInfo)
+  const { showScheduleDemoModal, isDarkMode } = useAppSelector(allReduxSliceInfo)
   const [error, setError] = useState("")
   const [formData, setFormData] = useState({
     firstName: "",
@@ -79,19 +79,19 @@ export default function ScheduleDemoForm() {
     <div className="fixed top-0 left-0 right-0 bottom-0 z-50">
       <div className="min-h-screen bg-gradient-to-br from-[#032247] via-[#2743b7] to-blue-300 flex items-center justify-center p-4">
         <div>
-          <X onClick={handleCloseModal} size={40} className="text-5xl absolute top-4 right-4 cursor-pointer bg-white p-2 rounded-full" />
+          <X onClick={handleCloseModal} size={40} className="text-5xl absolute top-4 right-4 cursor-pointer bg-white dark:bg-zinc-900 p-2 rounded-full" />
         </div>
-      <div className="w-full max-w-4xl p-8 bg-white shadow-2xl  border-r-[0.6em] border-l-[0.6em] border-b-[0.2em] max-sm:max-h-[86vh] overflow-y-auto border-teal-400 rounded-3xl border-0 relative">
+      <div className="w-full max-w-4xl p-8 bg-white dark:bg-zinc-900 shadow-2xl  border-r-[0.6em] border-l-[0.6em] border-b-[0.2em] max-sm:max-h-[86vh] overflow-y-auto border-teal-400 rounded-3xl border-0 relative">
         {/* Subtle glow effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 via-blue-400/20 to-purple-400/20 rounded-lg blur-xl -z-10" />
 
         <div className="flex justify-between items-start mb-8">
           <div>
-            <h1 className="text-3xl font-semibold text-gray-900 mb-2">Let's get started</h1>
-            <p className="text-gray-600">Schedule a demo with us to get started</p>
+            <h1 className="text-3xl font-semibold text-gray-900 dark:text-white mb-2">Let's get started</h1>
+            <p className="text-gray-600 dark:text-gray-300">Schedule a demo with us to get started</p>
           </div>
           <div className="inline-flex items-center gap-1 text-2xl font-bold text-blue-600">
-            <img src={sirzLogo} alt="" />
+            <img src={isDarkMode ? sirzLogoWhite : sirzLogo} alt="" />
           </div>
         </div>
 
@@ -99,26 +99,26 @@ export default function ScheduleDemoForm() {
           {/* First row: First name and Last name */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2 flex flex-col">
-              <label htmlFor="firstName" className="text-sm font-medium text-gray-700">
+              <label htmlFor="firstName" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 First name *
               </label>
               <input
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => handleInputChange("firstName", e.target.value)}
-                className="h-12 border-gray-300 rounded-lg border border-gray-300 px-3 rounded-lg"
+                className="h-12 border-gray-300 dark:bg-gray-600 rounded-lg border border-gray-300 px-3 rounded-lg"
                 required
               />
             </div>
             <div className="space-y-2 flex flex-col">
-              <label htmlFor="lastName" className="text-sm font-medium text-gray-700">
+              <label htmlFor="lastName" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Last name *
               </label>
               <input
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => handleInputChange("lastName", e.target.value)}
-                className="h-12 border-gray-300 rounded-lg border border-gray-300 px-3 rounded-lg"
+                className="h-12 border-gray-300 dark:bg-gray-600 rounded-lg border border-gray-300 px-3 rounded-lg"
                 required
               />
             </div>
@@ -127,7 +127,7 @@ export default function ScheduleDemoForm() {
           {/* Second row: Email and Phone */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2 flex flex-col">
-              <label htmlFor="email" className="text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Email address *
               </label>
               <input
@@ -135,12 +135,12 @@ export default function ScheduleDemoForm() {
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
-                className="h-12 border-gray-300 rounded-lg border border-gray-300 px-3 rounded-lg"
+                className="h-12 border-gray-300 dark:bg-gray-600 rounded-lg border border-gray-300 px-3 rounded-lg"
                 required
               />
             </div>
             <div className="space-y-2 flex flex-col">
-              <label htmlFor="phone" className="text-sm font-medium text-gray-700">
+              <label htmlFor="phone" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Phone number *
               </label>
               <input
@@ -148,7 +148,7 @@ export default function ScheduleDemoForm() {
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => handleInputChange("phone", e.target.value)}
-                className="h-12 border-gray-300 rounded-lg border border-gray-300 px-3 rounded-lg"
+                className="h-12 border-gray-300 dark:bg-gray-600 rounded-lg border border-gray-300 px-3 rounded-lg"
                 required
               />
             </div>
@@ -157,19 +157,19 @@ export default function ScheduleDemoForm() {
           {/* Third row: Company and Website */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2 flex flex-col">
-              <label htmlFor="company" className="text-sm font-medium text-gray-700">
+              <label htmlFor="company" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Company name *
               </label>
               <input
                 id="company"
                 value={formData.company}
                 onChange={(e) => handleInputChange("company", e.target.value)}
-                className="h-12 border-gray-300 rounded-lg border border-gray-300 px-3 rounded-lg"
+                className="h-12 border-gray-300 dark:bg-gray-600 rounded-lg border border-gray-300 px-3 rounded-lg"
                 required
               />
             </div>
             <div className="space-y-2 flex flex-col">
-              <label htmlFor="website" className="text-sm font-medium text-gray-700">
+              <label htmlFor="website" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Website URL *
               </label>
               <input
@@ -177,7 +177,7 @@ export default function ScheduleDemoForm() {
                 type="text"
                 value={formData.website}
                 onChange={(e) => handleInputChange("website", e.target.value)}
-                className="h-12 border-gray-300 rounded-lg border border-gray-300 px-3 rounded-lg"
+                className="h-12 border-gray-300 dark:bg-gray-600 rounded-lg border border-gray-300 px-3 rounded-lg"
                 required
               />
             </div>
@@ -186,11 +186,11 @@ export default function ScheduleDemoForm() {
           {/* Fourth row: Dropdowns */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2 flex flex-col">
-              <label className="text-sm font-medium text-gray-700">Number of employees</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Number of employees</label>
               <select 
               value={formData.employees} 
               onChange={(e) => handleInputChange("employees", e.target.value)}
-              className="h-12 border-gray-300 rounded-lg bg-transparent border border-gray-300 px-3 rounded-lg"
+              className="h-12 border-gray-300 dark:bg-gray-600 rounded-lg border border-gray-300 px-3 rounded-lg"
               required>
                 <option value="">Please select</option>
                 <option value="1-10">1-10</option>
@@ -201,11 +201,11 @@ export default function ScheduleDemoForm() {
               </select>
             </div>
             <div className="space-y-2 flex flex-col">
-              <label className="text-sm font-medium text-gray-700">Country of company headquarters</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Country of company headquarters</label>
               <select 
               value={formData.country} 
               onChange={(e) => handleInputChange("country", e.target.value)}
-              className="h-12 border-gray-300 rounded-lg bg-transparent border border-gray-300 px-3 rounded-lg"
+              className="h-12 border-gray-300 dark:bg-gray-600 rounded-lg border border-gray-300 px-3 rounded-lg"
               required>
                 <option value="">Please select</option>
                 <option value="usa">United States</option>

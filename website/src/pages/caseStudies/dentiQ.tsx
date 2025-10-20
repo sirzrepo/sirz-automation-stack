@@ -1,5 +1,5 @@
-import { DentiqAchievedImgs, DentiqBg, DentiqTeethImg, DentiqWomanTeethImg, greatBg } from "../../assets";
-import UniversalChart from "../../features/rechart";
+import { DentiqAchievedImgs, DentiqBg, DentiqGraphImgFive, DentiqGraphImgFour, DentiqGraphImgOne, DentiqGraphImgThree, DentiqGraphImgTwo, DentiqTeethImg, DentiqWomanTeethImg, greatBg } from "../../assets";
+import GraphLayout from "../../components/layout/graphLayout";
 import { calendyLink } from "../../utils";
 
 const data = [
@@ -14,24 +14,14 @@ const data = [
     },
 ]
 
-const chartData = [
-    {
-        name: "Appointment Bookings",
-        value: 52
-    },
-    {
-        name: "Page Creation and Updates",
-        value: 45
-    },
-    {
-        name: "Visitor-to-Lead Conversion",
-        value: 38
-    },
-    {
-        name: "Manual Design Effort (Reduction)",
-        value: 70
-    }
+const imageGridData = [
+    DentiqGraphImgOne,
+    DentiqGraphImgTwo,
+    DentiqGraphImgThree,
+    DentiqGraphImgFour,
+    DentiqGraphImgFive,
 ]
+
 
 export default function DentiQ() {
 
@@ -65,7 +55,7 @@ export default function DentiQ() {
     return (
         <div>
             <section className="relative">
-                <img src={DentiqBg} alt="" className=" sm:h-[500px] h-[250px] w-full object-cover" />
+                <img src={DentiqBg} alt="" className=" sm:h-[500px] h-[400px] w-full object-cover" />
                 <div className=" bg-[#0302022b] flex justify-center items-center absolute top-0 bottom-0 left-0 right-0">
                 </div>
             </section>
@@ -226,7 +216,7 @@ export default function DentiQ() {
                 </div>
             </section>
 
-            <section className=" py-16">
+            {/* <section className=" py-16">
                 <div className="w-[90%] max-w-6xl mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-12">Impact (from the Landing Page Builder Dashboard)</h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -252,10 +242,11 @@ export default function DentiQ() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <section className="py-12 bg-white  dark:bg-[#222222]">
-                <div className="w-[90%] max-w-4xl mx-auto">
+                <GraphLayout images={imageGridData} />
+                {/* <div className="w-[90%] max-w-4xl mx-auto">
                     <UniversalChart 
                         type="bar" 
                         data={chartData} 
@@ -270,7 +261,7 @@ export default function DentiQ() {
                             consistently reflect luxury and innovation.
                         </p>
                     </div>
-                </div>
+                </div> */}
             </section>
         </div>
     )

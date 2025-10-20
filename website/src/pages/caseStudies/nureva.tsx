@@ -1,28 +1,17 @@
-import { NuveraAchievedImgs, NuveraBg, NuveraSection2Bg } from "../../assets";
+import { NuveraAchievedImgs, NuveraBg, NuveraGraphImgFive, NuveraGraphImgFour, NuveraGraphImgOne, NuveraGraphImgThree, NuveraGraphImgTwo, NuveraSection2Bg } from "../../assets";
 import HeaderFormat from "../../components/header";
-import UniversalChart from "../../features/rechart";
+import GraphLayout from "../../components/layout/graphLayout";
 import { calendyLink } from "../../utils";
 
 export default function Nureva() {
 
-    const chartData = [
-        {
-            name: "Response Time to Queries (Reduction)",
-            value: 65
-        },
-        {
-            name: "Scheduling Appointments",
-            value: 85
-        },
-        {
-            name: "Patient Support & Trust",
-            value: 42
-        },
-        {
-            name: "Manual Support Effort (Reduction)",
-            value: 50
-        }
-    ]
+    const imageGridData = [
+        NuveraGraphImgOne,
+        NuveraGraphImgTwo,
+        NuveraGraphImgThree,
+        NuveraGraphImgFour,
+        NuveraGraphImgFive
+        ]
 
     const achieveData = [
         {
@@ -59,7 +48,7 @@ export default function Nureva() {
     return (
         <div>
             <section className="relative">
-                <img src={NuveraBg} alt="" className=" sm:h-[500px] h-[250px] w-full object-cover" />
+                <img src={NuveraBg} alt="" className=" sm:h-[500px] h-[400px] w-full object-cover" />
                 <div className=" bg-[#0302022b] flex justify-center items-center absolute top-0 bottom-0 left-0 right-0">
                     <h4 className="font-bold sm:text-[40px] text-[20px] text-white">Nuvera - Case Study</h4>
                 </div>
@@ -196,7 +185,7 @@ export default function Nureva() {
                     <div className=" w-[70%] m-auto text-center flex justify-center flex-col items-center">
                         <h4 className="font-bold sm:text-[30px] text-[20px] text-white pb-8">
                             Nureva transitioned to a fully AI-powered patient engagement system, ensuring instant, accurate,
-and compassionate responses while freeing staff for care delivery.
+                            and compassionate responses while freeing staff for care delivery.
                         </h4>
                         <a href={calendyLink} target="_blank" rel="noopener noreferrer" className={` bg-white text-black rounded-full sm:w-[30%] w-full max-sm:mt-5
                                     'w-full flex align-center justify-center py-3 cursor-pointer text-[16px] px-8 font-medium floating-button  
@@ -210,7 +199,7 @@ and compassionate responses while freeing staff for care delivery.
                 </div>
             </section>
 
-            <section className=" py-16">
+            {/* <section className=" py-16">
                 <div className="w-[90%] max-w-6xl mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-12">Impact (from the Smart Sales Chatbot Dashboard)</h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -233,13 +222,14 @@ and compassionate responses while freeing staff for care delivery.
                             <div className="text-4xl mb-3">⏱</div>
                             <p className="text-3xl font-bold text-[#9C27B0]">65%</p>
                             <p className="text-gray-600 dark:text-white mt-2">reduction in manual support effort</p>
-rust                        </div>
+                       </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <section className="py-12 dark:bg-[#222222]">
-                <div className="w-[90%] max-w-4xl mx-auto">
+                <GraphLayout images={imageGridData} />
+                {/* <div className="w-[90%] max-w-4xl mx-auto">
                     <UniversalChart 
                         type="pie" 
                         data={chartData} 
@@ -254,7 +244,7 @@ rust                        </div>
                             compassionate interactions for healthcare brands.
                         </p>
                     </div>
-                </div>
+                </div> */}
             </section>
         </div>
     )

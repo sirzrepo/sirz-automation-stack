@@ -220,6 +220,76 @@ export const TeamImgs = {
 
 };
 
+// case studies grapgh images
+// moss and glow
+import mossAchievedImgOne from '../pages/caseStudies/images/Moss and Glow 10.jpg';
+import mossAchievedImgTwo from '../pages/caseStudies/images/Moss and Glow 11.jpg';
+import mossAchievedImgThree from '../pages/caseStudies/images/Moss and Glow 5.jpg';
+import mossAchievedImgFour from '../pages/caseStudies/images/Moss and Glow 7.jpg';
+import mossAchievedImgFive from '../pages/caseStudies/images/Moss and Glow 8.jpg';
+import mossAchievedImgSix from '../pages/caseStudies/images/Moss and Glow 9.jpg';
+
+export const MossAchievedImgOne = mossAchievedImgOne;
+export const MossAchievedImgTwo = mossAchievedImgTwo;
+export const MossAchievedImgThree = mossAchievedImgThree;
+export const MossAchievedImgFour = mossAchievedImgFour;
+export const MossAchievedImgFive = mossAchievedImgFive;
+export const MossAchievedImgSix = mossAchievedImgSix;
+
+// dentiQ
+import dentiqGraphImgOne from '../pages/caseStudies/images/DentiQ 1.jpg';
+import dentiqGraphImgTwo from '../pages/caseStudies/images/DentiQ 2.jpg';
+import dentiqGraphImgThree from '../pages/caseStudies/images/DentiQ 3.jpg';
+import dentiqGraphImgFour from '../pages/caseStudies/images/DentiQ 4.jpg';
+import dentiqGraphImgFive from '../pages/caseStudies/images/DentiQ 5.jpg';
+
+export const DentiqGraphImgOne = dentiqGraphImgOne;
+export const DentiqGraphImgTwo = dentiqGraphImgTwo;
+export const DentiqGraphImgThree = dentiqGraphImgThree;
+export const DentiqGraphImgFour = dentiqGraphImgFour;
+export const DentiqGraphImgFive = dentiqGraphImgFive;
+
+// nuvera
+import nuveraGraphImgOne from '../pages/caseStudies/images/Nuvera 1.jpg';
+import nuveraGraphImgTwo from '../pages/caseStudies/images/Nuvera 2.jpg';
+import nuveraGraphImgThree from '../pages/caseStudies/images/Nuvera 3.jpg';
+import nuveraGraphImgFour from '../pages/caseStudies/images/Nuvera 4.jpg';
+import nuveraGraphImgFive from '../pages/caseStudies/images/Nuvera 5.jpg';
+
+export const NuveraGraphImgOne = nuveraGraphImgOne;
+export const NuveraGraphImgTwo = nuveraGraphImgTwo;
+export const NuveraGraphImgThree = nuveraGraphImgThree;
+export const NuveraGraphImgFour = nuveraGraphImgFour;
+export const NuveraGraphImgFive = nuveraGraphImgFive;
+
+// irose
+import iroseGraphImgOne from '../pages/caseStudies/images/Irose Fashion 1.jpg';
+import iroseGraphImgTwo from '../pages/caseStudies/images/Irose Fashion  2.jpg';
+import iroseGraphImgThree from '../pages/caseStudies/images/Irose Fashion  3.jpg';
+import iroseGraphImgFour from '../pages/caseStudies/images/Irose Fashion 4.jpg';
+import iroseGraphImgFive from '../pages/caseStudies/images/Irose Fashion 5.jpg';
+import iroseGraphImgSix from '../pages/caseStudies/images/Irose Fashion 6.jpg';
+
+export const IroseGraphImgOne = iroseGraphImgOne;
+export const IroseGraphImgTwo = iroseGraphImgTwo;
+export const IroseGraphImgThree = iroseGraphImgThree;
+export const IroseGraphImgFour = iroseGraphImgFour;
+export const IroseGraphImgFive = iroseGraphImgFive;
+export const IroseGraphImgSix = iroseGraphImgSix;
+
+// wellness
+import wellnessGraphImgOne from '../pages/caseStudies/images/Wellness 1.jpg';
+import wellnessGraphImgTwo from '../pages/caseStudies/images/Wellness 2.jpg';
+import wellnessGraphImgThree from '../pages/caseStudies/images/Wellness 3.jpg';
+import wellnessGraphImgFour from '../pages/caseStudies/images/Wellness 4.jpg';
+import wellnessGraphImgFive from '../pages/caseStudies/images/Wellness 5.jpg';
+
+export const WellnessGraphImgOne = wellnessGraphImgOne;
+export const WellnessGraphImgTwo = wellnessGraphImgTwo;
+export const WellnessGraphImgThree = wellnessGraphImgThree;
+export const WellnessGraphImgFour = wellnessGraphImgFour;
+export const WellnessGraphImgFive = wellnessGraphImgFive;
+
 export const slatedFrameImg = slatedFrame;
 export const sirzLogo = sirz;
 export const sirzLogoWhite = sirz_2;

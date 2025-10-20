@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Button from "../../../../components/common/button";
-import { sirzLogo } from "../../../../assets";
+import { sirzLogo, sirzLogoWhite } from "../../../../assets";
+import { useAppSelector } from "../../../../app/hook";
+import { allReduxSliceInfo } from "../../../../features/reduxSlice";
 
 interface UserDataProps {
   step: number;
@@ -13,6 +15,7 @@ interface UserDataProps {
 
 export default function UserData({ step, setStep, name, setName, email, setEmail }: UserDataProps) {
   const [isValidEmail, setIsValidEmail] = useState(true);
+  const {isDarkMode} = useAppSelector(allReduxSliceInfo)
   const [touched, setTouched] = useState({
     name: false,
     email: false
@@ -41,24 +44,24 @@ export default function UserData({ step, setStep, name, setName, email, setEmail
   const isFormValid = name.trim() !== '' && email.trim() !== '' && isValidEmail;
 
   return (
-    <div className="w-full max-w-4xl sm:p-16 max-sm:py-16 max-sm:px-6 text-center max-sm:max-h-[85vh] overflow-y-auto bg-white border-r-[0.6em] border-l-[0.6em] border-b-[0.2em] border-teal-400 shadow-2xl border-0 relative rounded-3xl">
+    <div className="w-full max-w-4xl sm:p-16 max-sm:py-16 max-sm:px-6 dark:bg-zinc-900 text-center max-sm:max-h-[85vh] overflow-y-auto bg-white border-r-[0.6em] border-l-[0.6em] border-b-[0.2em] border-teal-400 shadow-2xl border-0 relative rounded-3xl">
       {/* Subtle glow effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 via-blue-400/20 to-purple-400/20 rounded-lg blur-xl -z-10" />
 
       {/* Logo */}
       <div className="mb-8 mx-auto w-24">
-        <img src={sirzLogo} alt="SIRZ Logo" />
+        <img src={isDarkMode ? sirzLogoWhite : sirzLogo} alt="SIRZ Logo" />
       </div>
 
       {/* Welcome message */}
-      <h1 className="sm:text-4xl text-2xl font-semibold text-gray-800 mb-8">
+      <h1 className="sm:text-4xl text-2xl font-semibold text-gray-800 mb-8 dark:text-white">
         Let's get to know you
       </h1>
 
       <div className="max-w-[80%] mx-auto space-y-6 text-left">
         {/* Name Input */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="name" className="block text-sm dark:text-white font-medium text-gray-700 mb-1">
             Full Name <span className="text-red-500">*</span>
           </label>
           <input
@@ -69,7 +72,7 @@ export default function UserData({ step, setStep, name, setName, email, setEmail
             onBlur={() => handleBlur('name')}
             className={`w-full px-4 py-3 rounded-lg border ${
               touched.name && !name.trim() ? 'border-red-500' : 'border-gray-300'
-            } focus:ring-2 focus:ring-blue-500 focus:border-transparent transition`}
+            } focus:ring-2 focus:ring-blue-500 dark:text-black focus:border-transparent transition`}
             placeholder="John Doe"
             required
           />
@@ -80,7 +83,7 @@ export default function UserData({ step, setStep, name, setName, email, setEmail
 
         {/* Email Input */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-sm dark:text-white font-medium text-gray-700 mb-1">
             Email <span className="text-red-500">*</span>
           </label>
           <input
@@ -93,7 +96,7 @@ export default function UserData({ step, setStep, name, setName, email, setEmail
               (touched.email && !email.trim()) || (touched.email && !isValidEmail)
                 ? 'border-red-500'
                 : 'border-gray-300'
-            } focus:ring-2 focus:ring-blue-500 focus:border-transparent transition`}
+            } focus:ring-2 focus:ring-blue-500 dark:text-black focus:border-transparent transition`}
             placeholder="you@example.com"
             required
           />
