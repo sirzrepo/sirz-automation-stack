@@ -105,7 +105,7 @@ export default function Projects() {
                             </div>
                             <Button
                                 text="Visit the website"
-                                onClick={() => window.location.href = 'https://www.instagram.com/irosekings?igsh=MXdwOHp0a2dhM3U2NQ%3D%3D'}
+                                onClick={() => window.location.href = 'https://irosefashion.com/'}
                                 className="sm:w-[60%] w-[90%] m-auto mt-8"
                             />
                         </div>
