@@ -195,6 +195,16 @@ import purviaAchievedImgFive from './imgs/image 65 (1).png';
 import purviaAchievedImgSix from './imgs/image 3 (1).png';
 import vidDemonstration from './videos/VID-20250414-WA0006.mp4'
 
+// irose
+import iroseHeroBg from './imgs/irose/hero.png';
+import iroseSection2Bg from './imgs/irose/banner.png';
+
+import iroseAchievedImgOne from './imgs/irose/menuImg8.jpeg';
+import iroseAchievedImgTwo from './imgs/irose/menuImg9.jpeg';
+import iroseAchievedImgThree from './imgs/irose/menuImg7.jpeg';
+import iroseAchievedImgFour from './imgs/irose/menuImg1.jpg';
+import iroseAchievedImgFive from './imgs/irose/menuImg3.jpeg';
+import iroseAchievedImgSix from './imgs/irose/menuImg5.jpeg';
 
 // case studies
 import caseMoss from './imgs/caseMoss.svg';
@@ -203,6 +213,7 @@ import caseBrandcom from './imgs/caseBrandcom.svg';
 import casePurvia from './imgs/casePurvia.svg';
 import caseWellness from './imgs/caseWellness.svg';
 import caseNuvera from './imgs/Frame 1781.png';
+import caseIrose from './imgs/irose/menuImg8.jpeg';
 
 // Team members
 import femiImg from './imgs/Frame 1772.png';
@@ -366,6 +377,8 @@ export const brandImg = [
     brandImgOne,
     brandImgTwo
 ];
+
+// ra
 export const brandSliderImg = [
     brandSilderOne,
     brandSilderTwo,
@@ -457,6 +470,18 @@ export const PurviaAchievedImgs = {
     purviaAchievedImgSix,
 };
 
+// irose
+export const IroseHeroBg = iroseHeroBg;
+export const IroseSection2Bg = iroseSection2Bg;
+export const IroseAchievedImgs = {
+    iroseAchievedImgOne,
+    iroseAchievedImgTwo,
+    iroseAchievedImgThree,
+    iroseAchievedImgFour,
+    iroseAchievedImgFive,
+    iroseAchievedImgSix,
+};
+
 
 export const CaseStudiesImg = {
     caseMoss,
@@ -465,6 +490,7 @@ export const CaseStudiesImg = {
     casePurvia,
     caseWellness,
     caseNuvera,
+    caseIrose
 }
 
 // _________________________________________________________________________

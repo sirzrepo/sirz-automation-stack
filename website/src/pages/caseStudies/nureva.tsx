@@ -110,7 +110,7 @@ export default function Nureva() {
                             <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg">
                                 <h3 className="text-xl font-semibold mb-3">Automated Patient Engagement</h3>
                                 <p className="text-gray-600 dark:text-white">
-                                    Sirz implemented Smart Sales Chatbot, our AI-driven conversational agent, to automate patient engagement.
+                                Through the SIRZ Automation and Analytics System, Irose restructured how it engaged with retail buyers and managed its sales process.
                                 </p>
                             </div>
                             <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg">

@@ -80,6 +80,10 @@ const routes = (user: Iuser) =>
                     element: (ROUTES.CASE_STUDY_PURVIA.ELEMENT),
                 },
                 {
+                    path: (ROUTES.CASE_STUDY_IROSE_FASHION.PATH),
+                    element: (ROUTES.CASE_STUDY_IROSE_FASHION.ELEMENT),
+                },
+                {
                     path: (ROUTES.WELCOME.PATH),
                     element: (ROUTES.WELCOME.ELEMENT),
                 },

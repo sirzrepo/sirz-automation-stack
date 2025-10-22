@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { brandSliderImg } from "../../../assets";
 
-export default function Slider() {
+interface SliderProps {
+    imageArray: string[];
+}
+
+export default function Slider({ imageArray }: SliderProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const totalCards = brandSliderImg.length;
-    const visibleCards = 3; // Number of visible cards
+    const totalCards = imageArray.length;
+    const visibleCards = 5; // Number of visible cards
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -20,7 +23,7 @@ export default function Slider() {
             <div className="max-w-6xl mx-auto px-6 text-center">
                 <div className="relative flex items-center justify-center w-full ">
                     <div className="relative flex justify-center w-full overflow-x-scroll hideScrollBar h-[500px]">
-                        {brandSliderImg.map((serviceImg, index) => {
+                        {imageArray.map((serviceImg, index) => {
                             const relativeIndex = (index - currentIndex + totalCards) % totalCards;
                             const isActive = relativeIndex === Math.floor(visibleCards / 2); // Center card
 
@@ -44,14 +47,6 @@ export default function Slider() {
                                         zIndex: isActive ? 10 : 5 - Math.abs(Math.floor(visibleCards / 2) - relativeIndex),
                                     }}
                                 >
-                                    {/* <div className={`absolute z-10 ${isActive ? "bg-[#123a47d2]" : "bg-[#184c5c]"} pt-5 top-0 right-0 left-0 bottom-0 rounded-3xl`}>
-                                        <h3 className="text-xl font-semibold text-secondary_light">{service.title}</h3>
-                                        <p className="text-gray-100 w-[90%] m-auto text-[13px] text-center mt-2">
-                                            {service.description}
-                                        </p> brandSliderImg
-                                    </div> */}
-                                    {/* {
-                                        brandSliderImg.map((img, index) => ( */}
                                     <img
                                         key={index}
                                         src={serviceImg}

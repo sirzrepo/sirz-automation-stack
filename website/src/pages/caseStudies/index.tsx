@@ -32,11 +32,17 @@ export default function CaseStudies() {
         //     title: "Brandcom",
         //     text: "Moss & Glow Beauty is a skincare brand dedicated to offering natural, sustainable, and eco-friendly products."
         // },
+        // {
+        //     image: CaseStudiesImg.casePurvia,
+        //     url: ROUTES.CASE_STUDY_PURVIA.PATH,
+        //     title: "Purvia",
+        //     text: " From Manual Messaging to Automated Brand Storytelling with Content Agent."
+        // },
         {
-            image: CaseStudiesImg.casePurvia,
-            url: ROUTES.CASE_STUDY_PURVIA.PATH,
-            title: "Purvia",
-            text: " From Manual Messaging to Automated Brand Storytelling with Content Agent."
+            image: CaseStudiesImg.caseIrose,
+            url: ROUTES.CASE_STUDY_IROSE_FASHION.PATH,
+            title: "Irose Fashion",
+            text: "From Manual Messaging to Automated Brand Storytelling with Content Agent."
         },
         {
             image: CaseStudiesImg.caseNuvera,
@@ -80,7 +86,7 @@ export default function CaseStudies() {
                 <div className=" grid sm:grid-cols-2 md:w-[85%] w-[95%] py-14 m-auto gap-8">
                     {
                         caseStudies.map((data, index) => (
-                            <div key={index} className=" pb-5 bg-colorLight dark:bg-colorDark rounded-md">
+                            <div onClick={() => navigate(data?.url)} key={index} className=" pb-5 bg-colorLight dark:bg-colorDark rounded-md cursor-pointer">
                                 <img src={data.image} alt="" className="w-full object-cover rounded-t-md " />
                                 <section className=" md:w-[80%] px-3">
                                     <div className="pt-4 pb-4">

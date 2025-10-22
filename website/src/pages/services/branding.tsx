@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { BrandImgBg, BrandImgBgTwo, startSmallImg } from "../../assets";
 import Button from "../../components/common/button";
-import Slider from "./components/slider";
 import { ROUTES } from "../../constants/routes/desc";
 import { calendyLink } from "../../utils";
+import SliderContainer from "./components/sliderContainer";
 
 const Methods = [
     { num: "01", header: " Brand Discovery (AI-Powered Audit)", detail: "We start by analyzing your current brand assets and audience behavior using AI tools to uncover insights about what’s working — and what’s missing.", },
@@ -18,13 +18,6 @@ const BrandMatters = [
     { title: "Identity at Scale", details: "Stand out with instantly adaptable brand kits for every channel.", },
     { title: "Smarter Reputation Managemen", details: "Monitor, adjust, and update your brand assets from one dashboard.", },
     { title: "SEO & Visibility", details: "Optimized visuals and copy improve ranking and engagement across platforms.", },
-];
-
-const SlSocialInsta = [
-    { title: "Instagram Ads", url: "#", },
-    { title: "Landing Pages", url: "#", },
-    { title: "Brand Systems", url: "#", },
-    { title: "Client Logos", url: "#", },
 ];
 
 export default function Branding() {
@@ -145,40 +138,7 @@ export default function Branding() {
                 </section>
             </div>
 
-            <div className="pt-8">
-                {/* Header Section */}
-                <section className="w-[95%] sm:w-[85%] m-auto pt-7 ">
-                    <div className="flex gap-3 items-center mb-2">
-                        <img src={startSmallImg} alt="" className="w-5 sm:w-6" />
-                        <h2 className="font-bold text-lg sm:text-xl">See Our Work</h2>
-                    </div>
-
-                    <div>
-                        <h1 className="text-lg sm:text-2xl lg:text-3xl font-medium italic leading-snug">
-                        Explore how SIRz has helped brands evolve from static visuals to scalable, AI-powered identities.
-                        </h1>
-                    </div>
-                </section>
-
-                {/* Projects Grid */}
-                <section className="w-full m-auto mb-7 bg-colorLight dark:bg-colorDark">
-                    <div className="w-[90%] m-auto p-6 sm:p-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                        {SlSocialInsta.map((item, index) => (
-                            <section key={index}
-                                className="h-[11vh] flex justify-center first:bg-colorGreenDeeper first:border-b-[6px] border-colorGreen items-center rounded-lg 
-                               hover:bg-colorGreen shadow-md cursor-pointer transition-all py-8
-                               bg-white first:text-white text-[#001f3e] text-center hoverColor 
-                               rounded-bl-lg rounded-br-lg rounded-tl-lg rounded-tr-lg"
-                            >
-                                <h1 className="font-medium hover:text-white m-auto h-[90%] w-[99.9%] showthis flex justify-center items-center rounded-tl-lg rounded-tr-lg mt-0">{item.title}</h1>
-                            </section>
-                        ))}
-                    </div>
-                </section>
-            </div>
-            <div className=" pt-10 pb-5">
-                <Slider />
-            </div>
+            <SliderContainer />
 
             <div className="w-full p-6 sm:p-10 bg-colorGreenDeeper">
                 <div className="w-[95%] sm:w-[90%] m-auto text-center">

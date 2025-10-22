@@ -75,7 +75,7 @@ export default function About() {
                         </div>
                     </h4>
                 </div>
-                <div className=' md:grid bg-colorLight dark:bg-colorDark md:grid-cols-5 sm:gap-12 m-auto max-sm:p-5'>
+                <div className=' md:grid bg-colorLight dark:bg-colorDark md:grid-cols-5 sm:h-[500px] mt-10 sm:gap-12 m-auto max-sm:p-5'>
                     <div className=' sm:col-span-3 relative sm:px-16 sm:py-10'>
                         <header className='sm:text-[45px] text-[30px] italic font-bold'>The Story Behind Sirz</header>
                         <div className='pt-4 text-[18px] max-md:text-justify leading-9'>
@@ -96,16 +96,11 @@ export default function About() {
                         </div>
                     </div>
                     <div className=' col-span-2 w-full'>
-                        <img src={AboutStoryBg} alt="" className=' object-cover w-full h-full' />
+                        <img src={AboutStoryBg} alt="" className=' object-cover w-full sm:h-[500px] ' />
                     </div>
                 </div>
             </section>
             < section
-                // style={{
-                //     backgroundImage: `url(${rectangleDarkBlue})`,
-                //     backgroundSize: "cover",
-                //     backgroundPosition: "center",
-                // }}
                 className=" max-sm:pb-8 relative " >
                 <img src={rectangleDarkBlue} alt="" className=" w-full sm:h-[200px] md:h-[150px] h-[100px] object-top object-cover" />
                 <div className="  text-white  ">
@@ -133,9 +128,9 @@ export default function About() {
                 </div>
             </section >
             <section className='py-10'>
-                <div className=' md:grid grid-cols-5 gap-10 m-auto sm:w-[85%]'>
+                <div className=' md:grid grid-cols-5 gap-10 items-center m-auto sm:w-[85%]'>
                     <div className=' col-span-2 w-full'>
-                        <img src={AboutOfferBg} alt="" className='w-full h-full object-cover' />
+                        <img src={AboutOfferBg} alt="" className='w-full h-[700px] object-cover' />
                     </div>
                     <div className=' col-span-3 relative px-4 py-10'>
                         {

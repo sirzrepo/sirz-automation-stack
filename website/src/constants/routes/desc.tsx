@@ -20,6 +20,7 @@ import OnboardingPage from "../../pages/dashboard";
 import SalesFunnel from "../../pages/salesFunnel";
 import Agents from "../../pages/agents";
 import ThankYouPage from "../../pages/thankyou";
+import IroseFashion from "../../pages/caseStudies/iroseFashion";
 
 export const ROUTES = {
     LAYOUT: {
@@ -106,6 +107,10 @@ export const ROUTES = {
     CASE_STUDY_PURVIA: {
         PATH: "/case-study-purvia",
         ELEMENT: <Purvia />
+    },
+    CASE_STUDY_IROSE_FASHION: {
+        PATH: "/case-study-irose-fashion",
+        ELEMENT: <IroseFashion />
     },
     AGENTS: {
         PATH: "/agents",
