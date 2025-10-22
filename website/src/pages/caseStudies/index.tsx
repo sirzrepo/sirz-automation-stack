@@ -6,6 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function CaseStudies() {
     const navigate = useNavigate();
+    const tags = [
+        "Automation",
+        "Branding",
+        "Visual identity",
+        "Logo design",
+    ]
 
     const caseStudies = [
         {
@@ -93,10 +99,12 @@ export default function CaseStudies() {
                                         <header className=" sm:text-[22px] font-bold">{data.title}</header>
                                         <div className=" sm:text-[15px] text-[13px]">{data.text}</div>
                                     </div>
-                                    <div className=" grid grid-cols-3 gap-3 text-black font-light">
-                                        <div className="bg-[#CFD7FE] text-[10px] py-2 px-4 rounded-full flex items-center justify-center whitespace-nowrap">Branding</div>
-                                        <div className="bg-[#CFD7FE] text-[10px] py-2 rounded-full flex items-center justify-center whitespace-nowrap">Visual identity</div>
-                                        <div className="bg-[#CFD7FE] text-[10px] py-2 rounded-full flex items-center justify-center whitespace-nowrap">Logo design</div>
+                                    <div className=" grid grid-cols-4 gap-2 text-black font-light">
+                                        {
+                                            tags?.map((tag, index) => (
+                                                <div key={index} className="bg-[#CFD7FE] text-[10px] py-2 px-4 rounded-full flex items-center justify-center whitespace-nowrap">{tag}</div>
+                                            ))
+                                        }
                                     </div>
                                     <button
                                         onClick={() => navigate(data?.url)}
