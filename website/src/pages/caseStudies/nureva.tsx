@@ -110,7 +110,8 @@ export default function Nureva() {
                             <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg">
                                 <h3 className="text-xl font-semibold mb-3">Automated Patient Engagement</h3>
                                 <p className="text-gray-600 dark:text-white">
-                                Through the SIRZ Automation and Analytics System, Irose restructured how it engaged with retail buyers and managed its sales process.
+                                Sirz implemented Smart Sales Chatbot, our AI-driven conversational agent, to automate patient
+                                engagement. It enabled Nureva to:
                                 </p>
                             </div>
                             <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg">
@@ -138,8 +139,8 @@ export default function Nureva() {
                         <div className="bg-gradient-to-br from-[#00645B] to-[#2AFF65] rounded-lg p-8 text-white flex flex-col justify-center">
                             <h3 className="text-2xl font-bold mb-4">The Result:</h3>
                             <p className="text-lg mb-6">
-                                Nureva transformed its patient engagement with an AI-powered system that delivers instant, 
-                                accurate responses while allowing healthcare professionals to focus on delivering exceptional care.
+                                Nureva transitioned to a full AI-powered patient engagement system, ensuring instant, accurate,
+                                and compassionate responses while freeing staff for care delivery.
                             </p>
                             <div className="mt-4 space-y-4">
                                 <div className="flex items-center">
@@ -166,7 +167,7 @@ export default function Nureva() {
                     {
                         achieveData.map((data, index) => (
                             <div key={index} className=" flex items-center sm:even:flex-row-reverse justify-between max-sm:flex-col sm:pb-1 pb-10">
-                                <img src={data.img} alt="" className="h-[300px] sm:w-[50%] w-full object-cover" />
+                                <img src={data.img} alt="" className="h-[400px] sm:w-[50%] w-full object-cover" />
                                 <div className=" m-auto sm:w-[40%] max-sm:pt-5">
                                     <header className=" font-bold sm:text-2xl text-lg col-span-1">{data.title}</header>
                                     <div className=" text-lg leading-8 sm:pt-5 pt-2 text-justify">
@@ -199,52 +200,8 @@ export default function Nureva() {
                 </div>
             </section>
 
-            {/* <section className=" py-16">
-                <div className="w-[90%] max-w-6xl mx-auto">
-                    <h2 className="text-4xl font-bold text-center mb-12">Impact (from the Smart Sales Chatbot Dashboard)</h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg text-center">
-                            <div className="text-4xl mb-3">⏱</div>
-                            <p className="text-3xl font-bold text-[#4CAF50]">50%</p>
-                            <p className="text-gray-600 dark:text-white mt-2">reduction in response time to queries</p>
-                        </div>
-                        <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg text-center">
-                            <div className="text-4xl mb-3">📈</div>
-                            <p className="text-3xl font-bold text-[#2196F3]">42%</p>
-                            <p className="text-gray-600 dark:text-white mt-2">increase in scheduled appointments</p>
-                        </div>
-                        <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg text-center">
-                            <div className="text-4xl mb-3">⏱</div>
-                            <p className="text-3xl font-bold text-[#FF9800]">Significant</p>
-                            <p className="text-gray-600 dark:text-white mt-2">improvement in patient satisfaction and trust</p>
-                        </div>
-                        <div className="bg-gray-50 dark:bg-[#424242] p-6 rounded-lg text-center">
-                            <div className="text-4xl mb-3">⏱</div>
-                            <p className="text-3xl font-bold text-[#9C27B0]">65%</p>
-                            <p className="text-gray-600 dark:text-white mt-2">reduction in manual support effort</p>
-                       </div>
-                    </div>
-                </div>
-            </section> */}
-
             <section className="py-12 dark:bg-[#222222]">
                 <GraphLayout images={imageGridData} />
-                {/* <div className="w-[90%] max-w-4xl mx-auto">
-                    <UniversalChart 
-                        type="pie" 
-                        data={chartData} 
-                        dataKeyX="name" 
-                        dataKeyY="value" 
-                        height={500}
-                    />
-                    <div className="mt-12 p-6 bg-gray-50 dark:bg-[#424242] rounded-lg">
-                        <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Insight for Product Evolution</h3>
-                        <p className="text-gray-600 dark:text-white">
-                            Refined Smart Sales Chatbot’s Healthcare Guidance Module, enabling AI to deliver context-aware,
-                            compassionate interactions for healthcare brands.
-                        </p>
-                    </div>
-                </div> */}
             </section>
         </div>
     )

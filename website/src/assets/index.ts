@@ -202,7 +202,7 @@ import iroseSection2Bg from './imgs/irose/banner.png';
 import iroseAchievedImgOne from './imgs/irose/menuImg8.jpeg';
 import iroseAchievedImgTwo from './imgs/irose/menuImg9.jpeg';
 import iroseAchievedImgThree from './imgs/irose/menuImg7.jpeg';
-import iroseAchievedImgFour from './imgs/irose/menuImg1.jpg';
+import iroseAchievedImgFour from './imgs/irose/menuImg4.jpeg';
 import iroseAchievedImgFive from './imgs/irose/menuImg3.jpeg';
 import iroseAchievedImgSix from './imgs/irose/menuImg5.jpeg';
 
