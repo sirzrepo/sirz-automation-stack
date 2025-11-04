@@ -38,12 +38,13 @@ import ScheduleDemoInquiries from './pages/inquiries/scheduleDemoInquiries';
 import DemoEntries from './pages/inquiries/demoEntries';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
+import EmailVerification from './pages/auth/emailVerification';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
   function Layout() {
     const location = useLocation();
-    const hideNavbar = ['/login', '/register', '/forgot-password', '/reset-password'].includes(location.pathname);
+    const hideNavbar = ['/login', '/register', '/forgot-password', '/reset-password', '/verify-email'].includes(location.pathname);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(window.innerWidth < 768);
     
     // Handle sidebar collapse state changes
@@ -75,13 +76,14 @@ function App() {
             duration-300
           `}
         >
-          <div className="px-6">
+          <div className="">
             <Routes>
               {/* Public routes */}
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Signup />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/verify-email" element={<EmailVerification />} />
               {/* <Route path="/otp-verification" element={<OTPverification />} /> */}
 
               <Route path="/" element={

@@ -20,7 +20,8 @@ const Signup = () => {
   const [message, setMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false); 
 
-  console.log(error)
+  console.log("userId", userId)
+  console.log("error", error)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,10 +44,10 @@ const Signup = () => {
 
   const handleOTPSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!userId) return;
+    if (!email) return;
 
     try {
-      await verifyOTP(userId, otp);
+      await verifyOTP(email, otp);
       navigate('/');
     } catch (err: any) {
       setMessage(err.response?.data?.message || 'OTP verification failed');
@@ -54,10 +55,10 @@ const Signup = () => {
   };
 
   const handleResendOTP = async () => {
-    if (!userId) return;
+    if (!email) return;
     
     try {
-      await resendOTP(userId);
+      await resendOTP(email);
       setMessage('New verification code sent successfully!');
     } catch (err: any) {
       setMessage(err.response?.data?.message || 'Failed to resend verification code');

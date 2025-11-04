@@ -14,14 +14,17 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   register: (email: string, password: string) => Promise<{ userId: string }>;
-  verifyOTP: (userId: string, otp: string) => Promise<void>;
-  resendOTP: (userId: string) => Promise<void>;
+  verifyOTP: (email: string, otp: string) => Promise<void>;
+  resendOTP: (email: string) => Promise<void>;
   updateUserProfile: (userData: { first_name?: string; last_name?: string; image?: string }) => Promise<{ 
     success: boolean; 
     data?: any; 
     message?: string 
   }>;
+  resetPassword: (email: string, otp: string, password: string) => Promise<{ userId: string }>;
+  forgotPassword: (email: string) => Promise<{ userId: string }>;
 }
+
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -58,10 +61,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // function to get user
-  const fetchUser = async (userId: string) => {
+  const fetchUser = async (userId: string): Promise<IUser | null> => {
     try {
       const response = await authAPI.getUser(userId);
-      const userData = response.data;
+      const userData: IUser = response.data;
 
       setUser(userData); // Store full user object
 
@@ -72,29 +75,118 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email: userData.email,
         role: userData.role,
         image: userData.image || "",
-      }))
+      }));
+      
+      return userData;
     } catch (error) {
       console.error('Failed to fetch user data', error);
+      return null;
     }
   };
 
-  const login = async (email: string, password: string) => {
+  // const login = async (email: string, password: string) => {
+  //   try {
+  //     setError(null);
+  //     setIsLoading(true);
+
+  //     const response = await authAPI.login(email, password);
+  //     localStorage.setItem('token', response.token);
+
+  //     // Decode token to get userId
+  //     const decodedToken: any = jwtDecode(response.token);
+  //     const id = decodedToken.userId;
+
+  //     setUserId(id);
+  //     setIsAuthenticated(true);
+  //     await fetchUser(id);
+  //   } catch (err: any) {
+  //     setError(err.response?.data?.message || 'Login failed');
+  //     throw err;
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  // const login = async (email: string, password: string) => {
+  //   try {
+  //     setError(null);
+  //     setIsLoading(true);
+  
+  //     const response = await authAPI.login(email, password);
+      
+  //     // Store the token first so we can make authenticated requests
+  //     localStorage.setItem('token', response.token);
+  
+  //     // Decode token to get userId
+  //     const decodedToken: any = jwtDecode(response.token);
+  //     const id = decodedToken.userId;
+  
+  //     // Fetch user data which includes role
+  //     const userData: IUser | null = await fetchUser(id);
+      
+  //     // Check if user has a role and if it's in the allowed roles
+  //     if (!userData?.role || !roles.includes(userData.role)) {
+  //       // If no role or invalid role, clean up and log out
+  //       localStorage.removeItem('token');
+  //       setError('You do not have permission to access this application');
+  //       setIsAuthenticated(false);
+  //       setUser(null);
+  //       setUserId(null);
+  //       throw new Error('Access denied: Invalid user role');
+  //     }
+  
+  //     // If we get here, user has a valid role
+  //     setUserId(id);
+  //     setIsAuthenticated(true);
+  //     setUser(userData);
+  //     dispatch(loginUserRedux(userData));
+      
+  //   } catch (err: any) {
+  //     setError(err.response?.data?.message || err.message || 'Login failed');
+  //     throw err;
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  const login = async (email: string, password: string, ) => {
     try {
       setError(null);
       setIsLoading(true);
-
+  
       const response = await authAPI.login(email, password);
+  
+      // Store token first
       localStorage.setItem('token', response.token);
-
+  
       // Decode token to get userId
       const decodedToken: any = jwtDecode(response.token);
       const id = decodedToken.userId;
-
+  
+      // Fetch user data which includes onboardingStatus
+      const userData: IUser | null = await fetchUser(id);
+  
+      // ✅ Check onboarding status
+      if (!userData?.onboardingStatus || userData.onboardingStatus !== 'completed') {
+        // Clear token and mark unauthenticated
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+        setUser(null);
+        setUserId(null);
+  
+        // Redirect to onboarding form
+        window.location.href = `https://onboarding.sirz.co.uk?userId=${id}`;
+        return
+      }
+  
+      // ✅ Onboarding completed — proceed normally
       setUserId(id);
       setIsAuthenticated(true);
-      await fetchUser(id);
+      setUser(userData);
+      dispatch(loginUserRedux(userData));
+  
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed');
+      setError(err.response?.data?.message || err.message || 'Login failed');
       throw err;
     } finally {
       setIsLoading(false);
@@ -115,20 +207,64 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const verifyOTP = async (userId: string, otp: string) => {
+  const resetPassword = async (email: string, otp: string, password: string) => {
     try {
       setError(null);
       setIsLoading(true);
-      const response = await authAPI.verifyOTP(userId, otp);
+      const response = await authAPI.resetPassword(email, otp, password);
+      return { userId: response.userId };
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Password reset failed');
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-      localStorage.setItem('token', response.token);
-      setIsAuthenticated(true);
+  const forgotPassword = async (email: string) => {
+    try {
+      setError(null);
+      setIsLoading(true);
+      const response = await authAPI.forgotPassword(email);
+      return { userId: response.userId };
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Password reset failed');
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-      const decodedToken: any = jwtDecode(response.token);
-      const id = decodedToken.userId;
+  const verifyOTP = async (email: string, otp: string) => {
+    try {
+      setError(null);
+      setIsLoading(true);
+      const response = await authAPI.verifyOTP(email, otp);
+      console.log("verifyOTP response", response)
 
-      setUserId(id);
-      await fetchUser(id);
+      // localStorage.setItem('token', response.token);
+
+      // const decodedToken: any = jwtDecode(response.token);
+      // const id = decodedToken.userId;
+
+      // // Fetch user data which includes role
+      // const userData: IUser | null = await fetchUser(id);
+
+      // // Check if user has a role and if it's in the allowed roles
+      // if (!userData?.role || !roles.includes(userData.role)) {
+      //   // If no role or invalid role, clean up and log out
+      //   localStorage.removeItem('token');
+      //   setError('You do not have permission to access this application');
+      //   setIsAuthenticated(false);
+      //   setUser(null);
+      //   setUserId(null);
+      //   throw new Error('Access denied: Invalid user role');
+      // }
+        
+
+      // setUserId(id);
+      // setIsAuthenticated(true);
+      // await fetchUser(id);
     } catch (err: any) {
       setError(err.response?.data?.message || 'OTP verification failed');
       throw err;
@@ -137,11 +273,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const resendOTP = async (userId: string) => {
+  const resendOTP = async (email: string) => {
     try {
       setError(null);
       setIsLoading(true);
-      await authAPI.resendOTP(userId);
+      await authAPI.resendOTP(email);
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to resend OTP');
       throw err;
@@ -213,7 +349,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         register, 
         verifyOTP, 
         resendOTP,
-        updateUserProfile
+        updateUserProfile,
+        resetPassword,
+        forgotPassword
       }}
     >
       {children}

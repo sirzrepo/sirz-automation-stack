@@ -4,6 +4,7 @@ export interface IUser {
     last_name?: string;
     image?: string;
     email: string;
+    onboardingStatus?: string;
     role?: string;
 };
 

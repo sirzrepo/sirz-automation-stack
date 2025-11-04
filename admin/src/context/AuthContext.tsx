@@ -14,8 +14,8 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   register: (email: string, password: string) => Promise<{ userId: string }>;
-  verifyOTP: (userId: string, otp: string) => Promise<void>;
-  resendOTP: (userId: string) => Promise<void>;
+  verifyOTP: (email: string, otp: string) => Promise<void>;
+  resendOTP: (email: string) => Promise<void>;
   updateUserProfile: (userData: { first_name?: string; last_name?: string; image?: string }) => Promise<{ 
     success: boolean; 
     data?: any; 
@@ -197,15 +197,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setError(null);
       setIsLoading(true);
       const response = await authAPI.verifyOTP(email, otp);
+      console.log("verifyOTP response", response)
 
-      localStorage.setItem('token', response.token);
-      setIsAuthenticated(true);
+      // localStorage.setItem('token', response.token);
 
-      const decodedToken: any = jwtDecode(response.token);
-      const id = decodedToken.userId;
+      // const decodedToken: any = jwtDecode(response.token);
+      // const id = decodedToken.userId;
 
-      setUserId(id);
-      await fetchUser(id);
+      // // Fetch user data which includes role
+      // const userData: IUser | null = await fetchUser(id);
+
+      // // Check if user has a role and if it's in the allowed roles
+      // if (!userData?.role || !roles.includes(userData.role)) {
+      //   // If no role or invalid role, clean up and log out
+      //   localStorage.removeItem('token');
+      //   setError('You do not have permission to access this application');
+      //   setIsAuthenticated(false);
+      //   setUser(null);
+      //   setUserId(null);
+      //   throw new Error('Access denied: Invalid user role');
+      // }
+        
+
+      // setUserId(id);
+      // setIsAuthenticated(true);
+      // await fetchUser(id);
     } catch (err: any) {
       setError(err.response?.data?.message || 'OTP verification failed');
       throw err;

@@ -55,6 +55,7 @@ router.post('/register', async (req, res) => {
 router.post('/verify-otp', async (req, res) => {
   try {
     const { email, otp } = req.body;
+    console.log("email and otp", email, otp)
 
     let user;
 
@@ -222,6 +223,9 @@ router.post('/login', async (req, res) => {
     });
   }
 });
+
+// Verify email route
+// router.post('/resend')
 
 // Forgot password route
 router.post('/forgot-password', async (req, res) => {

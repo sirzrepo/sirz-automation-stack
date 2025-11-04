@@ -8,7 +8,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login, isLoading, error } = useAuth();
+  const { login, isLoading, error, resendOTP } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -22,7 +22,18 @@ const Login = () => {
       await login(email, password);
       navigate('/');
     } catch (err: any) {
-      setMessage(err.response?.data?.message || 'Login failed');
+      setMessage(err.response?.data?.message || "failed to login, check your credentials and ensure you have the right permissions");
+    }
+  };
+
+  const handleVerifyEmail = async () => {
+    try {
+      await resendOTP(email);
+      console.log("email", email)
+      navigate(`/verify-email?email=${email}`);
+    } catch (err: any) {
+      setMessage(err.response?.data?.message || 'Failed to resend OTP');
+      console.log(err.response?.data?.message || 'Failed to resend OTP')
     }
   };
 
@@ -30,7 +41,7 @@ const Login = () => {
 
   return (
     <section className="bg-colorLight dark:bg-colorDark py-10 bg-dashboard-form-gradient min-h-screen">
-      <div className="sm:w-[60%] md:w-[50%] lg:w-[30%] w-[90%] m-auto flex items-center justify-center  mt-10">
+      <div className="sm:w-[60%] lg:w-[40%] w-[90%] m-auto flex sm:items-center items-end justify-center mt-10">
         <form onSubmit={handleSubmit} className="py-12 px-12 mt-10 border-b-[6px] border-e-[7px] border-colorGreen rounded-xl bg-white dark:bg-colorDefaultDark">
           <section className="">
             <div className="flex justify-center items-center mb-10">
@@ -43,7 +54,7 @@ const Login = () => {
             </div>
 
             {message && (
-              <div className="mb-4 p-4 rounded bg-red-100 text-red-700">
+              <div className="mb-4 p-4 text-sm rounded bg-red-100 text-red-700">
                 {message}
               </div>
             )}
@@ -87,6 +98,17 @@ const Login = () => {
 
             {isLoading ? (
               <Loader />
+            ) : error === "Please verify your email first" ? (
+              <div className="max-sm:m-auto flex justify-center">
+                <Button
+                  type="button"
+                  onClick={handleVerifyEmail}
+                  text="Verify Your Email"
+                  className="w-full bg-red-600 text-sm text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors"
+                />
+                  {/* Sign In
+                </Button> */}
+              </div>
             ) : (
               <div className="max-sm:m-auto flex justify-center">
                 <Button
@@ -101,8 +123,14 @@ const Login = () => {
             )}
 
             <div className="text-center mt-4">
-              <a href="/register" className="text-primary-600 hover:text-primary-700">
-                Don't have an account? Sign up
+              Don't have an account? 
+              <a href="/register" className="text-blue-600 ps-2 font-bold italic hover:text-blue-700">
+                Sign up
+              </a>
+            </div>
+            <div className="text-center mt-2">
+              <a href="/forgot-password" className="text-blue-600 hover:text-blue-700 text-sm">
+                Forgot password?
               </a>
             </div>
           </section>

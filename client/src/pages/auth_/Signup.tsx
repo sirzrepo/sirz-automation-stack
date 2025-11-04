@@ -1,12 +1,12 @@
 import { useState } from 'react';
 // import { FiMail, FiLock } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../components/ui/Button';
 // import Input from '../../components/ui/Input';
 import { useAuth } from '../../context/AuthContext';
 import Loader from '../../features/loader';
 import { SirzLogo } from '../../assets';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import Button from '../../components/ui/Button';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -20,8 +20,7 @@ const Signup = () => {
   const [message, setMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false); 
 
-  console.log("userId", userId)
-  console.log("error", error)
+  console.log(error)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,10 +43,10 @@ const Signup = () => {
 
   const handleOTPSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!userId) return;
 
     try {
-      await verifyOTP(email, otp);
+      await verifyOTP(userId, otp);
       navigate('/');
     } catch (err: any) {
       setMessage(err.response?.data?.message || 'OTP verification failed');
@@ -55,10 +54,10 @@ const Signup = () => {
   };
 
   const handleResendOTP = async () => {
-    if (!email) return;
+    if (!userId) return;
     
     try {
-      await resendOTP(email);
+      await resendOTP(userId);
       setMessage('New verification code sent successfully!');
     } catch (err: any) {
       setMessage(err.response?.data?.message || 'Failed to resend verification code');
@@ -138,7 +137,7 @@ const Signup = () => {
 
   return (
     <section className="bg-colorLight dark:bg-colorDark py-10 bg-dashboard-form-gradient min-h-screen">
-      <div className="sm:w-[60%]  lg:w-[40%] w-[90%] m-auto flex items-center justify-center mt-10">
+      <div className="sm:w-[60%] md:w-[50%] lg:w-[30%] w-[90%] m-auto flex items-center justify-center mt-10">
       <form onSubmit={handleSubmit} className="py-12 px-12 mt-10 border-b-[6px] border-e-[7px] border-colorGreen rounded-xl bg-white dark:bg-colorDefaultDark">
           <section className="">
             <div className="flex justify-center items-center mb-10">
@@ -204,7 +203,7 @@ const Signup = () => {
                 required
               />
               <div className="absolute top-0 left-3 bg-white px-2 text-[12px] text-zinc-500 font-comfortaa dark:bg-colorDefaultDark">
-                Confirm Password
+                Password
               </div>
             </div>
 
@@ -223,9 +222,8 @@ const Signup = () => {
             )}
 
             <div className="text-center mt-4">
-              Already have an account?
-              <a href="/login" className="text-blue-600 ps-2 font-bold italic hover:text-blue-700">
-               login
+              <a href="/login" className="text-primary-600 hover:text-primary-700">
+              Already have an account? login
               </a>
             </div>
           </section>

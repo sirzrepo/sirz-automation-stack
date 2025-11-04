@@ -33,6 +33,11 @@ const userSchema = new mongoose.Schema({
     code: String,
     expiresAt: Date
   },
+  onboardingStatus: {
+    type: String,
+    enum: ['not_started', 'in_progress', 'completed'],
+    default: 'not_started'
+  },
   role: {
     type: String,
     default: "user"

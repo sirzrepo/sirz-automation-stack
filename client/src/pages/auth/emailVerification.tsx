@@ -1,8 +1,8 @@
 import { useAuth } from "../../context/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Button from "../../components/common/ui/Button";
 import Loader from "../../features/loader";
+import Button from "../../components/ui/Button";
 
 export default function EmailVerification() {
     const { verifyOTP, resendOTP } = useAuth();

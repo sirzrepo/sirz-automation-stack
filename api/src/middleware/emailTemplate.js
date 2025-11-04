@@ -1,13 +1,13 @@
 // emailTemplate.js
 function generateEmailTemplate({ 
-    title = "Notification", 
+    title = "Notification", // <img style="width: 100px; height: 100px; border-radius: 50%;" src="${logoUrl}" alt="Logo">
     message = "", 
     resetToken = "", 
     logoUrl = "https://res.cloudinary.com/dy4nvvdwd/image/upload/v1759107463/zirss_veplvi.jpg" 
   }) {
     return `
       <div style="font-family: Arial, sans-serif; color: white; background: linear-gradient(90deg, #001F3E, #203DA3, #3752E9); padding: 20px; border-radius: 10px; max-width: 600px; margin: auto;">
-        <img style="width: 100px; height: 100px; border-radius: 50%;" src="${logoUrl}" alt="Logo">
+        
         
         <h1 style="font-size: 24px; font-weight: bold; color: white; margin-top: 20px;">${title}</h1>
         

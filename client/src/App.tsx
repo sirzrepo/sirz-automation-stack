@@ -12,12 +12,15 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import Profile from './pages/profile/Profile'
 import Courses from './pages/courses'
 import Home from './pages/home'
+import ForgotPassword from './pages/auth/ForgotPassword'
+import ResetPassword from './pages/auth/ResetPassword'
+import EmailVerification from './pages/auth/emailVerification'
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
   function Layout() {
     const location = useLocation();
-    const hideNavbar = ['/login', '/register'].includes(location.pathname);
+    const hideNavbar = ['/login', '/register', '/forgot-password', '/reset-password', '/verify-email'].includes(location.pathname);
 
     return (
       <>
@@ -27,6 +30,9 @@ function App() {
             {/* Public routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Signup />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/verify-email" element={<EmailVerification />} />
             {/* <Route path="/otp-verification" element={<OTPverification />} /> */}
 
             <Route path="/" element={

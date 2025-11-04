@@ -25,6 +25,7 @@ const roleRoutes = require('./src/routes/role');
 const webFormRoutes = require('./src/routes/webFormRoutes');
 const demoDataRoutes = require('./src/routes/demoData');
 const scheduleDemoRoutes = require('./src/routes/scheduleDemo');
+const onboardingProfileRoutes = require('./src/routes/onboarding_profile');
 // import axios from "axios";
 
 dotenv.config();
@@ -38,8 +39,8 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Connect to MongoDB
 mongoose.connect(
   process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
 })
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));
@@ -75,6 +76,7 @@ app.use('/api/roles', roleRoutes);
 app.use('/api/web-form-questionnaire', webFormRoutes);
 app.use('/api/demo-data', demoDataRoutes);
 app.use('/api/schedule-demo', scheduleDemoRoutes);
+app.use('/api/onboarding', onboardingProfileRoutes);
 // API route to send an email
 app.post("/subscribe", async (req, res) => {
   const { subject, text, html } = req.body;
