@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const applicationformModal = require('../models/onboarding_profiles');
+const userModel = require('../models/user');
 const checkPermission = require('../middleware/permission');
 
 // CREATE or INITIALIZE application form for a user
@@ -17,8 +18,15 @@ router.post("/", async (req, res) => {
       });
     }
 
+    // 🔹 Generate unique application number
+    const year = new Date().getFullYear();
+    const count = await applicationformModal.countDocuments({}) + 1;
+    const paddedCount = String(count).padStart(3, "0");
+    const applicationNumber = `#SIRz-${year}-${paddedCount}`;
+
     const form = new applicationformModal({ 
       userId,
+      applicationNumber,
       applicationFormData: [],
       completionStatus: {},
       progressStatus: {},
@@ -26,6 +34,10 @@ router.post("/", async (req, res) => {
     });
     
     await form.save();  
+    
+    // Update user's onboarding status
+    await userModel.findByIdAndUpdate(userId, { onboardingStatus: 'in_progress' });
+    
     res.status(201).json({
       success: true,
       message: 'Application form initialized successfully',
@@ -63,71 +75,7 @@ router.get("/user/:userId", async (req, res) => {
   }
 });
 
-// Update form section data
-// router.put("/:userId/section/:sectionName", async (req, res) => {
-//   try {
-//     const { userId, sectionName } = req.params;
-//     const { data, isComplete, progress } = req.body;
-//     console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", req.body, "********************", userId, sectionName)
-
-//     // Find the form
-//     const form = await applicationformModal.findOne({ userId });
-//     if (!form) {
-//       return res.status(404).json({ 
-//         success: false, 
-//         message: 'Application form not found' 
-//       });
-//     }
-
-//     // Find the section index if it exists
-//     const sectionIndex = form.applicationFormData.findIndex(
-//       section => section.sectionName === sectionName
-//     );
-
-//     // Update or add the section data
-//     const sectionData = { sectionName, data };
-//     if (sectionIndex >= 0) {
-//       form.applicationFormData[sectionIndex] = sectionData;
-//     } else {
-//       form.applicationFormData.push(sectionData);
-//     }
-
-//     // Update completion status if provided
-//     if (isComplete !== undefined) {
-//       form.completionStatus[sectionName] = isComplete;
-      
-//       // Check if all sections are complete
-//       const allSections = [...new Set([
-//         ...Object.keys(form.completionStatus),
-//         sectionName
-//       ])];
-      
-//       form.isComplete = allSections.every(section => form.completionStatus[section] === true);
-//     }
-
-//     // Update progress if provided
-//     if (progress !== undefined) {
-//       form.progressStatus[sectionName] = progress;
-//     }
-
-//     await form.save();
-
-//     res.json({
-//       success: true,
-//       message: 'Section updated successfully',
-//       data: form
-//     });
-//   } catch (err) {
-//     res.status(400).json({ 
-//       success: false,
-//       message: "Failed to update section", 
-//       error: err.message 
-//     });
-//   }
-// });
-
 router.put("/:userId/section/:sectionName", async (req, res) => {
-  console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^", req.body);
   try {
     const { userId, sectionName } = req.params;
     let { data, isComplete, progress } = req.body;
@@ -282,6 +230,53 @@ router.get("/", async (req, res) => {
       success: false,
       message: "Failed to fetch application forms", 
       error: err.message 
+    });
+  }
+});
+
+// Update user onboarding status
+router.put('/user/onboarding-status', async (req, res) => {
+  try {
+    const { onboardingStatus, userId } = req.body;
+    
+    if (!onboardingStatus || !userId) {
+      return res.status(400).json({
+        success: false,
+        message: 'onboardingStatus and userId are required'
+      });
+    }
+
+    const validStatuses = ['not_started', 'in_progress', 'completed'];
+    if (!validStatuses.includes(onboardingStatus)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid onboarding status. Must be one of: not_started, in_progress, completed'
+      });
+    }
+
+    const user = await userModel.findByIdAndUpdate(
+      userId,
+      { onboardingStatus },
+      { new: true, runValidators: true }
+    ).select('-password');
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'User onboarding status updated successfully',
+      data: user
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Error updating user onboarding status',
+      error: error.message
     });
   }
 });

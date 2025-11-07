@@ -12,7 +12,7 @@ const applicationFormSchema = new mongoose.Schema(
     applicationFormData: [
       {
         sectionName: { type: String, required: true },
-        data: { type: Object, required: true },
+        data: { type: Object, required: false },
         _id: false
       }
     ],
@@ -33,6 +33,12 @@ const applicationFormSchema = new mongoose.Schema(
     progressStatus: {
       type: Object,
       default: {}
+    },
+
+    applicationNumber: { 
+      type: String, 
+      unique: true, 
+      // required: true 
     },
 
     // Overall form completion

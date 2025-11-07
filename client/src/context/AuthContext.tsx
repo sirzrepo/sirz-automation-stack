@@ -155,32 +155,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsLoading(true);
   
       const response = await authAPI.login(email, password);
-  
-      // Store token first
-      localStorage.setItem('token', response.token);
+      const token = response.token;
+      localStorage.setItem('token', token);
   
       // Decode token to get userId
-      const decodedToken: any = jwtDecode(response.token);
-      const id = decodedToken.userId;
+      // const decodedToken: any = jwtDecode(token);
+      // const id = decodedToken.userId;
+      const { userId } = jwtDecode<{ userId: string }>(token);
   
       // Fetch user data which includes onboardingStatus
-      const userData: IUser | null = await fetchUser(id);
+      const userData: IUser | null = await fetchUser(userId);
   
       // ✅ Check onboarding status
       if (!userData?.onboardingStatus || userData.onboardingStatus !== 'completed') {
-        // Clear token and mark unauthenticated
-        localStorage.removeItem('token');
-        setIsAuthenticated(false);
-        setUser(null);
-        setUserId(null);
-  
-        // Redirect to onboarding form
-        window.location.href = `https://onboarding.sirz.co.uk?userId=${id}`;
-        return
+        // Optionally show a loading spinner for smoother UX before redirect
+        setTimeout(() => {
+          localStorage.removeItem('token');
+          setIsAuthenticated(false);
+          setUser(null);
+          setUserId(null);
+          window.location.assign(`https://onboarding.sirz.co.uk?userId=${userId}`);
+        }, 500);
+        return;
       }
   
       // ✅ Onboarding completed — proceed normally
-      setUserId(id);
+      setUserId(userId);
       setIsAuthenticated(true);
       setUser(userData);
       dispatch(loginUserRedux(userData));
