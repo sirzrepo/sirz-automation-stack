@@ -15,17 +15,51 @@ import Home from './pages/home'
 import ForgotPassword from './pages/auth/ForgotPassword'
 import ResetPassword from './pages/auth/ResetPassword'
 import EmailVerification from './pages/auth/emailVerification'
+import { useState, useEffect } from 'react'
+import Sidebar from './layout/Sidebar'
+import { ToastContainer } from 'react-toastify'
+import LeadClassifier from './pages/agents/leadClassifier'
+import ContentCreation from './pages/agents/contentCreation'
+import LogoCreator from './pages/agents/logoCreator'
+import DataAnalyst from './pages/agents/dataAnalyst'
+import Chat from './pages/agents/chat'
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
   function Layout() {
     const location = useLocation();
     const hideNavbar = ['/login', '/register', '/forgot-password', '/reset-password', '/verify-email'].includes(location.pathname);
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(window.innerWidth < 768);
+
+    // Handle sidebar collapse state changes
+    const handleSidebarStateChange = (collapsed: boolean) => {
+      setIsSidebarCollapsed(collapsed);
+    };
+    
+    // Track window resize
+    useEffect(() => {
+      const handleResize = () => {
+        setIsSidebarCollapsed(window.innerWidth < 768);
+      };
+      
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return (
       <>
         {!hideNavbar && <NavBar />}
-        <div className='bg-[#FAFAFA]'>
+        {!hideNavbar && <Sidebar onStateChange={handleSidebarStateChange} />}
+        <div 
+          className={
+            `bg-[#FAFAFA] 
+            ${!hideNavbar ? 'pt-[40px]' : ''} 
+            ${!hideNavbar ? (isSidebarCollapsed ? 'md:ml-[80px] ml-[80px]' : 'md:ml-[280px] ml-[80px]') : ''}
+            min-h-screen 
+            transition-all 
+            duration-300
+          `}
+        >
           <Routes>
             {/* Public routes */}
             <Route path="/login" element={<Login />} />
@@ -55,6 +89,33 @@ function App() {
                 <div className="text-2xl">Settings</div>
               </ProtectedRoute>
             } />
+
+            {/* Agent routes */}
+            <Route path="/agent/leadClassifier" element={
+                <ProtectedRoute>
+                  <LeadClassifier />
+                </ProtectedRoute>
+              } />
+              <Route path="/agent/contentCreation" element={
+                <ProtectedRoute>
+                  <ContentCreation />
+                </ProtectedRoute>
+              } />
+              <Route path="/agent/logoCreator" element={
+                <ProtectedRoute>
+                  <LogoCreator />
+                </ProtectedRoute>
+              } />
+              <Route path="/agent/dataAnalyst" element={
+                <ProtectedRoute>
+                  <DataAnalyst />
+                </ProtectedRoute>
+              } />
+              <Route path="/agent/chat" element={
+                <ProtectedRoute>
+                  <Chat />
+                </ProtectedRoute>
+              } />
           </Routes>
         </div>
       </>
@@ -64,6 +125,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <ToastContainer />
         <Layout />
       </Router>
     </AuthProvider>
