@@ -8,7 +8,7 @@ export const formatDate = (date: string) => {
     return formattedDate
 }
 
-export const formatDateTime = (date: string) => {
+export const formatDateTime = (date: string | Date) => {
     const formattedDate = moment(date).format('ddd MMM D YYYY, HH:mm:ss');
     return formattedDate
 };
@@ -19,6 +19,15 @@ export const socialLinks = {
     Whatsapp: ``,
     TikTok: ""
 };
+
+  // Format date
+//   const formatDate = (dateString: string) => {
+//     return new Date(dateString).toLocaleDateString('en-US', {
+//       year: 'numeric',
+//       month: 'short',
+//       day: 'numeric'
+//     });
+//   };
 
 
 export const calendyLink = `https://calendly.com/sirz-support/1-hour-business-solutions-consult?month=2025-03`

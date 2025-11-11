@@ -219,7 +219,7 @@ const Clients = () => {
   };
   
   return (
-    <div className="w-full">
+    <div className="w-[95%] mx-auto">
       {/* Page header */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Clients</h1>

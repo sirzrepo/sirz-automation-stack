@@ -36,7 +36,7 @@ const Signup = () => {
       const response = await register(email, password);
       setUserId(response.userId);
       setShowOTPForm(true);
-      setMessage('Registration successful! Please check your email for the verification code.');
+      setMessage('Registration successful! Please check your email (or spam folder) for the verification code.');
     } catch (err: any) {
       setMessage(err.response?.data?.message || 'Registration failed');
     }

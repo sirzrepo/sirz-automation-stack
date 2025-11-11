@@ -39,6 +39,7 @@ import DemoEntries from './pages/inquiries/demoEntries';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import EmailVerification from './pages/auth/emailVerification';
+import OnboardingProfiles from './pages/onbordingProfile';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -94,6 +95,11 @@ function App() {
               <Route path="/users" element={
                 <ProtectedRoute>
                   <Clients />
+                </ProtectedRoute>
+              } />
+              <Route path="/onboarding-profiles" element={
+                  <ProtectedRoute>
+                  <OnboardingProfiles />
                 </ProtectedRoute>
               } />
               {/* AI_Inquiries */}

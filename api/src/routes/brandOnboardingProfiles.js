@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const applicationformModal = require('../models/onboarding_profiles');
+const brandOnboardingProfileModel = require('../models/brandOnboardingProfiles');
 const userModel = require('../models/user');
 const checkPermission = require('../middleware/permission');
 
@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
     const { userId } = req.body;
     
     // Check if form already exists
-    const existingForm = await applicationformModal.findOne({ userId });
+    const existingForm = await brandOnboardingProfileModel.findOne({ userId });
     if (existingForm) {
       return res.status(400).json({ 
         success: false,
@@ -20,11 +20,11 @@ router.post("/", async (req, res) => {
 
     // 🔹 Generate unique application number
     const year = new Date().getFullYear();
-    const count = await applicationformModal.countDocuments({}) + 1;
+    const count = await brandOnboardingProfileModel.countDocuments({}) + 1;
     const paddedCount = String(count).padStart(3, "0");
     const applicationNumber = `#SIRz-${year}-${paddedCount}`;
 
-    const form = new applicationformModal({ 
+    const form = new brandOnboardingProfileModel({ 
       userId,
       applicationNumber,
       applicationFormData: [],
@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
 // GET form by user ID
 router.get("/user/:userId", async (req, res) => {
   try {
-    const form = await applicationformModal.findOne({ userId: req.params.userId });
+    const form = await brandOnboardingProfileModel.findOne({ userId: req.params.userId });
     if (!form) {
       return res.status(404).json({ 
         success: false,
@@ -86,7 +86,7 @@ router.put("/:userId/section/:sectionName", async (req, res) => {
     }
 
     // Try to update existing section first
-    let form = await applicationformModal.findOneAndUpdate(
+    let form = await brandOnboardingProfileModel.findOneAndUpdate(
       { userId, "applicationFormData.sectionName": sectionName },
       {
         $set: {
@@ -102,7 +102,7 @@ router.put("/:userId/section/:sectionName", async (req, res) => {
 
     // If section doesn't exist yet, push it instead
     if (!form) {
-      form = await applicationformModal.findOneAndUpdate(
+      form = await brandOnboardingProfileModel.findOneAndUpdate(
         { userId },
         {
           $push: {
@@ -145,7 +145,7 @@ router.put("/:userId/selected-section", async (req, res) => {
     const { userId } = req.params;
     const { sectionName } = req.body;
 
-    const form = await applicationformModal.findOneAndUpdate(
+    const form = await brandOnboardingProfileModel.findOneAndUpdate(
       { userId },
       { selectedSection: sectionName },
       { new: true }
@@ -176,7 +176,7 @@ router.put("/:userId/selected-section", async (req, res) => {
 // GET progress summary
 router.get("/:userId/progress", async (req, res) => {
   try {
-    const form = await applicationformModal.findOne({ userId: req.params.userId });
+    const form = await brandOnboardingProfileModel.findOne({ userId: req.params.userId });
     if (!form) {
       return res.status(404).json({ 
         success: false,
@@ -213,23 +213,80 @@ router.get("/:userId/progress", async (req, res) => {
   }
 });
 
-// GET all forms (for admin purposes)
-router.get("/", async (req, res) => {
+// GET all onboarding profiles with pagination, search, and sorting
+// router.get("/", async (req, res) => {
+//   try {
+//     // Extract query parameters
+//     const { 
+//       page = 1, 
+//       limit = 10, 
+//       search = '',
+//       sortBy = 'updatedAt',
+//       sortOrder = 'desc',
+//       status
+//     } = req.query;
+
+//     // Build query
+//     const query = {};
+    
+//     // Add search filter
+//     if (search) {
+//       query.$or = [
+//         { 'user.firstName': { $regex: search, $options: 'i' } },
+//         { 'user.lastName': { $regex: search, $options: 'i' } },
+//         { 'user.email': { $regex: search, $options: 'i' } },
+//         { applicationNumber: { $regex: search, $options: 'i' } }
+//       ];
+//     }
+
+//     // Add status filter if provided
+//     if (status && status !== 'all') {
+//       query.status = status;
+//     }
+
+//     // Calculate pagination
+//     const skip = (parseInt(page) - 1) * parseInt(limit);
+//     const total = await brandOnboardingProfileModel.countDocuments(query);
+
+//     // Fetch profiles with pagination and sorting
+//     const profiles = await brandOnboardingProfileModel
+//       .find(query)
+//       .populate('userId', 'email firstName lastName image')
+//       .sort({ [sortBy]: sortOrder === 'asc' ? 1 : -1 })
+//       .skip(skip)
+//       .limit(parseInt(limit));
+
+//     res.json({
+//       success: true,
+//       count: profiles.length,
+//       total,
+//       totalPages: Math.ceil(total / limit),
+//       currentPage: parseInt(page),
+//       data: profiles
+//     });
+//   } catch (err) {
+//     console.error('Error fetching onboarding profiles:', err);
+//     res.status(500).json({ 
+//       success: false,
+//       message: "Failed to fetch onboarding profiles", 
+//       error: err.message 
+//     });
+//   }
+// });
+
+// Get all users
+router.get('/', async (req, res) => {
   try {
-    const forms = await applicationformModal.find()
-      .sort({ updatedAt: -1 })
-      .populate('userId', 'email firstName lastName');
-      
+    const profiles = await brandOnboardingProfileModel.find().sort({ createdAt: -1 }).populate('userId'); 
     res.json({
       success: true,
-      count: forms.length,
-      data: forms
+      data: profiles
     });
-  } catch (err) {
-    res.status(500).json({ 
+  } catch (error) {
+    res.status(500).json({
       success: false,
-      message: "Failed to fetch application forms", 
-      error: err.message 
+      message: 'Error fetching brand onboarding profiles',
+      error: error.message
     });
   }
 });

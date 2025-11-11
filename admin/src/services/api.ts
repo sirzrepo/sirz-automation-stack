@@ -67,6 +67,37 @@ export const authAPI = {
 };
 
 // Client/user management API
+// Onboarding profiles API
+export const onboardingAPI = {
+  // Get all onboarding profiles with pagination and filtering
+  getProfiles: async (params: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    sortOrder?: 'asc' | 'desc';
+    sortBy?: string;
+    status?: 'all' | 'not_started' | 'in_progress' | 'completed';
+  }) => {
+    const response = await api.get('/onboardingProfiles', { params });
+    console.log("response from onboardingAPI.....", response);
+    return response.data;
+  },
+
+  // Get a specific profile by ID
+  getProfileById: async (profileId: string) => {
+    const response = await api.get(`/onboardingProfiles/${profileId}`);
+    return response.data;
+  },
+
+  // Export profile as PDF
+  exportProfile: async (profileId: string) => {
+    const response = await api.get(`/onboardingProfiles/${profileId}/export`, {
+      responseType: 'blob',
+    });
+    return response.data;
+  },
+};
+
 export const clientsAPI = {
   // Get all clients with pagination, filtering and sorting
   getClients: async (params: {

@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const applicationFormSchema = new mongoose.Schema(
+const brandOnboardingSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'user',
+      ref: 'users',
       required: true
     },
 
@@ -50,4 +50,4 @@ const applicationFormSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('ApplicationForm', applicationFormSchema);
+module.exports = mongoose.model('brandOnboardingProfile', brandOnboardingSchema);

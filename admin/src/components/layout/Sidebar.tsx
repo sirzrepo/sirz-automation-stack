@@ -62,6 +62,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
         path: '/users' 
     },
     { 
+        icon: <FaUsers className="text-xl" />, 
+        label: 'Onboarding Profiles', 
+        path: '/onboarding-profiles' 
+    },
+    { 
         icon: <FaBlog className="text-xl" />, 
         label: 'Blog', 
         path: '/blog' 
@@ -217,6 +222,10 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
+
+  const displayName = userData?.firstName
+  ? `${userData.firstName} ${userData.lastName || ''}`.trim()
+  : userData?.email?.split('@')[0] || 'Guest User';
   
   return (
     <motion.div 
@@ -419,7 +428,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
                   className="ml-3 overflow-hidden"
                 >
                   <p className="font-semibold text-sm text-gray-800 truncate">
-                    {userData?.firstName ? `${userData.firstName} ${userData.lastName || ''}` : 'Guest User'}
+                    {displayName}
                   </p>
                   <p className="text-xs text-gray-500 truncate">
                     {userData?.email || 'Not signed in'}
