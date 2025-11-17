@@ -32,8 +32,6 @@ router.post('/register', async (req, res) => {
       resetToken: otp,
     });
 
-    console.log("email to be sent", emailSubject, emailText, emailHtml, email)
-
     await sendMail(emailSubject, emailText, emailHtml, email);
 
     res.status(201).json({
@@ -55,15 +53,12 @@ router.post('/register', async (req, res) => {
 router.post('/verify-otp', async (req, res) => {
   try {
     const { email, otp } = req.body;
-    console.log("email and otp", email, otp)
 
     let user;
 
     if (email) {
       user = await User.findOne({ email });
     }
-
-    console.log("user from verify otp", user)
 
     if (!user) {
       return res.status(404).json({
@@ -95,6 +90,33 @@ router.post('/verify-otp', async (req, res) => {
       process.env.JWT_SECRET || 'your-secret-key',
       { expiresIn: '24h' }
     );
+
+    // Send OTP email
+    const emailSubject = 'Welcome to Sirz — Let’s Grow Your Brand Together!';
+    const emailText = `
+      Welcome to Sirz!
+
+      We’re excited to have you join our creative community of entrepreneurs and brands.
+
+      At Sirz, we specialize in helping businesses stand out through:
+      - E-commerce solutions that make selling easy and efficient,
+      - Branding and design that give your business a unique voice, and
+      - Digital marketing strategies that actually deliver results.
+
+      By partnering with Sirz, you gain access to expert support, cutting-edge tools, and a team dedicated to turning your brand into a success story.
+
+      We’re glad to have you on board — your growth starts here.
+
+      Warm regards,
+      The Sirz Team
+      support@sirz.co.uk
+      `;
+    const emailHtml = generateEmailTemplate({
+      title: 'Welcome to Sirz — Let’s Grow Your Brand Together!',
+      message: emailText,
+    });
+
+    await sendMail(emailSubject, emailText, emailHtml, email);
 
     res.json({
       success: true,
@@ -150,7 +172,6 @@ router.post('/resend-otp', async (req, res) => {
     });
 
 
-    console.log("email to be sent", emailSubject, emailText, emailHtml, user.email)
     await sendMail(emailSubject, emailText, emailHtml, user.email);
 
     res.json({
@@ -208,6 +229,26 @@ router.post('/login', async (req, res) => {
       process.env.JWT_SECRET || 'your-secret-key',
       { expiresIn: '24h' }
     );
+
+    // --- SEND LOGIN EMAIL ---
+    const emailSubject = "Welcome Back to Sirz";
+    const emailMsg = `
+      Hello ${user.first_name || "there"},
+      We're glad to see you again! You successfully logged back into your Sirz account.
+
+      If this wasn’t you, please reset your password immediately or contact support.
+      
+      Warm regards,  
+      The Sirz Team  
+      support@sirz.co.uk
+    `;
+
+    const emailHtml = generateEmailTemplate({
+      title: "Welcome Back to Sirz",
+      message: emailMsg
+    });
+
+    await sendMail(emailSubject, emailMsg, emailHtml, user.email);
 
     res.json({
       success: true,

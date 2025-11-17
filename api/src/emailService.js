@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport({
 
 // Function to send an email
 const sendMail = async (subject, text, html, to) => {
-    console.log("email to be sent", subject, text, html, to)
+    // console.log("email to be sent", subject, text, html, to)
     try {
         const mailOptions = {
             from: `"SIRz" <${process.env.SMTP_USER}>`,

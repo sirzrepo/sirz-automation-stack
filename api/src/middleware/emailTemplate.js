@@ -7,11 +7,12 @@ function generateEmailTemplate({
   }) {
     return `
       <div style="font-family: Arial, sans-serif; color: white; background: linear-gradient(90deg, #001F3E, #203DA3, #3752E9); padding: 20px; border-radius: 10px; max-width: 600px; margin: auto;">
+      <img style="width: 100px; height: 100px; border-radius: 50%;" src="${logoUrl}" alt="Logo">
         
         
         <h1 style="font-size: 24px; font-weight: bold; color: white; margin-top: 20px;">${title}</h1>
         
-        <p style="color: white;">${message}</p>
+        <p style="color: white; white-space: pre-line;">${message}</p>
         
         ${resetToken ? `
           <p>Kindly use the verification code provided below to complete your password reset request.</p>

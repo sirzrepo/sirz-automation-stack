@@ -23,6 +23,9 @@ import ContentCreation from './pages/agents/contentCreation'
 import LogoCreator from './pages/agents/logoCreator'
 import DataAnalyst from './pages/agents/dataAnalyst'
 import Chat from './pages/agents/chat'
+import SmartAutomations from './pages/ourServices/smartAutomations'
+import ConversionIntelligence from './pages/ourServices/conversionIntelligence'
+import RetentionOps from './pages/ourServices/retentionOps'
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -114,6 +117,23 @@ function App() {
               <Route path="/agent/chat" element={
                 <ProtectedRoute>
                   <Chat />
+                </ProtectedRoute>
+              } />
+
+              {/* Our Services routes */}
+              <Route path="/services/smart-automation" element={
+                <ProtectedRoute>
+                  <SmartAutomations />
+                </ProtectedRoute>
+              } />
+              <Route path="/services/conversion-intelligence" element={
+                <ProtectedRoute>
+                  <ConversionIntelligence />
+                </ProtectedRoute>
+              } />
+              <Route path="/services/retention-ops" element={
+                <ProtectedRoute>
+                  <RetentionOps />
                 </ProtectedRoute>
               } />
           </Routes>

@@ -101,26 +101,26 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
     {
       icon: <FaRobot className="text-xl" />, 
       label: 'Our Services', 
-      path: '/agent',
+      path: '/services',
       subItems: [
         {
           icon: <FaRobot className="text-lg" />,
           label: 'Smart Automation',
-          path: '',
+          path: '/services/smart-automation',
           isLocked: true,
           tooltipText: 'Coming soon'
         },
         {
           icon: <FaRobot className="text-lg" />,
           label: 'Conversion Intelligence',
-          path: '',
+          path: '/services/conversion-intelligence',
           isLocked: true,
           tooltipText: 'Coming soon'
         },
         {
           icon: <FaRobot className="text-lg" />,
           label: 'Retention & Ops',
-          path: '',
+          path: '/services/retention-ops',
           isLocked: true,
           tooltipText: 'Coming soon'
         },
@@ -314,10 +314,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
                                   animation="scale"
                                   delay={[200, 400]}
                                   theme="silver"
-                                  disabled={subItem.isLocked}
                                 >
                                   <div
-                                      className={`flex items-center ${subItem.isLocked ? 'text-gray-400 cursor-not-allowed justify-between' : 'cursor-pointer'} py-2 px-3 rounded-lg ${
+                                      className={`flex items-center cursor-pointer py-2 px-3 rounded-lg ${
                                         isSubActive 
                                           ? 'bg-blue-50 text-blue-600' 
                                           : 'hover:bg-gray-50 text-gray-600'
