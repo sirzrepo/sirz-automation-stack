@@ -1,8 +1,6 @@
 import { HomeBanner, HomeVector, SliderImage1, SliderImage2, SliderImage3, SliderImage4, SliderImage5, SliderImage6, SliderImage7 } from "../../../assets";
 import Button from "../../../components/common/button";
 import bgImg from '../../../assets/imgs/Screenshot (602).png';
-import { ROUTES } from "../../../constants/routes/desc";
-import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
@@ -70,7 +68,6 @@ const ImageSlider = () => {
 };
 
 export default function Hero() {
-    const navigate = useNavigate();
     const sectionRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: sectionRef,
@@ -116,7 +113,10 @@ export default function Hero() {
                                 transition={{ duration: 0.8, delay: 0.4 }}
                                 className="sm:w-[30%] w-[70%] py-6 max-sm:pt-10"
                             >
-                                <Button text="Get started" onClick={() => navigate(ROUTES.DASHBOARD.PATH)} />
+                                <Button 
+                                    text="Get started" 
+                                    onClick={() => window.location.href = "https://client.sirz.co.uk/"} 
+                                />
                             </motion.div>
                         </div>
                     </div>

@@ -20,9 +20,11 @@ const Login = () => {
 
     try {
       await login(email, password);
-      navigate('/');
+      if (localStorage.getItem("token")) {
+        navigate("/");
+      }
     } catch (err: any) {
-      setMessage(err.response?.data?.message || "failed to login, check your credentials and ensure you have the right permissions");
+      setMessage(err.response?.data?.message || "failed to login, check your credentials");
     }
   };
 

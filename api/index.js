@@ -31,7 +31,16 @@ const onboardingProfileRoutes = require('./src/routes/brandOnboardingProfiles');
 dotenv.config();
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: true, // reflect request origin (ALL origins)
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: false // IMPORTANT
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
