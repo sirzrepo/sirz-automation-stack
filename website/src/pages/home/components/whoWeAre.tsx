@@ -1,10 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import Button from "../../../components/common/button";
 import HeaderFormat from "../../../components/header";
-import { ROUTES } from "../../../constants/routes/desc";
 
 export default function WhoAreWe() {
-    const navigate = useNavigate()
 
     return (
         <div className="sm:w-[85%] w-[90%] m-auto pt-8 ">
@@ -15,7 +12,10 @@ export default function WhoAreWe() {
                     </section>
                     <header className="md:text-7xl sm:text-5xl text-4xl leading-tight font-bold">Ready to scale <i className=" text-colorBlueDeep">smarter?</i> Let’s make it happen.</header>
                     <div className="sm:w-[40%] w-[80%] py-8 ">
-                        <Button text="Learn more" onClick={() => navigate(ROUTES.SERVICE_BRANDING.PATH)} />
+                        {/* <Button text="Learn more" onClick={() => navigate(ROUTES.SERVICE_BRANDING.PATH)} /> */}
+                        <a href="https://client.sirz.co.uk/" target="_blank" rel="noopener noreferrer">
+                            <Button text="Learn more" onClick={() => () => {}} />
+                        </a>
                     </div>
                 </div>
                 <div className="text-2xl sm:text-3xl leading-8  text-justify font-normal ">
