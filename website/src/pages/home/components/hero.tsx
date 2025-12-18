@@ -115,7 +115,8 @@ export default function Hero() {
                             >
                                 <Button 
                                     text="Get started" 
-                                    onClick={() => window.location.href = "https://client.sirz.co.uk/"} 
+                                    // onClick={() => window.location.href = "https://client.sirz.co.uk/"} 
+                                    onClick={() => window.open("https://onboarding-pwqw.vercel.app/", "_blank")}
                                 />
                             </motion.div>
                         </div>
