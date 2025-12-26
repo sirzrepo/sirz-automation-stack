@@ -353,8 +353,8 @@ export default function OnboardingPage() {
                     <div className='flex justify-center'>
                         <Button 
                             text="Client portal sign up.." 
-                            // onClick={() => window.open("https://client.sirz.co.uk/", "_blank")} 
-                            onClick={() => window.open("https://onboarding-pwqw.vercel.app/", "_blank")}
+                            onClick={() => window.open("https://client.sirz.co.uk/", "_blank")} 
+                            // onClick={() => window.open("https://onboarding-pwqw.vercel.app/", "_blank")}l
                             className='sm:w-[250px] w-full' 
                         />
                     </div>
