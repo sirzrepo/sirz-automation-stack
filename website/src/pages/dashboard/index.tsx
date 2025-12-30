@@ -126,7 +126,8 @@ export default function OnboardingPage() {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 // onClick={() => navigate(ROUTES.DASHBOARD.PATH)}
-                                onClick={() => window.open("https://onboarding-pwqw.vercel.app/", "_blank")}
+                                // onClick={() => window.open("https://onboarding-pwqw.vercel.app/", "_blank")}
+                                onClick={() => window.open("https://onboarding.sirz.co.uk?", "_blank")}
                                 {...fadeInUp}
                             >
                                 Get started
@@ -353,14 +354,15 @@ export default function OnboardingPage() {
                     <div className='flex justify-center'>
                         <Button 
                             text="Client portal sign up.." 
-                            onClick={() => window.open("https://client.sirz.co.uk/", "_blank")} 
-                            // onClick={() => window.open("https://onboarding-pwqw.vercel.app/", "_blank")}l
+                            // onClick={() => window.open("https://client.sirz.co.uk/", "_blank")} 
+                            // onClick={() => window.open("https://onboarding-pwqw.vercel.app/", "_blank")}
+                            onClick={() => window.open("https://onboarding.sirz.co.uk?", "_blank")}
                             className='sm:w-[250px] w-full' 
                         />
                     </div>
                 </section>
             </motion.section>
-
+````````````````````
             <motion.section 
                 className="bg-colorLight dark:bg-colorDark py-10 bg-dashboard-form-gradient"
                 initial={{ opacity: 0 }}
