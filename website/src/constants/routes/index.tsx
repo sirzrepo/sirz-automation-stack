@@ -105,6 +105,10 @@ const routes = (user: Iuser) =>
             path: (ROUTES.THANKYOU.PATH),
             element: (ROUTES.THANKYOU.ELEMENT),
         },
+        {
+            path: (ROUTES.DYNAMIC_CONTACT.PATH),
+            element: (ROUTES.DYNAMIC_CONTACT.ELEMENT),
+        },
     ])
 
 export default routes;

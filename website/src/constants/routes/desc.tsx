@@ -21,6 +21,7 @@ import SalesFunnel from "../../pages/salesFunnel";
 import Agents from "../../pages/agents";
 import ThankYouPage from "../../pages/thankyou";
 import IroseFashion from "../../pages/caseStudies/iroseFashion";
+import DynamicContact from "../../pages/dynamicContact";
 
 export const ROUTES = {
     LAYOUT: {
@@ -63,6 +64,10 @@ export const ROUTES = {
     CONTACT: {
         PATH: "/contact",
         ELEMENT: <Contact />
+    },
+    DYNAMIC_CONTACT: {
+        PATH: "/dynamic-contact",
+        ELEMENT: <DynamicContact />
     },
     SERVICE_BRANDING: {
         PATH: "/services-branding",

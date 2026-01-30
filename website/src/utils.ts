@@ -18,7 +18,8 @@ export const socialLinks = {
     Instagram: "https://www.instagram.com/sirz_official",
     Whatsapp: ``,
     TikTok: "",
-    Linkedin: "https://www.linkedin.com/company/sanz-innovation-retro/"
+    Linkedin: "https://www.linkedin.com/company/sanz-innovation-retro/",
+    linktr: "https://linktr.ee/sirzsupport"
 };
 
 export const calendyLink = `https://calendly.com/sirz-support/15-minutes-business-solutions-consult`
