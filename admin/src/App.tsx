@@ -18,6 +18,7 @@ import Clients from './pages/client'
 import ClientProfile from './pages/clientProfile'
 import Blogs from './pages/blog'
 import BlogDetail from './pages/blog/BlogDetail'
+import DigitalImages from './pages/digitalImages'
 import AI_Inquiries from './pages/inquiries/ai_inquiries';
 import LeadClassifier from './pages/agents/leadClassifier';
 import ContentCreation from './pages/agents/contentCreation';
@@ -195,6 +196,13 @@ function App() {
               <Route path="/blog/:slug" element={
                 <ProtectedRoute>
                   <BlogDetail />
+                </ProtectedRoute>
+              } />
+
+              {/* Digital Images routes */}
+              <Route path="/digital-images" element={
+                <ProtectedRoute>
+                  <DigitalImages />
                 </ProtectedRoute>
               } />
 

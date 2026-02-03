@@ -26,6 +26,7 @@ const webFormRoutes = require('./src/routes/webFormRoutes');
 const demoDataRoutes = require('./src/routes/demoData');
 const scheduleDemoRoutes = require('./src/routes/scheduleDemo');
 const onboardingProfileRoutes = require('./src/routes/brandOnboardingProfiles');
+const digitalImagesRoutes = require('./src/routes/digitalImages');
 // import axios from "axios";
 
 dotenv.config();
@@ -86,6 +87,7 @@ app.use('/api/web-form-questionnaire', webFormRoutes);
 app.use('/api/demo-data', demoDataRoutes);
 app.use('/api/schedule-demo', scheduleDemoRoutes);
 app.use('/api/onboardingProfiles', onboardingProfileRoutes);
+app.use('/api/digital-images', digitalImagesRoutes);
 // API route to send an email
 app.post("/subscribe", async (req, res) => {
   const { subject, text, html } = req.body;

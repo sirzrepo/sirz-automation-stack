@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { IoHomeOutline, IoSettingsOutline, IoChevronForward, IoChevronBack, IoAnalyticsOutline, IoNewspaperOutline, IoHelpCircleOutline, IoChevronDown, IoChevronUp, IoMenu } from 'react-icons/io5';
-import { FaBookOpen, FaSignOutAlt, FaUsers, FaBlog, FaRobot } from 'react-icons/fa';
+import { FaBookOpen, FaSignOutAlt, FaUsers, FaBlog, FaRobot, FaImage } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavItem {
@@ -70,6 +70,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
         icon: <FaBlog className="text-xl" />, 
         label: 'Blog', 
         path: '/blog' 
+    },
+    { 
+        icon: <FaImage className="text-xl" />, 
+        label: 'Digital Images', 
+        path: '/digital-images' 
     },
     {
       icon: <FaRobot className="text-xl" />, 
