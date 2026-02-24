@@ -142,12 +142,13 @@ app.post('/api/run-vectorshift', async (req, res) => {
 // API route to send an email
 app.post("/contact", async (req, res) => {
   const { subject, text, html } = req.body;
+  const to = "support@sirz.co.uk";
 
   if (!subject || (!text && !html)) {
     return res.status(400).json({ success: false, message: "Missing email parameters." });
   }
 
-  const result = await sendMail(subject, text, html);
+  const result = await sendMail(subject, text, html, to);
   res.json(result);
 });
 
@@ -156,12 +157,13 @@ app.post("/contact", async (req, res) => {
 app.post("/portfolio-leads", async (req, res) => {
   console.log("portfolio-leads", req.body);
   const { subject, text, html} = req.body;
+  const to = "support@sirz.co.uk";
 
   if (!subject || (!text && !html)) {
     return res.status(400).json({ success: false, message: "Missing email parameters." });
   }
 
-  const result = await sendMail(subject, text, html);
+  const result = await sendMail(subject, text, html, to);
   console.log("portfolio-leads", result);
   res.json(result);
 });
