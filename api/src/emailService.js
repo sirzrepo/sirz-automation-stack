@@ -24,13 +24,14 @@ const sendMail = async (subject, text, html, to) => {
     try {
         const mailOptions = {
             from: `"SIRz" <${process.env.SMTP_USER}>`,
-            to,
+            to: Array.isArray(to) ? to.join(", ") : to, // <--- THIS
             subject, // Email subject
             text, // Plain text body
             html, // HTML body
         };
 
         const info = await transporter.sendMail(mailOptions);
+        console.log("Email sent:", info);
         return { success: true, message: "Email sent successfully!" };
     } catch (error) {
         console.error("Error sending email:", error);
