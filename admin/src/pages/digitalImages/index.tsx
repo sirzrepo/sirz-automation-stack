@@ -12,12 +12,13 @@ import DigitalImageForm from "./form";
 import { Image, Transformation } from "cloudinary-react";
 import UpdateDigitalImageForm from "./UpdateForm";
 
-// Define BlogType interface
+// Define DigitalImageType interface
 interface DigitalImageType {
   _id?: string;
   title: string;
   category: string;
-  image?: string;
+  mediaUrl: string;
+  mediaType: "image" | "video";
   status: string;
   createdAt: string;
   updatedAt?: string;
@@ -36,7 +37,7 @@ export default function DigitalImages() {
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [blogsPerPage] = useState(5);
+  const [blogsPerPage] = useState(20);
   const { userId } = useAuth();
 
   // Close dropdown when clicking outside
@@ -178,7 +179,7 @@ export default function DigitalImages() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `digital_images_export_${Date.now()}.csv`);
+    link.setAttribute("download", `digital_media_export_${Date.now()}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -187,9 +188,9 @@ export default function DigitalImages() {
   return (
     <section className="p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Digital Images Management</h1>
+        <h1 className="text-2xl font-bold">Digital Media Management</h1>
         <Button
-          text="+ Create new digital image"
+          text="+ Create new digital media"
           onClick={() => dispatch(openModal("create_digital_image"))}
           className="text-[15px] hover:bg-blue-600"
         />
@@ -203,7 +204,7 @@ export default function DigitalImages() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search blogs..."
+              placeholder="Search media..."
               className="pl-9 pr-3 py-2 border rounded-md"
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
@@ -255,9 +256,9 @@ export default function DigitalImages() {
                 </svg>
               </div>
             </div>
-            <p className="text-lg mb-4">No digital images yet</p>
+            <p className="text-lg mb-4">No digital media yet</p>
             <Button
-              text="+ Create your first digital image"
+              text="+ Create your first digital media"
               onClick={() => dispatch(openModal("create_digital_image"))}
               className="text-[15px] hover:bg-blue-600"
             />
@@ -272,19 +273,37 @@ export default function DigitalImages() {
               key={digitalImage._id}
               className="group relative rounded-xl overflow-hidden border bg-white shadow-sm hover:shadow-md transition"
             >
-              {/* Image */}
+              {/* Media */}
               <div className="relative w-full h-56 bg-gray-100">
-                {digitalImage.image ? (
-                  <Image
-                    publicId={digitalImage.image}
-                    cloudName="dy4nvvdwd"
-                    className="w-full h-full object-cover"
-                  >
-                    <Transformation width="800" height="450" crop="fill" />
-                  </Image>
+                {digitalImage.mediaUrl ? (
+                  digitalImage.mediaType === "image" ? (
+                    <Image
+                      publicId={digitalImage.mediaUrl}
+                      cloudName="dy4nvvdwd"
+                      className="w-full h-full object-cover"
+                    >
+                      <Transformation width="800" height="450" crop="fill" />
+                    </Image>
+                  ) : (
+                    // <Video
+                    //   publicId={digitalImage.mediaUrl}
+                    //   cloudName="dy4nvvdwd"
+                    //   className="w-full h-full object-cover"
+                    //   controls
+                    // >
+                    //   <Transformation width="800" height="450" crop="fill" />
+                    // </Video>
+                    <iframe
+                      width="100%"
+                      height="400"
+                      src={`https://www.youtube.com/embed/${digitalImage.mediaUrl}`}
+                      title="Video"
+                      allowFullScreen
+                    />
+                  )
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                    No image
+                    No media
                   </div>
                 )}
 
@@ -358,7 +377,7 @@ export default function DigitalImages() {
               <div className="p-4">
                 <h3 className="font-medium truncate">{digitalImage.title}</h3>
                 <p className="text-xs text-gray-500 mt-1">
-                  {new Date(digitalImage.createdAt).toLocaleDateString()}
+                  {digitalImage.category} • {new Date(digitalImage.createdAt).toLocaleDateString()}
                 </p>
               </div>
             </div>
@@ -391,7 +410,7 @@ export default function DigitalImages() {
       {/* Modal for Creating */}
       <Modal
         id="create_digital_image"
-        title="Create Digital Image"
+        title="Create Digital Media"
         onclick={handleCreateSubmit}
         btnText="Create"
       >
@@ -401,7 +420,7 @@ export default function DigitalImages() {
       {/* Modal for Updating */}
       <Modal
         id="update_digital_image"
-        title="Update Digital Image"
+        title="Update Digital Media"
         onclick={handleUpdateSubmit}
         btnText="Update"
       >
@@ -411,16 +430,16 @@ export default function DigitalImages() {
       {/* Modal for Delete Confirmation */}
       <Modal
         id="delete_digital_image"
-        title="Delete Digital Image"
+        title="Delete Digital Media"
         onclick={handleConfirmDelete}
         btnText="Delete"
       >
         <div className="flex flex-col gap-4">
           <p className="text-gray-700">
-            Are you sure you want to delete the digital image "{selectedDigitalImage?.title}"?
+            Are you sure you want to delete the digital media "{selectedDigitalImage?.title}"?
           </p>
           <p className="text-sm text-red-600">
-            This action cannot be undone. All data associated with this digital image will be permanently removed.
+            This action cannot be undone. All data associated with this digital media will be permanently removed.
           </p>
           <div className="flex justify-end gap-3 mt-4">
             <button

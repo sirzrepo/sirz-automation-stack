@@ -16,7 +16,8 @@ interface DigitalImageFormProps {
 interface FormValues {
   title: string;
   category: string;
-  image: string;
+  mediaUrl: string;
+  mediaType: "image" | "video";
   status: "Draft" | "Published";
 }
 
@@ -26,18 +27,24 @@ export default function DigitalImageForm({ onSuccess }: DigitalImageFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [imagePreview, setImagePreview] = useState<string>("");
 
+  const extractYouTubeId = (url: string): string => {
+    const match = url.match(/[?&]v=([^#\&\?]*)/) || url.match(/youtu\.be\/([^#\&\?]*)/);
+    return match ? match[1] : url;
+  };
+
   const formik = useFormik<FormValues>({
     initialValues: {
       title: "",
       category: "",
-      image: "",
+      mediaUrl: "",
+      mediaType: "image",
       status: "Draft",
     },
     validate: (values) => {
       const errors: Partial<Record<keyof FormValues, string>> = {};
       if (!values.title) errors.title = "Title is required";
       if (!values.category) errors.category = "Category is required";
-      if (!values.image) errors.image = "Image is required";
+      if (!values.mediaUrl) errors.mediaUrl = "Media is required";
       return errors;
     },
     onSubmit: async (values, { resetForm }) => {
@@ -82,61 +89,97 @@ export default function DigitalImageForm({ onSuccess }: DigitalImageFormProps) {
         error={formik.touched.category && formik.errors.category}
       />
 
-      {/* Image */}
+      {/* Media Type */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">Image</label>
-        {/* Tabs */}
-        <div className="flex border-b border-gray-200 mb-4">
-          <button
-            type="button"
-            className={`flex items-center px-4 py-2 text-sm font-medium ${
-              uploadMethod === "file" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500 hover:text-gray-700"
-            }`}
-            onClick={() => {
-              setUploadMethod("file");
-              formik.setFieldValue("image", "");
-              setImagePreview("{}");
-            }}
+        <label className="block text-sm font-medium text-gray-700 mb-2">Media Type</label>
+        <div className="border-[1.4px] px-3 py-2">
+          <select
+            name="mediaType"
+            value={formik.values.mediaType}
+            onChange={formik.handleChange}
+            className="border-0 outline-none w-full"
           >
-            <Upload className="w-4 h-4 mr-2" /> Upload File
-          </button>
-          <button
-            type="button"
-            className={`flex items-center px-4 py-2 text-sm font-medium ${
-              uploadMethod === "url" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500 hover:text-gray-700"
-            }`}
-            onClick={() => {
-              setUploadMethod("url");
-              formik.setFieldValue("image", "");
-              setImagePreview("");
-            }}
-          >
-            <LinkIcon className="w-4 h-4 mr-2" /> Image URL
-          </button>
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+          </select>
         </div>
+      </div>
 
-        {uploadMethod === "url" ? (
+      {/* Media */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">Media</label>
+
+        {formik.values.mediaType === "image" ? (
+          <>
+            {/* Tabs */}
+            <div className="flex border-b border-gray-200 mb-4">
+              <button
+                type="button"
+                className={`flex items-center px-4 py-2 text-sm font-medium ${
+                  uploadMethod === "file" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500 hover:text-gray-700"
+                }`}
+                onClick={() => {
+                  setUploadMethod("file");
+                  formik.setFieldValue("mediaUrl", "");
+                  setImagePreview("");
+                }}
+              >
+                <Upload className="w-4 h-4 mr-2" /> Upload File
+              </button>
+              <button
+                type="button"
+                className={`flex items-center px-4 py-2 text-sm font-medium ${
+                  uploadMethod === "url" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500 hover:text-gray-700"
+                }`}
+                onClick={() => {
+                  setUploadMethod("url");
+                  formik.setFieldValue("mediaUrl", "");
+                  setImagePreview("");
+                }}
+              >
+                <LinkIcon className="w-4 h-4 mr-2" /> Media URL
+              </button>
+            </div>
+
+            {uploadMethod === "url" ? (
+              <Input
+                name="mediaUrl"
+                title="Image URL"
+                placeholder="https://example.com/image.jpg"
+                value={formik.values.mediaUrl}
+                onChange={(e) => {
+                  formik.handleChange(e);
+                  setImagePreview(e.target.value);
+                }}
+                required
+                error={formik.touched.mediaUrl && formik.errors.mediaUrl}
+                icon={<LinkIcon className="w-4 h-4 text-gray-400" />}
+              />
+            ) : (
+              <ImageUploadComponent
+                onUpload={({ url }) => {
+                  formik.setFieldValue("mediaUrl", url);
+                  setImagePreview(url);
+                }}
+                buttonText="Upload Media"
+                className="w-full"
+              />
+            )}
+          </>
+        ) : (
           <Input
-            name="image"
-            title="Image URL"
-            placeholder="https://example.com/image.jpg"
-            value={formik.values.image}
+            name="mediaUrl"
+            title="YouTube Video ID"
+            placeholder="e.g. BZP1rYjoBgI or paste YouTube URL"
+            value={formik.values.mediaUrl}
             onChange={(e) => {
-              formik.handleChange(e);
-              setImagePreview(e.target.value);
+              let value = e.target.value;
+              value = extractYouTubeId(value);
+              formik.setFieldValue("mediaUrl", value);
+              setImagePreview(value);
             }}
             required
-            error={formik.touched.image && formik.errors.image}
-            icon={<LinkIcon className="w-4 h-4 text-gray-400" />}
-          />
-        ) : (
-          <ImageUploadComponent
-            onUpload={({ url }) => {
-              formik.setFieldValue("image", url);
-              setImagePreview(url);
-            }}
-            buttonText="Upload Image"
-            className="w-full"
+            error={formik.touched.mediaUrl && formik.errors.mediaUrl}
           />
         )}
 
@@ -145,7 +188,17 @@ export default function DigitalImageForm({ onSuccess }: DigitalImageFormProps) {
           <div className="mt-4">
             <p className="text-sm font-medium text-gray-700 mb-2">Preview</p>
             <div className="relative w-full h-48 rounded-md overflow-hidden border border-gray-200">
-              <img src={imagePreview} alt="preview" className="w-full h-full object-cover" />
+              {formik.values.mediaType === "video" ? (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={`https://www.youtube.com/embed/${imagePreview}`}
+                  title="Video Preview"
+                  allowFullScreen
+                />
+              ) : (
+                <img src={imagePreview} alt="preview" className="w-full h-full object-cover" />
+              )}
             </div>
           </div>
         )}
