@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { BASE_URL } from "../../utils";
+import { BASE_URL, isYouTubeUrl, extractYouTubeId } from "../../utils";
 import { closeModal } from "../../store/modalSlice";
 import Input from "../../components/common/input";
 import Loader from "../../features/loader";
@@ -26,11 +26,6 @@ export default function DigitalImageForm({ onSuccess }: DigitalImageFormProps) {
   const [uploadMethod, setUploadMethod] = useState<"url" | "file">("url");
   const [isLoading, setIsLoading] = useState(false);
   const [imagePreview, setImagePreview] = useState<string>("");
-
-  const extractYouTubeId = (url: string): string => {
-    const match = url.match(/[?&]v=([^#\&\?]*)/) || url.match(/youtu\.be\/([^#\&\?]*)/);
-    return match ? match[1] : url;
-  };
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -169,13 +164,16 @@ export default function DigitalImageForm({ onSuccess }: DigitalImageFormProps) {
         ) : (
           <Input
             name="mediaUrl"
-            title="YouTube Video ID"
-            placeholder="e.g. BZP1rYjoBgI or paste YouTube URL"
+            title="Video URL"
+            placeholder="https://example.com/video.mp4 or YouTube URL"
             value={formik.values.mediaUrl}
             onChange={(e) => {
               let value = e.target.value;
-              value = extractYouTubeId(value);
-              formik.setFieldValue("mediaUrl", value);
+              if (isYouTubeUrl(value)) {
+                formik.setFieldValue("mediaUrl", extractYouTubeId(value));
+              } else {
+                formik.setFieldValue("mediaUrl", value);
+              }
               setImagePreview(value);
             }}
             required
@@ -189,13 +187,23 @@ export default function DigitalImageForm({ onSuccess }: DigitalImageFormProps) {
             <p className="text-sm font-medium text-gray-700 mb-2">Preview</p>
             <div className="relative w-full h-48 rounded-md overflow-hidden border border-gray-200">
               {formik.values.mediaType === "video" ? (
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={`https://www.youtube.com/embed/${imagePreview}`}
-                  title="Video Preview"
-                  allowFullScreen
-                />
+                isYouTubeUrl(imagePreview) ? (
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${extractYouTubeId(imagePreview)}`}
+                    title="Video Preview"
+                    allowFullScreen
+                  />
+                ) : (
+                  <video
+                    width="100%"
+                    height="100%"
+                    src={imagePreview}
+                    controls
+                    className="w-full h-full object-cover"
+                  />
+                )
               ) : (
                 <img src={imagePreview} alt="preview" className="w-full h-full object-cover" />
               )}

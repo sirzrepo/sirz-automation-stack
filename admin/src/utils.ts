@@ -31,3 +31,13 @@ export const socialLinks = {
 
 
 export const calendyLink = `https://calendly.com/sirz-support/1-hour-business-solutions-consult?month=2025-03`
+
+export const isYouTubeUrl = (url: string): boolean => {
+  const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+  return youtubeRegex.test(url);
+};
+
+export const extractYouTubeId = (url: string): string => {
+  const match = url.match(/[?&]v=([^#\&\?]*)/) || url.match(/youtu\.be\/([^#\&\?]*)/);
+  return match ? match[1] : url;
+};

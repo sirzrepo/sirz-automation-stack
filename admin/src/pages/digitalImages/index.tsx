@@ -2,7 +2,7 @@ import { ChevronLeft, ChevronRight, Download, MoreVertical, Search } from "lucid
 import { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { BASE_URL } from "../../utils";
+import { BASE_URL, isYouTubeUrl, extractYouTubeId } from "../../utils";
 import { useAuth } from "../../context/AuthContext";
 import { closeModal, openModal } from "../../store/modalSlice";
 import Loader from "../../features/loader";
@@ -285,21 +285,23 @@ export default function DigitalImages() {
                       <Transformation width="800" height="450" crop="fill" />
                     </Image>
                   ) : (
-                    // <Video
-                    //   publicId={digitalImage.mediaUrl}
-                    //   cloudName="dy4nvvdwd"
-                    //   className="w-full h-full object-cover"
-                    //   controls
-                    // >
-                    //   <Transformation width="800" height="450" crop="fill" />
-                    // </Video>
-                    <iframe
-                      width="100%"
-                      height="400"
-                      src={`https://www.youtube.com/embed/${digitalImage.mediaUrl}`}
-                      title="Video"
-                      allowFullScreen
-                    />
+                    (isYouTubeUrl(digitalImage.mediaUrl) || !digitalImage.mediaUrl.includes('http')) ? (
+                      <iframe
+                        width="100%"
+                        height="400"
+                        src={`https://www.youtube.com/embed/${extractYouTubeId(digitalImage.mediaUrl)}`}
+                        title="Video"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <video
+                        width="100%"
+                        height="400"
+                        src={digitalImage.mediaUrl}
+                        controls
+                        className="w-full h-full object-cover"
+                      />
+                    )
                   )
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
@@ -308,7 +310,7 @@ export default function DigitalImages() {
                 )}
 
                 {/* Hover Overlay Actions */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-3">
+                {/* <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-3">
                   <button
                     onClick={() => handleUpdate(digitalImage)}
                     className="px-4 py-2 text-sm bg-white rounded-md hover:bg-gray-100"
@@ -322,7 +324,7 @@ export default function DigitalImages() {
                   >
                     Delete
                   </button>
-                </div>
+                </div> */}
 
                 {/* Status Badge */}
                 <span

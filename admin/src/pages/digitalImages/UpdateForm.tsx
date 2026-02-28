@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { BASE_URL } from "../../utils";
+import { BASE_URL, isYouTubeUrl, extractYouTubeId } from "../../utils";
 import { closeModal } from "../../store/modalSlice";
 import Input from "../../components/common/input";
 import Loader from "../../features/loader";
@@ -39,11 +39,6 @@ export default function UpdateDigitalImageForm({ digitalImage, onSuccess }: Upda
   const [error, setError] = useState<string | null>(null);
 
   const dispatch = useDispatch();
-
-  const extractYouTubeId = (url: string): string => {
-    const match = url.match(/[?&]v=([^#\&\?]*)/) || url.match(/youtu\.be\/([^#\&\?]*)/);
-    return match ? match[1] : url;
-  };
 
   // Check if digitalImage is undefined and handle gracefully
   useEffect(() => {
@@ -265,18 +260,21 @@ export default function UpdateDigitalImageForm({ digitalImage, onSuccess }: Upda
             <Input
               name="mediaUrl"
               value={formik.values.mediaUrl || ''}
-              placeholder="e.g. BZP1rYjoBgI or paste YouTube URL"
+              placeholder="https://example.com/video.mp4 or YouTube URL"
               onChange={(e) => {
                 let value = e.target.value;
-                value = extractYouTubeId(value);
-                formik.setFieldValue("mediaUrl", value);
+                if (isYouTubeUrl(value)) {
+                  formik.setFieldValue("mediaUrl", extractYouTubeId(value));
+                } else {
+                  formik.setFieldValue("mediaUrl", value);
+                }
                 setHasImageError(false);
               }}
-              title="YouTube Video ID"
+              title="Video URL"
               className="mb-0"
             />
             <p className="mt-2 text-sm text-gray-500">
-              Enter the YouTube video ID
+              Enter a video URL or YouTube link
             </p>
           </div>
         )}
@@ -288,15 +286,27 @@ export default function UpdateDigitalImageForm({ digitalImage, onSuccess }: Upda
             <div className="relative w-full h-48 rounded-md overflow-hidden border border-gray-200">
               {!hasImageError ? (
                 formik.values.mediaType === "video" ? (
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={`https://www.youtube.com/embed/${formik.values.mediaUrl}`}
-                    title="Video Preview"
-                    allowFullScreen
-                    onError={() => setHasImageError(true)}
-                    onLoad={() => setHasImageError(false)}
-                  />
+                  formik.values.mediaUrl.startsWith('http') ? (
+                    <video
+                      width="100%"
+                      height="100%"
+                      src={formik.values.mediaUrl}
+                      controls
+                      className="w-full h-full object-cover"
+                      onError={() => setHasImageError(true)}
+                      onLoad={() => setHasImageError(false)}
+                    />
+                  ) : (
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube.com/embed/${formik.values.mediaUrl}`}
+                      title="Video Preview"
+                      allowFullScreen
+                      onError={() => setHasImageError(true)}
+                      onLoad={() => setHasImageError(false)}
+                    />
+                  )
                 ) : (
                   <img
                     src={formik.values.mediaUrl}
