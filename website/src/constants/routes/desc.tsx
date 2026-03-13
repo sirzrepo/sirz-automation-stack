@@ -22,6 +22,11 @@ import Agents from "../../pages/agents";
 import ThankYouPage from "../../pages/thankyou";
 import IroseFashion from "../../pages/caseStudies/iroseFashion";
 import DynamicContact from "../../pages/dynamicContact";
+import SecurityLayout from "../../pages/security/loayout";
+import LeadDataProcessing from "../../pages/security/lead_data_processing";
+import PrivacyPolicy from "../../pages/security/privacy_policy";
+import TermsOfService from "../../pages/security/terms_of_service";
+import CookiePolicy from "../../pages/security/cookie_policy";
 
 export const ROUTES = {
     LAYOUT: {
@@ -125,4 +130,26 @@ export const ROUTES = {
         PATH: "/thankyou",
         ELEMENT: <ThankYouPage />
     },
+
+    SECURITY: {
+        PATH: "/security",
+        ELEMENT: <SecurityLayout />
+    },
+    PRIVACY_POLICY: {
+        PATH: "/security/privacy-policy",
+        ELEMENT: <PrivacyPolicy />
+    },
+    LEAD_DATA_PROCESSING: {
+        PATH: "/security/lead-data-processing",
+        ELEMENT: <LeadDataProcessing />
+    },
+    TERMS_OF_SERVICE: {
+        PATH: "/security/terms-of-service",
+        ELEMENT: <TermsOfService />
+    },
+    COOKIE_POLICY: {
+        PATH: "/security/cookie-policy",
+        ELEMENT: <CookiePolicy />
+    }
+    
 }

@@ -94,6 +94,28 @@ const routes = (user: Iuser) =>
             ],
         },
         {
+            path: (ROUTES.SECURITY.PATH),
+            element: (ROUTES.SECURITY.ELEMENT),
+            children: [
+                {
+                    path: (ROUTES.LEAD_DATA_PROCESSING.PATH),
+                    element: (ROUTES.LEAD_DATA_PROCESSING.ELEMENT),
+                },
+                {
+                    path: (ROUTES.PRIVACY_POLICY.PATH),
+                    element: (ROUTES.PRIVACY_POLICY.ELEMENT),
+                },
+                {
+                    path: (ROUTES.TERMS_OF_SERVICE.PATH),
+                    element: (ROUTES.TERMS_OF_SERVICE.ELEMENT),
+                },
+                {
+                    path: (ROUTES.COOKIE_POLICY.PATH),
+                    element: (ROUTES.COOKIE_POLICY.ELEMENT),
+                },
+            ],
+        },
+        {
             path: (ROUTES.DASHBOARD.PATH),
             element: (ROUTES.DASHBOARD.ELEMENT),
         },

@@ -31,8 +31,10 @@ export default function Footer() {
 
   const links = [
     { label: "Quick Links", url: "#" },
-    { label: "Terms & Conditions", url: "/terms" },
-    { label: "Privacy Policy", url: "/privacy" },
+    { label: "Terms & Conditions", url: ROUTES.TERMS_OF_SERVICE.PATH },
+    { label: "Privacy Policy", url: ROUTES.PRIVACY_POLICY.PATH },
+    { label: "Cookie Policy", url: ROUTES.COOKIE_POLICY.PATH },
+    { label: "Lead Data Processing", url: ROUTES.LEAD_DATA_PROCESSING.PATH },
   ];
 
   const navigate = useNavigate();
