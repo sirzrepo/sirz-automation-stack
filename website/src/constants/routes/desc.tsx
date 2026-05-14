@@ -27,6 +27,7 @@ import LeadDataProcessing from "../../pages/security/lead_data_processing";
 import PrivacyPolicy from "../../pages/security/privacy_policy";
 import TermsOfService from "../../pages/security/terms_of_service";
 import CookiePolicy from "../../pages/security/cookie_policy";
+import StripeTermsCondition from "../../pages/security/stripe_terms_condition";
 
 export const ROUTES = {
     LAYOUT: {
@@ -150,6 +151,10 @@ export const ROUTES = {
     COOKIE_POLICY: {
         PATH: "/security/cookie-policy",
         ELEMENT: <CookiePolicy />
+    },
+    STRIPE_TERMS_CONDITION: {
+        PATH: "/security/stripe-terms-condition",
+        ELEMENT: <StripeTermsCondition />
     }
     
 }

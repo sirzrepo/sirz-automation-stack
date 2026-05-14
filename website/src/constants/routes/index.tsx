@@ -113,6 +113,10 @@ const routes = (user: Iuser) =>
                     path: (ROUTES.COOKIE_POLICY.PATH),
                     element: (ROUTES.COOKIE_POLICY.ELEMENT),
                 },
+                {
+                    path: (ROUTES.STRIPE_TERMS_CONDITION.PATH),
+                    element: (ROUTES.STRIPE_TERMS_CONDITION.ELEMENT),
+                },
             ],
         },
         {
