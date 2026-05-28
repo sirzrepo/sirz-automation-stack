@@ -2,6 +2,7 @@ import moment from "moment";
 
 export const BASE_URL = `https://api.sirz.co.uk`;
 // export const BASE_URL = `http://localhost:5000`;
+export const APP_URL = `https://www.sirz.ai`;
 
 export const formatDate = (date: string) => {
     const formattedDate = moment(date).format('MMMM D, YYYY');

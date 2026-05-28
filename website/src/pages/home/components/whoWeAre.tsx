@@ -1,5 +1,6 @@
 import Button from "../../../components/common/button";
 import HeaderFormat from "../../../components/header";
+import { APP_URL } from "../../../utils";
 
 export default function WhoAreWe() {
 
@@ -13,7 +14,7 @@ export default function WhoAreWe() {
                     <header className="md:text-7xl sm:text-5xl text-4xl leading-tight font-bold">Ready to scale <i className=" text-colorBlueDeep">smarter?</i> Let’s make it happen.</header>
                     <div className="sm:w-[40%] w-[80%] py-8 ">
                         {/* <Button text="Learn more" onClick={() => navigate(ROUTES.SERVICE_BRANDING.PATH)} /> */}
-                        <a href="https://onboarding-pwqw.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        <a href={APP_URL} target="_blank" rel="noopener noreferrer">
                             <Button text="Learn more" onClick={() => () => {}} />
                         </a>
                     </div>

@@ -41,6 +41,7 @@ import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import EmailVerification from './pages/auth/emailVerification';
 import OnboardingProfiles from './pages/onbordingProfile';
+import ContactFormEnteries from './pages/inquiries/contact_form_enteries';
 
 function App() {
   // Helper component to conditionally render Navbar and Footer
@@ -107,6 +108,12 @@ function App() {
               <Route path="/client-profile" element={
                 <ProtectedRoute>
                   <ClientProfile />
+                </ProtectedRoute>
+              } />
+
+              <Route path="/contact-form-enteries" element={
+                <ProtectedRoute>
+                  <ContactFormEnteries />
                 </ProtectedRoute>
               } />
 

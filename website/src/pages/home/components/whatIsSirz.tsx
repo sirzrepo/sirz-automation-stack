@@ -1,8 +1,9 @@
 import { WhatIsSirzImg } from "../../../assets";
 import DemoSteps from "./demoSteps";
-import { setGetStarted, setShowScheduleDemoModal } from "../../../features/reduxSlice";
+import { setShowScheduleDemoModal } from "../../../features/reduxSlice";
 import { useAppDispatch } from "../../../app/hook";
 import ScheduleDemoForm from "../../../components/layout/scheduleDemoForm";
+import { APP_URL } from "../../../utils";
 
 export default function WhatIsSirz() {
     const dispatch = useAppDispatch()
@@ -30,7 +31,8 @@ export default function WhatIsSirz() {
                 </section>
                 <section className="py-4 space-x-4">
                     <button onClick={() => {dispatch(setShowScheduleDemoModal(true))}} className="bg-blue-600 text-white px-8 py-4 rounded-full">Schedule a Demo</button>
-                    <button onClick={() => {dispatch(setGetStarted(true))}} className="bg-white border border-blue-600 text-black px-8 py-4 rounded-full">Get started</button>
+                    {/* <button onClick={() => {dispatch(setGetStarted(true))}} className="bg-white border border-blue-600 text-black px-8 py-4 rounded-full">Get started</button> */}
+                    <button onClick={() => {window.open(APP_URL, "_blank")}} className="bg-white border border-blue-600 text-black px-8 py-4 rounded-full">Get started</button>
                 </section>
                 <DemoSteps />
                 <ScheduleDemoForm />

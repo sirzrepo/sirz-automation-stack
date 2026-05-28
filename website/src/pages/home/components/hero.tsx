@@ -3,6 +3,7 @@ import Button from "../../../components/common/button";
 import bgImg from '../../../assets/imgs/Screenshot (602).png';
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { APP_URL } from "../../../utils";
 
 const cardContent = [
     {
@@ -116,7 +117,8 @@ export default function Hero() {
                                 <Button 
                                     text="Get started" 
                                     // onClick={() => window.location.href = "https://client.sirz.co.uk/"} 
-                                    onClick={() => window.open("https://onboarding-pwqw.vercel.app/", "_blank")}
+                                    // onClick={() => window.open("https://onboarding-pwqw.vercel.app/", "_blank")}
+                                    onClick={() => window.open(APP_URL, "_blank")}
                                 />
                             </motion.div>
                         </div>

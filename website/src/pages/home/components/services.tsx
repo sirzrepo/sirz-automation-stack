@@ -1,4 +1,5 @@
 import { Settings, CheckCheck } from "lucide-react"
+import { APP_URL } from "../../../utils"
 
 export default function DashboardServices() {
 
@@ -75,7 +76,7 @@ export default function DashboardServices() {
                             </div>
                         </div>
 
-                        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full py-3">Learn more</button>
+                        <button onClick={() => {window.open(APP_URL, "_blank")}} className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full py-3">Learn more</button>
                     </div>
                 </div>
             ))

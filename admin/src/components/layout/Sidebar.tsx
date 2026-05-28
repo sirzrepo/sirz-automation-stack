@@ -7,6 +7,7 @@ import { RootState } from '../../store/store';
 import { IoHomeOutline, IoSettingsOutline, IoChevronForward, IoChevronBack, IoAnalyticsOutline, IoNewspaperOutline, IoHelpCircleOutline, IoChevronDown, IoChevronUp, IoMenu } from 'react-icons/io5';
 import { FaBookOpen, FaSignOutAlt, FaUsers, FaBlog, FaRobot, FaImage } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MdEmail } from 'react-icons/md';
 
 interface NavItem {
   icon: JSX.Element;
@@ -118,6 +119,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onStateChange }) => {
       label: 'Inquiries', 
       path: '/inquiries',
       subItems: [
+                {
+          icon: <MdEmail className="text-lg" />,
+          label: 'Contact Form Enteries',
+          path: '/contact-form-enteries'
+        },
         {
           icon: <IoNewspaperOutline className="text-lg" />,
           label: 'AI Inquiries',

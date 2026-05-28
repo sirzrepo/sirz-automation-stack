@@ -3,6 +3,7 @@
 import { Check } from "lucide-react"
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
+import { APP_URL } from "../../../utils"
 
 export default function BrandBanner() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -108,7 +109,8 @@ export default function BrandBanner() {
           {/* CTA Button */}
           <div className="animate-fade-in-up delay-1200">
             <button
-              onClick={() => window.open("https://brandcom.sirz.co.uk/", "_blank")}
+              // onClick={() => window.open("https://brandcom.sirz.co.uk/", "_blank")}
+              onClick={() => window.open(APP_URL, "_blank")}
               className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white px-8 py-4 text-lg rounded-full shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
             >
               Learn More →
